@@ -36,3 +36,10 @@ In this section, I am including all the articles that I have used to build this 
     Navbar
     <content>
     Footer
+
+
+### Interesting Stuff
+
+ Find - ' {4}"(.+)": \{\n {8}.+ (".+"),\n {8}.+ (".+"),\n {8}.+ (\[.+\]),\n {8}.+ (".+")\n {4}\},?'
+    Replace - '---\ntitle: $2\nproject-slug: $1\nlayout: project\ntags: $4\ndescription: $3\nsourcecode: $5\n---'
+

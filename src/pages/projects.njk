@@ -1,0 +1,35 @@
+---
+title: Projects
+---
+
+<main class="max-w-7xl mx-auto">
+    <div id="projects">
+        <div id="projects-heading"></div>
+        <div id="projects-list" class="mx-auto">
+            {% for pslug, project in projects %}
+                    <div id="{{ pslug }}-project-card" style="width:45%" class="rounded-lg shadow-lg p-4 mt-4 bg-white">
+                        <div class="flex flex-row justify-between">
+                            <span class="font-semibold">{{ project.title }}</span>
+                            <spam>
+                                <a href="{{ project.sourcecode }}">
+                                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                </a>
+                            </span>
+                        </div>
+                        <hr class="mt-3">
+                        <div class="mt-2 min-h-8 max-h-32">
+                            <span class="text-sm">{{ project.description }}</span>
+                        </div>
+                        <div class="mt-2">
+                            {# <span class="text-sm">Technologies used:</span> #}
+                            <div class="flex flex-row flex-wrap justify-start">
+                                {% for tech in project.tags %}
+                                    <span class="text-xs font-semibold bg-gray-200 rounded-md px-2 py-1 m-1">{{ tech }}</span>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+            {% endfor %}
+        </div>
+    </div>
+</main>

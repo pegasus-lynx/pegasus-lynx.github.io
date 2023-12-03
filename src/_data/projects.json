@@ -1,0 +1,50 @@
+{
+    "contour-rendering": {
+        "title": "Contour Rendering",
+        "description": "A C++ application for visualing contours as 3D models.",
+        "tags": ["C++", "OpenGL", "Computer Graphics"],
+        "sourcecode": "https://github.com/pegasus-lynx/ContourRendering"
+    },
+    "personal-webapp": {
+        "title": "Dipesh Kumar's Webapp",
+        "description": "A webapp for managing personal data.",
+        "tags": ["11ty", "Tailwind", "Nunjucks", "Markdown"],
+        "sourcecode": "https://github.com/pegasus-lynx/pegasus-lynx.github.io"
+    },
+    "mwe-bpe": {
+        "title": "BPE beyond Word Boundary: How NOT to use Multi‑Word Expressions in NMT",
+        "description": "A research project to identify Multi-Word Expressions using Byte Pair Encoding.",
+        "tags": ["Python", "NLP", "Multi-Word Expressions", "Byte-Pair Encoding", "PyTorch", "Transformers"],
+        "sourcecode": "https://github.com/pegasus-lynx/mwe-bpe"
+    },
+    "cross-lingual-rdf-extraction": {
+        "title": "Cross-lingual Hindi RDF Extraction from natural text",
+        "description": "Research project to extract RDF triples from Hindi text in an unsupervised setting.",
+        "tags": ["Python", "NLP", "RDF extraction", "PyTorch", "Tensorflow", "NER", "LSTM", "Deep Learning"],
+        "sourcecode": ""
+    },
+    "codefest-pwa-frontend": {
+        "title": "Codefest PWA Frontend",
+        "description": "A Progressive Web App for Codefest'19, IIT(BHU) Varanasi.",
+        "tags": ["VueJS", "CSS3", "PWA", "Frontend Development"],
+        "sourcecode": "https://github.com/codefest-iit-bhu/codefest-app"
+    },
+    "hindi-data-crf-viterbi-analysis": {
+        "title": "Analysis of Hindi tagged data using CRF with Viterbi Decoding",
+        "description": "A research project to analyze the results of using CRF with Viterbi decoding on Hindi tagged data.",
+        "tags": ["Python", "NLP", "CRF", "NLTK", "NER"],
+        "sourcecode": "https://github.com/pegasus-lynx/Junk/tree/master/NLP"
+    },
+    "genmed-store-locator": {
+        "title": "GenMed: Medical Store Locator Webapp",
+        "description": "A webapp to locate generic medicine stores in your area.",
+        "tags": ["Django", "Python", "CSS3", "HTML5", "MySQL", "Backend Development"],
+        "sourcecode": "https://github.com/pegasus-lynx/Genmed"
+    },
+    "image-enc-dl": {
+        "title": "Image Encryption Algorithms for privacy in Deep Learning",
+        "description": "An exploratory project on different image encryption schemes for privacy in deep learning.",
+        "tags": ["Python", "Deep Learning", "Image Processing"],
+        "sourcecode": "https://github.com/pegasus-lynx/imgEncDL/tree/main"
+    }
+}

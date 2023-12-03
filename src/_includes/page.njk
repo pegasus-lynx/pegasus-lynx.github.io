@@ -1,6 +1,3 @@
----
-title: "Page Layout"
----
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,12 +7,26 @@ title: "Page Layout"
     <title>{{ title }}</title>
     <!-- <link rel="stylesheet" href="/css/style.css"> -->
     <link rel="stylesheet" href="{{ '/assets/css/tailwind.css' | url }}">
-    {% eleventyGoogleFonts 'https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&display=swap' %}
+    <script src="https://kit.fontawesome.com/a69420ddea.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
+    {% eleventyGoogleFonts 'https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap' %}
 </head>
-<body>
+<body class="m-0 p-0">
     {% include '_navbar.njk' %}
     {{ content | safe }}
     {% include '_footer.njk'%}
     <script src="/js/bundle.js"></script>
 </body>
+<style>
+body {
+  --dot-bg: white;
+  --dot-color: black;
+  --dot-size: 1.2px;
+  --dot-space: 30px;
+	background:
+		linear-gradient(90deg, var(--dot-bg) calc(var(--dot-space) - var(--dot-size)), transparent 1%) center / var(--dot-space) var(--dot-space),
+		linear-gradient(var(--dot-bg) calc(var(--dot-space) - var(--dot-size)), transparent 1%) center / var(--dot-space) var(--dot-space),
+		var(--dot-color);
+}
+</style>
 </html>
