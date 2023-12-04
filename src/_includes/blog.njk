@@ -3,7 +3,12 @@ layout: page
 ---
 <main class="max-w-6xl mx-auto pt-16">
     <div id="post-body" class="bg-white text-center mt-32 py-12 md:mt-16">
-        <div id="post-title" class="mb-8">
+        <div id="post-banner-image" class="mb-8 w-full mx-auto"> 
+            <img src="/assets/images/{{ blogimage }}" 
+                    alt="{{ title }}" 
+                    class="h-auto w-full">
+        </div>
+        <div id="post-header" class="mb-8">
             <h1 class="text-3xl font-bold my-4 text-gray-900">{{ title }}</h1>
             <h3 class="text-xl font-semibold text-gray-700">{{ description }}</h3>
         </div>
@@ -11,13 +16,9 @@ layout: page
         <div id="post-details" 
             class="flex flex-row justify-between w-8/12 mx-auto my-3
                     text-gray-500 font-semibold">
-                <span class="text-sm">{{ startdate }} - {{ enddate }}</span>
+                <span class="text-sm">{{ readingtime }} | {{ publishdate }}</span>
             
             <div class="flex flex-row items-center gap-x-6 mx-4 text-sm">
-                    <a href="{{ sourcecode }}" 
-                        class="hover:text-gray-600">
-                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                    </a>
                 <button onclick="copyPageUrl()" 
                     class="hover:text-gray-600">
                     <i class="fa-solid fa-copy"></i>
@@ -25,11 +26,6 @@ layout: page
             </div>
         </div>
         <hr class="w-8/12 mx-auto">
-        <div id="post-banner-image" class="mt-12 mb-8 w-7/12 mx-auto"> 
-            <img src="/assets/images/{{ projectimage }}" 
-                    alt="{{ title }}" 
-                    class="h-auto">
-        </div>
         <div id="post-content" class="w-8/12 mx-auto mt-16 mb-8 text-justify">
             <article class="prose lg:prose-lg mx-auto">
                 {{ content | safe }}
@@ -50,7 +46,7 @@ layout: page
         </div>
         <hr class="w-8/12 mx-auto">
     </div>
-    
+
     <script>
         const copyPageUrl = () => {
             const ta = document.createElement("textarea");
