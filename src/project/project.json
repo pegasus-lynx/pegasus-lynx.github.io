@@ -1,5 +1,0 @@
-{
-    "layout": "project",
-    "permalink": "/project/{{ post_slug }}",
-    "tags": ["Project"]
-}
