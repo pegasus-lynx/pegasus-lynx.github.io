@@ -1,6 +1,6 @@
 ---
 title: "Dipesh Kumar's Webapp"
-project-slug: personal-webapp
+post_slug: personal-webapp
 layout: project
 tags: ["11ty", "Tailwind", "Nunjucks", "Markdown"]
 description: "A webapp for managing personal data."
