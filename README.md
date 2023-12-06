@@ -41,5 +41,14 @@ In this section, I am including all the articles that I have used to build this 
 ### Interesting Stuff
 
  Find - ' {4}"(.+)": \{\n {8}.+ (".+"),\n {8}.+ (".+"),\n {8}.+ (\[.+\]),\n {8}.+ (".+")\n {4}\},?'
-    Replace - '---\ntitle: $2\nproject-slug: $1\nlayout: project\ntags: $4\ndescription: $3\nsourcecode: $5\n---'
+    Replace - '---\ntitle: $2\npost_slug: $1\nlayout: project\ntags: $4\ndescription: $3\nsourcecode: $5\n---'
 
+
+### TODO List
+
+[] Add shortcodes - date, date range
+[] Add a filter to add section links in markdown content
+[] Unify js and css from tags and pages
+[] Image autoresize in 11ty ?
+[] Remove projects.json from global data
+[] Pagination for blogs page
