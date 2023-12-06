@@ -1,5 +1,7 @@
 const eleventyGoogleFonts = require("eleventy-google-fonts");
 const esbuild = require("esbuild");
+const fs = require("fs");
+const path = require("path");
 
 module.exports = function (eleventyConfig) {
   // eleventyConfig.on("eleventy.before", async () => {
@@ -15,6 +17,19 @@ module.exports = function (eleventyConfig) {
   // eleventyConfig.addWatchTarget("src/assets/js/");
   eleventyConfig.addPassthroughCopy("src/assets/images/");
   eleventyConfig.addPlugin(eleventyGoogleFonts);
+
+  eleventyConfig.addCollection("gallery", () => {
+    const galleryPath = path.resolve(__dirname, "./src/assets/images/gallery");
+    const files = fs.readdirSync(galleryPath);
+
+    return files.map((file) => {
+      return {
+        name: file.split(".")[0],
+        src: `/assets/images/gallery/${file}`,
+        alt: file,
+      };
+    });
+  });
 
   return {
     passthroughFileCopy: true,
