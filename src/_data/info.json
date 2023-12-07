@@ -1,5 +1,6 @@
 {
     "name": "Dipesh Kumar",
+    "sitename": "Dipesh's Personal Website",
     "bio": "",
     "about": "",
     "socials": [
@@ -102,5 +103,11 @@
             "name": "PyTorch",
             "icon": "devicon-pytorch-plain"
         }
+    ],
+    "selectedprojects": [
+        "contour-rendering",
+        "personal-webapp",
+        "mwe-bpe",
+        "cross-lingual-rdf-extraction"
     ]
 }
