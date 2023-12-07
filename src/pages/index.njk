@@ -2,7 +2,7 @@
 title: Home
 permalink: /
 ---
-<main class="max-w-7xl mx-auto">
+<main class="max-w-6xl mx-auto">
     <div id="hero">
         <div id="photo" class="mt-32">
             <img src="/assets/images/ted.jpg" alt=""
@@ -79,7 +79,7 @@ permalink: /
                 Here are some of the interesting ones. I have mentioned the rest of them in the <a href="#"><u>Projects</u></a> page.
             </p>
         </div>
-        <div id="projects-list" class="max-w-3xl mx-auto mt-8 mb-8 flex flex-row flex-wrap gap-x-6 justify-center">
+        <div id="projects-list" class="max-w-3xl mx-auto mt-8 flex flex-row flex-wrap gap-x-6 justify-center">
             {% for selected_project in info.selectedprojects %}
                 {% for project in collections.Project %}
                     {% if project.data.post_slug == selected_project %}

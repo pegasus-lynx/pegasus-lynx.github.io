@@ -13,12 +13,14 @@ title: Page
     <script src="https://kit.fontawesome.com/a69420ddea.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
     {% eleventyGoogleFonts 'https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap' %}
+    {% eleventyGoogleFonts 'https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap' %}
+    {% eleventyGoogleFonts 'https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap' %}
 </head>
-<body class="m-0 p-0">
+<body class="m-0 p-0 relative min-h-screen">
     {% include '_navbar.njk' %}
     {{ content | safe }}
     {% include '_footer.njk'%}
-    <script src="/js/bundle.js"></script>
+    {# <script src="/js/bundle.js"></script> #}
 </body>
 <style>
 body {

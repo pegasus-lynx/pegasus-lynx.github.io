@@ -5,6 +5,11 @@ module.exports = {
     extend: {
       fontFamily: {
         yusei: ["'Yusei Magic'", "sans-serif"],
+        ibmplex: ["'IBM Plex Sans'", "sans-serif"],
+        opensans: ["'Open Sans'", "sans-serif"],
+      },
+      fontSize: {
+        '6xl': '4rem',
       },
       boxShadow: {
         't-sm': '0 -1px 2px 0 rgba(0, 0, 0, 0.05)',
