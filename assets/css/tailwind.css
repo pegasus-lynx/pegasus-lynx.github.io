@@ -1036,8 +1036,16 @@ video {
   margin-bottom: 0;
 }
 
+.fixed {
+  position: fixed;
+}
+
 .absolute {
   position: absolute;
+}
+
+.bottom-0 {
+  bottom: 0px;
 }
 
 .-m-1 {
