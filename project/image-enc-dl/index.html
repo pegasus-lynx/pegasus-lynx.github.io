@@ -1668,13 +1668,13 @@
     <div id="post-body" class="bg-white text-center px-16 py-24">
         <div id="post-header" class="mb-8">
             <h1 class="text-5xl font-bold font-opensans text-gray-900 mb-4 w-10/12 mx-auto">Image Encryption Algorithms for privacy in Deep Learning</h1>
-            <h3 class="text-xl font-semibold text-gray-700">An exploratory project on different image encryption schemes for privacy in deep learning.</h3>
+            <h3 class="text-xl font-semibold text-gray-700">An exploratory project on different learnable image encryption schemes for privacy in deep learning.</h3>
         </div>
         <hr class="w-8/12 mx-auto">
         <div id="post-details" 
             class="flex flex-row justify-between w-8/12 mx-auto my-3
                     text-gray-500 font-semibold">
-                <span class="text-sm"> - </span>
+                <span class="text-sm">Mar, 2021 - Apr, 2021</span>
             
             <div class="flex flex-row items-center gap-x-6 mx-4 text-sm">
                     <a href="https://github.com/pegasus-lynx/imgEncDL/tree/main" 
@@ -1689,13 +1689,35 @@
         </div>
         <hr class="w-8/12 mb-8 mx-auto">
         <div id="post-banner-image" class="w-7/12 mx-auto mb-12"> 
-            <img src="/assets/images/" 
+            <img src="/assets/images/image-enc-dl.png" 
                     alt="Image Encryption Algorithms for privacy in Deep Learning" 
                     class="h-auto">
         </div>
         <div id="post-content" class="w-10/12 mx-auto mb-8 text-justify">
             <article class="prose lg:prose-lg mx-auto">
-                
+                <p>In this project, we delved into the realm of enhancing privacy in Deep Neural Networks ( DNNs ) through learnable image encryption algorithms.</p>
+<blockquote>
+<p><strong>Learnable Image Encryption Algorithms</strong>, refer to those algorithms that, where the encrypted images obtained after encryption can be applied to a learning algorithm such as DNNs as training and testing data.</p>
+</blockquote>
+<h3>Why is this important ?</h3>
+<p>Distributed systems like cloud and edge computing in various fields, which, while beneficial, pose risks like unauthorized service use, data leaks, and privacy breaches due to unreliable providers and accidents. The spread of Deep Neural Networks (DNNs) has been transformative in areas such as computer vision, biomedical systems, and information technology, leveraging large datasets, including sensitive information, to enhance performance. However, this integration of machine learning in distributed systems introduces security concerns like compromised data privacy and unauthorized access, making privacy-preserving machine learning an urgent priority, especially as DNNs are deployed in critical areas like autonomous vehicles, healthcare, and finance, where they must be robust against various attacks such as model inversion attacks, membership inference attacks, and adversarial attacks.</p>
+<h3>What I did and learn ?</h3>
+<p>As mentioned earlier, the main aim here was to learn and understand what learnable image encryption algorithms we have, how they work and test their robustness.</p>
+<p>First, I implemented the encryption schemes, particularly focusing on the SKK, Tanaka and ETC schemes ( Encryption-then-Compression schemes ), and encrypted image datasets to reproduce and verified the results of training for Tanaka scheme. The picture below shows the result of SKK encryption on an image.</p>
+<p><img src="/assets/images/imgencdl-skk-encryption.png" alt="SKK Encryption Result"></p>
+<p>Second, I also looked into different attack scenarios for Tanaka and different variations of SKK schemes. Implemented the attack scenarios mentioned in <a href="https://arxiv.org/pdf/2004.13263.pdf">Attacks on Image Encryption Schemes for
+Privacy-Preserving Deep Neural Networks</a> for these encryption schemes, to test the robustness of these methods and replicated the results mentioned in the paper. The image below, shows the results of various attacks on SKK scheme encrypted image.</p>
+<p><img src="/assets/images/imgencdl-skk-attack.png" alt="SKK Encryption Scheme Attacks"></p>
+<h4>References</h4>
+<p>Here is the list of research papers that I referenced while doing this exploratory project :</p>
+<ul>
+<li><a href="https://arxiv.org/abs/2201.11006">An Overview of Compressible and Learnable Image Transformation with Secret Key and Its Applications</a></li>
+<li><a href="https://arxiv.org/ftp/arxiv/papers/1804/1804.00490.pdf">Learnable Image Encryption</a></li>
+<li><a href="https://arxiv.org/abs/1905.01827">Privacy-Preserving Deep Neural Networks with Pixel-based Image Encryption Considering Data Augmentation in the Encrypted Domain</a></li>
+<li><a href="https://arxiv.org/pdf/2004.13263.pdf">Attacks on Image Encryption Schemes for
+Privacy-Preserving Deep Neural Networks</a></li>
+</ul>
+
             </article>
         </div>
         <hr class="w-8/12 mx-auto">
