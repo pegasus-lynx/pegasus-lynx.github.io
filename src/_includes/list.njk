@@ -29,16 +29,17 @@ showtagslist: false
             <hr class="w-8/12 mx-auto">
         {% endif %} #}
 
-        <div id="list-content" class="w-10/12 mx-auto text-left">
+        <div id="list-content" class="lg:w-10/12 mx-auto text-left">
             {% for post in collections[selectedtag] %}
-                <div class="flex flex-row h-72 w-full mb-16">
+                <div class="flex flex-row lg:h-72 w-full mb-16
+                                md:h-64">
                     <div class="h-full w-4/12">
                             <img src="/assets/images/{{ post.data.post_image }}" 
                                  class="object-cover w-full h-full" alt="{{ post.data.title }}"> 
                     </div>
                     <div class="py-4 px-12 w-8/12 flex flex-col justify-between">
                         <div id="card-header">
-                            <p class="text-3xl font-bold font-opensans mb-2">
+                            <p class="lg:text-3xl md:text-xl font-bold font-opensans mb-2">
                                 <a href="{{ post.url }}">{{ post.data.title }}</a>
                             </p>
                             <p class="text-base mb-4">
