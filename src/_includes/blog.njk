@@ -1,15 +1,15 @@
 ---
 layout: page
 ---
-<main class="max-w-6xl mx-auto pt-16">
-    <div id="post-body" class="bg-white text-center mt-32 pb-12 md:mt-16">
+<main class="max-w-6xl mx-auto py-32">
         <div id="post-banner-image" class="w-full mx-auto"> 
             <img src="/assets/images/{{ post_image }}" 
                     alt="{{ title }}" 
-                    class="h-auto w-full shadow-xl">
+                    class="h-96 object-cover w-full shadow-xl">
         </div>
-        <div id="post-header" class="mt-16 mb-8">
-            <h1 class="text-4xl font-bold my-4 text-gray-900">{{ title }}</h1>
+    <div id="post-body" class="bg-white text-center px-16 py-24">
+        <div id="post-header" class="mb-8">
+            <h1 class="text-4xl font-bold my-4 text-gray-900 w-10/12 mx-auto">{{ title }}</h1>
             <h3 class="text-xl font-semibold text-gray-700">{{ description }}</h3>
         </div>
         <hr class="w-8/12 mx-auto">
@@ -19,7 +19,7 @@ layout: page
                 <span class="text-sm">{{ readingtime }} | {{ publishdate }}</span>
             
             <div class="flex flex-row items-center gap-x-6 mx-4 text-sm">
-                <button onclick="copyPageUrl()" 
+                <button onclick="window.App.copyPageUrl()" 
                     class="hover:text-gray-600">
                     <i class="fa-solid fa-copy"></i>
                 </button>
@@ -32,13 +32,14 @@ layout: page
             </article>
         </div>
         <hr class="w-8/12 mx-auto">
-        <div id="post-tags" class="w-8/12 mx-auto my-2">
-            <ul class="flex flex-row flex-wrap gap-x-4 gap-y-2">
-                <li class="text-sm text-gray-900 font-semibold">Tags :</li>
+        <div id="post-tags" 
+            class="w-8/12 mx-auto my-2 text-sm font-semibold text-gray-900">
+            <ul class="flex flex-row flex-wrap gap-x-4 gap-y-2 mb-2">
+                <li>Tags :</li>
                 {% for tag in tags %}
-                    <li class="text-sm text-gray-900 font-semibold">
+                    <li>
                         <a href="/tags/{{ tag | slugify }}/">
-                            <span class="text-xs font-semibold bg-gray-200 rounded-md px-2 py-1 m-1">{{ tag }}</span>
+                            <span class="text-xs bg-gray-200 rounded-md px-2 py-1 my-1">{{ tag }}</span>
                         </a>
                     </li>
                 {% endfor %}
@@ -46,20 +47,4 @@ layout: page
         </div>
         <hr class="w-8/12 mx-auto">
     </div>
-
-    <script>
-        const copyPageUrl = () => {
-            const ta = document.createElement("textarea");
-            ta.value = window.location.href;
-            ta.setAttribute(`readonly`, ``);
-            ta.style.position = `absolute`;
-            ta.style.left = `-9999px`;
-            document.body.appendChild(ta);            
-            ta.select();
-            ta.setSelectionRange(0, 99999)
-            document.execCommand("copy");
-            document.body.removeChild(ta);
-        }
-    </script>
-
 </main>
