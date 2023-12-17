@@ -1,7 +1,7 @@
 ---
 title: "GenMed: Medical Store Locator Webapp"
 post_slug: genmed-store-locator
-post_image: "store-locator.jpg"
+post_image: "genmed-cover.png"
 layout: project
 tags: ["Django", "Python", "CSS3", "HTML5", "MySQL", "Backend Development"]
 description: "A user-friendly web application to locate generic medicine stores in your area."

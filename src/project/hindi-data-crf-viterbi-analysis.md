@@ -1,6 +1,7 @@
 ---
 title: "Analysis of Hindi tagged data using CRF with Viterbi Decoding"
 post_slug: hindi-data-crf-viterbi-analysis
+post_image: "crf-project-cover.png"
 layout: project
 tags: ["Python", "NLP", "CRF", "NLTK", "NER"]
 description: "A research project to analyze the results of using CRF with Viterbi decoding on Hindi tagged data."
