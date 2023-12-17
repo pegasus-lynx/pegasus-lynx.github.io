@@ -108,6 +108,6 @@
         "contour-rendering",
         "personal-webapp",
         "mwe-bpe",
-        "cross-lingual-rdf-extraction"
+        "hindi-data-crf-viterbi-analysis"
     ]
 }
