@@ -31,53 +31,55 @@ showtagslist: false
 
         <div id="list-content" class="lg:w-10/12 mx-auto text-left">
             {% for post in collections[selectedtag] %}
-                <div class="flex flex-row lg:h-72 w-full mb-16
-                                md:h-64">
-                    <div class="h-full w-4/12">
-                            <img src="/assets/images/{{ post.data.post_image }}" 
-                                 class="object-cover w-full h-full" alt="{{ post.data.title }}"> 
-                    </div>
-                    <div class="py-4 px-12 w-8/12 flex flex-col justify-between">
-                        <div id="card-header">
-                            <p class="lg:text-3xl md:text-xl font-bold font-opensans mb-2">
-                                <a href="{{ post.url }}">{{ post.data.title }}</a>
-                            </p>
-                            <p class="text-base mb-4">
-                                {{ post.data.description }}
-                            </p>
+                {% if post.data.show %}
+                    <div class="flex flex-row lg:h-72 w-full mb-16
+                                    md:h-64">
+                        <div class="h-full w-4/12">
+                                <img src="/assets/images/{{ post.data.post_image }}" 
+                                    class="object-cover w-full h-full" alt="{{ post.data.title }}"> 
                         </div>
-                        <div id="card-extradetails" class="text-sm font-semibold">
-                            <div class="flex flex-row justify-between text-gray-500 mb-2">
-                                {% if 'Project' in post.data.tags %}
-                                <span>{{ post.data.startdate }} - {{ post.data.enddate }}</span>
-                                <span>
-                                    <a href="{{ post.data.sourcecode }}" class="hover:text-gray-600">
-                                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                                    </a>
-                                </span>
-                                {% else %}
-                                <span>{{ post.data.readingtime }}</span>
-                                <span>{{ post.data.publishdate }}</span>
-                                {% endif %}
+                        <div class="py-4 px-12 w-8/12 flex flex-col justify-between">
+                            <div id="card-header">
+                                <p class="lg:text-3xl md:text-xl font-bold font-opensans mb-2">
+                                    <a href="{{ post.url }}">{{ post.data.title }}</a>
+                                </p>
+                                <p class="text-base mb-4">
+                                    {{ post.data.description }}
+                                </p>
                             </div>
-
-                            <hr class="mb-2">
-                            <ul class="flex flex-row flex-wrap gap-x-2 gap-y-4 mb-2">
-                                {% for tag in post.data.tags %}
-                                    <li class="text-gray-900">
-                                        <a href="/tags/{{ tag | slugify }}/">
-                                            <span class="text-xs 
-                                                        bg-gray-200 rounded-md px-2 py-1 my-1">
-                                                {{ tag }}
-                                            </span>
+                            <div id="card-extradetails" class="text-sm font-semibold">
+                                <div class="flex flex-row justify-between text-gray-500 mb-2">
+                                    {% if 'Project' in post.data.tags %}
+                                    <span>{{ post.data.startdate }} - {{ post.data.enddate }}</span>
+                                    <span>
+                                        <a href="{{ post.data.sourcecode }}" class="hover:text-gray-600">
+                                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
                                         </a>
-                                    </li>
-                                {% endfor %}
-                            </ul>
-                            <hr class="mb-2">
+                                    </span>
+                                    {% else %}
+                                    <span>{{ post.data.readingtime }}</span>
+                                    <span>{{ post.data.publishdate }}</span>
+                                    {% endif %}
+                                </div>
+
+                                <hr class="mb-2">
+                                <ul class="flex flex-row flex-wrap gap-x-2 gap-y-4 mb-2">
+                                    {% for tag in post.data.tags %}
+                                        <li class="text-gray-900">
+                                            <a href="/tags/{{ tag | slugify }}/">
+                                                <span class="text-xs 
+                                                            bg-gray-200 rounded-md px-2 py-1 my-1">
+                                                    {{ tag }}
+                                                </span>
+                                            </a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                                <hr class="mb-2">
+                            </div>
                         </div>
                     </div>
-                </div>
+                {% endif %}
             {% endfor %}
         </div>
     </div>
