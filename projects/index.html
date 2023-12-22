@@ -630,37 +630,72 @@
 <body class="m-0 p-0 relative min-h-screen">
     <header class="bg-white shadow-xl">
   <nav class="mx-auto flex max-w-7xl items-center justify-between p-4 lg:px-8" aria-label="Global">
-    <div class="flex lg:flex-1 font-bold font-opensans">
+    <div class="lg:flex-1 font-bold font-opensans
+                hidden md:flex">
       <a href="/" class="-m-1.5 p-1.5">
-        
         <span
           class="text-lg text-gray-900">DIPESH KUMAR'S</span>
         <span class="bg-gray-800 leading-6 text-white rounded-md py-1 px-2">PORTFOLIO</span>
       </a>
     </div>
-    
-    <div class="hidden md:flex lg:gap-x-12 md:gap-x-8">
-      
+    <div class="flex sm:flex-1 font-bold font-opensans
+                md:hidden">
+      <a href="/" class="-m-1.5 p-1.5">
+        <span
+          class="text-lg text-gray-900">DK'S</span>
+        <span class="bg-gray-800 leading-6 text-white rounded-md py-1 px-2">PORTFOLIO</span>
+      </a>
+    </div>
+    <div class="flex md:hidden">
+      <button type="button" id="mobile-nav-button" class="-my-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700" 
+              onclick="window.App.toggleMobileMenu()">
+        <span class="sr-only">Open main menu</span>
+        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+        </svg>
+      </button>
+    </div>
 
+    <div class="hidden md:flex lg:gap-x-12 md:gap-x-8">
       <a href="/projects/" class="text-sm font-semibold leading-6 text-gray-900">Projects</a>
       <a href="/blogs/" class="text-sm font-semibold leading-6 text-gray-900">Blogs</a>
       <a href="/contact/" class="text-sm font-semibold leading-6 text-gray-900">Contact</a>
-      
     </div>
-    
   </nav>
 
   <!-- Mobile menu, show/hide based on menu open state. -->
-  
+  <div class="hidden" id="mobile-nav-menu" role="dialog" aria-modal="true">
+    <!-- Background backdrop, show/hide based on slide-over state. -->
+    <div class="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+      <div class="flex items-center justify-between font-bold shadow-md p-4">
+        <a href="#" class="m-0">
+          <span class="sr-only">Your Company</span>
+          <span class="text-lg text-gray-900">DK'S</span>
+          <span class="bg-gray-800 leading-6 text-white rounded-md py-1 px-2">PORTFOLIO</span>        
+        </a>
+        <button type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700" onclick="window.App.toggleMobileMenu()">
+          <span class="sr-only">Close menu</span>
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      <div class="mt-4 flex flex-col text-center text-3xl text-gray-900 font-bold">
+        <a href="/projects/" class="p-4 m-4 leading-6">Projects</a>
+        <a href="/blogs/" class="p-4 m-4 leading-6 ">Blogs</a>
+        <a href="/contact/" class="p-4 m-4 leading-6 ">Contact</a>
+      </div>
+    </div>
+  </div>
 </header>
-    <main class="max-w-6xl mx-auto py-32">
-    <div id="list-body" class="bg-white text-center p-16 shadow-lg">
+    <main class="max-w-6xl mx-auto pt-16 pb-32 md:py-32">
+    <div id="list-body" class="bg-white text-center p-8 md:p-16 shadow-lg">
 
-        <div id="list-header" class="mb-24">
+        <div id="list-header" class="mb-12 md:mb-24">
             
 <div class="text-center">
-    <p class="text-6xl font-bold font-opensans">Projects</p>
-    <p class="text-xl font-semibold mb-16">List of all the projects that I have done 
+    <p class="text-4xl md:text-6xl font-bold font-opensans mb-2 md:mb-8">Projects</p>
+    <p class="text-base md:font-semibold md:text-xl mb-8 md:mb-16">List of all the projects that I have done 
         over the years - starting from college.</p>
     <hr class="w-10/12 mx-auto">
 </div>
@@ -673,7 +708,7 @@
         <div id="list-content" class="lg:w-10/12 mx-auto text-left">
             
                 
-                    <div class="flex flex-row lg:h-72 w-full mb-16 shadow-lg
+                    <div class="hidden md:flex flex-row lg:h-72 w-full mb-16 shadow-lg
                                     md:h-64">
                         <div class="h-full w-4/12">
                                 <img src="/assets/images/codefest-frontend-pwa.png" 
@@ -753,10 +788,89 @@
                             </div>
                         </div>
                     </div>
+                    <div class="flex md:hidden flex-col w-full mb-16 shadow-lg">
+                        <div class="w-full h-48">
+                                <img src="/assets/images/codefest-frontend-pwa.png" 
+                                    class="object-cover w-full h-full" alt="Codefest PWA Frontend"> 
+                        </div>
+                        <div class="p-8 w-full flex flex-col justify-between">
+                            <div id="card-header">
+                                <p class="lg:text-3xl md:text-xl font-bold font-opensans mb-2">
+                                    <a href="/project/codefest-pwa-frontend/">Codefest PWA Frontend</a>
+                                </p>
+                                <p class="text-base mb-4">
+                                    A Progressive Web App for Codefest, IIT(BHU) Varanasi.
+                                </p>
+                            </div>
+                            <div id="card-extradetails" class="text-sm font-semibold">
+                                <div class="flex flex-row justify-between text-gray-500 mb-2">
+                                    
+                                    <span>Jan, 2019 - Apr, 2019</span>
+                                    <span>
+                                        <a href="https://github.com/codefest-iit-bhu/codefest-app" class="hover:text-gray-600">
+                                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                        </a>
+                                    </span>
+                                    
+                                </div>
+
+                                <hr class="mb-2">
+                                <ul class="flex flex-row flex-wrap gap-x-2 gap-y-4 mb-2">
+                                    
+                                        <li class="text-gray-900">
+                                            <a href="/tags/project/">
+                                                <span class="text-xs 
+                                                            bg-gray-200 rounded-md px-2 py-1 my-1">
+                                                    Project
+                                                </span>
+                                            </a>
+                                        </li>
+                                    
+                                        <li class="text-gray-900">
+                                            <a href="/tags/vuejs/">
+                                                <span class="text-xs 
+                                                            bg-gray-200 rounded-md px-2 py-1 my-1">
+                                                    VueJS
+                                                </span>
+                                            </a>
+                                        </li>
+                                    
+                                        <li class="text-gray-900">
+                                            <a href="/tags/css3/">
+                                                <span class="text-xs 
+                                                            bg-gray-200 rounded-md px-2 py-1 my-1">
+                                                    CSS3
+                                                </span>
+                                            </a>
+                                        </li>
+                                    
+                                        <li class="text-gray-900">
+                                            <a href="/tags/pwa/">
+                                                <span class="text-xs 
+                                                            bg-gray-200 rounded-md px-2 py-1 my-1">
+                                                    PWA
+                                                </span>
+                                            </a>
+                                        </li>
+                                    
+                                        <li class="text-gray-900">
+                                            <a href="/tags/frontend-development/">
+                                                <span class="text-xs 
+                                                            bg-gray-200 rounded-md px-2 py-1 my-1">
+                                                    Frontend Development
+                                                </span>
+                                            </a>
+                                        </li>
+                                    
+                                </ul>
+                                <hr class="mb-2">
+                            </div>
+                        </div>
+                    </div>
                 
             
                 
-                    <div class="flex flex-row lg:h-72 w-full mb-16 shadow-lg
+                    <div class="hidden md:flex flex-row lg:h-72 w-full mb-16 shadow-lg
                                     md:h-64">
                         <div class="h-full w-4/12">
                                 <img src="/assets/images/contour-rendering.png" 
@@ -836,12 +950,91 @@
                             </div>
                         </div>
                     </div>
+                    <div class="flex md:hidden flex-col w-full mb-16 shadow-lg">
+                        <div class="w-full h-48">
+                                <img src="/assets/images/contour-rendering.png" 
+                                    class="object-cover w-full h-full" alt="Contour Renderer"> 
+                        </div>
+                        <div class="p-8 w-full flex flex-col justify-between">
+                            <div id="card-header">
+                                <p class="lg:text-3xl md:text-xl font-bold font-opensans mb-2">
+                                    <a href="/project/contour-rendering/">Contour Renderer</a>
+                                </p>
+                                <p class="text-base mb-4">
+                                    A C++ application for visualing 2D contour maps as 3D models.
+                                </p>
+                            </div>
+                            <div id="card-extradetails" class="text-sm font-semibold">
+                                <div class="flex flex-row justify-between text-gray-500 mb-2">
+                                    
+                                    <span>Mar, 2019 - Apr, 2019</span>
+                                    <span>
+                                        <a href="https://github.com/pegasus-lynx/ContourRendering" class="hover:text-gray-600">
+                                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                        </a>
+                                    </span>
+                                    
+                                </div>
+
+                                <hr class="mb-2">
+                                <ul class="flex flex-row flex-wrap gap-x-2 gap-y-4 mb-2">
+                                    
+                                        <li class="text-gray-900">
+                                            <a href="/tags/project/">
+                                                <span class="text-xs 
+                                                            bg-gray-200 rounded-md px-2 py-1 my-1">
+                                                    Project
+                                                </span>
+                                            </a>
+                                        </li>
+                                    
+                                        <li class="text-gray-900">
+                                            <a href="/tags/c/">
+                                                <span class="text-xs 
+                                                            bg-gray-200 rounded-md px-2 py-1 my-1">
+                                                    C++
+                                                </span>
+                                            </a>
+                                        </li>
+                                    
+                                        <li class="text-gray-900">
+                                            <a href="/tags/opengl/">
+                                                <span class="text-xs 
+                                                            bg-gray-200 rounded-md px-2 py-1 my-1">
+                                                    OpenGL
+                                                </span>
+                                            </a>
+                                        </li>
+                                    
+                                        <li class="text-gray-900">
+                                            <a href="/tags/computer-graphics/">
+                                                <span class="text-xs 
+                                                            bg-gray-200 rounded-md px-2 py-1 my-1">
+                                                    Computer Graphics
+                                                </span>
+                                            </a>
+                                        </li>
+                                    
+                                        <li class="text-gray-900">
+                                            <a href="/tags/dynamic-programming/">
+                                                <span class="text-xs 
+                                                            bg-gray-200 rounded-md px-2 py-1 my-1">
+                                                    Dynamic Programming
+                                                </span>
+                                            </a>
+                                        </li>
+                                    
+                                </ul>
+                                <hr class="mb-2">
+                            </div>
+                        </div>
+                    </div>
                 
             
                 
             
                 
-                    <div class="flex flex-row lg:h-72 w-full mb-16 shadow-lg
+                    <div class="hidden md:flex flex-row lg:h-72 w-full mb-16 shadow-lg
                                     md:h-64">
                         <div class="h-full w-4/12">
                                 <img src="/assets/images/genmed-cover.png" 
@@ -939,10 +1132,107 @@
                             </div>
                         </div>
                     </div>
+                    <div class="flex md:hidden flex-col w-full mb-16 shadow-lg">
+                        <div class="w-full h-48">
+                                <img src="/assets/images/genmed-cover.png" 
+                                    class="object-cover w-full h-full" alt="GenMed: Medical Store Locator Webapp"> 
+                        </div>
+                        <div class="p-8 w-full flex flex-col justify-between">
+                            <div id="card-header">
+                                <p class="lg:text-3xl md:text-xl font-bold font-opensans mb-2">
+                                    <a href="/project/genmed-store-locator/">GenMed: Medical Store Locator Webapp</a>
+                                </p>
+                                <p class="text-base mb-4">
+                                    A user-friendly web application to locate generic medicine stores in your area.
+                                </p>
+                            </div>
+                            <div id="card-extradetails" class="text-sm font-semibold">
+                                <div class="flex flex-row justify-between text-gray-500 mb-2">
+                                    
+                                    <span>Aug, 2018 - Nov, 2018</span>
+                                    <span>
+                                        <a href="https://github.com/pegasus-lynx/Genmed" class="hover:text-gray-600">
+                                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                        </a>
+                                    </span>
+                                    
+                                </div>
+
+                                <hr class="mb-2">
+                                <ul class="flex flex-row flex-wrap gap-x-2 gap-y-4 mb-2">
+                                    
+                                        <li class="text-gray-900">
+                                            <a href="/tags/project/">
+                                                <span class="text-xs 
+                                                            bg-gray-200 rounded-md px-2 py-1 my-1">
+                                                    Project
+                                                </span>
+                                            </a>
+                                        </li>
+                                    
+                                        <li class="text-gray-900">
+                                            <a href="/tags/django/">
+                                                <span class="text-xs 
+                                                            bg-gray-200 rounded-md px-2 py-1 my-1">
+                                                    Django
+                                                </span>
+                                            </a>
+                                        </li>
+                                    
+                                        <li class="text-gray-900">
+                                            <a href="/tags/python/">
+                                                <span class="text-xs 
+                                                            bg-gray-200 rounded-md px-2 py-1 my-1">
+                                                    Python
+                                                </span>
+                                            </a>
+                                        </li>
+                                    
+                                        <li class="text-gray-900">
+                                            <a href="/tags/css3/">
+                                                <span class="text-xs 
+                                                            bg-gray-200 rounded-md px-2 py-1 my-1">
+                                                    CSS3
+                                                </span>
+                                            </a>
+                                        </li>
+                                    
+                                        <li class="text-gray-900">
+                                            <a href="/tags/html5/">
+                                                <span class="text-xs 
+                                                            bg-gray-200 rounded-md px-2 py-1 my-1">
+                                                    HTML5
+                                                </span>
+                                            </a>
+                                        </li>
+                                    
+                                        <li class="text-gray-900">
+                                            <a href="/tags/mysql/">
+                                                <span class="text-xs 
+                                                            bg-gray-200 rounded-md px-2 py-1 my-1">
+                                                    MySQL
+                                                </span>
+                                            </a>
+                                        </li>
+                                    
+                                        <li class="text-gray-900">
+                                            <a href="/tags/backend-development/">
+                                                <span class="text-xs 
+                                                            bg-gray-200 rounded-md px-2 py-1 my-1">
+                                                    Backend Development
+                                                </span>
+                                            </a>
+                                        </li>
+                                    
+                                </ul>
+                                <hr class="mb-2">
+                            </div>
+                        </div>
+                    </div>
                 
             
                 
-                    <div class="flex flex-row lg:h-72 w-full mb-16 shadow-lg
+                    <div class="hidden md:flex flex-row lg:h-72 w-full mb-16 shadow-lg
                                     md:h-64">
                         <div class="h-full w-4/12">
                                 <img src="/assets/images/crf-project-cover.png" 
@@ -1031,10 +1321,98 @@
                             </div>
                         </div>
                     </div>
+                    <div class="flex md:hidden flex-col w-full mb-16 shadow-lg">
+                        <div class="w-full h-48">
+                                <img src="/assets/images/crf-project-cover.png" 
+                                    class="object-cover w-full h-full" alt="Analysis of Hindi tagged data using CRF with Viterbi Decoding"> 
+                        </div>
+                        <div class="p-8 w-full flex flex-col justify-between">
+                            <div id="card-header">
+                                <p class="lg:text-3xl md:text-xl font-bold font-opensans mb-2">
+                                    <a href="/project/hindi-data-crf-viterbi-analysis/">Analysis of Hindi tagged data using CRF with Viterbi Decoding</a>
+                                </p>
+                                <p class="text-base mb-4">
+                                    A research project to analyze the results of using CRF with Viterbi decoding on Hindi tagged data.
+                                </p>
+                            </div>
+                            <div id="card-extradetails" class="text-sm font-semibold">
+                                <div class="flex flex-row justify-between text-gray-500 mb-2">
+                                    
+                                    <span>Jan, 2019 - Apr, 2019</span>
+                                    <span>
+                                        <a href="https://github.com/pegasus-lynx/Junk/tree/master/NLP" class="hover:text-gray-600">
+                                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                        </a>
+                                    </span>
+                                    
+                                </div>
+
+                                <hr class="mb-2">
+                                <ul class="flex flex-row flex-wrap gap-x-2 gap-y-4 mb-2">
+                                    
+                                        <li class="text-gray-900">
+                                            <a href="/tags/project/">
+                                                <span class="text-xs 
+                                                            bg-gray-200 rounded-md px-2 py-1 my-1">
+                                                    Project
+                                                </span>
+                                            </a>
+                                        </li>
+                                    
+                                        <li class="text-gray-900">
+                                            <a href="/tags/python/">
+                                                <span class="text-xs 
+                                                            bg-gray-200 rounded-md px-2 py-1 my-1">
+                                                    Python
+                                                </span>
+                                            </a>
+                                        </li>
+                                    
+                                        <li class="text-gray-900">
+                                            <a href="/tags/nlp/">
+                                                <span class="text-xs 
+                                                            bg-gray-200 rounded-md px-2 py-1 my-1">
+                                                    NLP
+                                                </span>
+                                            </a>
+                                        </li>
+                                    
+                                        <li class="text-gray-900">
+                                            <a href="/tags/crf/">
+                                                <span class="text-xs 
+                                                            bg-gray-200 rounded-md px-2 py-1 my-1">
+                                                    CRF
+                                                </span>
+                                            </a>
+                                        </li>
+                                    
+                                        <li class="text-gray-900">
+                                            <a href="/tags/nltk/">
+                                                <span class="text-xs 
+                                                            bg-gray-200 rounded-md px-2 py-1 my-1">
+                                                    NLTK
+                                                </span>
+                                            </a>
+                                        </li>
+                                    
+                                        <li class="text-gray-900">
+                                            <a href="/tags/ner/">
+                                                <span class="text-xs 
+                                                            bg-gray-200 rounded-md px-2 py-1 my-1">
+                                                    NER
+                                                </span>
+                                            </a>
+                                        </li>
+                                    
+                                </ul>
+                                <hr class="mb-2">
+                            </div>
+                        </div>
+                    </div>
                 
             
                 
-                    <div class="flex flex-row lg:h-72 w-full mb-16 shadow-lg
+                    <div class="hidden md:flex flex-row lg:h-72 w-full mb-16 shadow-lg
                                     md:h-64">
                         <div class="h-full w-4/12">
                                 <img src="/assets/images/imgencdl-cover.png" 
@@ -1105,10 +1483,80 @@
                             </div>
                         </div>
                     </div>
+                    <div class="flex md:hidden flex-col w-full mb-16 shadow-lg">
+                        <div class="w-full h-48">
+                                <img src="/assets/images/imgencdl-cover.png" 
+                                    class="object-cover w-full h-full" alt="Image Encryption Algorithms for privacy in Deep Learning"> 
+                        </div>
+                        <div class="p-8 w-full flex flex-col justify-between">
+                            <div id="card-header">
+                                <p class="lg:text-3xl md:text-xl font-bold font-opensans mb-2">
+                                    <a href="/project/image-enc-dl/">Image Encryption Algorithms for privacy in Deep Learning</a>
+                                </p>
+                                <p class="text-base mb-4">
+                                    An exploratory project on different learnable image encryption schemes for privacy in deep learning.
+                                </p>
+                            </div>
+                            <div id="card-extradetails" class="text-sm font-semibold">
+                                <div class="flex flex-row justify-between text-gray-500 mb-2">
+                                    
+                                    <span>Mar, 2021 - Apr, 2021</span>
+                                    <span>
+                                        <a href="https://github.com/pegasus-lynx/imgEncDL/tree/main" class="hover:text-gray-600">
+                                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                        </a>
+                                    </span>
+                                    
+                                </div>
+
+                                <hr class="mb-2">
+                                <ul class="flex flex-row flex-wrap gap-x-2 gap-y-4 mb-2">
+                                    
+                                        <li class="text-gray-900">
+                                            <a href="/tags/project/">
+                                                <span class="text-xs 
+                                                            bg-gray-200 rounded-md px-2 py-1 my-1">
+                                                    Project
+                                                </span>
+                                            </a>
+                                        </li>
+                                    
+                                        <li class="text-gray-900">
+                                            <a href="/tags/python/">
+                                                <span class="text-xs 
+                                                            bg-gray-200 rounded-md px-2 py-1 my-1">
+                                                    Python
+                                                </span>
+                                            </a>
+                                        </li>
+                                    
+                                        <li class="text-gray-900">
+                                            <a href="/tags/deep-learning/">
+                                                <span class="text-xs 
+                                                            bg-gray-200 rounded-md px-2 py-1 my-1">
+                                                    Deep Learning
+                                                </span>
+                                            </a>
+                                        </li>
+                                    
+                                        <li class="text-gray-900">
+                                            <a href="/tags/image-processing/">
+                                                <span class="text-xs 
+                                                            bg-gray-200 rounded-md px-2 py-1 my-1">
+                                                    Image Processing
+                                                </span>
+                                            </a>
+                                        </li>
+                                    
+                                </ul>
+                                <hr class="mb-2">
+                            </div>
+                        </div>
+                    </div>
                 
             
                 
-                    <div class="flex flex-row lg:h-72 w-full mb-16 shadow-lg
+                    <div class="hidden md:flex flex-row lg:h-72 w-full mb-16 shadow-lg
                                     md:h-64">
                         <div class="h-full w-4/12">
                                 <img src="/assets/images/mwe-bpe-tokenization-examples.png" 
@@ -1206,16 +1654,192 @@
                             </div>
                         </div>
                     </div>
+                    <div class="flex md:hidden flex-col w-full mb-16 shadow-lg">
+                        <div class="w-full h-48">
+                                <img src="/assets/images/mwe-bpe-tokenization-examples.png" 
+                                    class="object-cover w-full h-full" alt="BPE beyond Word Boundary: How NOT to use MWEs in NMT"> 
+                        </div>
+                        <div class="p-8 w-full flex flex-col justify-between">
+                            <div id="card-header">
+                                <p class="lg:text-3xl md:text-xl font-bold font-opensans mb-2">
+                                    <a href="/project/mwe-bpe/">BPE beyond Word Boundary: How NOT to use MWEs in NMT</a>
+                                </p>
+                                <p class="text-base mb-4">
+                                    A research project to identify Multi-Word Expressions using Byte Pair Encoding.
+                                </p>
+                            </div>
+                            <div id="card-extradetails" class="text-sm font-semibold">
+                                <div class="flex flex-row justify-between text-gray-500 mb-2">
+                                    
+                                    <span>Aug, 2021 - May, 2022</span>
+                                    <span>
+                                        <a href="https://github.com/pegasus-lynx/mwe-bpe" class="hover:text-gray-600">
+                                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                        </a>
+                                    </span>
+                                    
+                                </div>
+
+                                <hr class="mb-2">
+                                <ul class="flex flex-row flex-wrap gap-x-2 gap-y-4 mb-2">
+                                    
+                                        <li class="text-gray-900">
+                                            <a href="/tags/project/">
+                                                <span class="text-xs 
+                                                            bg-gray-200 rounded-md px-2 py-1 my-1">
+                                                    Project
+                                                </span>
+                                            </a>
+                                        </li>
+                                    
+                                        <li class="text-gray-900">
+                                            <a href="/tags/python/">
+                                                <span class="text-xs 
+                                                            bg-gray-200 rounded-md px-2 py-1 my-1">
+                                                    Python
+                                                </span>
+                                            </a>
+                                        </li>
+                                    
+                                        <li class="text-gray-900">
+                                            <a href="/tags/nlp/">
+                                                <span class="text-xs 
+                                                            bg-gray-200 rounded-md px-2 py-1 my-1">
+                                                    NLP
+                                                </span>
+                                            </a>
+                                        </li>
+                                    
+                                        <li class="text-gray-900">
+                                            <a href="/tags/multi-word-expressions/">
+                                                <span class="text-xs 
+                                                            bg-gray-200 rounded-md px-2 py-1 my-1">
+                                                    Multi-Word Expressions
+                                                </span>
+                                            </a>
+                                        </li>
+                                    
+                                        <li class="text-gray-900">
+                                            <a href="/tags/byte-pair-encoding/">
+                                                <span class="text-xs 
+                                                            bg-gray-200 rounded-md px-2 py-1 my-1">
+                                                    Byte-Pair Encoding
+                                                </span>
+                                            </a>
+                                        </li>
+                                    
+                                        <li class="text-gray-900">
+                                            <a href="/tags/pytorch/">
+                                                <span class="text-xs 
+                                                            bg-gray-200 rounded-md px-2 py-1 my-1">
+                                                    PyTorch
+                                                </span>
+                                            </a>
+                                        </li>
+                                    
+                                        <li class="text-gray-900">
+                                            <a href="/tags/transformers/">
+                                                <span class="text-xs 
+                                                            bg-gray-200 rounded-md px-2 py-1 my-1">
+                                                    Transformers
+                                                </span>
+                                            </a>
+                                        </li>
+                                    
+                                </ul>
+                                <hr class="mb-2">
+                            </div>
+                        </div>
+                    </div>
                 
             
                 
-                    <div class="flex flex-row lg:h-72 w-full mb-16 shadow-lg
+                    <div class="hidden md:flex flex-row lg:h-72 w-full mb-16 shadow-lg
                                     md:h-64">
                         <div class="h-full w-4/12">
                                 <img src="/assets/images/personal-webapp.jpg" 
                                     class="object-cover w-full h-full" alt="Dipesh Kumar&#39;s Webapp"> 
                         </div>
                         <div class="py-4 px-12 w-8/12 flex flex-col justify-between">
+                            <div id="card-header">
+                                <p class="lg:text-3xl md:text-xl font-bold font-opensans mb-2">
+                                    <a href="/project/personal-webapp/">Dipesh Kumar&#39;s Webapp</a>
+                                </p>
+                                <p class="text-base mb-4">
+                                    A personal blogging webapp for managing and sharing ideas and showcase my past projects.
+                                </p>
+                            </div>
+                            <div id="card-extradetails" class="text-sm font-semibold">
+                                <div class="flex flex-row justify-between text-gray-500 mb-2">
+                                    
+                                    <span>Dec, 2023 - Present</span>
+                                    <span>
+                                        <a href="https://github.com/pegasus-lynx/pegasus-lynx.github.io" class="hover:text-gray-600">
+                                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                        </a>
+                                    </span>
+                                    
+                                </div>
+
+                                <hr class="mb-2">
+                                <ul class="flex flex-row flex-wrap gap-x-2 gap-y-4 mb-2">
+                                    
+                                        <li class="text-gray-900">
+                                            <a href="/tags/project/">
+                                                <span class="text-xs 
+                                                            bg-gray-200 rounded-md px-2 py-1 my-1">
+                                                    Project
+                                                </span>
+                                            </a>
+                                        </li>
+                                    
+                                        <li class="text-gray-900">
+                                            <a href="/tags/11ty/">
+                                                <span class="text-xs 
+                                                            bg-gray-200 rounded-md px-2 py-1 my-1">
+                                                    11ty
+                                                </span>
+                                            </a>
+                                        </li>
+                                    
+                                        <li class="text-gray-900">
+                                            <a href="/tags/tailwind/">
+                                                <span class="text-xs 
+                                                            bg-gray-200 rounded-md px-2 py-1 my-1">
+                                                    Tailwind
+                                                </span>
+                                            </a>
+                                        </li>
+                                    
+                                        <li class="text-gray-900">
+                                            <a href="/tags/nunjucks/">
+                                                <span class="text-xs 
+                                                            bg-gray-200 rounded-md px-2 py-1 my-1">
+                                                    Nunjucks
+                                                </span>
+                                            </a>
+                                        </li>
+                                    
+                                        <li class="text-gray-900">
+                                            <a href="/tags/markdown/">
+                                                <span class="text-xs 
+                                                            bg-gray-200 rounded-md px-2 py-1 my-1">
+                                                    Markdown
+                                                </span>
+                                            </a>
+                                        </li>
+                                    
+                                </ul>
+                                <hr class="mb-2">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex md:hidden flex-col w-full mb-16 shadow-lg">
+                        <div class="w-full h-48">
+                                <img src="/assets/images/personal-webapp.jpg" 
+                                    class="object-cover w-full h-full" alt="Dipesh Kumar&#39;s Webapp"> 
+                        </div>
+                        <div class="p-8 w-full flex flex-col justify-between">
                             <div id="card-header">
                                 <p class="lg:text-3xl md:text-xl font-bold font-opensans mb-2">
                                     <a href="/project/personal-webapp/">Dipesh Kumar&#39;s Webapp</a>
@@ -1300,14 +1924,14 @@
     <div class="w-full mx-auto max-w-screen-xl py-4 px-8 
                 flex flex-col items-center flex-wrap
                 lg:py-6 lg:flex-row lg:justify-between">
-        <span class="text-sm text-gray-500 text-center mb-2
+        <span class="text-sm text-gray-500 text-center md:mb-2
                         lg:text-left lg:mb-0">
             Built with <a href="https://www.11ty.dev/" class="hover:underline font-semibold">11ty</a>, 
                         <a href="https://tailwindcss.com/" class="hover:underline font-semibold">Tailwind CSS</a>. 
             Hosted on <a href="https://pages.github.com/" class="hover:underline font-semibold">GitHub Pages</a>.
             Copyright <a href="#" class="hover:underline font-semibold">© Dipesh Kumar</a> 2023
         </span>
-        <ul class="flex flex-row flex-wrap items-center text-sm font-medium text-gray-500">
+        <ul class="hidden md:flex flex-row flex-wrap items-center text-sm font-medium text-gray-500">
             <li>
                 <a href="/" class="hover:underline me-4 md:me-6">About</a>
             </li>

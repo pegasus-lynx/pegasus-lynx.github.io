@@ -630,38 +630,75 @@
 <body class="m-0 p-0 relative min-h-screen">
     <header class="bg-white shadow-xl">
   <nav class="mx-auto flex max-w-7xl items-center justify-between p-4 lg:px-8" aria-label="Global">
-    <div class="flex lg:flex-1 font-bold font-opensans">
+    <div class="lg:flex-1 font-bold font-opensans
+                hidden md:flex">
       <a href="/" class="-m-1.5 p-1.5">
-        
         <span
           class="text-lg text-gray-900">DIPESH KUMAR'S</span>
         <span class="bg-gray-800 leading-6 text-white rounded-md py-1 px-2">PORTFOLIO</span>
       </a>
     </div>
-    
-    <div class="hidden md:flex lg:gap-x-12 md:gap-x-8">
-      
+    <div class="flex sm:flex-1 font-bold font-opensans
+                md:hidden">
+      <a href="/" class="-m-1.5 p-1.5">
+        <span
+          class="text-lg text-gray-900">DK'S</span>
+        <span class="bg-gray-800 leading-6 text-white rounded-md py-1 px-2">PORTFOLIO</span>
+      </a>
+    </div>
+    <div class="flex md:hidden">
+      <button type="button" id="mobile-nav-button" class="-my-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700" 
+              onclick="window.App.toggleMobileMenu()">
+        <span class="sr-only">Open main menu</span>
+        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+        </svg>
+      </button>
+    </div>
 
+    <div class="hidden md:flex lg:gap-x-12 md:gap-x-8">
       <a href="/projects/" class="text-sm font-semibold leading-6 text-gray-900">Projects</a>
       <a href="/blogs/" class="text-sm font-semibold leading-6 text-gray-900">Blogs</a>
       <a href="/contact/" class="text-sm font-semibold leading-6 text-gray-900">Contact</a>
-      
     </div>
-    
   </nav>
 
   <!-- Mobile menu, show/hide based on menu open state. -->
-  
+  <div class="hidden" id="mobile-nav-menu" role="dialog" aria-modal="true">
+    <!-- Background backdrop, show/hide based on slide-over state. -->
+    <div class="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+      <div class="flex items-center justify-between font-bold shadow-md p-4">
+        <a href="#" class="m-0">
+          <span class="sr-only">Your Company</span>
+          <span class="text-lg text-gray-900">DK'S</span>
+          <span class="bg-gray-800 leading-6 text-white rounded-md py-1 px-2">PORTFOLIO</span>        
+        </a>
+        <button type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700" onclick="window.App.toggleMobileMenu()">
+          <span class="sr-only">Close menu</span>
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      <div class="mt-4 flex flex-col text-center text-3xl text-gray-900 font-bold">
+        <a href="/projects/" class="p-4 m-4 leading-6">Projects</a>
+        <a href="/blogs/" class="p-4 m-4 leading-6 ">Blogs</a>
+        <a href="/contact/" class="p-4 m-4 leading-6 ">Contact</a>
+      </div>
+    </div>
+  </div>
 </header>
-    <main class="max-w-6xl mx-auto py-32">
-    <div id="post-body" class="bg-white text-center px-16 py-24">
-        <div id="post-header" class="mb-8">
-            <h1 class="text-5xl font-bold font-opensans text-gray-900 mb-4 w-10/12 mx-auto">Image Encryption Algorithms for privacy in Deep Learning</h1>
-            <h3 class="text-xl font-semibold text-gray-700">An exploratory project on different learnable image encryption schemes for privacy in deep learning.</h3>
+    <main class="max-w-6xl mx-auto pt-16 pb-32 md:py-32">
+    <div id="post-body" class="bg-white text-center 
+                                    md:px-16 md:py-24
+                                    px-4 py-8">
+        <div id="post-header" class="mb-8 w-10/12 md:w-full mx-auto">
+            <h1 class="text-2xl md:text-5xl font-bold font-opensans text-gray-900 mb-4 w-10/12 mx-auto">Image Encryption Algorithms for privacy in Deep Learning</h1>
+            <h3 class="text-lg md:text-xl md:font-semibold text-gray-700">An exploratory project on different learnable image encryption schemes for privacy in deep learning.</h3>
         </div>
-        <hr class="w-8/12 mx-auto">
+        <hr class="w-10/12 md:w-8/12 mx-auto">
         <div id="post-details" 
-            class="flex flex-row justify-between w-8/12 mx-auto my-3
+            class="flex flex-row justify-between w-10/12 md:w-8/12 mx-auto my-3
                     text-gray-500 font-semibold">
                 <span class="text-sm">Mar, 2021 - Apr, 2021</span>
             
@@ -676,8 +713,9 @@
                 </button>
             </div>
         </div>
-        <hr class="w-8/12 mb-8 mx-auto">
-        <div id="post-banner-image" class="w-7/12 mx-auto mb-12"> 
+        <hr class="w-10/12 md:w-8/12 mb-8 mx-auto">
+        <div id="post-banner-image" class="w-10/12 md:w-7/12 mx-auto
+                                            mb-8 md:mb-12"> 
             <img src="/assets/images/imgencdl-cover.png" 
                     alt="Image Encryption Algorithms for privacy in Deep Learning" 
                     class="h-auto">
@@ -709,9 +747,9 @@ Privacy-Preserving Deep Neural Networks</a></li>
 
             </article>
         </div>
-        <hr class="w-8/12 mx-auto">
+        <hr class="w-10/12 md:w-8/12 mx-auto">
         <div id="post-tags" 
-            class="w-8/12 mx-auto my-2 text-sm font-semibold text-gray-900">
+            class="w-10/12 md:w-8/12 mx-auto my-2 text-sm font-semibold text-gray-900">
             <ul class="flex flex-row flex-wrap gap-x-4 gap-y-2 mb-2">
                 <li>Tags :</li>
                 
@@ -741,7 +779,7 @@ Privacy-Preserving Deep Neural Networks</a></li>
                 
             </ul>
         </div>
-        <hr class="w-8/12 mx-auto">
+        <hr class="w-10/12 md:w-8/12 mx-auto">
     </div>
 </main>
     
@@ -750,14 +788,14 @@ Privacy-Preserving Deep Neural Networks</a></li>
     <div class="w-full mx-auto max-w-screen-xl py-4 px-8 
                 flex flex-col items-center flex-wrap
                 lg:py-6 lg:flex-row lg:justify-between">
-        <span class="text-sm text-gray-500 text-center mb-2
+        <span class="text-sm text-gray-500 text-center md:mb-2
                         lg:text-left lg:mb-0">
             Built with <a href="https://www.11ty.dev/" class="hover:underline font-semibold">11ty</a>, 
                         <a href="https://tailwindcss.com/" class="hover:underline font-semibold">Tailwind CSS</a>. 
             Hosted on <a href="https://pages.github.com/" class="hover:underline font-semibold">GitHub Pages</a>.
             Copyright <a href="#" class="hover:underline font-semibold">© Dipesh Kumar</a> 2023
         </span>
-        <ul class="flex flex-row flex-wrap items-center text-sm font-medium text-gray-500">
+        <ul class="hidden md:flex flex-row flex-wrap items-center text-sm font-medium text-gray-500">
             <li>
                 <a href="/" class="hover:underline me-4 md:me-6">About</a>
             </li>

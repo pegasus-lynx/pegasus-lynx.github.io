@@ -1,7 +1,7 @@
 {
   "version": 3,
   "sources": ["../../src/assets/js/index.js"],
-  "sourcesContent": ["\nfunction copyPageUrl() {\n    const ta = document.createElement(\"textarea\");\n    ta.value = window.location.href;\n    ta.setAttribute(`readonly`, ``);\n    ta.style.position = `absolute`;\n    ta.style.left = `-9999px`;\n    document.body.appendChild(ta);            \n    ta.select();\n    ta.setSelectionRange(0, 99999)\n    document.execCommand(\"copy\");\n    document.body.removeChild(ta);\n}\n\nglobalThis.App = { copyPageUrl };"],
-  "mappings": ";;AACA,WAAS,cAAc;AACnB,UAAM,KAAK,SAAS,cAAc,UAAU;AAC5C,OAAG,QAAQ,OAAO,SAAS;AAC3B,OAAG,aAAa,YAAY,EAAE;AAC9B,OAAG,MAAM,WAAW;AACpB,OAAG,MAAM,OAAO;AAChB,aAAS,KAAK,YAAY,EAAE;AAC5B,OAAG,OAAO;AACV,OAAG,kBAAkB,GAAG,KAAK;AAC7B,aAAS,YAAY,MAAM;AAC3B,aAAS,KAAK,YAAY,EAAE;AAAA,EAChC;AAEA,aAAW,MAAM,EAAE,YAAY;",
+  "sourcesContent": ["\nfunction copyPageUrl() {\n    const ta = document.createElement(\"textarea\");\n    ta.value = window.location.href;\n    ta.setAttribute(`readonly`, ``);\n    ta.style.position = `absolute`;\n    ta.style.left = `-9999px`;\n    document.body.appendChild(ta);            \n    ta.select();\n    ta.setSelectionRange(0, 99999)\n    document.execCommand(\"copy\");\n    document.body.removeChild(ta);\n}\n\nfunction toggleMobileMenu() {\n    const menu = document.querySelector(`#mobile-nav-menu`);\n    menu.classList.toggle(`hidden`);\n}\n\nglobalThis.App = { copyPageUrl, toggleMobileMenu };"],
+  "mappings": ";;AACA,WAAS,cAAc;AACnB,UAAM,KAAK,SAAS,cAAc,UAAU;AAC5C,OAAG,QAAQ,OAAO,SAAS;AAC3B,OAAG,aAAa,YAAY,EAAE;AAC9B,OAAG,MAAM,WAAW;AACpB,OAAG,MAAM,OAAO;AAChB,aAAS,KAAK,YAAY,EAAE;AAC5B,OAAG,OAAO;AACV,OAAG,kBAAkB,GAAG,KAAK;AAC7B,aAAS,YAAY,MAAM;AAC3B,aAAS,KAAK,YAAY,EAAE;AAAA,EAChC;AAEA,WAAS,mBAAmB;AACxB,UAAM,OAAO,SAAS,cAAc,kBAAkB;AACtD,SAAK,UAAU,OAAO,QAAQ;AAAA,EAClC;AAEA,aAAW,MAAM,EAAE,aAAa,iBAAiB;",
   "names": []
 }

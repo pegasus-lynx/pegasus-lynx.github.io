@@ -12,6 +12,10 @@
     document.execCommand("copy");
     document.body.removeChild(ta);
   }
-  globalThis.App = { copyPageUrl };
+  function toggleMobileMenu() {
+    const menu = document.querySelector("#mobile-nav-menu");
+    menu.classList.toggle("hidden");
+  }
+  globalThis.App = { copyPageUrl, toggleMobileMenu };
 })();
 //# sourceMappingURL=bundle.js.map
