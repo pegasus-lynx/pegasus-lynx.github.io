@@ -1,20 +1,23 @@
 ---
 layout: page
 ---
-<main class="max-w-6xl mx-auto py-32">
-        <div id="post-banner-image" class="w-full mx-auto"> 
-            <img src="/assets/images/{{ post_image }}" 
-                    alt="{{ title }}" 
-                    class="h-96 object-cover w-full shadow-xl">
+<main class="max-w-6xl mx-auto 
+                pb-32 md:py-32">
+    <div id="post-banner-image" class="w-full mx-auto"> 
+        <img src="/assets/images/{{ post_image }}" 
+                alt="{{ title }}" 
+                class="h-64 md:h-96 object-cover w-full shadow-xl">
+    </div>
+    <div id="post-body" class="bg-white md:text-center 
+                                md:px-16 md:py-24
+                                px-4 py-8">
+        <div id="post-header" class="mb-8 w-10/12 md:w-full mx-auto">
+            <h1 class="text-2xl md:text-4xl font-bold my-4 text-gray-900 md:w-10/12 mx-auto">{{ title }}</h1>
+            <h3 class="text-base md:text-xl md:font-semibold text-gray-700">{{ description }}</h3>
         </div>
-    <div id="post-body" class="bg-white text-center px-16 py-24">
-        <div id="post-header" class="mb-8">
-            <h1 class="text-4xl font-bold my-4 text-gray-900 w-10/12 mx-auto">{{ title }}</h1>
-            <h3 class="text-xl font-semibold text-gray-700">{{ description }}</h3>
-        </div>
-        <hr class="w-8/12 mx-auto">
+        <hr class="w-10/12 md:w-8/12 mx-auto">
         <div id="post-details" 
-            class="flex flex-row justify-between w-8/12 mx-auto my-3
+            class="flex flex-row justify-between w-10/12 md:w-8/12 mx-auto my-3
                     text-gray-500 font-semibold">
                 <span class="text-sm">{{ readingtime }} | {{ publishdate }}</span>
             
@@ -25,15 +28,15 @@ layout: page
                 </button>
             </div>
         </div>
-        <hr class="w-8/12 mx-auto">
-        <div id="post-content" class="w-10/12 mx-auto mt-16 mb-8 text-justify">
+        <hr class="w-10/12 md:w-8/12 mx-auto">
+        <div id="post-content" class="w-10/12 mx-auto mt-8 md:mt-16 mb-8 text-justify">
             <article class="prose lg:prose-lg mx-auto">
                 {{ content | safe }}
             </article>
         </div>
-        <hr class="w-8/12 mx-auto">
+        <hr class="w-10/12 md:w-8/12 mx-auto">
         <div id="post-tags" 
-            class="w-8/12 mx-auto my-2 text-sm font-semibold text-gray-900">
+            class="w-10/12 md:w-8/12 mx-auto my-2 text-sm font-semibold text-gray-900">
             <ul class="flex flex-row flex-wrap gap-x-4 gap-y-2 mb-2">
                 <li>Tags :</li>
                 {% for tag in tags %}
@@ -45,6 +48,6 @@ layout: page
                 {% endfor %}
             </ul>
         </div>
-        <hr class="w-8/12 mx-auto">
+        <hr class="w-10/12 md:w-8/12 mx-auto">
     </div>
 </main>

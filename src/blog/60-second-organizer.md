@@ -2,7 +2,7 @@
 title: "The 60-Second Organizer - Book Summary"
 post_slug: "60-second-organizer-summary"
 post_image: "60-second-organizer.png"
-tags: ["Organization", "Perato's Principle", "Declutter", "Book Summary"]
+tags: ["Organization", "Declutter", "Perato's Principle",  "Book Summary"]
 description: "How would you like to know the small steps that can get you organized for life?"
 readingtime: "15 min"
 publishdate: "Dec 11, 2022"
