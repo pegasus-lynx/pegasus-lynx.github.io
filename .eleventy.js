@@ -2,6 +2,7 @@ const eleventyGoogleFonts = require("eleventy-google-fonts");
 const esbuild = require("esbuild");
 const fs = require("fs");
 const path = require("path");
+const { DateTime } = require("luxon");
 
 module.exports = function (eleventyConfig) {
   
@@ -32,11 +33,19 @@ module.exports = function (eleventyConfig) {
     });
   });
 
+  eleventyConfig.addFilter("postDate", (date) => {
+    console.log(date);
+    return DateTime.fromFormat(date, 'dd-MM-yyyy').toLocaleString(DateTime.DATE_MED);
+  });
+
+  eleventyConfig.addFilter("postMonth", (date) => {
+    if(date === 'Present') return date;
+    return DateTime.fromFormat(date, 'dd-MM-yyyy').toFormat('LLL, yyyy');
+  });
+
   return {
     passthroughFileCopy: true,
     markdownTemplateEngine: "njk",
-    // htmlTemplateEngine: "njk",
-    // templateFormats: ["html", "liquid", "njk"],
     dir: {
       input: 'src',
       output: '_site'  // This is the default value anyhow

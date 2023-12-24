@@ -94,8 +94,10 @@ permalink: /
                         {% if project.data.post_slug == selected_project %}
                             <div id="{{ project.post_slug }}-project-card" 
                                 class="md:w-9/20 rounded-lg shadow-lg mb-8 md:mb-4 dark:bg-neutral-800">
-                                <img src="/assets/images/{{ project.data.post_image }}" alt=""
-                                    class="w-full h-32 object-cover">
+                                <a href="{{ project.url }}">
+                                    <img src="/assets/images/{{ project.data.post_image }}" alt=""
+                                        class="w-full h-32 object-cover">
+                                </a>
                                 <div class="p-4">
                                     <div class="flex sm:flex-col flex-row justify-between">
                                             <a href="{{ project.url }}">

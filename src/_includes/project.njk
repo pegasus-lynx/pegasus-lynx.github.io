@@ -13,7 +13,7 @@ layout: page
         <div id="post-details" 
             class="flex flex-row justify-between w-10/12 md:w-8/12 mx-auto my-3
                     text-gray-500 dark:text-neutral-200 font-semibold">
-                <span class="text-sm">{{ startdate }} - {{ enddate }}</span>
+                <span class="text-sm">{{ startdate | postMonth }} - {{ enddate | postMonth }}</span>
             
             <div class="flex flex-row items-center gap-x-6 mx-4 text-sm">
                     <a href="{{ sourcecode }}" 

@@ -6,7 +6,7 @@ layout: project
 tags: ["11ty", "Tailwind", "Nunjucks", "Markdown"]
 description: "A personal blogging webapp for managing and sharing ideas and showcase my past projects."
 sourcecode: "https://github.com/pegasus-lynx/pegasus-lynx.github.io"
-startdate: Dec, 2023
+startdate: 01-12-2023
 enddate: Present
 ---
 

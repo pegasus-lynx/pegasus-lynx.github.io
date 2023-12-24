@@ -6,8 +6,8 @@ layout: project
 tags: ["Python", "NLP", "CRF", "NLTK", "NER"]
 description: "A research project to analyze the results of using CRF with Viterbi decoding on Hindi tagged data."
 sourcecode: "https://github.com/pegasus-lynx/Junk/tree/master/NLP"
-startdate: "Jan, 2019"
-enddate: "Apr, 2019"
+startdate: "01-01-2019"
+enddate: "01-04-2019"
 ---
 
 ### Introduction 

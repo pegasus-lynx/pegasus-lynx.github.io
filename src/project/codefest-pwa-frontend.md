@@ -5,8 +5,8 @@ post_image: "codefest-frontend-pwa.png"
 tags: ["VueJS", "CSS3", "PWA", "Frontend Development"]
 description: "A Progressive Web App for Codefest, IIT(BHU) Varanasi."
 sourcecode: "https://github.com/codefest-iit-bhu/codefest-app"
-startdate: "Jan, 2019"
-enddate: "Apr, 2019"
+startdate: "01-01-2019"
+enddate: "01-04-2019"
 ---
 
 **Codefest** is the annual Computer Science department fest at IIT (BHU). 

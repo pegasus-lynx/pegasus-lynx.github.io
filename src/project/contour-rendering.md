@@ -5,8 +5,8 @@ post_image: "contour-rendering.png"
 tags: ["C++", "OpenGL", "Computer Graphics", "Dynamic Programming"]
 description: "A C++ application for visualing 2D contour maps as 3D models."
 sourcecode: "https://github.com/pegasus-lynx/ContourRendering"
-startdate: "Mar, 2019"
-enddate: "Apr, 2019"
+startdate: "01-03-2019"
+enddate: "01-04-2019"
 ---
 
 **Contour Renderer** is a 3D terrain visualization tool that showcases 

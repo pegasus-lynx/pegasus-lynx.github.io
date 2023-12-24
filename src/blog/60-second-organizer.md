@@ -5,7 +5,7 @@ post_image: "60-second-organizer.png"
 tags: ["Organization", "Declutter", "Perato's Principle",  "Book Summary"]
 description: "How would you like to know the small steps that can get you organized for life?"
 readingtime: "15 min"
-publishdate: "Dec 11, 2022"
+publishdate: "11-12-2022"
 ---
 
 The book **‘The 60-second organizer’** is about small steps for beating chaos and getting a more organized life. The book as such consists of 6 parts, and each part has ten rules. 

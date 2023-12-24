@@ -6,8 +6,8 @@ layout: project
 tags: ["Python", "Deep Learning", "Image Processing"]
 description: "An exploratory project on different learnable image encryption schemes for privacy in deep learning."
 sourcecode: "https://github.com/pegasus-lynx/imgEncDL/tree/main"
-startdate: "Mar, 2021"
-enddate: "Apr, 2021"
+startdate: "01-03-2021"
+enddate: "01-04-2021"
 ---
 
 In this project, we delved into the realm of enhancing privacy in Deep Neural Networks ( DNNs ) through learnable image encryption algorithms. 

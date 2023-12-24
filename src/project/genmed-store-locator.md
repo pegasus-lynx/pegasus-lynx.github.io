@@ -6,8 +6,8 @@ layout: project
 tags: ["Django", "Python", "CSS3", "HTML5", "MySQL", "Backend Development"]
 description: "A user-friendly web application to locate generic medicine stores in your area."
 sourcecode: "https://github.com/pegasus-lynx/Genmed"
-startdate: "Aug, 2018"
-enddate: "Nov, 2018"
+startdate: "01-08-2018"
+enddate: "01-11-2018"
 ---
 
 **GenMed: Store Locator** is a **Django**-based web application I developed to 

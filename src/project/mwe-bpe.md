@@ -6,8 +6,8 @@ layout: project
 tags: ["Python", "NLP", "Multi-Word Expressions", "Byte-Pair Encoding", "PyTorch", "Transformers"]
 description: "A research project to identify Multi-Word Expressions using Byte Pair Encoding."
 sourcecode: "https://github.com/pegasus-lynx/mwe-bpe"
-startdate: "Aug, 2021"
-enddate: "May, 2022"
+startdate: "01-08-2021"
+enddate: "01-05-2022"
 ---
 
 
