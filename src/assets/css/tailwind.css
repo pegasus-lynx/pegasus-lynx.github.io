@@ -3,12 +3,37 @@
 @tailwind utilities;
 
 @layer components {
+
+    .body-pattern {
+        --dot-bg: white;
+        --dot-color: black;
+        --dot-size: 1.2px;
+        --dot-space: 30px;
+          background:
+              linear-gradient(90deg, var(--dot-bg) calc(var(--dot-space) - var(--dot-size)), transparent 1%) center / var(--dot-space) var(--dot-space),
+              linear-gradient(var(--dot-bg) calc(var(--dot-space) - var(--dot-size)), transparent 1%) center / var(--dot-space) var(--dot-space),
+              var(--dot-color);
+    }
+
+    .body-pattern-dark {
+        --tw-bg-opacity: 1;
+        --dot-bg: rgb(23 23 23 / var(--tw-bg-opacity));
+        --dot-color: white;
+        --dot-size: 1px;
+        --dot-space: 30px;
+          background:
+              linear-gradient(90deg, var(--dot-bg) calc(var(--dot-space) - var(--dot-size)), transparent 1%) center / var(--dot-space) var(--dot-space),
+              linear-gradient(var(--dot-bg) calc(var(--dot-space) - var(--dot-size)), transparent 1%) center / var(--dot-space) var(--dot-space),
+              var(--dot-color);
+        color: white;
+    }
+  
     .main-style {
         @apply max-w-6xl mx-auto pt-16 pb-32 md:py-32;
     }
 
     .body-style {
-        @apply bg-white text-center p-8 md:p-16 shadow-lg;
+        @apply bg-white dark:bg-neutral-900 text-center p-8 md:p-16 shadow-lg;
     }
 
     .section-heading {
@@ -40,6 +65,6 @@
     }
 
     .form-input {
-        @apply bg-gray-200 p-2;
+        @apply bg-gray-200 dark:bg-neutral-800 p-2;
     }
 }

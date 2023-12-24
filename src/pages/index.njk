@@ -69,7 +69,7 @@ permalink: /
             </div>
             <div id="skills-list" class="flex flex-wrap justify-center flex-row md:justify-normal">
                     {% for skill in info.skills %}
-                        <span class="rounded-full p-4 bg-gray-200 m-2 align-middle" >
+                        <span class="rounded-full p-4 bg-gray-200 dark:bg-neutral-800 m-2 align-middle" >
                             <i class="{{ skill.icon }} text-4xl m-auto text-gray-[750]"></i>
                         </span>
                     {% endfor %}
@@ -93,7 +93,7 @@ permalink: /
                     {% for project in collections.Project %}
                         {% if project.data.post_slug == selected_project %}
                             <div id="{{ project.post_slug }}-project-card" 
-                                class="md:w-9/20 rounded-lg shadow-lg mb-8 md:mb-4">
+                                class="md:w-9/20 rounded-lg shadow-lg mb-8 md:mb-4 dark:bg-neutral-800">
                                 <img src="/assets/images/{{ project.data.post_image }}" alt=""
                                     class="w-full h-32 object-cover">
                                 <div class="p-4">

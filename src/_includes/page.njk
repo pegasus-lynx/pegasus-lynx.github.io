@@ -2,7 +2,7 @@
 title: Page
 ---
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,22 +14,10 @@ title: Page
     {% eleventyGoogleFonts 'https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap' %}
     {% eleventyGoogleFonts 'https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap' %}
 </head>
-<body class="m-0 p-0 relative min-h-screen">
+<body class="m-0 p-0 relative min-h-screen body-pattern-dark" onload="window.App.onLoadInit()">
     {% include '_navbar.njk' %}
     {{ content | safe }}
     {% include '_footer.njk'%}
     <script src="/js/bundle.js"></script>
 </body>
-<style>
-body {
-  --dot-bg: white;
-  --dot-color: black;
-  --dot-size: 1.2px;
-  --dot-space: 30px;
-	background:
-		linear-gradient(90deg, var(--dot-bg) calc(var(--dot-space) - var(--dot-size)), transparent 1%) center / var(--dot-space) var(--dot-space),
-		linear-gradient(var(--dot-bg) calc(var(--dot-space) - var(--dot-size)), transparent 1%) center / var(--dot-space) var(--dot-space),
-		var(--dot-color);
-}
-</style>
 </html>

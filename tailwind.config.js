@@ -1,10 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: 'class',
   content: ["./_site/**/*.{html,js}", "./_site/project/*"],
   theme: {
     extend: {
       fontFamily: {
-        yusei: ["'Yusei Magic'", "sans-serif"],
         ibmplex: ["'IBM Plex Sans'", "sans-serif"],
         opensans: ["'Open Sans'", "sans-serif"],
       },
