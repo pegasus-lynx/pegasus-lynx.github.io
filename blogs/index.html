@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -627,93 +627,95 @@
 }
 </style>
 </head>
-<body class="m-0 p-0 relative min-h-screen">
-    <header class="bg-white shadow-xl">
+<body class="m-0 p-0 relative min-h-screen body-pattern-dark" onload="window.App.onLoadInit()">
+    <header class="bg-white dark:bg-neutral-950 shadow-xl">
   <nav class="mx-auto flex max-w-7xl items-center justify-between p-4 lg:px-8" aria-label="Global">
     <div class="lg:flex-1 font-bold font-opensans
                 hidden md:flex">
       <a href="/" class="-m-1.5 p-1.5">
         <span
-          class="text-lg text-gray-900">DIPESH KUMAR'S</span>
-        <span class="bg-gray-800 leading-6 text-white rounded-md py-1 px-2">PORTFOLIO</span>
+          class="text-lg text-gray-900 dark:text-white">DIPESH KUMAR'S</span>
+        <span class="bg-gray-800 dark:bg-white leading-6 text-white dark:text-neutral-900 rounded-md py-1 px-2 mx-2">PORTFOLIO</span>
       </a>
     </div>
     <div class="flex sm:flex-1 font-bold font-opensans
                 md:hidden">
       <a href="/" class="-m-1.5 p-1.5">
         <span
-          class="text-lg text-gray-900">DK'S</span>
-        <span class="bg-gray-800 leading-6 text-white rounded-md py-1 px-2">PORTFOLIO</span>
+          class="text-lg text-gray-900 dark:text-white">DK'S</span>
+        <span class="bg-gray-800 dark:bg-white leading-6 text-white dark:text-neutral-900 rounded-md py-1 px-2 mx-2">PORTFOLIO</span>
       </a>
     </div>
     <div class="flex md:hidden">
+      <button class="pr-2" onclick="window.App.toggleDarkMode()"><i id="dark-mode-icon" class="fa-solid fa-sun"></i></button>
       <button type="button" id="mobile-nav-button" class="-my-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700" 
               onclick="window.App.toggleMobileMenu()">
         <span class="sr-only">Open main menu</span>
-        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+        <svg class="h-6 w-6 text-gray-900 dark:text-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
         </svg>
       </button>
     </div>
 
-    <div class="hidden md:flex lg:gap-x-12 md:gap-x-8">
-      <a href="/projects/" class="text-sm font-semibold leading-6 text-gray-900">Projects</a>
-      <a href="/blogs/" class="text-sm font-semibold leading-6 text-gray-900">Blogs</a>
-      <a href="/contact/" class="text-sm font-semibold leading-6 text-gray-900">Contact</a>
+    <div class="hidden md:flex lg:gap-x-12 md:gap-x-8 text-sm font-semibold leading-6 text-gray-900 dark:text-white">
+      <button onclick="window.App.toggleDarkMode()"><i id="dark-mode-icon" class="fa-solid"></i></button>
+      <a href="/projects/" >Projects</a>
+      <a href="/blogs/" >Blogs</a>
+      <a href="/contact/" >Contact</a>
     </div>
   </nav>
 
   <!-- Mobile menu, show/hide based on menu open state. -->
   <div class="hidden" id="mobile-nav-menu" role="dialog" aria-modal="true">
     <!-- Background backdrop, show/hide based on slide-over state. -->
-    <div class="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+    <div class="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white dark:bg-neutral-950 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
       <div class="flex items-center justify-between font-bold shadow-md p-4">
         <a href="#" class="m-0">
           <span class="sr-only">Your Company</span>
-          <span class="text-lg text-gray-900">DK'S</span>
-          <span class="bg-gray-800 leading-6 text-white rounded-md py-1 px-2">PORTFOLIO</span>        
+          <span class="text-lg text-gray-900 dark:text-white">DK'S</span>
+          <span class="bg-gray-800 dark:bg-white leading-6 text-white dark:text-neutral-950 rounded-md py-1 px-2 mx-2">PORTFOLIO</span>        
         </a>
         <button type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700" onclick="window.App.toggleMobileMenu()">
           <span class="sr-only">Close menu</span>
-          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+          <svg class="h-6 w-6 text-gray-900 dark:text-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
       </div>
-      <div class="mt-4 flex flex-col text-center text-3xl text-gray-900 font-bold">
-        <a href="/projects/" class="p-4 m-4 leading-6">Projects</a>
-        <a href="/blogs/" class="p-4 m-4 leading-6 ">Blogs</a>
-        <a href="/contact/" class="p-4 m-4 leading-6 ">Contact</a>
+      <div class="mt-4 flex flex-col text-center text-3xl text-gray-900 dark:text-neutral-100 font-bold leading-6">
+        <a href="/projects/" class="p-4 m-4">Projects</a>
+        <a href="/blogs/" class="p-4 m-4">Blogs</a>
+        <a href="/contact/" class="p-4 m-4">Contact</a>
       </div>
     </div>
   </div>
 </header>
-    <main class="max-w-6xl mx-auto pt-16 pb-32 md:py-32">
-    <div id="list-body" class="bg-white text-center p-8 md:p-16 shadow-lg">
-
-        <div id="list-header" class="mb-12 md:mb-24">
+    <main class="main-style">
+    <div id="list-body" class="body-style">
+        <div id="list-header" class="section-spacing">
             
-<div class="text-center">
-    <p class="text-4xl md:text-6xl font-bold font-opensans mb-2 md:mb-8">Blogs</p>
-    <p class="text-base md:text-xl md:font-semibold mb-8 md:mb-16">A collection of articles, blogs, quotes I have written ( and collected ) over the years.</p>
+<div>
+    <h1 class="page-title-font-style mb-2 md:mb-8">
+        Blogs
+    </h1>
+    <h3 class="page-description-font-style mb-8 md:mb-16">
+        A collection of articles, blogs, quotes I have 
+        written ( and collected ) over the years.
+    </h3>
     <hr class="w-10/12 mx-auto">
 </div>
         </div>
 
-        
-        
-        
-
         <div id="list-content" class="lg:w-10/12 mx-auto text-left">
             
                 
-                    <div class="hidden md:flex flex-row lg:h-72 w-full mb-16 shadow-lg
-                                    md:h-64">
-                        <div class="h-full w-4/12">
+                    <div class="flex flex-col md:flex-row w-full mb-16 shadow-lg md:h-64 lg:h-72 dark:bg-neutral-800">
+                        <div class="w-full h-48 md:w-4/12 md:h-full">
                                 <img src="/assets/images/60-second-organizer.png" 
                                     class="object-cover w-full h-full" alt="The 60-Second Organizer - Book Summary"> 
                         </div>
-                        <div class="py-4 px-12 w-8/12 flex flex-col justify-between">
+                        <div class="flex flex-col justify-between
+                                        p-8 w-full md:py-4 md:px-12 md:w-8/12 ">
                             <div id="card-header">
                                 <p class="lg:text-3xl md:text-xl font-bold font-opensans mb-2">
                                     <a href="/blog/60-second-organizer-summary/">The 60-Second Organizer - Book Summary</a>
@@ -723,82 +725,7 @@
                                 </p>
                             </div>
                             <div id="card-extradetails" class="text-sm font-semibold">
-                                <div class="flex flex-row justify-between text-gray-500 mb-2">
-                                    
-                                    <span>15 min</span>
-                                    <span>Dec 11, 2022</span>
-                                    
-                                </div>
-
-                                <hr class="mb-2">
-                                <ul class="flex flex-row flex-wrap gap-x-2 gap-y-4 mb-2">
-                                    
-                                        <li class="text-gray-900">
-                                            <a href="/tags/blog/">
-                                                <span class="text-xs 
-                                                            bg-gray-200 rounded-md px-2 py-1 my-1">
-                                                    Blog
-                                                </span>
-                                            </a>
-                                        </li>
-                                    
-                                        <li class="text-gray-900">
-                                            <a href="/tags/organization/">
-                                                <span class="text-xs 
-                                                            bg-gray-200 rounded-md px-2 py-1 my-1">
-                                                    Organization
-                                                </span>
-                                            </a>
-                                        </li>
-                                    
-                                        <li class="text-gray-900">
-                                            <a href="/tags/declutter/">
-                                                <span class="text-xs 
-                                                            bg-gray-200 rounded-md px-2 py-1 my-1">
-                                                    Declutter
-                                                </span>
-                                            </a>
-                                        </li>
-                                    
-                                        <li class="text-gray-900">
-                                            <a href="/tags/perato-s-principle/">
-                                                <span class="text-xs 
-                                                            bg-gray-200 rounded-md px-2 py-1 my-1">
-                                                    Perato&#39;s Principle
-                                                </span>
-                                            </a>
-                                        </li>
-                                    
-                                        <li class="text-gray-900">
-                                            <a href="/tags/book-summary/">
-                                                <span class="text-xs 
-                                                            bg-gray-200 rounded-md px-2 py-1 my-1">
-                                                    Book Summary
-                                                </span>
-                                            </a>
-                                        </li>
-                                    
-                                </ul>
-                                <hr class="mb-2">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex md:hidden flex-col w-full mb-16 shadow-lg">
-                        <div class="w-full h-48">
-                                <img src="/assets/images/60-second-organizer.png" 
-                                    class="object-cover w-full h-full" alt="The 60-Second Organizer - Book Summary"> 
-                        </div>
-                        <div class="p-8 w-full flex flex-col justify-between">
-                            <div id="card-header">
-                                <p class="lg:text-3xl md:text-xl font-bold font-opensans mb-2">
-                                    <a href="/blog/60-second-organizer-summary/">The 60-Second Organizer - Book Summary</a>
-                                </p>
-                                <p class="text-base mb-4">
-                                    How would you like to know the small steps that can get you organized for life?
-                                </p>
-                            </div>
-                            <div id="card-extradetails" class="text-sm font-semibold">
-                                <div class="flex flex-row justify-between text-gray-500 mb-2">
+                                <div class="flex flex-row justify-between text-gray-500 dark:text-neutral-200 mb-2">
                                     
                                     <span>15 min</span>
                                     <span>Dec 11, 2022</span>
@@ -865,18 +792,18 @@
 </main>
     
 
-<footer class="bg-white shadow-t-lg absolute bottom-0 w-full m-0">
+<footer class="bg-white dark:bg-neutral-950 shadow-t-lg absolute bottom-0 w-full m-0">
     <div class="w-full mx-auto max-w-screen-xl py-4 px-8 
                 flex flex-col items-center flex-wrap
-                lg:py-6 lg:flex-row lg:justify-between">
-        <span class="text-sm text-gray-500 text-center md:mb-2
-                        lg:text-left lg:mb-0">
+                lg:py-6 lg:flex-row lg:justify-between
+                text-gray-500 dark:text-neutral-200">
+        <span class="text-sm md:mb-2 lg:text-left lg:mb-0">
             Built with <a href="https://www.11ty.dev/" class="hover:underline font-semibold">11ty</a>, 
                         <a href="https://tailwindcss.com/" class="hover:underline font-semibold">Tailwind CSS</a>. 
             Hosted on <a href="https://pages.github.com/" class="hover:underline font-semibold">GitHub Pages</a>.
             Copyright <a href="#" class="hover:underline font-semibold">© Dipesh Kumar</a> 2023
         </span>
-        <ul class="hidden md:flex flex-row flex-wrap items-center text-sm font-medium text-gray-500">
+        <ul class="hidden md:flex flex-row flex-wrap items-center text-sm font-medium">
             <li>
                 <a href="/" class="hover:underline me-4 md:me-6">About</a>
             </li>
@@ -895,16 +822,4 @@
 
     <script src="/js/bundle.js"></script>
 </body>
-<style>
-body {
-  --dot-bg: white;
-  --dot-color: black;
-  --dot-size: 1.2px;
-  --dot-space: 30px;
-	background:
-		linear-gradient(90deg, var(--dot-bg) calc(var(--dot-space) - var(--dot-size)), transparent 1%) center / var(--dot-space) var(--dot-space),
-		linear-gradient(var(--dot-bg) calc(var(--dot-space) - var(--dot-size)), transparent 1%) center / var(--dot-space) var(--dot-space),
-		var(--dot-color);
-}
-</style>
 </html>

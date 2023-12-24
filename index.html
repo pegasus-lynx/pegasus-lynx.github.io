@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -627,85 +627,88 @@
 }
 </style>
 </head>
-<body class="m-0 p-0 relative min-h-screen">
-    <header class="bg-white shadow-xl">
+<body class="m-0 p-0 relative min-h-screen body-pattern-dark" onload="window.App.onLoadInit()">
+    <header class="bg-white dark:bg-neutral-950 shadow-xl">
   <nav class="mx-auto flex max-w-7xl items-center justify-between p-4 lg:px-8" aria-label="Global">
     <div class="lg:flex-1 font-bold font-opensans
                 hidden md:flex">
       <a href="/" class="-m-1.5 p-1.5">
         <span
-          class="text-lg text-gray-900">DIPESH KUMAR'S</span>
-        <span class="bg-gray-800 leading-6 text-white rounded-md py-1 px-2">PORTFOLIO</span>
+          class="text-lg text-gray-900 dark:text-white">DIPESH KUMAR'S</span>
+        <span class="bg-gray-800 dark:bg-white leading-6 text-white dark:text-neutral-900 rounded-md py-1 px-2 mx-2">PORTFOLIO</span>
       </a>
     </div>
     <div class="flex sm:flex-1 font-bold font-opensans
                 md:hidden">
       <a href="/" class="-m-1.5 p-1.5">
         <span
-          class="text-lg text-gray-900">DK'S</span>
-        <span class="bg-gray-800 leading-6 text-white rounded-md py-1 px-2">PORTFOLIO</span>
+          class="text-lg text-gray-900 dark:text-white">DK'S</span>
+        <span class="bg-gray-800 dark:bg-white leading-6 text-white dark:text-neutral-900 rounded-md py-1 px-2 mx-2">PORTFOLIO</span>
       </a>
     </div>
     <div class="flex md:hidden">
+      <button class="pr-2" onclick="window.App.toggleDarkMode()"><i id="dark-mode-icon" class="fa-solid fa-sun"></i></button>
       <button type="button" id="mobile-nav-button" class="-my-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700" 
               onclick="window.App.toggleMobileMenu()">
         <span class="sr-only">Open main menu</span>
-        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+        <svg class="h-6 w-6 text-gray-900 dark:text-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
         </svg>
       </button>
     </div>
 
-    <div class="hidden md:flex lg:gap-x-12 md:gap-x-8">
-      <a href="/projects/" class="text-sm font-semibold leading-6 text-gray-900">Projects</a>
-      <a href="/blogs/" class="text-sm font-semibold leading-6 text-gray-900">Blogs</a>
-      <a href="/contact/" class="text-sm font-semibold leading-6 text-gray-900">Contact</a>
+    <div class="hidden md:flex lg:gap-x-12 md:gap-x-8 text-sm font-semibold leading-6 text-gray-900 dark:text-white">
+      <button onclick="window.App.toggleDarkMode()"><i id="dark-mode-icon" class="fa-solid"></i></button>
+      <a href="/projects/" >Projects</a>
+      <a href="/blogs/" >Blogs</a>
+      <a href="/contact/" >Contact</a>
     </div>
   </nav>
 
   <!-- Mobile menu, show/hide based on menu open state. -->
   <div class="hidden" id="mobile-nav-menu" role="dialog" aria-modal="true">
     <!-- Background backdrop, show/hide based on slide-over state. -->
-    <div class="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+    <div class="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white dark:bg-neutral-950 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
       <div class="flex items-center justify-between font-bold shadow-md p-4">
         <a href="#" class="m-0">
           <span class="sr-only">Your Company</span>
-          <span class="text-lg text-gray-900">DK'S</span>
-          <span class="bg-gray-800 leading-6 text-white rounded-md py-1 px-2">PORTFOLIO</span>        
+          <span class="text-lg text-gray-900 dark:text-white">DK'S</span>
+          <span class="bg-gray-800 dark:bg-white leading-6 text-white dark:text-neutral-950 rounded-md py-1 px-2 mx-2">PORTFOLIO</span>        
         </a>
         <button type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700" onclick="window.App.toggleMobileMenu()">
           <span class="sr-only">Close menu</span>
-          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+          <svg class="h-6 w-6 text-gray-900 dark:text-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
       </div>
-      <div class="mt-4 flex flex-col text-center text-3xl text-gray-900 font-bold">
-        <a href="/projects/" class="p-4 m-4 leading-6">Projects</a>
-        <a href="/blogs/" class="p-4 m-4 leading-6 ">Blogs</a>
-        <a href="/contact/" class="p-4 m-4 leading-6 ">Contact</a>
+      <div class="mt-4 flex flex-col text-center text-3xl text-gray-900 dark:text-neutral-100 font-bold leading-6">
+        <a href="/projects/" class="p-4 m-4">Projects</a>
+        <a href="/blogs/" class="p-4 m-4">Blogs</a>
+        <a href="/contact/" class="p-4 m-4">Contact</a>
       </div>
     </div>
   </div>
 </header>
-    <main class="max-w-6xl mx-auto pt-16 pb-32 md:py-32">
-    <div id="index-body" class="bg-white text-center p-8 md:px-16 md:py-24 shadow-lg">
-        <div id="hero-section" class="mb-12 md:mb-24">
-            <div id="photo" class="inline-block w-auto mb-8 md:mb-12 rounded-full shadow-2xl-dark">
+    <main class="main-style">
+    <div id="index-body" class="body-style md:py-24">
+        <div id="hero-section" class="section-spacing">
+            <div id="photo" class="inline-block w-auto mb-8 md:mb-12 
+                                        rounded-full shadow-2xl-dark">
                 <img src="/assets/images/dipesh2.jpg" alt=""
-                    class="w-60 h-60 mx-auto object-cover rounded-full filter">
+                    class="w-60 h-60 mx-auto object-cover 
+                                rounded-full filter">
             </div>
-            <div id="intro" 
-                class="mb-8 text-center">
-                <h1 class="text-3xl md:text-6xl font-opensans font-bold mb-4 md:mb-8">
+            <div id="intro" class="mb-8">
+                <h1 class="page-title-font-style text-3xl mb-4 md:mb-8">
                     Hi there! I'm Dipesh.
                 </h1>
-                <p class="text-base md:text-xl max-w-3xl md:font-semibold font-ibmplex mx-auto">
+                <h3 class="page-description-font-style section-div">
                     I'm a <b>Software Engineer</b> with a knack for almost everything.
-                </p>
+                </h3>
             </div>
             <div id="socials"
-                class="mx-auto flex flex-row items-center justify-center mb-8 md:mb-16">
+                class="flex flex-row flex-wrap justify-center items-center mx-auto mb-8 md:mb-16">
                 
                     <span class="mx-4">
                     <a href="https://github.com/pegasus-lynx" target="_blank" rel="noopener noreferrer">
@@ -732,15 +735,13 @@
                         <i class="fa-solid fa-envelope fa-lg"></i>
                     </a></span>
                 
-                
             </div>
             <hr class="mx-auto w-10/12 md:w-8/12">
         </div>
 
-        <div id="about-section" class="max-w-3xl mx-auto mb-12 md:mb-24 font-ibmplex">
-            <h2 class="text-3xl font-opensans font-bold mb-4 md:mb-8">About Me</h2>
+        <div id="about-section" class="section-div section-spacing">
+            <h2 class="section-heading md:mb-8">About Me</h2>
             <p class="text-justify">
-
                 Hello and welcome! I'm Dipesh Kumar, a spirited Software Developer 
                 II at Microsoft, where I contribute on maintaining WPF's robustness 
                 and introducing new innovative features.
@@ -767,93 +768,93 @@
             </p>
         </div>
         
-        <div id="skills-section" class="max-w-3xl mx-auto mb-12 md:mb-24 font-ibmplex">
+        <div id="skills-section" class="section-div section-spacing">
             <div id="skills-heading" class="mb-4 md:mb-8">
-                <h2 class="text-3xl font-opensans font-bold mb-4">Skills</h2>
+                <h2 class="section-heading">Skills</h2>
                 <p>
                     Technologies and languages that I have worked with:
                 </p>
             </div>
-            <div id="skills-list" class="flex flex-row flex-wrap justify-center md:justify-normal">
+            <div id="skills-list" class="flex flex-wrap justify-center flex-row md:justify-normal">
                     
-                        <span class="rounded-full p-4 bg-gray-200 m-2 align-middle" >
+                        <span class="rounded-full p-4 bg-gray-200 dark:bg-neutral-800 m-2 align-middle" >
                             <i class="devicon-c-plain text-4xl m-auto text-gray-[750]"></i>
                         </span>
                     
-                        <span class="rounded-full p-4 bg-gray-200 m-2 align-middle" >
+                        <span class="rounded-full p-4 bg-gray-200 dark:bg-neutral-800 m-2 align-middle" >
                             <i class="devicon-cplusplus-plain text-4xl m-auto text-gray-[750]"></i>
                         </span>
                     
-                        <span class="rounded-full p-4 bg-gray-200 m-2 align-middle" >
+                        <span class="rounded-full p-4 bg-gray-200 dark:bg-neutral-800 m-2 align-middle" >
                             <i class="devicon-python-plain text-4xl m-auto text-gray-[750]"></i>
                         </span>
                     
-                        <span class="rounded-full p-4 bg-gray-200 m-2 align-middle" >
+                        <span class="rounded-full p-4 bg-gray-200 dark:bg-neutral-800 m-2 align-middle" >
                             <i class="devicon-javascript-plain text-4xl m-auto text-gray-[750]"></i>
                         </span>
                     
-                        <span class="rounded-full p-4 bg-gray-200 m-2 align-middle" >
+                        <span class="rounded-full p-4 bg-gray-200 dark:bg-neutral-800 m-2 align-middle" >
                             <i class="devicon-csharp-plain text-4xl m-auto text-gray-[750]"></i>
                         </span>
                     
-                        <span class="rounded-full p-4 bg-gray-200 m-2 align-middle" >
+                        <span class="rounded-full p-4 bg-gray-200 dark:bg-neutral-800 m-2 align-middle" >
                             <i class="devicon-mysql-plain text-4xl m-auto text-gray-[750]"></i>
                         </span>
                     
-                        <span class="rounded-full p-4 bg-gray-200 m-2 align-middle" >
+                        <span class="rounded-full p-4 bg-gray-200 dark:bg-neutral-800 m-2 align-middle" >
                             <i class="devicon-git-plain text-4xl m-auto text-gray-[750]"></i>
                         </span>
                     
-                        <span class="rounded-full p-4 bg-gray-200 m-2 align-middle" >
+                        <span class="rounded-full p-4 bg-gray-200 dark:bg-neutral-800 m-2 align-middle" >
                             <i class="devicon-fastapi-plain text-4xl m-auto text-gray-[750]"></i>
                         </span>
                     
-                        <span class="rounded-full p-4 bg-gray-200 m-2 align-middle" >
+                        <span class="rounded-full p-4 bg-gray-200 dark:bg-neutral-800 m-2 align-middle" >
                             <i class="devicon-opengl-plain text-4xl m-auto text-gray-[750]"></i>
                         </span>
                     
-                        <span class="rounded-full p-4 bg-gray-200 m-2 align-middle" >
+                        <span class="rounded-full p-4 bg-gray-200 dark:bg-neutral-800 m-2 align-middle" >
                             <i class="devicon-html5-plain text-4xl m-auto text-gray-[750]"></i>
                         </span>
                     
-                        <span class="rounded-full p-4 bg-gray-200 m-2 align-middle" >
+                        <span class="rounded-full p-4 bg-gray-200 dark:bg-neutral-800 m-2 align-middle" >
                             <i class="devicon-css3-plain text-4xl m-auto text-gray-[750]"></i>
                         </span>
                     
-                        <span class="rounded-full p-4 bg-gray-200 m-2 align-middle" >
+                        <span class="rounded-full p-4 bg-gray-200 dark:bg-neutral-800 m-2 align-middle" >
                             <i class="devicon-bootstrap-plain text-4xl m-auto text-gray-[750]"></i>
                         </span>
                     
-                        <span class="rounded-full p-4 bg-gray-200 m-2 align-middle" >
+                        <span class="rounded-full p-4 bg-gray-200 dark:bg-neutral-800 m-2 align-middle" >
                             <i class="devicon-angularjs-plain text-4xl m-auto text-gray-[750]"></i>
                         </span>
                     
-                        <span class="rounded-full p-4 bg-gray-200 m-2 align-middle" >
+                        <span class="rounded-full p-4 bg-gray-200 dark:bg-neutral-800 m-2 align-middle" >
                             <i class="devicon-nodejs-plain text-4xl m-auto text-gray-[750]"></i>
                         </span>
                     
-                        <span class="rounded-full p-4 bg-gray-200 m-2 align-middle" >
+                        <span class="rounded-full p-4 bg-gray-200 dark:bg-neutral-800 m-2 align-middle" >
                             <i class="devicon-dotnetcore-plain text-4xl m-auto text-gray-[750]"></i>
                         </span>
                     
-                        <span class="rounded-full p-4 bg-gray-200 m-2 align-middle" >
+                        <span class="rounded-full p-4 bg-gray-200 dark:bg-neutral-800 m-2 align-middle" >
                             <i class="devicon-django-plain text-4xl m-auto text-gray-[750]"></i>
                         </span>
                     
-                        <span class="rounded-full p-4 bg-gray-200 m-2 align-middle" >
+                        <span class="rounded-full p-4 bg-gray-200 dark:bg-neutral-800 m-2 align-middle" >
                             <i class="devicon-eleventy-plain text-4xl m-auto text-gray-[750]"></i>
                         </span>
                     
-                        <span class="rounded-full p-4 bg-gray-200 m-2 align-middle" >
+                        <span class="rounded-full p-4 bg-gray-200 dark:bg-neutral-800 m-2 align-middle" >
                             <i class="devicon-pytorch-plain text-4xl m-auto text-gray-[750]"></i>
                         </span>
                     
             </div>
         </div>
         
-        <div id="projects-section" class="max-w-3xl mx-auto font-ibmplex">
+        <div id="projects-section" class="section-div">
             <div id="projects-heading" class="mb-4 md:mb-8">
-                <h2 class="text-3xl font-opensans font-bold mb-4">Projects</h2>
+                <h2 class="section-heading">Projects</h2>
                 <p class="text-justify">
                     In my professional journey, I've tackled a wide range of projects, 
                     from simple web apps to complex database management systems. 
@@ -862,7 +863,7 @@
                     For a complete overview of my projects, visit the Projects page.
                 </p>
             </div>
-            <div id="projects-list" class="flex flex-col md:flex-row flex-wrap md:gap-x-6 justify-center text-left
+            <div id="projects-list" class="flex flex-wrap justify-center flex-col md:flex-row md:gap-x-6 text-left
                                             w-10/12 md:w-full mx-auto">
                 
                     
@@ -870,7 +871,7 @@
                     
                         
                             <div id="-project-card" 
-                                class="md:w-9/20 rounded-lg shadow-lg mb-8 md:mb-4">
+                                class="md:w-9/20 rounded-lg shadow-lg mb-8 md:mb-4 dark:bg-neutral-800">
                                 <img src="/assets/images/contour-rendering.png" alt=""
                                     class="w-full h-32 object-cover">
                                 <div class="p-4">
@@ -917,7 +918,7 @@
                     
                         
                             <div id="-project-card" 
-                                class="md:w-9/20 rounded-lg shadow-lg mb-8 md:mb-4">
+                                class="md:w-9/20 rounded-lg shadow-lg mb-8 md:mb-4 dark:bg-neutral-800">
                                 <img src="/assets/images/personal-webapp.jpg" alt=""
                                     class="w-full h-32 object-cover">
                                 <div class="p-4">
@@ -950,7 +951,7 @@
                     
                         
                             <div id="-project-card" 
-                                class="md:w-9/20 rounded-lg shadow-lg mb-8 md:mb-4">
+                                class="md:w-9/20 rounded-lg shadow-lg mb-8 md:mb-4 dark:bg-neutral-800">
                                 <img src="/assets/images/mwe-bpe-tokenization-examples.png" alt=""
                                     class="w-full h-32 object-cover">
                                 <div class="p-4">
@@ -981,7 +982,7 @@
                     
                         
                             <div id="-project-card" 
-                                class="md:w-9/20 rounded-lg shadow-lg mb-8 md:mb-4">
+                                class="md:w-9/20 rounded-lg shadow-lg mb-8 md:mb-4 dark:bg-neutral-800">
                                 <img src="/assets/images/crf-project-cover.png" alt=""
                                     class="w-full h-32 object-cover">
                                 <div class="p-4">
@@ -1012,18 +1013,18 @@
 
     
 
-<footer class="bg-white shadow-t-lg absolute bottom-0 w-full m-0">
+<footer class="bg-white dark:bg-neutral-950 shadow-t-lg absolute bottom-0 w-full m-0">
     <div class="w-full mx-auto max-w-screen-xl py-4 px-8 
                 flex flex-col items-center flex-wrap
-                lg:py-6 lg:flex-row lg:justify-between">
-        <span class="text-sm text-gray-500 text-center md:mb-2
-                        lg:text-left lg:mb-0">
+                lg:py-6 lg:flex-row lg:justify-between
+                text-gray-500 dark:text-neutral-200">
+        <span class="text-sm md:mb-2 lg:text-left lg:mb-0">
             Built with <a href="https://www.11ty.dev/" class="hover:underline font-semibold">11ty</a>, 
                         <a href="https://tailwindcss.com/" class="hover:underline font-semibold">Tailwind CSS</a>. 
             Hosted on <a href="https://pages.github.com/" class="hover:underline font-semibold">GitHub Pages</a>.
             Copyright <a href="#" class="hover:underline font-semibold">© Dipesh Kumar</a> 2023
         </span>
-        <ul class="hidden md:flex flex-row flex-wrap items-center text-sm font-medium text-gray-500">
+        <ul class="hidden md:flex flex-row flex-wrap items-center text-sm font-medium">
             <li>
                 <a href="/" class="hover:underline me-4 md:me-6">About</a>
             </li>
@@ -1042,16 +1043,4 @@
 
     <script src="/js/bundle.js"></script>
 </body>
-<style>
-body {
-  --dot-bg: white;
-  --dot-color: black;
-  --dot-size: 1.2px;
-  --dot-space: 30px;
-	background:
-		linear-gradient(90deg, var(--dot-bg) calc(var(--dot-space) - var(--dot-size)), transparent 1%) center / var(--dot-space) var(--dot-space),
-		linear-gradient(var(--dot-bg) calc(var(--dot-space) - var(--dot-size)), transparent 1%) center / var(--dot-space) var(--dot-space),
-		var(--dot-color);
-}
-</style>
 </html>
