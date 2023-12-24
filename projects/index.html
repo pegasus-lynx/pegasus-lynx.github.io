@@ -8,6 +8,17 @@
     <link rel="stylesheet" href="/assets/css/tailwind.css">
     <script src="https://kit.fontawesome.com/a69420ddea.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicons/favicon-16x16.png">
+    <link rel="manifest" href="/assets/images/favicons/site.webmanifest">
+    <link rel="mask-icon" href="/assets/images/favicons/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="/assets/images/favicons/favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="/assets/images/favicons/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+
     <link rel="preconnect" href="https://fonts.gstatic.com"><link data-href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"><style data-href='https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap'>/* cyrillic-ext */
 @font-face {
   font-family: 'IBM Plex Sans';
@@ -630,24 +641,13 @@
 <body class="m-0 p-0 relative min-h-screen body-pattern-dark" onload="window.App.onLoadInit()">
     <header class="bg-white dark:bg-neutral-950 shadow-xl">
   <nav class="mx-auto flex max-w-7xl items-center justify-between p-4 lg:px-8" aria-label="Global">
-    <div class="lg:flex-1 font-bold font-opensans
-                hidden md:flex">
+    <div class="flex lg:flex-1 font-bold font-opensans">
       <a href="/" class="-m-1.5 p-1.5">
-        <span
-          class="text-lg text-gray-900 dark:text-white">DIPESH KUMAR'S</span>
-        <span class="bg-gray-800 dark:bg-white leading-6 text-white dark:text-neutral-900 rounded-md py-1 px-2 mx-2">PORTFOLIO</span>
-      </a>
-    </div>
-    <div class="flex sm:flex-1 font-bold font-opensans
-                md:hidden">
-      <a href="/" class="-m-1.5 p-1.5">
-        <span
-          class="text-lg text-gray-900 dark:text-white">DK'S</span>
-        <span class="bg-gray-800 dark:bg-white leading-6 text-white dark:text-neutral-900 rounded-md py-1 px-2 mx-2">PORTFOLIO</span>
-      </a>
+        <img src="/assets/images/dk-icon.jpg" class="w-8 h-8" alt="">
+      </a>      
     </div>
     <div class="flex md:hidden">
-      <button class="pr-2" onclick="window.App.toggleDarkMode()"><i id="dark-mode-icon" class="fa-solid fa-sun"></i></button>
+      <button class="pr-2" onclick="window.App.toggleDarkMode()"><i id="dark-mode-icon1" class="fa-solid"></i></button>
       <button type="button" id="mobile-nav-button" class="-my-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700" 
               onclick="window.App.toggleMobileMenu()">
         <span class="sr-only">Open main menu</span>
@@ -658,7 +658,7 @@
     </div>
 
     <div class="hidden md:flex lg:gap-x-12 md:gap-x-8 text-sm font-semibold leading-6 text-gray-900 dark:text-white">
-      <button onclick="window.App.toggleDarkMode()"><i id="dark-mode-icon" class="fa-solid"></i></button>
+      <button onclick="window.App.toggleDarkMode()"><i id="dark-mode-icon2" class="fa-solid"></i></button>
       <a href="/projects/" >Projects</a>
       <a href="/blogs/" >Blogs</a>
       <a href="/contact/" >Contact</a>
@@ -670,10 +670,8 @@
     <!-- Background backdrop, show/hide based on slide-over state. -->
     <div class="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white dark:bg-neutral-950 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
       <div class="flex items-center justify-between font-bold shadow-md p-4">
-        <a href="#" class="m-0">
-          <span class="sr-only">Your Company</span>
-          <span class="text-lg text-gray-900 dark:text-white">DK'S</span>
-          <span class="bg-gray-800 dark:bg-white leading-6 text-white dark:text-neutral-950 rounded-md py-1 px-2 mx-2">PORTFOLIO</span>        
+        <a href="/" class="m-0">
+          <img src="/assets/images/dk-icon.jpg" class="w-8 h-8" alt="">       
         </a>
         <button type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700" onclick="window.App.toggleMobileMenu()">
           <span class="sr-only">Close menu</span>
@@ -711,8 +709,10 @@
                 
                     <div class="flex flex-col md:flex-row w-full mb-16 shadow-lg md:h-64 lg:h-72 dark:bg-neutral-800">
                         <div class="w-full h-48 md:w-4/12 md:h-full">
+                            <a href="/project/codefest-pwa-frontend/" class="w-full h-full">
                                 <img src="/assets/images/codefest-frontend-pwa.png" 
                                     class="object-cover w-full h-full" alt="Codefest PWA Frontend"> 
+                            </a>
                         </div>
                         <div class="flex flex-col justify-between
                                         p-8 w-full md:py-4 md:px-12 md:w-8/12 ">
@@ -794,8 +794,10 @@
                 
                     <div class="flex flex-col md:flex-row w-full mb-16 shadow-lg md:h-64 lg:h-72 dark:bg-neutral-800">
                         <div class="w-full h-48 md:w-4/12 md:h-full">
+                            <a href="/project/contour-rendering/" class="w-full h-full">
                                 <img src="/assets/images/contour-rendering.png" 
                                     class="object-cover w-full h-full" alt="Contour Renderer"> 
+                            </a>
                         </div>
                         <div class="flex flex-col justify-between
                                         p-8 w-full md:py-4 md:px-12 md:w-8/12 ">
@@ -879,8 +881,10 @@
                 
                     <div class="flex flex-col md:flex-row w-full mb-16 shadow-lg md:h-64 lg:h-72 dark:bg-neutral-800">
                         <div class="w-full h-48 md:w-4/12 md:h-full">
+                            <a href="/project/genmed-store-locator/" class="w-full h-full">
                                 <img src="/assets/images/genmed-cover.png" 
                                     class="object-cover w-full h-full" alt="GenMed: Medical Store Locator Webapp"> 
+                            </a>
                         </div>
                         <div class="flex flex-col justify-between
                                         p-8 w-full md:py-4 md:px-12 md:w-8/12 ">
@@ -980,8 +984,10 @@
                 
                     <div class="flex flex-col md:flex-row w-full mb-16 shadow-lg md:h-64 lg:h-72 dark:bg-neutral-800">
                         <div class="w-full h-48 md:w-4/12 md:h-full">
+                            <a href="/project/hindi-data-crf-viterbi-analysis/" class="w-full h-full">
                                 <img src="/assets/images/crf-project-cover.png" 
                                     class="object-cover w-full h-full" alt="Analysis of Hindi tagged data using CRF with Viterbi Decoding"> 
+                            </a>
                         </div>
                         <div class="flex flex-col justify-between
                                         p-8 w-full md:py-4 md:px-12 md:w-8/12 ">
@@ -1072,8 +1078,10 @@
                 
                     <div class="flex flex-col md:flex-row w-full mb-16 shadow-lg md:h-64 lg:h-72 dark:bg-neutral-800">
                         <div class="w-full h-48 md:w-4/12 md:h-full">
+                            <a href="/project/image-enc-dl/" class="w-full h-full">
                                 <img src="/assets/images/imgencdl-cover.png" 
                                     class="object-cover w-full h-full" alt="Image Encryption Algorithms for privacy in Deep Learning"> 
+                            </a>
                         </div>
                         <div class="flex flex-col justify-between
                                         p-8 w-full md:py-4 md:px-12 md:w-8/12 ">
@@ -1146,8 +1154,10 @@
                 
                     <div class="flex flex-col md:flex-row w-full mb-16 shadow-lg md:h-64 lg:h-72 dark:bg-neutral-800">
                         <div class="w-full h-48 md:w-4/12 md:h-full">
+                            <a href="/project/mwe-bpe/" class="w-full h-full">
                                 <img src="/assets/images/mwe-bpe-tokenization-examples.png" 
                                     class="object-cover w-full h-full" alt="BPE beyond Word Boundary: How NOT to use MWEs in NMT"> 
+                            </a>
                         </div>
                         <div class="flex flex-col justify-between
                                         p-8 w-full md:py-4 md:px-12 md:w-8/12 ">
@@ -1247,8 +1257,10 @@
                 
                     <div class="flex flex-col md:flex-row w-full mb-16 shadow-lg md:h-64 lg:h-72 dark:bg-neutral-800">
                         <div class="w-full h-48 md:w-4/12 md:h-full">
+                            <a href="/project/personal-webapp/" class="w-full h-full">
                                 <img src="/assets/images/personal-webapp.jpg" 
                                     class="object-cover w-full h-full" alt="Dipesh Kumar&#39;s Webapp"> 
+                            </a>
                         </div>
                         <div class="flex flex-col justify-between
                                         p-8 w-full md:py-4 md:px-12 md:w-8/12 ">
