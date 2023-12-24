@@ -2,39 +2,38 @@
 title: Home
 permalink: /
 ---
-<main class="max-w-6xl mx-auto pt-16 pb-32 md:py-32">
-    <div id="index-body" class="bg-white text-center p-8 md:px-16 md:py-24 shadow-lg">
-        <div id="hero-section" class="mb-12 md:mb-24">
-            <div id="photo" class="inline-block w-auto mb-8 md:mb-12 rounded-full shadow-2xl-dark">
+<main class="main-style">
+    <div id="index-body" class="body-style md:py-24">
+        <div id="hero-section" class="section-spacing">
+            <div id="photo" class="inline-block w-auto mb-8 md:mb-12 
+                                        rounded-full shadow-2xl-dark">
                 <img src="/assets/images/dipesh2.jpg" alt=""
-                    class="w-60 h-60 mx-auto object-cover rounded-full filter">
+                    class="w-60 h-60 mx-auto object-cover 
+                                rounded-full filter">
             </div>
-            <div id="intro" 
-                class="mb-8 text-center">
-                <h1 class="text-3xl md:text-6xl font-opensans font-bold mb-4 md:mb-8">
+            <div id="intro" class="mb-8">
+                <h1 class="page-title-font-style text-3xl mb-4 md:mb-8">
                     Hi there! I'm Dipesh.
                 </h1>
-                <p class="text-base md:text-xl max-w-3xl md:font-semibold font-ibmplex mx-auto">
+                <h3 class="page-description-font-style section-div">
                     I'm a <b>Software Engineer</b> with a knack for almost everything.
-                </p>
+                </h3>
             </div>
             <div id="socials"
-                class="mx-auto flex flex-row items-center justify-center mb-8 md:mb-16">
+                class="flex flex-row flex-wrap justify-center items-center mx-auto mb-8 md:mb-16">
                 {% for social in info.socials %}
                     <span class="mx-4">
                     <a href="{{ social.url }}" target="_blank" rel="noopener noreferrer">
                         <i class="{{ social.icon }} fa-lg"></i>
                     </a></span>
                 {% endfor %}
-                {# Fill using data #}
             </div>
             <hr class="mx-auto w-10/12 md:w-8/12">
         </div>
 
-        <div id="about-section" class="max-w-3xl mx-auto mb-12 md:mb-24 font-ibmplex">
-            <h2 class="text-3xl font-opensans font-bold mb-4 md:mb-8">About Me</h2>
+        <div id="about-section" class="section-div section-spacing">
+            <h2 class="section-heading md:mb-8">About Me</h2>
             <p class="text-justify">
-
                 Hello and welcome! I'm Dipesh Kumar, a spirited Software Developer 
                 II at Microsoft, where I contribute on maintaining WPF's robustness 
                 and introducing new innovative features.
@@ -61,14 +60,14 @@ permalink: /
             </p>
         </div>
         
-        <div id="skills-section" class="max-w-3xl mx-auto mb-12 md:mb-24 font-ibmplex">
+        <div id="skills-section" class="section-div section-spacing">
             <div id="skills-heading" class="mb-4 md:mb-8">
-                <h2 class="text-3xl font-opensans font-bold mb-4">Skills</h2>
+                <h2 class="section-heading">Skills</h2>
                 <p>
                     Technologies and languages that I have worked with:
                 </p>
             </div>
-            <div id="skills-list" class="flex flex-row flex-wrap justify-center md:justify-normal">
+            <div id="skills-list" class="flex flex-wrap justify-center flex-row md:justify-normal">
                     {% for skill in info.skills %}
                         <span class="rounded-full p-4 bg-gray-200 m-2 align-middle" >
                             <i class="{{ skill.icon }} text-4xl m-auto text-gray-[750]"></i>
@@ -77,9 +76,9 @@ permalink: /
             </div>
         </div>
         
-        <div id="projects-section" class="max-w-3xl mx-auto font-ibmplex">
+        <div id="projects-section" class="section-div">
             <div id="projects-heading" class="mb-4 md:mb-8">
-                <h2 class="text-3xl font-opensans font-bold mb-4">Projects</h2>
+                <h2 class="section-heading">Projects</h2>
                 <p class="text-justify">
                     In my professional journey, I've tackled a wide range of projects, 
                     from simple web apps to complex database management systems. 
@@ -88,7 +87,7 @@ permalink: /
                     For a complete overview of my projects, visit the Projects page.
                 </p>
             </div>
-            <div id="projects-list" class="flex flex-col md:flex-row flex-wrap md:gap-x-6 justify-center text-left
+            <div id="projects-list" class="flex flex-wrap justify-center flex-col md:flex-row md:gap-x-6 text-left
                                             w-10/12 md:w-full mx-auto">
                 {% for selected_project in info.selectedprojects %}
                     {% for project in collections.Project %}

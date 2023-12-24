@@ -1,8 +1,7 @@
 ---
 layout: page
 ---
-<main class="max-w-6xl mx-auto 
-                pb-32 md:py-32">
+<main class="main-style pt-0">
     <div id="post-banner-image" class="w-full mx-auto"> 
         <img src="/assets/images/{{ post_image }}" 
                 alt="{{ title }}" 
@@ -13,7 +12,7 @@ layout: page
                                 px-4 py-8">
         <div id="post-header" class="mb-8 w-10/12 md:w-full mx-auto">
             <h1 class="text-2xl md:text-4xl font-bold my-4 text-gray-900 md:w-10/12 mx-auto">{{ title }}</h1>
-            <h3 class="text-base md:text-xl md:font-semibold text-gray-700">{{ description }}</h3>
+            <h3 class="page-description-font-styletext-gray-700">{{ description }}</h3>
         </div>
         <hr class="w-10/12 md:w-8/12 mx-auto">
         <div id="post-details" 
@@ -37,7 +36,7 @@ layout: page
         <hr class="w-10/12 md:w-8/12 mx-auto">
         <div id="post-tags" 
             class="w-10/12 md:w-8/12 mx-auto my-2 text-sm font-semibold text-gray-900">
-            <ul class="flex flex-row flex-wrap gap-x-4 gap-y-2 mb-2">
+            <ul class="tags-flex mb-2">
                 <li>Tags :</li>
                 {% for tag in tags %}
                     <li>

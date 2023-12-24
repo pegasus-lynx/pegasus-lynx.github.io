@@ -3,88 +3,22 @@ layout: page
 title: Posts
 showtagslist: false
 ---
-<main class="max-w-6xl mx-auto pt-16 pb-32 md:py-32">
-    <div id="list-body" class="bg-white text-center p-8 md:p-16 shadow-lg">
-
-        <div id="list-header" class="mb-12 md:mb-24">
+<main class="main-style">
+    <div id="list-body" class="body-style">
+        <div id="list-header" class="section-spacing">
             {{ content | safe }}
         </div>
-
-        {# Figure this out later #}
-        {# Selected Tags does not work #}
-        {# {% if showtagslist == true %}
-            <hr class="w-8/12 mx-auto">
-            <div id="list-tags" class="w-8/12 mx-auto my-2">
-                <ul class="flex flex-row flex-wrap gap-x-4 gap-y-2">
-                    <li class="text-sm text-gray-900 font-semibold">Selected Tags :</li>
-                    {% for tag in selectedtags %}
-                        <li class="text-sm text-gray-900 font-semibold">
-                            <a href="/tags/{{ tag | slugify }}/">
-                                <span class="text-xs font-semibold bg-gray-200 rounded-md px-2 py-1 m-1">{{ tag }}</span>
-                            </a>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
-            <hr class="w-8/12 mx-auto">
-        {% endif %} #}
 
         <div id="list-content" class="lg:w-10/12 mx-auto text-left">
             {% for post in collections[selectedtag] %}
                 {% if post.data.show %}
-                    <div class="hidden md:flex flex-row lg:h-72 w-full mb-16 shadow-lg
-                                    md:h-64">
-                        <div class="h-full w-4/12">
+                    <div class="flex flex-col md:flex-row w-full mb-16 shadow-lg md:h-64 lg:h-72">
+                        <div class="w-full h-48 md:w-4/12 md:h-full">
                                 <img src="/assets/images/{{ post.data.post_image }}" 
                                     class="object-cover w-full h-full" alt="{{ post.data.title }}"> 
                         </div>
-                        <div class="py-4 px-12 w-8/12 flex flex-col justify-between">
-                            <div id="card-header">
-                                <p class="lg:text-3xl md:text-xl font-bold font-opensans mb-2">
-                                    <a href="{{ post.url }}">{{ post.data.title }}</a>
-                                </p>
-                                <p class="text-base mb-4">
-                                    {{ post.data.description }}
-                                </p>
-                            </div>
-                            <div id="card-extradetails" class="text-sm font-semibold">
-                                <div class="flex flex-row justify-between text-gray-500 mb-2">
-                                    {% if 'Project' in post.data.tags %}
-                                    <span>{{ post.data.startdate }} - {{ post.data.enddate }}</span>
-                                    <span>
-                                        <a href="{{ post.data.sourcecode }}" class="hover:text-gray-600">
-                                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                                        </a>
-                                    </span>
-                                    {% else %}
-                                    <span>{{ post.data.readingtime }}</span>
-                                    <span>{{ post.data.publishdate }}</span>
-                                    {% endif %}
-                                </div>
-
-                                <hr class="mb-2">
-                                <ul class="flex flex-row flex-wrap gap-x-2 gap-y-4 mb-2">
-                                    {% for tag in post.data.tags %}
-                                        <li class="text-gray-900">
-                                            <a href="/tags/{{ tag | slugify }}/">
-                                                <span class="text-xs 
-                                                            bg-gray-200 rounded-md px-2 py-1 my-1">
-                                                    {{ tag }}
-                                                </span>
-                                            </a>
-                                        </li>
-                                    {% endfor %}
-                                </ul>
-                                <hr class="mb-2">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex md:hidden flex-col w-full mb-16 shadow-lg">
-                        <div class="w-full h-48">
-                                <img src="/assets/images/{{ post.data.post_image }}" 
-                                    class="object-cover w-full h-full" alt="{{ post.data.title }}"> 
-                        </div>
-                        <div class="p-8 w-full flex flex-col justify-between">
+                        <div class="flex flex-col justify-between
+                                        p-8 w-full md:py-4 md:px-12 md:w-8/12 ">
                             <div id="card-header">
                                 <p class="lg:text-3xl md:text-xl font-bold font-opensans mb-2">
                                     <a href="{{ post.url }}">{{ post.data.title }}</a>

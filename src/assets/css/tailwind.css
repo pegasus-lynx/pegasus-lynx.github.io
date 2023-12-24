@@ -1,3 +1,45 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .main-style {
+        @apply max-w-6xl mx-auto pt-16 pb-32 md:py-32;
+    }
+
+    .body-style {
+        @apply bg-white text-center p-8 md:p-16 shadow-lg;
+    }
+
+    .section-heading {
+        @apply text-3xl font-opensans font-bold mb-4;
+    }
+
+    .section-div {
+        @apply max-w-3xl mx-auto font-ibmplex;
+    }
+
+    .section-spacing {
+        @apply mb-12 md:mb-24;        
+    }
+    
+    .page-description-font-style {
+        @apply text-base md:text-xl md:font-semibold 
+    }
+    
+    .page-title-font-style {
+        @apply text-4xl md:text-6xl font-bold font-opensans;
+    }
+    
+    .tags-flex {
+        @apply flex flex-row flex-wrap gap-x-4 gap-y-2
+    }
+
+    .form-label {
+        @apply font-semibold text-sm;
+    }
+
+    .form-input {
+        @apply bg-gray-200 p-2;
+    }
+}
