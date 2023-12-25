@@ -1,7 +1,7 @@
 ---
 title: "Contour Renderer"
 post_slug: contour-rendering
-post_image: "contour-rendering.png"
+post_image: "contour-rendering.webp"
 tags: ["C++", "OpenGL", "Computer Graphics", "Dynamic Programming"]
 description: "A C++ application for visualing 2D contour maps as 3D models."
 sourcecode: "https://github.com/pegasus-lynx/ContourRendering"

@@ -1,7 +1,7 @@
 ---
 title: "The 60-Second Organizer - Book Summary"
 post_slug: "60-second-organizer-summary"
-post_image: "60-second-organizer.png"
+post_image: "60-second-organizer.webp"
 tags: ["Organization", "Declutter", "Perato's Principle",  "Book Summary"]
 description: "How would you like to know the small steps that can get you organized for life?"
 readingtime: "15 min"

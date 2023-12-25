@@ -1,7 +1,7 @@
 ---
 title: "Codefest PWA Frontend"
 post_slug: codefest-pwa-frontend
-post_image: "codefest-frontend-pwa.png"
+post_image: "codefest-frontend-pwa.webp"
 tags: ["VueJS", "CSS3", "PWA", "Frontend Development"]
 description: "A Progressive Web App for Codefest, IIT(BHU) Varanasi."
 sourcecode: "https://github.com/codefest-iit-bhu/codefest-app"

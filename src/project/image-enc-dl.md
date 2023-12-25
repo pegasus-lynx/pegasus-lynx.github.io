@@ -1,7 +1,7 @@
 ---
 title: "Image Encryption Algorithms for privacy in Deep Learning"
 post_slug: image-enc-dl
-post_image: "imgencdl-cover.png"
+post_image: "imgencdl-cover.webp"
 layout: project
 tags: ["Python", "Deep Learning", "Image Processing"]
 description: "An exploratory project on different learnable image encryption schemes for privacy in deep learning."
