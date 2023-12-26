@@ -67,4 +67,26 @@
     .form-input {
         @apply bg-gray-200 dark:bg-neutral-800 p-2;
     }
+
+    .gallery-content {
+        column-count: 3;
+        column-gap: 2em;
+        padding-top: 16px;
+
+        @media only screen and (max-width: 767px) and (min-width: 540px) {
+            column-count: 2;
+        }
+
+        @media only screen and (max-width: 600px) {
+            column-count: 1;
+        }
+    }
+
+    .gallery-item {
+        @apply block bg-white dark:bg-neutral-900 shadow-lg w-full;
+        margin: 0 0 2em;
+        .img {
+            margin:0
+        }
+    }
 }
