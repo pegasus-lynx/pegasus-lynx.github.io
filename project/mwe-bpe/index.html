@@ -643,7 +643,7 @@
   <nav class="mx-auto flex max-w-7xl items-center justify-between p-4 lg:px-8" aria-label="Global">
     <div class="flex lg:flex-1 font-bold font-opensans">
       <a href="/" class="-m-1.5 p-1.5">
-        <img src="/assets/images/dk-icon.jpg" class="w-8 h-8" alt="">
+        <img src="/assets/images/dk-icon.webp" class="w-8 h-8" alt="">
       </a>      
     </div>
     <div class="flex md:hidden">
@@ -671,7 +671,7 @@
     <div class="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white dark:bg-neutral-950 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
       <div class="flex items-center justify-between font-bold shadow-md p-4">
         <a href="/" class="m-0">
-          <img src="/assets/images/dk-icon.jpg" class="w-8 h-8" alt="">       
+          <img src="/assets/images/dk-icon.webp" class="w-8 h-8" alt="">       
         </a>
         <button type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700" onclick="window.App.toggleMobileMenu()">
           <span class="sr-only">Close menu</span>
@@ -716,7 +716,7 @@
         <hr class="w-10/12 md:w-8/12 mb-8 mx-auto">
         <div id="post-banner-image" class="w-10/12 md:w-7/12 mx-auto
                                             mb-8 md:mb-12"> 
-            <img src="/assets/images/mwe-bpe-tokenization-examples.png" 
+            <img src="/assets/images/mwe-bpe-tokenization-examples.webp" 
                     alt="BPE beyond Word Boundary: How NOT to use MWEs in NMT" 
                     class="h-auto">
         </div>
@@ -744,11 +744,11 @@
 <p><strong>Adding MWEs with PMI</strong> : However, the above approach does not work well in practice. Therefore, instead of raw frequency, here we find MWEs using a common technique of finding word collocations: Pointwise Mutual Information (PMI), which is a measure of the association between two word types in text. We used similar MWEs ( bigram, trigrams, combination of bigram and trigrams, and skipgrams )</p>
 </li>
 </ol>
-<p><img src="/assets/images/mwe-bpe-coverage-examples.png" alt="MWE BPE Coverage and Examples"></p>
+<p><img src="/assets/images/mwe-bpe-coverage-examples.webp" alt="MWE BPE Coverage and Examples"></p>
 <p>In the interest of keeping this article concise, I will not dive deep into all the parameters used for finding MWEs, the dataset and experiment configurations used for Neural Machine Translation (NMT) experiments.</p>
 <h3>Results and Discussions</h3>
 <p>Empirically we observe that BPE with high frequency MWE tokens see a drop in performance whereas the PMI counterpart as well as the original baseline (within word boundary) performs well. What then happens at the word boundary that the BPE algorithm stops working? <em>We hypothesize that this is the result of words combining in more diverse ways than subwords.</em></p>
-<p><img src="/assets/images/mwe-bpe-score-table.png" alt="MWE BPE Experiment Results"></p>
+<p><img src="/assets/images/mwe-bpe-score-table.webp" alt="MWE BPE Experiment Results"></p>
 <p>High frequency MWE tokens include n-grams like <em>in_the, that_in, of_the</em>, etc. However, as seen in the table adding these tokens hurts the performance. Words like <em>in</em>, <em>the</em>, <em>of</em>, etc. make many versatile combinations, which is rarely observed at the subword level. Suffixes like <em>-ing</em> almost never appear as prefixes whereas prefixes like de almost never appear as suffixes. When such subwords combine to form longer tokens, they generally retain a coherent meaning, unlike n-grams like <em>in_the</em>.</p>
 <p>Finally, this hypothesis may explain why MWEs ordered by PMI help improve MT scores – they are by definition units that co-occur as a coherent unit. Indeed, the MWEs thus found (e.g. <em>New_York, per_cent</em>) include constituents which exclusively form only these tokens.</p>
 <p>I would really like to thank Avijit Thawani, who brought up this idea and project to life and was the major driving force behind these experiments.</p>

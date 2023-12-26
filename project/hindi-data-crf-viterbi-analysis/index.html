@@ -643,7 +643,7 @@
   <nav class="mx-auto flex max-w-7xl items-center justify-between p-4 lg:px-8" aria-label="Global">
     <div class="flex lg:flex-1 font-bold font-opensans">
       <a href="/" class="-m-1.5 p-1.5">
-        <img src="/assets/images/dk-icon.jpg" class="w-8 h-8" alt="">
+        <img src="/assets/images/dk-icon.webp" class="w-8 h-8" alt="">
       </a>      
     </div>
     <div class="flex md:hidden">
@@ -671,7 +671,7 @@
     <div class="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white dark:bg-neutral-950 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
       <div class="flex items-center justify-between font-bold shadow-md p-4">
         <a href="/" class="m-0">
-          <img src="/assets/images/dk-icon.jpg" class="w-8 h-8" alt="">       
+          <img src="/assets/images/dk-icon.webp" class="w-8 h-8" alt="">       
         </a>
         <button type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700" onclick="window.App.toggleMobileMenu()">
           <span class="sr-only">Close menu</span>
@@ -741,22 +741,22 @@ at the cat</em></p>
 <p>Viterbi decoding is a dynamic programming approach that is used for the maximum likely-hood decoding of a sequence of states.</p>
 </blockquote>
 <h3>What did we do ?</h3>
-<p><img src="/assets/images/crf-hindi-ssf-data.png" alt="Hindi Treebank Data Example"></p>
+<p><img src="/assets/images/crf-hindi-ssf-data.webp" alt="Hindi Treebank Data Example"></p>
 <p>First of all, before going further, we pre-processed the Hindi TreeBank data from SSF ( Shakti Standard Format ) to a list of dictionaries, each dictionary represented a word and included word and chunk category and morph features like number, gender, case, root word, etc. Moreover, we divided chunk category in two parts: <em>B-</em> marking the beginning of the chunk and <em>I-</em> marking the internal of the chunk.</p>
 <p>We used the sklearn-crfsuite library for training and predicting the results. We used L-BFGS optimization algorithm for parameter estimation.</p>
-<p><img src="/assets/images/crf-modes.png" alt="CRF Different Modes Parameter"></p>
+<p><img src="/assets/images/crf-modes.webp" alt="CRF Different Modes Parameter"></p>
 <p>We used different <em>modes</em>, where each mode represented a combination of different morph features and calculated F1-scores for them. Once, the models were trained, we did different kinds of error analysis.</p>
 <p><strong>Tag Level Analysis :</strong> We calculated F1-scores, precision and recall for the prediction of different chunk tags. From the graph below, we observed that the performance of FRAGP and NEGP tags are very staggering. We believe that the main reason for this error is that the probability of predicting a sequence to be NP or NP+FRAGP becomes quite similar in many cases and thus, it becomes hard to get the correct chunk tag.</p>
 <p>Similarly is the case with NEGP, which in general combines with verb groups to form VGNF however due to presence of NP in between it is not possible and is often grouped with others.</p>
-<p><img src="/assets/images/crf-tag-level-analysis.png" alt="CRF Tag Level Analysis"></p>
+<p><img src="/assets/images/crf-tag-level-analysis.webp" alt="CRF Tag Level Analysis"></p>
 <p><strong>Word Level Analysis :</strong> Here we focused on various words to understand how the model behaves for them. Let's consider an example to understand better.</p>
 <p><em>बिना कुछ बोले काम नहीं चलता</em> ( witout speaking something work does not go on )</p>
 <p>Here, the noun <em>कुछ</em> comes between the negative <em>बिना</em> and verb <em>बोले</em>. Here, it is not possible to group the negative and the verb as one chunk. At the same time, <em>बिना</em> cannot be grouped within an NP chunk as functionally, it is negating the verb and not the noun. To handle such cases an additional NEGP chunk is introduced. If a negative occurs away from the verb chunk, the negative will be chunked by itself and chunk will be tagged as NEGP.</p>
 <p>However, our model treated <em>बिना कुछ</em> as an NP chunk, because it couldn’t train itself on any provided feature which could determine this NEGP case.</p>
 <p>Another example of ambiguity is the word <em>खाना</em>, which appears in both NP ( as it means food ) and VP ( as it also means the act of eating ). However, the model worked very well on this word.</p>
-<p><img src="/assets/images/crf-word-analysis.png" alt="CRF Word Level Analysis Examples"></p>
+<p><img src="/assets/images/crf-word-analysis.webp" alt="CRF Word Level Analysis Examples"></p>
 <p><strong>Sentence Level Analysis :</strong> Sentence level analysis is done on two measures: correct sequence of chunk tag prediction and correct boundary prediction of the chunk. We plot heat-maps for different modes, where each heat map depicts the accuracy of the prediction of the tag sequences. One common trend we saw was that, as we included more morph features, the accuracy for various tags improved.</p>
-<p><img src="/assets/images/crf-heat-map.png" alt="CRF Tag Prediction Heat Map"></p>
+<p><img src="/assets/images/crf-heat-map.webp" alt="CRF Tag Prediction Heat Map"></p>
 <p>Next, we analyzed the prediction of correct chunk boundaries and observed that NP and JJP are the tags where the boundaries are skipped the most. For example, suppose a sentence consists of following chunks NP NP NP VP, however our model predicts the sequence as NP NP VP i.e boundaries are skipped.</p>
 <p>One interestng thing to note here is that, NP is also the chunk where more boundary prediction happens in other cases. Apart from NP, NULL_VGF is a case where extra boundaries appear. This error stems from the fact that the model predicts a verb group as a combination of a verb group and NULL_VGF.</p>
 <h3>Conclusions</h3>
