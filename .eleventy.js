@@ -3,6 +3,18 @@ const esbuild = require("esbuild");
 const fs = require("fs");
 const path = require("path");
 const { DateTime } = require("luxon");
+const Image = require('@11ty/eleventy-img');
+
+
+const stringifyAttributes = (attributeMap) => {
+  return Object.entries(attributeMap)
+    .map(([attribute, value]) => {
+      if (typeof value === 'undefined') return '';
+      return `${attribute}="${value}"`;
+    })
+    .join(' ');
+};
+
 
 module.exports = function (eleventyConfig) {
   
@@ -16,9 +28,12 @@ module.exports = function (eleventyConfig) {
     });
   });
 
-  eleventyConfig.addWatchTarget("src/assets/js/");
-  eleventyConfig.addPassthroughCopy("src/assets/images/");
   eleventyConfig.addPlugin(eleventyGoogleFonts);
+
+  eleventyConfig.addWatchTarget("src/assets/js/");
+  
+  eleventyConfig.addPassthroughCopy({"src/assets/images/*.webp": "assets/images/"});
+  eleventyConfig.addPassthroughCopy("src/assets/images/favicons/");
 
   eleventyConfig.addCollection("gallery", () => {
     const galleryPath = path.resolve(__dirname, "./src/assets/images/gallery");
@@ -26,8 +41,7 @@ module.exports = function (eleventyConfig) {
 
     return files.map((file) => {
       return {
-        name: file.split(".")[0],
-        src: `/assets/images/gallery/${file}`,
+        src: `./src/assets/images/gallery/${file}`,
         alt: file,
       };
     });
@@ -41,6 +55,29 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addFilter("postMonth", (date) => {
     if(date === 'Present') return date;
     return DateTime.fromFormat(date, 'dd-MM-yyyy').toFormat('LLL, yyyy');
+  });
+
+  eleventyConfig.addShortcode("image", async function (src, alt, widths, classname = "") {
+    let metadata = await Image(src, {
+      widths: [...widths],
+      formats: ["webp"],
+      urlPath: "/assets/images/gallery",
+      outputDir: "./_site/assets/images/gallery/",
+      filenameFormat: function (id, src, width, format, options) {
+        const extension = path.extname(src);
+        const name = path.basename(src, extension);
+        return `${name}-${width}w.${format}`;
+      }
+    });
+
+    const imgAttributes = stringifyAttributes({
+      src: metadata.webp[0].url,
+      loading: 'lazy',
+      decoding: 'async',
+      class: classname,
+    });
+    
+    return `<img ${imgAttributes}>`;
   });
 
   return {
