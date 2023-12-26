@@ -1,7 +1,7 @@
 ---
 title: "Dipesh Kumar's Webapp"
 post_slug: personal-webapp
-post_image: "personal-webapp.jpg"
+post_image: "personal-webapp.webp"
 layout: project
 tags: ["11ty", "Tailwind", "Nunjucks", "Markdown"]
 description: "A personal blogging webapp for managing and sharing ideas and showcase my past projects."

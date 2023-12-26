@@ -24,12 +24,12 @@ As mentioned earlier, the main aim here was to learn and understand what learnab
 
 First, I implemented the encryption schemes, particularly focusing on the SKK, Tanaka and ETC schemes ( Encryption-then-Compression schemes ), and encrypted image datasets to reproduce and verified the results of training for Tanaka scheme. The picture below shows the result of SKK encryption on an image.
 
-![SKK Encryption Result](/assets/images/imgencdl-skk-encryption.png)
+![SKK Encryption Result](/assets/images/imgencdl-skk-encryption.webp)
 
 Second, I also looked into different attack scenarios for Tanaka and different variations of SKK schemes. Implemented the attack scenarios mentioned in [Attacks on Image Encryption Schemes for
 Privacy-Preserving Deep Neural Networks](https://arxiv.org/pdf/2004.13263.pdf) for these encryption schemes, to test the robustness of these methods and replicated the results mentioned in the paper. The image below, shows the results of various attacks on SKK scheme encrypted image.
 
-![SKK Encryption Scheme Attacks](/assets/images/imgencdl-skk-attack.png)
+![SKK Encryption Scheme Attacks](/assets/images/imgencdl-skk-attack.webp)
 
 #### References
 

@@ -34,13 +34,13 @@ Chunking works on top of POS tagging, it uses POS-tags as input and provides chu
 
 ### What did we do ?
 
-![Hindi Treebank Data Example](/assets/images/crf-hindi-ssf-data.png)
+![Hindi Treebank Data Example](/assets/images/crf-hindi-ssf-data.webp)
 
 First of all, before going further, we pre-processed the Hindi TreeBank data from SSF ( Shakti Standard Format ) to a list of dictionaries, each dictionary represented a word and included word and chunk category and morph features like number, gender, case, root word, etc. Moreover, we divided chunk category in two parts: *B-* marking the beginning of the chunk and *I-* marking the internal of the chunk.
 
 We used the sklearn-crfsuite library for training and predicting the results. We used L-BFGS optimization algorithm for parameter estimation.
 
-![CRF Different Modes Parameter](/assets/images/crf-modes.png)
+![CRF Different Modes Parameter](/assets/images/crf-modes.webp)
 
 We used different *modes*, where each mode represented a combination of different morph features and calculated F1-scores for them. Once, the models were trained, we did different kinds of error analysis. 
 
@@ -48,7 +48,7 @@ We used different *modes*, where each mode represented a combination of differen
 
 Similarly is the case with NEGP, which in general combines with verb groups to form VGNF however due to presence of NP in between it is not possible and is often grouped with others.
 
-![CRF Tag Level Analysis](/assets/images/crf-tag-level-analysis.png)
+![CRF Tag Level Analysis](/assets/images/crf-tag-level-analysis.webp)
 
 **Word Level Analysis :** Here we focused on various words to understand how the model behaves for them. Let's consider an example to understand better. 
 
@@ -60,11 +60,11 @@ However, our model treated *बिना कुछ* as an NP chunk, because it c
 
 Another example of ambiguity is the word *खाना*, which appears in both NP ( as it means food ) and VP ( as it also means the act of eating ). However, the model worked very well on this word.
 
-![CRF Word Level Analysis Examples](/assets/images/crf-word-analysis.png)
+![CRF Word Level Analysis Examples](/assets/images/crf-word-analysis.webp)
 
 **Sentence Level Analysis :** Sentence level analysis is done on two measures: correct sequence of chunk tag prediction and correct boundary prediction of the chunk. We plot heat-maps for different modes, where each heat map depicts the accuracy of the prediction of the tag sequences. One common trend we saw was that, as we included more morph features, the accuracy for various tags improved.
 
-![CRF Tag Prediction Heat Map](/assets/images/crf-heat-map.png)
+![CRF Tag Prediction Heat Map](/assets/images/crf-heat-map.webp)
 
 Next, we analyzed the prediction of correct chunk boundaries and observed that NP and JJP are the tags where the boundaries are skipped the most. For example, suppose a sentence consists of following chunks NP NP NP VP, however our model predicts the sequence as NP NP VP i.e boundaries are skipped.
 

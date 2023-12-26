@@ -1,7 +1,7 @@
 ---
 title: "BPE beyond Word Boundary: How NOT to use MWEs in NMT"
 post_slug: mwe-bpe
-post_image: "mwe-bpe-tokenization-examples.png"
+post_image: "mwe-bpe-tokenization-examples.webp"
 layout: project
 tags: ["Python", "NLP", "Multi-Word Expressions", "Byte-Pair Encoding", "PyTorch", "Transformers"]
 description: "A research project to identify Multi-Word Expressions using Byte Pair Encoding."
@@ -35,7 +35,7 @@ In this project, we experimented with two kinds of ways to add MWEs to a BPE voc
    
 2. **Adding MWEs with PMI** : However, the above approach does not work well in practice. Therefore, instead of raw frequency, here we find MWEs using a common technique of finding word collocations: Pointwise Mutual Information (PMI), which is a measure of the association between two word types in text. We used similar MWEs ( bigram, trigrams, combination of bigram and trigrams, and skipgrams )
 
-![MWE BPE Coverage and Examples](/assets/images/mwe-bpe-coverage-examples.png)
+![MWE BPE Coverage and Examples](/assets/images/mwe-bpe-coverage-examples.webp)
 
 In the interest of keeping this article concise, I will not dive deep into all the parameters used for finding MWEs, the dataset and experiment configurations used for Neural Machine Translation (NMT) experiments. 
 
@@ -43,7 +43,7 @@ In the interest of keeping this article concise, I will not dive deep into all t
 
 Empirically we observe that BPE with high frequency MWE tokens see a drop in performance whereas the PMI counterpart as well as the original baseline (within word boundary) performs well. What then happens at the word boundary that the BPE algorithm stops working? *We hypothesize that this is the result of words combining in more diverse ways than subwords.*
 
-![MWE BPE Experiment Results](/assets/images/mwe-bpe-score-table.png)
+![MWE BPE Experiment Results](/assets/images/mwe-bpe-score-table.webp)
 
 High frequency MWE tokens include n-grams like *in_the, that_in, of_the*, etc. However, as seen in the table adding these tokens hurts the performance. Words like *in*, *the*, *of*, etc. make many versatile combinations, which is rarely observed at the subword level. Suffixes like *-ing* almost never appear as prefixes whereas prefixes like de almost never appear as suffixes. When such subwords combine to form longer tokens, they generally retain a coherent meaning, unlike n-grams like *in_the*. 
 
