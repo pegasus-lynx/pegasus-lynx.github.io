@@ -2,7 +2,7 @@
 title: "The 60-Second Organizer - Book Summary"
 post_slug: "60-second-organizer-summary"
 post_image: "60-second-organizer.webp"
-tags: ["Organization", "Declutter", "Perato's Principle",  "Book Summary"]
+tags: ["Organization", "Book Summary"]
 description: "How would you like to know the small steps that can get you organized for life?"
 readingtime: "15 min"
 publishdate: "11-12-2022"
@@ -28,7 +28,7 @@ Organizing gives me peace of mind. When things are placed in the places they are
 - **Make profound choices:** When you choose to do something, choose what feels right for you, gives you a new sense of control over your own life and yields a tremendous sense of inner harmony.
 - **********************Live and actually learn:********************** If we are not able to recognize how we’ve changed since the past, we’re likely to allow our past to unduly influence what we do next. It’s good to learn from past experiences and not repeat the mistake. All by itself, the advice is not of much use.
     
-    So for example, maybe you tried organizing few times back and you failed, then remembering what you did will help you avoid the same mistake this time.  ********************************************
+    So for example, maybe you tried organizing few times back and you failed, then remembering what you did will help you avoid the same mistake this time. 
     
 - “************************Work Smarter” for Real:************************ We often hear, “work smarter not harder”. But what does it actually mean? Simply telling someone to “work smarter” does not work. Was Thomas Edison working smarter when he tried and failed to identify a suitable filament? Did his IQ suddenly rise? Working longer and being open to new ideas can lead to working smarter. **With hard work, you can learn about your subject and develop more efficient techniques.**
 - **************************************************************Heed Perato and his Principle:************************************************************** The Perato principle describes a relationship between effort and result. The principle says that, 80% of the result comes from 20% of the time that an individual expends. Therefore, it makes sense for directing our efforts in those areas which will generate the most results.

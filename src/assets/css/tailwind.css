@@ -53,7 +53,7 @@
     }
     
     .page-title-font-style {
-        @apply text-4xl md:text-6xl font-bold font-opensans;
+        @apply text-4xl md:text-6xl md:leading-normal font-bold font-opensans;
     }
     
     .tags-flex {
