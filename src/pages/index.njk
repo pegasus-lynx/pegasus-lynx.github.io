@@ -20,15 +20,24 @@ permalink: /
                 </h3>
             </div>
             <div id="socials"
-                class="flex flex-row flex-wrap justify-center items-center mx-auto mb-8 md:mb-16">
+                class="flex flex-row flex-wrap justify-center items-center mx-auto mb-2">
                 {% for social in info.socials %}
                     <span class="mx-4">
-                    <a href="{{ social.url }}" target="_blank" rel="noopener noreferrer">
-                        <i class="{{ social.icon }} fa-lg"></i>
-                    </a></span>
+                        <a href="{{ social.url }}" target="_blank" rel="noopener noreferrer">
+                            <i class="{{ social.icon }} fa-lg"></i>
+                        </a>
+                    </span>
                 {% endfor %}
             </div>
-            <hr class="mx-auto w-10/12 md:w-8/12">
+            <hr class="mx-auto w-8/12 md:w-6/12">
+            <div class="w-full">
+                <a href="https://drive.google.com/file/d/1AFSSzhv9SuvjyP-Am3ukRk6_0hB40fKG/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="font-bold my-4">
+                    Resume
+                </a>
+            </div>
+            <hr class="mx-auto w-8/12 md:w-6/12">
+
+            {# <hr class="mx-auto w-10/12 md:w-8/12"> #}
         </div>
 
         <div id="about-section" class="section-div section-spacing">
@@ -67,12 +76,15 @@ permalink: /
                     Technologies and languages that I have worked with:
                 </p>
             </div>
-            <div id="skills-list" class="flex flex-wrap justify-center flex-row md:justify-normal">
-                    {% for skill in info.skills %}
-                        <span class="rounded-full p-4 bg-gray-200 dark:bg-neutral-800 m-2 align-middle" >
-                            <i class="{{ skill.icon }} text-4xl m-auto text-gray-[750]"></i>
-                        </span>
-                    {% endfor %}
+
+            <div id="skills-list" class="flex flex-wrap justify-center flex-row mx-auto">
+                {% for skill in info.skills %}
+                    <span class="rounded-full p-4 bg-gray-200 dark:bg-neutral-800 m-2 align-middle" >
+                        <svg viewBox="0 0 128 128" class="h-9 w-9">
+                            {% svgpath skill.iconname %}
+                        </svg>
+                    </span>
+                {% endfor %}
             </div>
         </div>
         

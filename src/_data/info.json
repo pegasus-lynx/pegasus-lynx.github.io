@@ -33,75 +33,75 @@
     "skills": [
         {
             "name": "C",
-            "icon": "devicon-c-plain"
+            "iconname": "c"
         },
         {
             "name": "C++",
-            "icon": "devicon-cplusplus-plain"
+            "iconname": "cplusplus"
         },
         {
             "name": "Python",
-            "icon": "devicon-python-plain"
+            "iconname": "python"
         },
         {
             "name": "Javascript",
-            "icon": "devicon-javascript-plain"
+            "iconname": "javascript"
         },
         {
             "name": "C#",
-            "icon": "devicon-csharp-plain"
+            "iconname": "csharp"
         },
         {
             "name": "MySQL",
-            "icon": "devicon-mysql-plain"
+            "iconname": "mysql"
         },
         {
             "name": "Git",
-            "icon": "devicon-git-plain"
+            "iconname": "git"
         },
         {
             "name": "Fast API",
-            "icon": "devicon-fastapi-plain"
+            "iconname": "fastapi"
         },
         {
             "name": "OpenGL",
-            "icon": "devicon-opengl-plain"
+            "iconname": "opengl"
         },
         {
             "name": "HTML",
-            "icon": "devicon-html5-plain"
+            "iconname": "html5"
         },
         {
             "name": "CSS",
-            "icon": "devicon-css3-plain"
+            "iconname": "css3"
         },
         {
             "name": "Bootstrap",
-            "icon": "devicon-bootstrap-plain"
+            "iconname": "bootstrap"
         },
         {
             "name": "Angular JS",
-            "icon": "devicon-angularjs-plain"
+            "iconname": "angularjs"
         },
         {
             "name": "NodeJS",
-            "icon": "devicon-nodejs-plain"
+            "iconname": "nodejs"
         },
         {
             "name": ".NET",
-            "icon": "devicon-dotnetcore-plain"
+            "iconname": "dotnetcore"
         },
         {
             "name": "Django",
-            "icon": "devicon-django-plain"
+            "iconname": "django"
         },
         {
             "name": "11ty",
-            "icon": "devicon-eleventy-plain"
+            "iconname": "eleventy"
         },
         {
             "name": "PyTorch",
-            "icon": "devicon-pytorch-plain"
+            "iconname": "pytorch"
         }
     ],
     "selectedprojects": [

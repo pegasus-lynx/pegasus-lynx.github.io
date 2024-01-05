@@ -44,7 +44,7 @@ Here are the basic things that I will follow for this website :
 #### Other Resources ( I will organize these soon)
 - [11ty Rocks](https://11ty.rocks/)
 - [QUICK TIP #004—ZERO MAINTENANCE TAG PAGES FOR YOUR BLOG](https://www.11ty.dev/docs/quicktips/tag-pages/)
-
+- [Common Pitfalls](https://www.11ty.dev/docs/permalinks/#remapping-output-(permalink))
 - [Customizing Colors](https://tailwindcss.com/docs/customizing-colors)
 - [How To Convert Your Images Into Next Generation Formats (.WebP) In Python](https://understandingdata.com/posts/how-to-convert-your-images-into-next-generation-formats-webp-in-python/)
 - [Tailwind Typography](https://tailwindcss.com/docs/typography-plugin)
