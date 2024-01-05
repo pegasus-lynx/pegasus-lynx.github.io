@@ -1144,6 +1144,7 @@ video {
 @media (min-width: 768px) {
   .page-title-font-style {
     font-size: 4rem;
+    line-height: 1.5;
   }
 }
 
@@ -1351,10 +1352,6 @@ video {
 
 .me-4 {
   margin-inline-end: 1rem;
-}
-
-.mt-16 {
-  margin-top: 4rem;
 }
 
 .mt-2 {
@@ -1634,24 +1631,12 @@ video {
   padding-bottom: 2rem;
 }
 
-.pb-12 {
-  padding-bottom: 3rem;
-}
-
-.pb-8 {
-  padding-bottom: 2rem;
-}
-
 .pr-2 {
   padding-right: 0.5rem;
 }
 
 .pt-0 {
   padding-top: 0px;
-}
-
-.pt-8 {
-  padding-top: 2rem;
 }
 
 .text-left {
@@ -1682,11 +1667,6 @@ video {
 .text-3xl {
   font-size: 1.875rem;
   line-height: 2.25rem;
-}
-
-.text-4xl {
-  font-size: 2.25rem;
-  line-height: 2.5rem;
 }
 
 .text-base {
