@@ -66,6 +66,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "src/assets/images/*.webp": "assets/images/" });
   eleventyConfig.addPassthroughCopy("src/assets/images/favicons/");
   eleventyConfig.addPassthroughCopy("src/assets/css/");
+  eleventyConfig.addPassthroughCopy("CNAME");
 
   eleventyConfig.addCollection("gallery", () => {
     const galleryPath = path.resolve(__dirname, "./src/assets/images/gallery");

@@ -26,6 +26,9 @@ Partials ( shared elements )
     |-- footer
 ```
 
+> Pages, refer to the actual pages of the website.
+> Partials, refer to the elements that can be included in different pages, and will stay the same. Here, they are not composable, i.e. you can not extend these elements.
+
 Once, I had the list of all the pages for the website, I started thinking on how will I structure the website and what elements will be shared across the pages. In terms of Nunjucks these are referred as *partials* ( these are included in the `_includes` directory and start with '_' in there names, this is a convention ). These are the most basic partials that you will find in most websites. Now, that I had these basic elements in place, I started visualizing how can I structure / layout the different pages. In the `_includes` directory, rest of the files are our layouts.
 
 ```
@@ -38,10 +41,12 @@ Layouts
           |-- project
 ```
 
+> Layouts, are composable elements which can be further extended or used as final templates to render the page.
+
 Let me explain this in brief : 
 - `page` is the first and the most basic layout. Every page in the website, will have navbar and footer and rest of the code for page will be composed by filling out the content. *home*, *contact* and *gallery* pages use this template
 - `list`, uses the page layout as the base and acts as a template for a page with a custom header ( to be included using the *content* ) and a list of posts / cards. I have used the list layout to make the *projects*, *blogs* and *tag/{{ tag }}* pages.
-- `blog` and `project`, these both layouts derive from page layout and are used for blog posts or project details page. Although these both are very similar, I have kept them seperate for now.
+- `blog` and `project`, these both layouts derive from page layout and are used as template for blog posts or project details page. Although these both are very similar, I have kept them seperate for now due to minor differences.
 
 ### Project Iterations
 
