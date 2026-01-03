@@ -1,92 +1,149 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
-@layer components {
+@plugin '@tailwindcss/typography';
 
-    .body-pattern {
-        --dot-bg: white;
-        --dot-color: black;
-        --dot-size: 1.2px;
-        --dot-space: 30px;
-          background:
-              linear-gradient(90deg, var(--dot-bg) calc(var(--dot-space) - var(--dot-size)), transparent 1%) center / var(--dot-space) var(--dot-space),
-              linear-gradient(var(--dot-bg) calc(var(--dot-space) - var(--dot-size)), transparent 1%) center / var(--dot-space) var(--dot-space),
-              var(--dot-color);
-    }
+@source '../../../_site/**/*.{html,js}';
 
-    .body-pattern-dark {
-        --tw-bg-opacity: 1;
-        --dot-bg: rgb(23 23 23 / var(--tw-bg-opacity));
-        --dot-color: white;
-        --dot-size: 1px;
-        --dot-space: 30px;
-          background:
-              linear-gradient(90deg, var(--dot-bg) calc(var(--dot-space) - var(--dot-size)), transparent 1%) center / var(--dot-space) var(--dot-space),
-              linear-gradient(var(--dot-bg) calc(var(--dot-space) - var(--dot-size)), transparent 1%) center / var(--dot-space) var(--dot-space),
-              var(--dot-color);
-        color: white;
-    }
-  
-    .main-style {
-        @apply max-w-6xl mx-auto pt-16 pb-32 md:py-32;
-    }
+@custom-variant dark (&:is(.dark *));
 
-    .body-style {
-        @apply bg-white dark:bg-neutral-900 text-center p-8 md:p-16 shadow-lg;
-    }
+@theme {
+  --font-ibmplex: 'IBM Plex Sans', sans-serif;
+  --font-opensans: 'Open Sans', sans-serif;
 
-    .section-heading {
-        @apply text-3xl font-opensans font-bold mb-4;
-    }
+  --text-6xl: 4rem;
 
-    .section-div {
-        @apply max-w-3xl mx-auto font-ibmplex;
-    }
+  --width-9\/20: 45%;
 
-    .section-spacing {
-        @apply mb-12 md:mb-24;        
-    }
-    
-    .page-description-font-style {
-        @apply text-base md:text-xl md:font-semibold 
-    }
-    
-    .page-title-font-style {
-        @apply text-4xl md:text-6xl md:leading-normal font-bold font-opensans;
-    }
-    
-    .tags-flex {
-        @apply flex flex-row flex-wrap gap-x-4 gap-y-2
-    }
+  --shadow-t-sm: 0 -1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-t-md:
+    0 -4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-t-lg:
+    0 -10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-t-xl:
+    0 -20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-t-2xl: 0 -25px 50px -12px rgba(0, 0, 0, 0.25);
+  --shadow-t-3xl: 0 -35px 60px -15px rgba(0, 0, 0, 0.3);
+  --shadow-2xl-dark: 0 20px 50px 12px rgba(107, 114, 128, 0.3);
+}
 
-    .form-label {
-        @apply font-semibold text-sm;
-    }
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
 
-    .form-input {
-        @apply bg-gray-200 dark:bg-neutral-800 p-2;
-    }
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
 
-    .gallery-content {
-        column-count: 3;
-        column-gap: 2em;
-        padding-top: 16px;
+@utility body-pattern {
+  --dot-bg: white;
+  --dot-color: black;
+  --dot-size: 1.2px;
+  --dot-space: 30px;
+  background:
+    linear-gradient(
+        90deg,
+        var(--dot-bg) calc(var(--dot-space) - var(--dot-size)),
+        transparent 1%
+      )
+      center / var(--dot-space) var(--dot-space),
+    linear-gradient(
+        var(--dot-bg) calc(var(--dot-space) - var(--dot-size)),
+        transparent 1%
+      )
+      center / var(--dot-space) var(--dot-space),
+    var(--dot-color);
+}
 
-        @media only screen and (max-width: 767px) and (min-width: 540px) {
-            column-count: 2;
-        }
+@utility body-pattern-dark {
+  --tw-bg-opacity: 1;
+  --dot-bg: rgb(23 23 23 / var(--tw-bg-opacity));
+  --dot-color: white;
+  --dot-size: 1px;
+  --dot-space: 30px;
+  background:
+    linear-gradient(
+        90deg,
+        var(--dot-bg) calc(var(--dot-space) - var(--dot-size)),
+        transparent 1%
+      )
+      center / var(--dot-space) var(--dot-space),
+    linear-gradient(
+        var(--dot-bg) calc(var(--dot-space) - var(--dot-size)),
+        transparent 1%
+      )
+      center / var(--dot-space) var(--dot-space),
+    var(--dot-color);
+  color: white;
+}
 
-        @media only screen and (max-width: 600px) {
-            column-count: 1;
-        }
-    }
+@utility main-style {
+  @apply max-w-6xl mx-auto pt-16 pb-32 md:py-32;
+}
 
-    .gallery-item {
-        @apply block bg-white dark:bg-neutral-900 shadow-lg w-full;
-        margin: 0 0 2em;
-        .img {
-            margin:0
-        }
-    }
+@utility body-style {
+  @apply bg-white dark:bg-neutral-900 text-center p-8 md:p-16 shadow-lg;
+}
+
+@utility section-heading {
+  @apply text-3xl font-opensans font-bold mb-4;
+}
+
+@utility section-div {
+  @apply max-w-3xl mx-auto font-ibmplex;
+}
+
+@utility section-spacing {
+  @apply mb-12 md:mb-24;
+}
+
+@utility page-description-font-style {
+  @apply text-base md:text-xl md:font-semibold;
+}
+
+@utility page-title-font-style {
+  @apply text-4xl md:text-6xl md:leading-normal font-bold font-opensans;
+}
+
+@utility tags-flex {
+  @apply flex flex-row flex-wrap gap-x-4 gap-y-2;
+}
+
+@utility form-label {
+  @apply font-semibold text-sm;
+}
+
+@utility form-input {
+  @apply bg-gray-200 dark:bg-neutral-800 p-2;
+}
+
+@utility gallery-content {
+  column-count: 3;
+  column-gap: 2em;
+  padding-top: 16px;
+
+  @media only screen and (max-width: 767px) and (min-width: 540px) {
+    column-count: 2;
+  }
+
+  @media only screen and (max-width: 600px) {
+    column-count: 1;
+  }
+}
+
+@utility gallery-item {
+  @apply block bg-white dark:bg-neutral-900 shadow-lg w-full;
+  margin: 0 0 2em;
+  .img {
+    margin: 0;
+  }
 }
