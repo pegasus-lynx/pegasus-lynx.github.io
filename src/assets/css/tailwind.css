@@ -24,6 +24,45 @@
   --shadow-t-2xl: 0 -25px 50px -12px rgba(0, 0, 0, 0.25);
   --shadow-t-3xl: 0 -35px 60px -15px rgba(0, 0, 0, 0.3);
   --shadow-2xl-dark: 0 20px 50px 12px rgba(107, 114, 128, 0.3);
+
+  /* Custom Color Variants */
+  --color-darkaccent1-500: #74c5e9;
+  --color-darkaccent1-400: #86cbec;
+  --color-darkaccent1-300: #97d2ee;
+  --color-darkaccent1-200: #a7d8f0;
+  --color-darkaccent1-100: #b6dff3;
+  --color-darkaccent1-50: #c5e5f5;
+
+  --color-darkaccent2-500: #3b5c80;
+  --color-darkaccent2-400: #516d8d;
+  --color-darkaccent2-300: #667d9b;
+  --color-darkaccent2-200: #7b8fa9;
+  --color-darkaccent2-100: #91a1b7;
+  --color-darkaccent2-50: #a6b3c5;
+  
+  --color-accent1-50: #210922;
+  --color-accent1-100: #1f081f;
+  --color-accent1-200: #1c071c;
+  --color-accent1-300: #1a0619;
+  --color-accent1-400: #170517;
+  --color-accent1-500: #140413;
+  
+  --color-accent2-50: #3a5b80;
+  --color-accent2-100: #355171;
+  --color-accent2-200: #2f4762;
+  --color-accent2-300: #2a3d54;
+  --color-accent2-400: #243346;
+  --color-accent2-500: #1f2a39;
+
+  --color-fill-500: #218991;
+  --color-fill-400: #44969d;
+  --color-fill-300: #5fa3a8;
+  --color-fill-200: #77b0b4;
+  --color-fill-100: #8ebdc0;
+  --color-fill-50: #a5cacd;
+
+  --color-surface: #e5f2ff;
+  --color-darksurface: #141516;
 }
 
 /*
@@ -44,54 +83,12 @@
   }
 }
 
-@utility body-pattern {
-  --dot-bg: white;
-  --dot-color: black;
-  --dot-size: 1.2px;
-  --dot-space: 30px;
-  background:
-    linear-gradient(
-        90deg,
-        var(--dot-bg) calc(var(--dot-space) - var(--dot-size)),
-        transparent 1%
-      )
-      center / var(--dot-space) var(--dot-space),
-    linear-gradient(
-        var(--dot-bg) calc(var(--dot-space) - var(--dot-size)),
-        transparent 1%
-      )
-      center / var(--dot-space) var(--dot-space),
-    var(--dot-color);
-}
-
-@utility body-pattern-dark {
-  --tw-bg-opacity: 1;
-  --dot-bg: rgb(23 23 23 / var(--tw-bg-opacity));
-  --dot-color: white;
-  --dot-size: 1px;
-  --dot-space: 30px;
-  background:
-    linear-gradient(
-        90deg,
-        var(--dot-bg) calc(var(--dot-space) - var(--dot-size)),
-        transparent 1%
-      )
-      center / var(--dot-space) var(--dot-space),
-    linear-gradient(
-        var(--dot-bg) calc(var(--dot-space) - var(--dot-size)),
-        transparent 1%
-      )
-      center / var(--dot-space) var(--dot-space),
-    var(--dot-color);
-  color: white;
-}
-
 @utility main-style {
   @apply max-w-6xl mx-auto pt-16 pb-32 md:py-32;
 }
 
 @utility body-style {
-  @apply bg-white dark:bg-neutral-900 text-center p-8 md:p-16 shadow-lg;
+  @apply text-center p-8 md:p-16 shadow-lg;
 }
 
 @utility section-heading {
@@ -145,5 +142,83 @@
   margin: 0 0 2em;
   .img {
     margin: 0;
+  }
+}
+
+@layer componenets {
+
+  .link-plain {
+      cursor: pointer;
+      position: relative;
+      white-space: nowrap;
+      color: var(--color-accent1-500);
+
+      @variant hover {
+        color: var(--color-accent2-500);
+      }
+
+      @variant dark {
+        color: var(--color-darkaccent1-500);
+
+        @variant hover {
+          color: var(--color-darkaccent1-50);
+        }
+      }
+  }
+
+  .link {
+      cursor: pointer;
+      font-size: var(--text-sm);
+      position: relative;
+      white-space: nowrap;
+      color: var(--color-accent1-500);
+
+      @variant hover {
+        color: var(--color-accent2-500);
+      }
+
+      @variant dark {
+        color: var(--color-darkaccent1-500);
+
+        @variant hover {
+          color: var(--color-darkaccent1-50);
+        }
+      }
+  }
+
+  .link::before,
+  .link::after {
+      position: absolute;
+      width: 100%;
+      height: 1px;
+      background: currentColor;
+      top: 100%;
+      left: 0;
+      pointer-events: none;
+  }
+
+  .link::before {
+      content: '';
+      /* show by default */
+  }
+
+  .link::before {
+      transform-origin: 50% 100%;
+      transition: clip-path 0.3s, transform 0.3s cubic-bezier(0.2, 1, 0.8, 1);
+      clip-path: polygon(0% 0%, 0% 100%, 0 100%, 0 0, 100% 0, 100% 100%, 0 100%, 0 100%, 100% 100%, 100% 0%);
+  }
+
+  .link:hover::before {
+      transform: translate3d(0, 2px, 0) scale3d(1.08, 2, 1);
+      clip-path: polygon(0% 0%, 0% 100%, 50% 100%, 50% 0, 50% 0, 50% 100%, 50% 100%, 0 100%, 100% 100%, 100% 0%);
+  }
+
+  .link span {
+      display: inline-block;
+      transition: transform 0.3s cubic-bezier(0.2, 1, 0.8, 1);
+  }
+
+  .link:hover span {
+      transform: translate3d(0, -2px, 0);
   }
 }
