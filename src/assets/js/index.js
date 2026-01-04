@@ -30,8 +30,6 @@ function onLoadInit() {
 
     if(darkMode === `true`) {
         html.classList.add("dark");
-        body.classList.add("body-pattern-dark");
-        body.classList.remove("body-pattern");
         darkModeIcon1.classList.add("fa-moon");
         darkModeIcon1.classList.remove("fa-sun");
         darkModeIcon2.classList.add("fa-moon");
@@ -39,8 +37,6 @@ function onLoadInit() {
     }
     else {
         html.classList.remove("dark");
-        body.classList.remove("body-pattern-dark");
-        body.classList.add("body-pattern");        
         darkModeIcon1.classList.remove("fa-moon");
         darkModeIcon1.classList.add("fa-sun");
         darkModeIcon2.classList.remove("fa-moon");
@@ -58,8 +54,6 @@ function toggleDarkMode() {
     darkModeIcon2.classList.toggle(`fa-moon`);
     darkModeIcon2.classList.toggle(`fa-sun`);
     const body = document.querySelector(`body`);
-    body.classList.toggle("body-pattern");
-    body.classList.toggle("body-pattern-dark");
     localStorage.setItem(`darkMode`, html.classList.contains(`dark`));
 }
 
