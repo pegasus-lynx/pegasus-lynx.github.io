@@ -1,27 +1,27 @@
-<header class="bg-white dark:bg-neutral-950 shadow-xl">
-  <nav class="mx-auto flex max-w-7xl items-center justify-between p-4 lg:px-8" aria-label="Global">
+<header>
+  <nav class="mx-auto flex items-center justify-between pt-4 lg:px-8" aria-label="Global">
     <div class="flex lg:flex-1 font-bold font-opensans">
-      <a href="/" class="-m-1.5 p-1.5">
+      <a href="/" class="mx-2 -my-1 md:-mx-1.5 md:py-1.5">
         <img src="/assets/images/dk-icon.webp" class="w-8 h-8" alt="">
       </a>      
     </div>
     <div class="flex md:hidden">
-      <button class="pr-2" onclick="window.App.toggleDarkMode()"><i id="dark-mode-icon1" class="fa-solid"></i></button>
-      <button type="button" id="mobile-nav-button" class="-my-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700" 
+      <button class="link-plain pr-2" onclick="window.App.toggleDarkMode()"><i id="dark-mode-icon1" class="fa-solid"></i></button>
+      <button type="button" id="mobile-nav-button" class="-my-2.5 inline-flex items-center justify-center rounded-md p-2.5 link-plain" 
               onclick="window.App.toggleMobileMenu()">
         <span class="sr-only">Open main menu</span>
-        <svg class="h-6 w-6 text-gray-900 dark:text-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
         </svg>
       </button>
     </div>
 
-    <div class="hidden md:flex lg:gap-x-12 md:gap-x-8 text-sm font-semibold leading-6 text-gray-900 dark:text-white">
-      <a href="/projects/" >Projects</a>
-      <a href="/blogs/" >Blogs</a>
-      <a href="/contact/" >Contact</a>
-      <a href="/gallery/" >Gallery</a>
-      <button onclick="window.App.toggleDarkMode()"><i id="dark-mode-icon2" class="fa-solid"></i></button>
+    <div class="hidden md:flex lg:gap-x-12 md:gap-x-8 text-sm font-semibold leading-6 *:font-semibold">
+      <a href="/projects/" class="link"><span>Projects</span></a>
+      <a href="/blogs/" class="link"><span>Blogs</span></a>
+      <a href="/contact/" class="link"><span>Contact</span></a>
+      <a href="/gallery/" class="link"><span>Gallery</span></a>
+      <button class="link-plain" onclick="window.App.toggleDarkMode()"><i id="dark-mode-icon2" class="fa-solid"></i></button>
     </div>
   </nav>
 
@@ -33,18 +33,18 @@
         <a href="/" class="m-0">
           <img src="/assets/images/dk-icon.webp" class="w-8 h-8" alt="">       
         </a>
-        <button type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700" onclick="window.App.toggleMobileMenu()">
+        <button type="button" class="-m-2.5 rounded-md p-2.5 link-plain" onclick="window.App.toggleMobileMenu()">
           <span class="sr-only">Close menu</span>
-          <svg class="h-6 w-6 text-gray-900 dark:text-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
       </div>
-      <div class="mt-4 flex flex-col text-center text-3xl text-gray-900 dark:text-neutral-100 font-bold leading-6">
-        <a href="/projects/" class="p-4 m-4">Projects</a>
-        <a href="/blogs/" class="p-4 m-4">Blogs</a>
-        <a href="/contact/" class="p-4 m-4">Contact</a>
-        <a href="/gallery/" class="p-4 m-4">Gallery</a>
+      <div class="mt-4 flex flex-col text-center *:text-3xl font-bold leading-6">
+        <a href="/projects/" class="p-4 m-4 link-plain">Projects</a>
+        <a href="/blogs/" class="p-4 m-4 link-plain">Blogs</a>
+        <a href="/contact/" class="p-4 m-4 link-plain">Contact</a>
+        <a href="/gallery/" class="p-4 m-4 link-plain">Gallery</a>
       </div>
     </div>
   </div>
