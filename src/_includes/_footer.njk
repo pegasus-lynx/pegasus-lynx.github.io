@@ -1,25 +1,35 @@
 
 
-<footer class="bg-white dark:bg-neutral-950 shadow-t-lg absolute bottom-0 w-full m-0">
-    <div class="w-full mx-auto max-w-(--breakpoint-xl) py-4 px-8 
+<footer class="absolute bottom-0 w-full m-0">
+    <div class="w-full mx-auto py-4 px-8 
                 flex flex-col items-center flex-wrap
                 lg:py-6 lg:flex-row lg:justify-between
-                text-gray-500 dark:text-neutral-200">
-        <span class="text-sm md:mb-2 lg:text-left lg:mb-0">
+                text-accent2-500 dark:text-darkaccent2-200">
+         <div id="socials"
+            class="flex flex-row flex-wrap items-center mb-4 lg:mb-0">
+            {% for social in info.socials %}
+                <span class="mx-4">
+                    <a href="{{ social.url }}" target="_blank" rel="noopener noreferrer" class="link">
+                        <i class="{{ social.icon }} fa-lg"></i>
+                    </a>
+                </span>
+            {% endfor %}
+        </div>
+        <span class="text-sm text-center mx-auto lg:mx-0 md:mb-2 lg:text-left lg:mb-0">
             Built with <a href="https://www.11ty.dev/" class="hover:underline font-semibold">11ty</a>, 
                         <a href="https://tailwindcss.com/" class="hover:underline font-semibold">Tailwind CSS</a>. 
             Hosted on <a href="https://pages.github.com/" class="hover:underline font-semibold">GitHub Pages</a>.
-            Copyright <a href="#" class="hover:underline font-semibold">© Dipesh Kumar</a> 2023
+            Copyright <a href="#" class="hover:underline font-semibold">© Dipesh Kumar</a> 2025
         </span>
-        <ul class="hidden md:flex flex-row flex-wrap items-center text-sm font-medium">
+        <ul class="hidden xl:flex flex-row flex-wrap items-center text-sm font-medium">
             <li>
-                <a href="/" class="hover:underline me-4 md:me-6">About</a>
+                <a href="/" class="hover:underline me-4 xl:me-6 link"><span>About</span></a>
             </li>
             <li>
-                <a href="/projects/" class="hover:underline me-4 md:me-6">Projects</a>
+                <a href="/projects/" class="hover:underline me-4 xl:me-6 link"><span>Projects</span></a>
             </li>
             <li>
-                <a href="/blogs/" class="hover:underline me-4 md:me-6">Blogs</a>
+                <a href="/blogs/" class="hover:underline me-4 xl:me-6 link"><span>Blogs</span></a>
             </li>
         </ul>
     </div>
