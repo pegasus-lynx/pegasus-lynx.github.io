@@ -3,46 +3,52 @@ title: Home
 permalink: /
 ---
 <main class="main-style">
-    <div id="index-body" class="body-style md:py-24">
-        <div id="hero-section" class="section-spacing">
-            <div id="photo" class="inline-block w-auto mb-8 md:mb-12 
-                                        rounded-full shadow-2xl-dark">
+    <div id="index-body" class="body-style">
+        <div id="hero-section" class="section-div flex flex-col min-h-screen relative">
+            {# <div id="photo" class="inline-block w-auto mb-8 md:mb-12">
                 <img src="/assets/images/dipesh2.webp" alt=""
-                    class="w-60 h-60 mx-auto object-cover 
-                                rounded-full filter">
-            </div>
-            <div id="intro" class="mb-8">
-                <h1 class="page-title-font-style text-3xl mb-4 md:mb-8">
-                    Hi there! I'm Dipesh.
-                </h1>
-                <h3 class="page-description-font-style section-div">
-                    I'm a <b>Software Engineer</b> with a knack for almost everything.
+                    class="w-60 h-60 mx-auto object-cover rounded-4xl">
+            </div> #}
+            <div id="intro" class="mt-48 md:mt-96 mb-8">
+                <div class="text-xl md:-mb-2 font-medium 
+                            dark:text-darkaccent2-200 text-accent2-500">
+                    Hi there! I'm
+                </div>
+                <div class="page-title-font-style font-bold text-6xl xl:text-8xl -ml-1 
+                          dark:text-fill-300 text-accent2-300">Dipesh Kumar</div>
+                <h3 class="text-left font-header md:max-w-3xl lg:max-w-4xl text-2xl md:text-5xl font-medium 
+                        dark:text-darkaccent2-500 text-fill-500">
+                    Software Developer by day and night.
                 </h3>
+                <h4 class="text-left text-lg mt-8 md:max-w-3xl lg:max-w-4xl
+                        dark:text-darkaccent1-50 text-accent1-50">
+                    I specialize in crafting modern desktop experiences within the Windows ecosystem 
+                    (WPF/WinUI), focusing on robust UI toolkits that feel as good as they look. While,
+                    I enjoy developing components to aid UI developers, I'm currently expanding my horizon
+                    in the world of distributed systems and scalable architectures.
+                </h4>
             </div>
-            <div id="socials"
-                class="flex flex-row flex-wrap justify-center items-center mx-auto mb-2">
+            {# <div>
+                <a href="https://drive.google.com/file/d/1AFSSzhv9SuvjyP-Am3ukRk6_0hB40fKG/view?usp=sharing" target="_blank" rel="noopener noreferrer" 
+                class="font-bold my-4 link">
+                    Resume
+                </a>
+            </div> #}
+
+            <div id="socials" class="flex flex-row flex-wrap items-center -ml-4 mt-16 mb-4 lg:mb-0">
                 {% for social in info.socials %}
                     <span class="mx-4">
-                        <a href="{{ social.url }}" target="_blank" rel="noopener noreferrer">
+                        <a href="{{ social.url }}" target="_blank" rel="noopener noreferrer" class="link">
                             <i class="{{ social.icon }} fa-lg"></i>
                         </a>
                     </span>
                 {% endfor %}
             </div>
-            <hr class="mx-auto w-8/12 md:w-6/12">
-            <div class="w-full">
-                <a href="https://drive.google.com/file/d/1AFSSzhv9SuvjyP-Am3ukRk6_0hB40fKG/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="font-bold my-4">
-                    Resume
-                </a>
-            </div>
-            <hr class="mx-auto w-8/12 md:w-6/12">
-
-            {# <hr class="mx-auto w-10/12 md:w-8/12"> #}
         </div>
 
         <div id="about-section" class="section-div section-spacing">
             <h2 class="section-heading md:mb-8">About Me</h2>
-            <p class="text-justify">
+            <p class="text-left dark:text-darkaccent2-50 text-accent1-500">
                 Hello and welcome! I'm Dipesh Kumar, a spirited Software Developer 
                 II at Microsoft, where I contribute on maintaining WPF's robustness 
                 and introducing new innovative features.
@@ -59,39 +65,70 @@ permalink: /
                 <br>
                 When I am not working, one will find me immersed in 
                 making designs, editing photos and reading. Currently, 
-                I'm reading <span class="font-semibold"><i>Harry Potter and the 
-                Order of the Phoenix.</i></span>. Among my other recent reads, I really
-                enjoyed <span class="font-semibold"><i>Animal Farm</i></span> by G. Orwell.
+                I'm reading <span class="font-semibold"><i>Do It Today</i></span>. 
+                Among my other recent reads, I really enjoyed 
+                <span class="font-semibold"><i>1984</i></span> by G. Orwell and 
+                <span class="font-semibold"><i>The Lost Symbol</i></span> by Dan Brown.
                 Beyond my professional pursuits, I'm an avid lover of tea and coffee 
                 - the perfect companions for both code and contemplation. 
                 My love for adventure often takes me on hiking trails and road trips, 
                 experiences that I cherish and share in the gallery on this website.
+                <br>
+                <br>
+                Over the years, I have worked with various different technologies and languages.
+                Some for personal projects, wherease others on a more official capacity. Some of
+                them include:
+                <br>
+                <br>
             </p>
-        </div>
-        
-        <div id="skills-section" class="section-div section-spacing">
-            <div id="skills-heading" class="mb-4 md:mb-8">
-                <h2 class="section-heading">Skills</h2>
-                <p>
-                    Technologies and languages that I have worked with:
-                </p>
-            </div>
-
-            <div id="skills-list" class="flex flex-wrap justify-center flex-row mx-auto">
+            <div id="skills-list" class="flex flex-wrap flex-row mx-0">
                 {% for skill in info.skills %}
-                    <span class="rounded-full p-4 bg-gray-200 dark:bg-neutral-800 m-2 align-middle" >
-                        <svg viewBox="0 0 128 128" class="h-9 w-9">
-                            {% svgpath skill.iconname %}
-                        </svg>
+                    <span class="rounded-2xl pr-2 py-1 mt-1 text-left dark:font-medium font-bold
+                                text-accent2-300 dark:text-darkaccent1-500" >
+                        {{ skill.name }}
                     </span>
+                    <span class="last:hidden text-accent2-300 dark:text-darkaccent1-500 py-1 pr-2 mb-1">.</span>
                 {% endfor %}
             </div>
         </div>
+
+        <div id="work-section" class="section-div section-spacing">
+            <h2 class="section-heading md:mb-8 text-right">Experience</h2>
+            <p class="text-left text-accent1-500 dark:text-darkaccent2-50">
+                Major portion of my professional journey has revolved around development
+                of Desktop UI Frameworks for Windows ecosystem, shifting gears from WPF to
+                WinUI in the last year. Even though, core principles guiding my work remain
+                the same in this domain, but after working on variety of issues and features
+                and complex problems, I have developed a muscle when it comes to both UI and
+                UI Framework development.
+            </p>
+
+            <div id="experience-list" class="flex flex-col w-10/12 mt-12 mx-auto">
+                {% for exp in info.experiences %}
+                    <div class="grid grid-cols-4 gap-4 mb-6">
+                        <h5 class="col-start-1 font-bold dark:font-medium text-fill-500 dark:text-fill-50 text-left text-sm m-1"> 
+                            <span>{{ exp.time | makeUppercase }}</span>
+                        </h5>
+                        <h5 class="col-start-2 col-span-3 font-semibold text-xl
+                                    text-accent2-500 dark:text-darkaccent2-300 *:inline-block" >
+                            <span class="">{{ exp.role }}</span> 
+                            <span class="mx-1"> &#x2022; </span>
+                            <span class="">{{ exp.company }}</span>
+                        </h5>
+                        <ul class="col-start-2 col-span-3 text-md text-accent1-500 dark:text-darkaccent2-50 list-disc">
+                            {% for expitem in exp.details %}
+                                <li class="mb-4 last:mb-0">{{ expitem }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>    
         
         <div id="projects-section" class="section-div">
-            <div id="projects-heading" class="mb-4 md:mb-8">
-                <h2 class="section-heading">Projects</h2>
-                <p class="text-justify">
+            <div id="projects-heading" class="mb-8 md:mb-16">
+                <h2 class="section-heading md:mb-8">Projects</h2>
+                <p class="text-left text-accent1-500 dark:text-darkaccent2-50">
                     In my professional journey, I've tackled a wide range of projects, 
                     from simple web apps to complex database management systems. 
                     Each one has offered unique challenges and learning opportunities. 
@@ -99,26 +136,34 @@ permalink: /
                     For a complete overview of my projects, visit the Projects page.
                 </p>
             </div>
-            <div id="projects-list" class="flex flex-wrap justify-center flex-col md:flex-row md:gap-x-6 text-left
-                                            w-10/12 md:w-full mx-auto">
+            <div id="projects-list" class="flex flex-wrap justify-center flex-col mx-auto
+                                            md:gap-x-6 text-left w-10/12 md:w-full xl:w-10/12">
                 {% for selected_project in info.selectedprojects %}
                     {% for project in collections.Project %}
                         {% if project.data.post_slug == selected_project %}
                             <div id="{{ project.post_slug }}-project-card" 
-                                class="md:w-9/20 rounded-lg shadow-lg mb-8 md:mb-4 dark:bg-neutral-800">
-                                <a href="{{ project.url }}">
-                                    <img src="/assets/images/{{ project.data.post_image }}" alt=""
-                                        class="w-full h-32 object-cover">
-                                </a>
-                                <div class="p-4">
-                                    <div class="flex sm:flex-col flex-row justify-between">
-                                            <a href="{{ project.url }}">
-                                        <span class="font-bold pr-2">{{ project.data.title }}</span>
-                                            </a>
+                                class="mb-8 md:mb-16 
+                                       flex flex-row even:flex-row-reverse
+                                       odd:[&>div:last-child]:-ml-32 even:[&>div:last-child]:-mr-32">
+                                <div class="image-wrapper w-96 h-72 group">
+                                    <div class="h-full w-96 overflow-clip rounded-sm">
+                                        <img src="/assets/images/{{ project.data.post_image }}" alt=""
+                                            class="h-full w-full filter object-cover
+                                                   grayscale group-hover:grayscale-0  
+                                                   transition duration-300" />
                                     </div>
-                                    <hr class="mt-3">
-                                    <div class="mt-2 min-h-8 max-h-32">
-                                        <span class="text-sm">{{ project.data.description }}</span>
+                                    <div class="image-overlay rounded-sm
+                                                transition duration-300"></div>
+                                </div>
+
+                                <div class="rounded-sm z-10 max-h-56 my-auto w-full p-8
+                                            dark:bg-accent2-500 bg-accent2-500 shadow-xl/30">
+                                    <div class="flex sm:flex-col flex-row justify-between">
+                                        <span class="font-bold text-xl pr-2
+                                                        dark:text-fill-50 text-darkaccent2-50">{{ project.data.title }}</span>
+                                    </div>
+                                    <div class="mt-4 min-h-8 max-h-32">
+                                        <span class="text-sm dark:text-darkaccent2-50 text-fill-50">{{ project.data.description }}</span>
                                     </div>
                                 </div>
                             </div>

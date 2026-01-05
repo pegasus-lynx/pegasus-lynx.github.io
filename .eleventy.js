@@ -94,6 +94,10 @@ module.exports = function (eleventyConfig) {
     return iconPathTag;
   });
 
+  eleventyConfig.addFilter("makeUppercase", async function (_string) {
+    return _string.toUpperCase();
+  });
+
   eleventyConfig.addShortcode("image", async function (src, alt, widths, classname = "") {
     let metadata = await Image(src, {
       widths: [...widths],

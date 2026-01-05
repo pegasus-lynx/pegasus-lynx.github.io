@@ -7,11 +7,9 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  --font-ibmplex: 'IBM Plex Sans', sans-serif;
-  --font-opensans: 'Open Sans', sans-serif;
-
-  --text-6xl: 4rem;
-
+  --font-content: 'Open Sans', sans-serif;
+  --font-header: 'Montserrat', sans-serif;
+  
   --width-9\/20: 45%;
 
   --shadow-t-sm: 0 -1px 2px 0 rgba(0, 0, 0, 0.05);
@@ -84,19 +82,19 @@
 }
 
 @utility main-style {
-  @apply max-w-6xl mx-auto pt-16 pb-32 md:py-32;
+  @apply max-w-10/12 xl:max-w-8/12 mx-auto pb-32 md:pb-32;
 }
 
 @utility body-style {
-  @apply text-center p-8 md:p-16 shadow-lg;
+  @apply text-left px-8 md:px-16;
 }
 
 @utility section-heading {
-  @apply text-3xl font-opensans font-bold mb-4;
+  @apply text-3xl font-header font-bold mb-4 dark:text-fill-100 text-accent2-300;
 }
 
 @utility section-div {
-  @apply max-w-3xl mx-auto font-ibmplex;
+  @apply max-w-3xl xl:max-w-5xl mx-auto font-content;
 }
 
 @utility section-spacing {
@@ -108,7 +106,7 @@
 }
 
 @utility page-title-font-style {
-  @apply text-4xl md:text-6xl md:leading-normal font-bold font-opensans;
+  @apply text-4xl md:text-6xl md:leading-normal font-bold font-header;
 }
 
 @utility tags-flex {
@@ -220,5 +218,40 @@
 
   .link:hover span {
       transform: translate3d(0, -2px, 0);
+  }
+
+  .image-wrapper::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .image-wrapper {
+    position: relative;
+  }
+ 
+  .image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--color-fill-500);
+    opacity: 0.85;
+
+    @variant hover {
+      opacity: 0;
+    }
+
+    @variant dark {
+      background: var(--color-fill-500);
+
+      @variant hover {
+        opacity: 0;
+      }
+    }
   }
 }

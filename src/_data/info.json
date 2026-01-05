@@ -30,6 +30,44 @@
             "url": "mailto:dipeshkrj14@gmail.com"
         }
     ],
+    "experiences": [
+        {
+            "role": "Software Developer II",
+            "company": "Microsoft",
+            "time": "Sep 23 - Present",
+            "details": [
+                "Part of the team that oversees the development of Windows Presentation Framework (WPF) a desktop application development framework for Windows that ships with .NET SDK. WPF being opensourced, I work with the community, respond to issues, PRs, and fix bugs in the framework.",
+                "Co-developed and designed the OpenFolderDialog API for WPF, facilitating design discussions and securing approval from the review committee. Reviewed the feature's PR, authored a blog post, created a sample app, wrote documentation for better understanding and added unit and integration tests to ensure quality and performance.",
+                "Developed an efficient pipeline using various tools and scripts to reduce time taken in open-sourcing the test infrastructure. Enabled unit test on build pipelines, which allows contributors to validate their bug fixes and PRs."
+            ]
+        },
+        {
+            "role": "Software Developer I",
+            "company": "Microsoft",
+            "time": "Jun 21 - Sep 23",
+            "details": [
+                "Part of the team that oversees the development of Windows Presentation Framework (WPF) - a desktop application development framework for Windows that ships with .NET SDK. WPF being open-sourced, I work with the community, respond to issues, PRs, and fix bugs in the framework.",
+                "Co-developed and designed the OpenFolderDialog API for WPF, facilitating design discussions and securing approval from the review committee. Reviewed the feature's PR, authored a blog post, created a sample app, wrote documentation for better understanding and added unit and integration tests to ensure quality and performance.",
+                "Developed an efficient pipeline using various tools and scripts to reduce time taken in open-sourcing the test infrastructure. Enabled unit test on build pipelines, which allows contributors to validate their bug fixes and PRs."
+            ]
+        },
+        {
+            "role": "Software Developer Intern",
+            "company": "Microsoft",
+            "time": "May 20 - Jul 20",
+            "details": [
+                "Extended an internal debug tool, a desktop application developed using the WPF framework, that aggregates data from various sources. Implemented customizable command polling, wrote module for parsing the responses received and added shell-like command autocompletion features. Wrote unit and integration tests to validate the added features."
+            ]
+        },
+        {
+            "role": "CheckIn, Reservefree Pvt. Ltd.",
+            "company": "Backend Engineer",
+            "time": "Dec 18 - Jan 18",
+            "details": [
+                "Developed REST API endpoints for Android apps, enhancing database for user reviews using PostgreSQL and Django REST Framework."
+            ]
+        }
+    ],
     "skills": [
         {
             "name": "C",
@@ -40,16 +78,16 @@
             "iconname": "cplusplus"
         },
         {
+            "name": "C#",
+            "iconname": "csharp"
+        },
+        {
             "name": "Python",
             "iconname": "python"
         },
         {
             "name": "Javascript",
             "iconname": "javascript"
-        },
-        {
-            "name": "C#",
-            "iconname": "csharp"
         },
         {
             "name": "MySQL",
@@ -80,8 +118,16 @@
             "iconname": "bootstrap"
         },
         {
+            "name": "Tailwind CSS",
+            "iconname": ""
+        },
+        {
             "name": "Angular JS",
             "iconname": "angularjs"
+        },
+        {
+            "name": "11ty",
+            "iconname": "eleventy"
         },
         {
             "name": "NodeJS",
@@ -92,12 +138,16 @@
             "iconname": "dotnetcore"
         },
         {
-            "name": "Django",
-            "iconname": "django"
+            "name": "WPF",
+            "iconname": ""
         },
         {
-            "name": "11ty",
-            "iconname": "eleventy"
+            "name": "WinUI",
+            "iconname": ""
+        },
+        {
+            "name": "Django",
+            "iconname": "django"
         },
         {
             "name": "PyTorch",

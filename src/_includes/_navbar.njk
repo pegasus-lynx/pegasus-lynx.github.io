@@ -1,6 +1,9 @@
-<header>
-  <nav class="mx-auto flex items-center justify-between pt-4 lg:px-8" aria-label="Global">
-    <div class="flex lg:flex-1 font-bold font-opensans">
+<header class="z-20 fixed w-full shadow-xl">
+  <nav class="mx-auto flex items-center justify-between py-4 lg:px-8 
+              backdrop-filter backdrop-blur-lg
+              bg-surface/50 dark:bg-darksurface/50
+              border-b border-gray-200 dark:border-gray-950" aria-label="Global">
+    <div class="flex lg:flex-1 font-bold font-header">
       <a href="/" class="mx-2 -my-1 md:-mx-1.5 md:py-1.5">
         <img src="/assets/images/dk-icon.webp" class="w-8 h-8" alt="">
       </a>      
@@ -17,9 +20,9 @@
     </div>
 
     <div class="hidden md:flex lg:gap-x-12 md:gap-x-8 text-sm font-semibold leading-6 *:font-semibold">
-      <a href="/projects/" class="link"><span>Projects</span></a>
-      <a href="/blogs/" class="link"><span>Blogs</span></a>
-      <a href="/gallery/" class="link"><span>Gallery</span></a>
+      <a href="/projects/" class="link"><span>PROJECTS</span></a>
+      <a href="/blogs/" class="link"><span>BLOGS</span></a>
+      <a href="/gallery/" class="link"><span>GALLERY</span></a>
       <button class="link-plain" onclick="window.App.toggleDarkMode()"><i id="dark-mode-icon2" class="fa-solid"></i></button>
     </div>
   </nav>
