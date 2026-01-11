@@ -23,6 +23,30 @@
   --shadow-t-3xl: 0 -35px 60px -15px rgba(0, 0, 0, 0.3);
   --shadow-2xl-dark: 0 20px 50px 12px rgba(107, 114, 128, 0.3);
 
+  /* Dark Color Variants v2 */
+  --color-dark-text-v2: #8a8d7e;
+  --color-dark-textheader-v2: #f6fcdf;
+  --color-dark-textoverlay-v2: #1a1a19;
+
+  --color-dark-accent1-v2: #8bae66;
+  --color-dark-accent2-v2: #628141;
+
+  --color-dark-surface1-v2: #1e1e1d;
+  --color-dark-surface2-v2: #161616;
+  --color-dark-surface3-v2: #1a1a19;
+
+  /* Light Color Variants v2 */
+  --color-text-v2: #8a8d7e;
+  --color-textheader-v2: #f6fcdf;
+  --color-textoverlay-v2: #1a1a19;
+
+  --color-accent1-v2: #8bae66;
+  --color-accent2-v2: #628141;
+
+  --color-surface1-v2: #1e1e1d;
+  --color-surface2-v2: #161616;
+  --color-surface3-v2: #1a1a19;
+
   /* Custom Color Variants */
   --color-darkaccent1-500: #74c5e9;
   --color-darkaccent1-400: #86cbec;
