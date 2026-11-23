@@ -1,0 +1,69 @@
+<header class="sticky top-0 z-40 border-b border-[var(--border-subtle)] backdrop-blur-md bg-[var(--bg-canvas)]/85">
+  <nav class="max-w-6xl mx-auto flex items-center justify-between px-6 md:px-10 h-16" aria-label="Primary">
+    <a href="/" class="flex items-center gap-3 group">
+      <img src="/assets/images/dk-icon.webp" class="w-8 h-8 rounded-lg" alt="{{ info.name }} logo">
+      <span class="font-display font-bold text-lg tracking-tight text-[var(--text-primary)] group-hover:text-[var(--accent-primary)] transition-colors">
+        {{ info.name }}
+      </span>
+    </a>
+
+    <div class="hidden md:flex items-center gap-8">
+      <a href="/projects/" class="ec-nav-link" {% if page.url and page.url.startsWith('/project') %}aria-current="page"{% endif %}>Projects</a>
+      <a href="/blogs/" class="ec-nav-link" {% if page.url and page.url.startsWith('/blog') %}aria-current="page"{% endif %}>Blogs</a>
+      <a href="/gallery/" class="ec-nav-link" {% if page.url == '/gallery/' %}aria-current="page"{% endif %}>Gallery</a>
+      <a href="{{ info.resumeUrl }}" target="_blank" rel="noopener noreferrer" class="ec-nav-link inline-flex items-center gap-1">
+        <span>Resume</span>
+        <span class="font-mono text-xs" aria-hidden="true">↗</span>
+      </a>
+      <button type="button" onclick="window.App.toggleTheme()" aria-label="Toggle color theme"
+              class="w-9 h-9 rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-card)] flex items-center justify-center text-[var(--text-secondary)] hover:text-[var(--accent-primary)] hover:border-[var(--accent-primary)] transition-colors cursor-pointer">
+        <i data-theme-icon class="fa-solid fa-moon text-sm"></i>
+      </button>
+    </div>
+
+    <div class="flex items-center gap-2 md:hidden">
+      <button type="button" onclick="window.App.toggleTheme()" aria-label="Toggle color theme"
+              class="w-9 h-9 rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-card)] flex items-center justify-center text-[var(--text-secondary)] cursor-pointer">
+        <i data-theme-icon class="fa-solid fa-moon text-sm"></i>
+      </button>
+      <button type="button" id="mobile-nav-button" onclick="window.App.toggleMobileMenu()" aria-label="Open navigation menu"
+              class="w-9 h-9 rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-card)] flex items-center justify-center text-[var(--text-primary)] cursor-pointer">
+        <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <div id="mobile-nav-menu" class="hidden fixed inset-0 z-50 md:hidden" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+    <div class="fixed inset-0 bg-black/50 backdrop-blur-xs" onclick="window.App.toggleMobileMenu(true)"></div>
+    <div class="fixed inset-y-0 right-0 w-full max-w-xs bg-[var(--bg-canvas)] border-l border-[var(--border-subtle)] p-6 flex flex-col justify-between shadow-2xl">
+      <div>
+        <div class="flex items-center justify-between pb-6 border-b border-[var(--border-subtle)]">
+          <span class="font-display font-bold text-lg">{{ info.name }}</span>
+          <button type="button" onclick="window.App.toggleMobileMenu(true)" aria-label="Close navigation menu"
+                  class="w-9 h-9 rounded-lg border border-[var(--border-subtle)] flex items-center justify-center">
+            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+        <div class="mt-6 flex flex-col gap-4 font-display text-xl font-semibold">
+          <a href="/" class="py-2 hover:text-[var(--accent-primary)]">Home</a>
+          <a href="/projects/" class="py-2 hover:text-[var(--accent-primary)]">Projects</a>
+          <a href="/blogs/" class="py-2 hover:text-[var(--accent-primary)]">Blogs</a>
+          <a href="/gallery/" class="py-2 hover:text-[var(--accent-primary)]">Gallery</a>
+          <a href="{{ info.resumeUrl }}" target="_blank" rel="noopener noreferrer" class="py-2 hover:text-[var(--accent-primary)]">Resume ↗</a>
+        </div>
+      </div>
+
+      <div class="pt-6 border-t border-[var(--border-subtle)] flex items-center gap-5 text-[var(--text-secondary)]">
+        {% for social in info.socials %}
+          <a href="{{ social.url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ social.name }}" class="hover:text-[var(--accent-primary)]">
+            <i class="{{ social.icon }} fa-lg"></i>
+          </a>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</header>
