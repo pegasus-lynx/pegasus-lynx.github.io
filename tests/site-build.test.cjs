@@ -104,4 +104,35 @@ test("home page populates experience, skill groups, featured projects, and lates
   assert.ok(!html.includes("text-justify"));
 });
 
+test("blog reader renders 68ch prose container, progress bar, and sticky TOC rail", () => {
+  const blogHtml = fs.readFileSync(
+    path.join(SITE, "blog", "journey-with-11ty-and-tailwind", "index.html"),
+    "utf8"
+  );
+  assert.ok(blogHtml.includes('id="reading-progress"'), "Missing #reading-progress");
+  assert.ok(blogHtml.includes('id="article-prose"'), "Missing #article-prose");
+  assert.ok(blogHtml.includes('id="toc-rail"'), "Missing #toc-rail");
+  assert.ok(blogHtml.includes("← All Essays"), "Missing back link");
+  assert.ok(!blogHtml.includes("text-justify"), "Blog prose must not use text-justify");
+});
+
+test("project reader renders case study metadata, markdown tables, and guarded source links", () => {
+  const projectHtml = fs.readFileSync(
+    path.join(SITE, "project", "mwe-bpe", "index.html"),
+    "utf8"
+  );
+  assert.ok(projectHtml.includes('id="article-prose"'), "Missing #article-prose");
+  assert.ok(projectHtml.includes("← All Projects"), "Missing back link");
+  assert.ok(projectHtml.includes("https://github.com/pegasus-lynx/mwe-bpe"), "Missing source code link");
+  assert.ok(projectHtml.includes("<table>"), "Missing rendered markdown table");
+  assert.ok(!projectHtml.includes("text-justify"), "Project prose must not use text-justify");
+
+  const draftHtml = fs.readFileSync(
+    path.join(SITE, "project", "cross-lingual-rdf-extraction", "index.html"),
+    "utf8"
+  );
+  assert.ok(!draftHtml.includes("Source Code ↗"), "Draft with sourcecode:# must omit Source Code button");
+});
+
+
 

@@ -1,0 +1,218 @@
+---
+title: Home
+permalink: /
+---
+<main class="max-w-6xl mx-auto px-6 md:px-10 py-12 lg:py-20">
+  <div class="lg:grid lg:grid-cols-12 lg:gap-14">
+
+    <!-- Left Sticky Sidebar Rail -->
+    <aside class="lg:col-span-5 lg:sticky lg:top-24 lg:self-start mb-16 lg:mb-0">
+      <div class="flex items-center gap-4 mb-6">
+        <img src="/assets/images/dipesh2.webp" alt="{{ info.name }}"
+             class="w-20 h-20 rounded-2xl object-cover border border-[var(--border-subtle)] shadow-sm">
+        <div>
+          <p class="ec-kicker">{{ info.role }}</p>
+          <h1 class="font-display text-3xl sm:text-4xl font-bold tracking-tight text-[var(--text-primary)] mt-1">
+            {{ info.name }}
+          </h1>
+        </div>
+      </div>
+
+      <p class="font-display text-xl font-semibold text-[var(--text-primary)] leading-snug mb-3">
+        {{ info.punch }}
+      </p>
+      <p class="text-[var(--text-secondary)] text-base leading-relaxed mb-8">
+        {{ info.intro }}
+      </p>
+
+      <nav class="hidden lg:flex flex-col gap-1 mb-10" aria-label="Page sections">
+        <a href="#about" data-spy-target="about" class="ec-spy-link is-active">01 · About</a>
+        <a href="#experience" data-spy-target="experience" class="ec-spy-link">02 · Experience</a>
+        <a href="#skills" data-spy-target="skills" class="ec-spy-link">03 · Skills</a>
+        <a href="#projects" data-spy-target="projects" class="ec-spy-link">04 · Projects</a>
+        <a href="#writing" data-spy-target="writing" class="ec-spy-link">05 · Writing</a>
+      </nav>
+
+      <div class="flex flex-wrap items-center gap-3 mb-8">
+        <a href="{{ info.resumeUrl }}" target="_blank" rel="noopener noreferrer" class="ec-btn-primary">
+          <span>Resume</span>
+          <span class="font-mono text-xs" aria-hidden="true">↗</span>
+        </a>
+        <a href="mailto:{{ info.email }}" class="ec-btn-secondary">
+          <span>Say Hello</span>
+        </a>
+      </div>
+
+      <div class="flex items-center gap-5 text-[var(--text-secondary)]">
+        {% for social in info.socials %}
+          <a href="{{ social.url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ social.name }}"
+             class="hover:text-[var(--accent-primary)] transition-colors">
+            <i class="{{ social.icon }} fa-lg"></i>
+          </a>
+        {% endfor %}
+      </div>
+    </aside>
+
+    <!-- Right Scrolling Content Feed -->
+    <div class="lg:col-span-7 space-y-20">
+
+      <!-- 01 About -->
+      <section id="about" class="scroll-mt-24">
+        <div class="ec-kicker mb-2">01 · Background</div>
+        <h2 class="font-display text-2xl sm:text-3xl font-bold mb-6">About Me</h2>
+        <div class="space-y-4 text-[var(--text-secondary)] text-base md:text-[1.05rem] leading-[1.8] text-left">
+          {% for paragraph in info.about %}
+            <p>{{ paragraph }}</p>
+          {% endfor %}
+        </div>
+      </section>
+
+      <!-- 02 Experience -->
+      <section id="experience" class="scroll-mt-24">
+        <div class="ec-kicker mb-2">02 · Career</div>
+        <h2 class="font-display text-2xl sm:text-3xl font-bold mb-6">Experience</h2>
+        <div class="space-y-5">
+          {% for exp in info.experiences %}
+            <div class="ec-card p-6">
+              <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-3">
+                <h3 class="font-display text-lg font-semibold text-[var(--text-primary)]">
+                  {{ exp.role }} <span class="text-[var(--accent-primary)]">· {{ exp.company }}</span>
+                </h3>
+                <span class="font-mono text-xs uppercase tracking-wider text-[var(--accent-secondary)] shrink-0">
+                  {{ exp.time }}
+                </span>
+              </div>
+              <ul class="space-y-2.5 text-sm md:text-[0.95rem] leading-relaxed text-[var(--text-secondary)] list-disc pl-5">
+                {% for item in exp.details %}
+                  <li>{{ item }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+          {% endfor %}
+        </div>
+      </section>
+
+      <!-- 03 Skills -->
+      <section id="skills" class="scroll-mt-24">
+        <div class="ec-kicker mb-2">03 · Toolkit</div>
+        <h2 class="font-display text-2xl sm:text-3xl font-bold mb-6">Skills &amp; Technologies</h2>
+        <div class="grid sm:grid-cols-2 gap-4">
+          {% for group in info.skillGroups %}
+            <div class="ec-card p-5">
+              <h3 class="font-mono text-xs uppercase tracking-wider text-[var(--text-muted)] mb-3">
+                {{ group.name }}
+              </h3>
+              <div class="flex flex-wrap gap-2">
+                {% for skill in group.skills %}
+                  <span class="ec-chip">{{ skill }}</span>
+                {% endfor %}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </section>
+
+      <!-- 04 Selected Projects -->
+      <section id="projects" class="scroll-mt-24">
+        <div class="flex items-end justify-between gap-4 mb-6">
+          <div>
+            <div class="ec-kicker mb-2">04 · Selected Work</div>
+            <h2 class="font-display text-2xl sm:text-3xl font-bold">Featured Projects</h2>
+          </div>
+          <a href="/projects/" class="font-mono text-xs uppercase tracking-wider text-[var(--accent-primary)] hover:underline underline-offset-4">
+            All projects →
+          </a>
+        </div>
+
+        <div class="space-y-5">
+          {% for slug in info.selectedprojects %}
+            {% for project in collections.projectsSorted %}
+              {% if project.data.post_slug == slug %}
+                <article class="ec-card ec-card-interactive overflow-hidden sm:flex">
+                  {% if project.data.post_image %}
+                    <a href="{{ project.url }}" class="block sm:w-48 shrink-0 bg-[var(--bg-surface)]">
+                      <img src="/assets/images/{{ project.data.post_image }}" alt="{{ project.data.title }}"
+                           loading="lazy" class="w-full h-44 sm:h-full object-cover">
+                    </a>
+                  {% endif %}
+                  <div class="p-6 flex flex-col justify-between flex-1">
+                    <div>
+                      <div class="flex items-center justify-between gap-2 mb-1.5">
+                        <span class="font-mono text-xs text-[var(--accent-secondary)]">
+                          {{ project.data.startdate | postMonth }} — {{ project.data.enddate | postMonth }}
+                        </span>
+                        {% if project.data.sourcecode and project.data.sourcecode != '#' %}
+                          <a href="{{ project.data.sourcecode }}" target="_blank" rel="noopener noreferrer"
+                             aria-label="Source code for {{ project.data.title }}"
+                             class="text-xs font-mono text-[var(--text-muted)] hover:text-[var(--accent-primary)]">
+                            GitHub ↗
+                          </a>
+                        {% endif %}
+                      </div>
+                      <h3 class="font-display text-xl font-bold leading-snug mb-2">
+                        <a href="{{ project.url }}" class="hover:text-[var(--accent-primary)] transition-colors">
+                          {{ project.data.title }}
+                        </a>
+                      </h3>
+                      <p class="text-sm text-[var(--text-secondary)] leading-relaxed mb-4">
+                        {{ project.data.description }}
+                      </p>
+                    </div>
+                    <div class="flex flex-wrap gap-1.5">
+                      {% for tag in project.data.tags %}
+                        {% if tag != 'Project' %}
+                          <a href="/tags/{{ tag | slugify }}/" class="ec-chip">{{ tag }}</a>
+                        {% endif %}
+                      {% endfor %}
+                    </div>
+                  </div>
+                </article>
+              {% endif %}
+            {% endfor %}
+          {% endfor %}
+        </div>
+      </section>
+
+      <!-- 05 Latest Writing -->
+      <section id="writing" class="scroll-mt-24">
+        <div class="flex items-end justify-between gap-4 mb-6">
+          <div>
+            <div class="ec-kicker mb-2">05 · Essays &amp; Notes</div>
+            <h2 class="font-display text-2xl sm:text-3xl font-bold">Latest Writing</h2>
+          </div>
+          <a href="/blogs/" class="font-mono text-xs uppercase tracking-wider text-[var(--accent-primary)] hover:underline underline-offset-4">
+            All essays →
+          </a>
+        </div>
+
+        <div class="space-y-4">
+          {% for post in collections.blogsSorted %}
+            {% if loop.index <= 3 %}
+              <article class="ec-card ec-card-interactive p-6">
+                <div class="font-mono text-xs text-[var(--accent-secondary)] mb-2">
+                  {{ post.data.publishdate | postDate }} · {{ post.data.readingtime }} read
+                </div>
+                <h3 class="font-display text-xl font-bold leading-snug mb-2">
+                  <a href="{{ post.url }}" class="hover:text-[var(--accent-primary)] transition-colors">
+                    {{ post.data.title }}
+                  </a>
+                </h3>
+                <p class="text-sm text-[var(--text-secondary)] leading-relaxed mb-4">
+                  {{ post.data.description }}
+                </p>
+                <div class="flex flex-wrap gap-1.5">
+                  {% for tag in post.data.tags %}
+                    {% if tag != 'Blog' %}
+                      <a href="/tags/{{ tag | slugify }}/" class="ec-chip">{{ tag }}</a>
+                    {% endif %}
+                  {% endfor %}
+                </div>
+              </article>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </section>
+
+    </div>
+  </div>
+</main>
