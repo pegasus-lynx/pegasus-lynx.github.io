@@ -135,5 +135,72 @@ test("project reader renders case study metadata, blockquotes, figures, and guar
   assert.ok(!draftHtml.includes("Source Code ↗"), "Draft with sourcecode:# must omit Source Code button");
 });
 
+function walkHtmlFiles(dir) {
+  const results = [];
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    const full = path.join(dir, entry.name);
+    if (entry.isDirectory()) {
+      results.push(...walkHtmlFiles(full));
+    } else if (entry.name.endsWith(".html")) {
+      results.push(full);
+    }
+  }
+  return results;
+}
+
+test("blogs, projects, gallery, and tag pages render cleanly and exclude show:false drafts", () => {
+  for (const route of ["blogs", "projects", "gallery"]) {
+    assert.equal(
+      fs.existsSync(path.join(SITE, route, "index.html")),
+      true,
+      `Missing _site/${route}/index.html`
+    );
+  }
+
+  const projectsHtml = fs.readFileSync(path.join(SITE, "projects", "index.html"), "utf8");
+  assert.ok(projectsHtml.includes("BPE beyond Word Boundary"), "Missing mwe-bpe card");
+  assert.ok(!projectsHtml.includes("cross-lingual-rdf-extraction"), "Draft must be excluded");
+
+  const galleryHtml = fs.readFileSync(path.join(SITE, "gallery", "index.html"), "utf8");
+  assert.ok(galleryHtml.includes("ec-gallery-masonry"), "Missing masonry container");
+  assert.ok(galleryHtml.includes("/assets/images/gallery/"), "Missing gallery images");
+
+  assert.equal(
+    fs.existsSync(path.join(SITE, "tags", "11ty", "index.html")),
+    true,
+    "Expected /tags/11ty/ page"
+  );
+  assert.equal(
+    fs.existsSync(path.join(SITE, "tags", "rdf-extraction", "index.html")),
+    false,
+    "Hidden draft tag rdf-extraction must not generate a tag page"
+  );
+});
+
+test("every internal href and img src in visible _site pages resolves on disk", () => {
+  const htmlFiles = walkHtmlFiles(SITE).filter(
+    (f) => !f.includes(`${path.sep}cross-lingual-rdf-extraction${path.sep}`)
+  );
+  assert.ok(htmlFiles.length >= 25, `Expected >=25 HTML pages, found ${htmlFiles.length}`);
+
+  const attrRegex = /\b(?:href|src)="(\/[^"#?]*)"/g;
+  for (const file of htmlFiles) {
+    const html = fs.readFileSync(file, "utf8");
+    let match;
+    while ((match = attrRegex.exec(html)) !== null) {
+      const ref = match[1];
+      const diskTarget = ref.endsWith("/")
+        ? path.join(SITE, ref, "index.html")
+        : path.join(SITE, ref);
+      assert.equal(
+        fs.existsSync(diskTarget),
+        true,
+        `Broken internal reference "${ref}" in ${path.relative(SITE, file)}`
+      );
+    }
+  }
+});
+
+
 
 
