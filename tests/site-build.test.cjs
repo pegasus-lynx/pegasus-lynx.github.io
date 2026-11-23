@@ -116,7 +116,7 @@ test("blog reader renders 68ch prose container, progress bar, and sticky TOC rai
   assert.ok(!blogHtml.includes("text-justify"), "Blog prose must not use text-justify");
 });
 
-test("project reader renders case study metadata, markdown tables, and guarded source links", () => {
+test("project reader renders case study metadata, blockquotes, figures, and guarded source links", () => {
   const projectHtml = fs.readFileSync(
     path.join(SITE, "project", "mwe-bpe", "index.html"),
     "utf8"
@@ -124,7 +124,8 @@ test("project reader renders case study metadata, markdown tables, and guarded s
   assert.ok(projectHtml.includes('id="article-prose"'), "Missing #article-prose");
   assert.ok(projectHtml.includes("← All Projects"), "Missing back link");
   assert.ok(projectHtml.includes("https://github.com/pegasus-lynx/mwe-bpe"), "Missing source code link");
-  assert.ok(projectHtml.includes("<table>"), "Missing rendered markdown table");
+  assert.ok(projectHtml.includes("<blockquote>"), "Missing rendered blockquote");
+  assert.ok(projectHtml.includes("/assets/images/mwe-bpe-score-table.webp"), "Missing figure image");
   assert.ok(!projectHtml.includes("text-justify"), "Project prose must not use text-justify");
 
   const draftHtml = fs.readFileSync(
