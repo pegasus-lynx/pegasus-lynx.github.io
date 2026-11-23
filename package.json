@@ -6,6 +6,7 @@
   "scripts": {
     "start": "npm-run-all -p dev:*",
     "build": "run-s build:*",
+    "test": "node --test tests/*.test.cjs",
     "dev:11ty": "eleventy --serve --incremental",
     "dev:css": "tailwindcss -i src/assets/css/tailwind.css -o _site/assets/css/tailwind.css --watch --postcss",
     "build:11ty": "eleventy",
