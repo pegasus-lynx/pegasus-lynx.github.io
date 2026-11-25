@@ -1,17 +1,64 @@
 ---
-layout: list
 title: Projects
+description: Systems, NLP research, computer graphics, and web applications built over the years.
 permalink: /projects/
-selectedtag: Project
 ---
-
-<div>
-    <h1 class="page-title-font-style mb-2 md:mb-8">
-        {{ title }}
+<main class="max-w-6xl mx-auto px-6 md:px-10 py-12 md:py-16">
+  <header class="mb-12 max-w-2xl">
+    <div class="ec-kicker mb-2">Archive &amp; Case Studies</div>
+    <h1 class="font-display text-4xl md:text-5xl font-bold tracking-tight mb-4">
+      Projects
     </h1>
-    <h3 class="page-description-font-style mb-8 md:mb-16">
-        List of all the projects that I have done 
-        over the years - starting from college.
-    </h3>
-    <hr class="w-10/12 mx-auto">
-</div>
+    <p class="text-lg text-[var(--text-secondary)] leading-relaxed">
+      Engineering builds and research explorations spanning desktop frameworks, Natural Language Processing, 3D graphics, and web applications.
+    </p>
+  </header>
+
+  <div class="grid md:grid-cols-2 gap-8">
+    {% for project in collections.projectsSorted %}
+      <article class="ec-card ec-card-interactive overflow-hidden flex flex-col">
+        {% if project.data.post_image %}
+          <a href="{{ project.url }}" class="block bg-[var(--bg-surface)] border-b border-[var(--border-subtle)]">
+            <img src="/assets/images/{{ project.data.post_image }}" alt="{{ project.data.title }}"
+                 loading="lazy" class="w-full h-52 object-cover">
+          </a>
+        {% endif %}
+
+        <div class="p-6 md:p-7 flex flex-col justify-between flex-1">
+          <div>
+            <div class="flex items-center justify-between gap-3 mb-2">
+              <span class="font-mono text-xs uppercase tracking-wider text-[var(--accent-secondary)]">
+                {{ project.data.startdate | postMonth }} — {{ project.data.enddate | postMonth }}
+              </span>
+              {% if project.data.sourcecode and project.data.sourcecode != '#' %}
+                <a href="{{ project.data.sourcecode }}" target="_blank" rel="noopener noreferrer"
+                   aria-label="Source code for {{ project.data.title }}"
+                   class="font-mono text-xs text-[var(--text-muted)] hover:text-[var(--accent-primary)]">
+                  Source ↗
+                </a>
+              {% endif %}
+            </div>
+
+            <h2 class="font-display text-2xl font-bold leading-snug mb-2.5">
+              <a href="{{ project.url }}" class="hover:text-[var(--accent-primary)] transition-colors">
+                {{ project.data.title }}
+              </a>
+            </h2>
+
+            <p class="text-[var(--text-secondary)] text-sm md:text-base leading-relaxed mb-5">
+              {{ project.data.description }}
+            </p>
+          </div>
+
+          <div class="flex flex-wrap gap-1.5 pt-4 border-t border-[var(--border-subtle)]">
+            {% for tag in project.data.tags %}
+              {% if tag != 'Project' %}
+                <a href="/tags/{{ tag | slugify }}/" class="ec-chip">{{ tag }}</a>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      </article>
+    {% endfor %}
+  </div>
+</main>

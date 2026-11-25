@@ -1,17 +1,61 @@
 ---
 pagination:
-  data: collections
+  data: collections.visibleTags
   size: 1
-  alias: tag
-layout: list
-permalink: /tags/{{ tag | slugify }}/
+  alias: tagEntry
+permalink: /tags/{{ tagEntry.name | slugify }}/
 eleventyComputed:
-  selectedtag: "{{ tag }}"
+  title: "Topic: {{ tagEntry.name }}"
 ---
-
-<div>
-    <h1 class="page-title-font-style mb-2 md:mb-8">
-        Tagged - "{{ tag }}"
+<main class="max-w-4xl mx-auto px-6 md:px-10 py-12 md:py-16">
+  <header class="mb-10">
+    <div class="flex items-center gap-4 mb-4 font-mono text-xs uppercase tracking-wider">
+      <a href="/projects/" class="text-[var(--accent-primary)] hover:underline underline-offset-4">← Projects</a>
+      <span class="text-[var(--text-muted)]">·</span>
+      <a href="/blogs/" class="text-[var(--accent-primary)] hover:underline underline-offset-4">Essays</a>
+    </div>
+    <div class="ec-kicker mb-2">{{ tagEntry.items.length }} {% if tagEntry.items.length == 1 %}Entry{% else %}Entries{% endif %}</div>
+    <h1 class="font-display text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight">
+      Tagged “{{ tagEntry.name }}”
     </h1>
-    <hr class="w-10/12 mx-auto">
-</div>
+  </header>
+
+  <div class="space-y-5">
+    {% for post in tagEntry.items %}
+      {% set isProject = 'Project' in post.data.tags %}
+      <article class="ec-card ec-card-interactive p-6">
+        <div class="flex items-center gap-2 font-mono text-xs uppercase tracking-wider mb-2">
+          <span class="text-[var(--accent-primary)] font-semibold">
+            {% if isProject %}Project{% else %}Essay{% endif %}
+          </span>
+          <span class="text-[var(--text-muted)]">·</span>
+          <span class="text-[var(--accent-secondary)]">
+            {% if isProject %}
+              {{ post.data.startdate | postMonth }} — {{ post.data.enddate | postMonth }}
+            {% else %}
+              {{ post.data.publishdate | postDate }} · {{ post.data.readingtime }} read
+            {% endif %}
+          </span>
+        </div>
+
+        <h2 class="font-display text-xl sm:text-2xl font-bold leading-snug mb-2">
+          <a href="{{ post.url }}" class="hover:text-[var(--accent-primary)] transition-colors">
+            {{ post.data.title }}
+          </a>
+        </h2>
+
+        <p class="text-[var(--text-secondary)] text-sm md:text-base leading-relaxed mb-4">
+          {{ post.data.description }}
+        </p>
+
+        <div class="flex flex-wrap gap-1.5">
+          {% for tag in post.data.tags %}
+            {% if tag != 'Blog' and tag != 'Project' %}
+              <a href="/tags/{{ tag | slugify }}/" class="ec-chip">{{ tag }}</a>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </article>
+    {% endfor %}
+  </div>
+</main>

@@ -1,17 +1,53 @@
 ---
-layout: list
 title: Blogs
+description: Essays, book notes, and engineering reflections on building software.
 permalink: /blogs/
-selectedtag: Blog
 ---
-
-<div>
-    <h1 class="page-title-font-style mb-2 md:mb-8">
-        {{ title }}
+<main class="max-w-4xl mx-auto px-6 md:px-10 py-12 md:py-16">
+  <header class="mb-12">
+    <div class="ec-kicker mb-2">Writing</div>
+    <h1 class="font-display text-4xl md:text-5xl font-bold tracking-tight mb-4">
+      Essays &amp; Notes
     </h1>
-    <h3 class="page-description-font-style mb-8 md:mb-16">
-        A collection of articles, blogs, quotes I have 
-        written ( and collected ) over the years.
-    </h3>
-    <hr class="w-10/12 mx-auto">
-</div>
+    <p class="text-lg text-[var(--text-secondary)] max-w-2xl leading-relaxed">
+      Articles, engineering deep dives, and book summaries I've written and collected over the years.
+    </p>
+
+    <div class="mt-6 flex flex-wrap items-center gap-2">
+      <span class="font-mono text-xs uppercase tracking-wider text-[var(--text-muted)] mr-1">Topics:</span>
+      {% for tagObj in collections.visibleTags %}
+        <a href="/tags/{{ tagObj.name | slugify }}/" class="ec-chip">{{ tagObj.name }}</a>
+      {% endfor %}
+    </div>
+  </header>
+
+  <div class="space-y-6">
+    {% for post in collections.blogsSorted %}
+      <article class="ec-card ec-card-interactive p-6 md:p-8">
+        <div class="font-mono text-xs uppercase tracking-wider text-[var(--accent-secondary)] mb-2">
+          {{ post.data.publishdate | postDate }} · {{ post.data.readingtime }} read
+        </div>
+        <h2 class="font-display text-2xl font-bold leading-snug mb-2.5">
+          <a href="{{ post.url }}" class="hover:text-[var(--accent-primary)] transition-colors">
+            {{ post.data.title }}
+          </a>
+        </h2>
+        <p class="text-[var(--text-secondary)] leading-relaxed mb-5">
+          {{ post.data.description }}
+        </p>
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <div class="flex flex-wrap gap-2">
+            {% for tag in post.data.tags %}
+              {% if tag != 'Blog' %}
+                <a href="/tags/{{ tag | slugify }}/" class="ec-chip">{{ tag }}</a>
+              {% endif %}
+            {% endfor %}
+          </div>
+          <a href="{{ post.url }}" class="font-mono text-xs uppercase tracking-wider text-[var(--accent-primary)] hover:underline underline-offset-4">
+            Read essay →
+          </a>
+        </div>
+      </article>
+    {% endfor %}
+  </div>
+</main>

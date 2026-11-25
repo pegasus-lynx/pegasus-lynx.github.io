@@ -1,19 +1,35 @@
-const eleventyGoogleFonts = require("eleventy-google-fonts");
 const esbuild = require("esbuild");
 const fs = require("fs");
 const path = require("path");
+const markdownIt = require("markdown-it");
 const { DateTime } = require("luxon");
-const Image = require('@11ty/eleventy-img');
+const Image = require("@11ty/eleventy-img");
 
+const stringifyAttributes = (attributeMap) =>
+  Object.entries(attributeMap)
+    .filter(([, value]) => typeof value !== "undefined")
+    .map(([attribute, value]) => `${attribute}="${value}"`)
+    .join(" ");
 
-const stringifyAttributes = (attributeMap) => {
-  return Object.entries(attributeMap)
-    .map(([attribute, value]) => {
-      if (typeof value === 'undefined') return '';
-      return `${attribute}="${value}"`;
-    })
-    .join(' ');
-};
+function slugifyHeading(text) {
+  return String(text)
+    .toLowerCase()
+    .trim()
+    .replace(/[`*_~]/g, "")
+    .replace(/[^\w\s-]/g, "")
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-");
+}
+
+function parseDdMmYyyy(value) {
+  if (!value || String(value).trim() === "Present") {
+    return DateTime.now().toMillis();
+  }
+  const dt = DateTime.fromFormat(String(value).trim(), "dd-MM-yyyy");
+  return dt.isValid ? dt.toMillis() : 0;
+}
+
+const META_TAGS = new Set(["all", "Blog", "Project", "gallery"]);
 
 const svgiconpaths = {
   c: `<path fill="#659AD3" d="M115.4 30.7L67.1 2.9c-.8-.5-1.9-.7-3.1-.7-1.2 0-2.3.3-3.1.7l-48 27.9c-1.7 1-2.9 3.5-2.9 5.4v55.7c0 1.1.2 2.4 1 3.5l106.8-62c-.6-1.2-1.5-2.1-2.4-2.7z"></path><path fill="#03599C" d="M10.7 95.3c.5.8 1.2 1.5 1.9 1.9l48.2 27.9c.8.5 1.9.7 3.1.7 1.2 0 2.3-.3 3.1-.7l48-27.9c1.7-1 2.9-3.5 2.9-5.4V36.1c0-.9-.1-1.9-.6-2.8l-106.6 62z"></path><path fill="#fff" d="M85.3 76.1C81.1 83.5 73.1 88.5 64 88.5c-13.5 0-24.5-11-24.5-24.5s11-24.5 24.5-24.5c9.1 0 17.1 5 21.3 12.5l13-7.5c-6.8-11.9-19.6-20-34.3-20-21.8 0-39.5 17.7-39.5 39.5s17.7 39.5 39.5 39.5c14.6 0 27.4-8 34.2-19.8l-12.9-7.6z"></path>`,
@@ -48,45 +64,112 @@ const getSvgPath = (iconName) => {
 
 
 module.exports = function (eleventyConfig) {
+  eleventyConfig.ignores.add("src/**/v1/**");
 
-  eleventyConfig.on("eleventy.before", async () => {
+  eleventyConfig.on("eleventy.before", async ({ runMode }) => {
+    if (runMode === "build") {
+      fs.rmSync(path.resolve(__dirname, "_site"), { recursive: true, force: true });
+    }
     await esbuild.build({
       entryPoints: ["src/assets/js/index.js"],
       bundle: true,
       outfile: "_site/js/bundle.js",
       sourcemap: true,
-      target: ["chrome58", "firefox57", "safari11", "edge16"],
+      target: ["es2020"],
     });
   });
 
-  eleventyConfig.addPlugin(eleventyGoogleFonts);
+  const md = markdownIt({ html: true, linkify: true, typographer: true });
+  const defaultHeadingOpen =
+    md.renderer.rules.heading_open ||
+    function (tokens, idx, options, env, self) {
+      return self.renderToken(tokens, idx, options);
+    };
+
+  md.renderer.rules.heading_open = function (tokens, idx, options, env, self) {
+    const inlineToken = tokens[idx + 1];
+    if (inlineToken && inlineToken.type === "inline" && inlineToken.content) {
+      env._headingSlugs = env._headingSlugs || {};
+      const base = slugifyHeading(inlineToken.content) || "section";
+      const count = env._headingSlugs[base] || 0;
+      env._headingSlugs[base] = count + 1;
+      const slug = count === 0 ? base : `${base}-${count}`;
+      tokens[idx].attrSet("id", slug);
+    }
+    return defaultHeadingOpen(tokens, idx, options, env, self);
+  };
+  eleventyConfig.setLibrary("md", md);
 
   eleventyConfig.addWatchTarget("src/assets/js/");
 
   eleventyConfig.addPassthroughCopy({ "src/assets/images/*.webp": "assets/images/" });
   eleventyConfig.addPassthroughCopy("src/assets/images/favicons/");
-  eleventyConfig.addPassthroughCopy("src/assets/css/");
   eleventyConfig.addPassthroughCopy("CNAME");
 
   eleventyConfig.addCollection("gallery", () => {
     const galleryPath = path.resolve(__dirname, "./src/assets/images/gallery");
-    const files = fs.readdirSync(galleryPath);
+    return fs.readdirSync(galleryPath).map((file) => ({
+      src: `./src/assets/images/gallery/${file}`,
+      alt: file.replace(/\.[^.]+$/, "").replace(/[-_]+/g, " "),
+    }));
+  });
 
-    return files.map((file) => {
-      return {
-        src: `./src/assets/images/gallery/${file}`,
-        alt: file,
-      };
-    });
+  eleventyConfig.addCollection("blogsSorted", (collectionApi) =>
+    collectionApi
+      .getFilteredByTag("Blog")
+      .filter((item) => item.data.show !== false)
+      .sort((a, b) => parseDdMmYyyy(b.data.publishdate) - parseDdMmYyyy(a.data.publishdate))
+  );
+
+  eleventyConfig.addCollection("projectsSorted", (collectionApi) =>
+    collectionApi
+      .getFilteredByTag("Project")
+      .filter((item) => item.data.show !== false)
+      .sort((a, b) => parseDdMmYyyy(b.data.startdate) - parseDdMmYyyy(a.data.startdate))
+  );
+
+  eleventyConfig.addCollection("visibleTags", (collectionApi) => {
+    const tagMap = new Map();
+    const visibleItems = collectionApi
+      .getAll()
+      .filter(
+        (item) =>
+          item.data.show !== false &&
+          Array.isArray(item.data.tags) &&
+          (item.data.tags.includes("Blog") || item.data.tags.includes("Project"))
+      );
+
+    for (const item of visibleItems) {
+      for (const tag of item.data.tags) {
+        if (META_TAGS.has(tag)) continue;
+        if (!tagMap.has(tag)) tagMap.set(tag, []);
+        tagMap.get(tag).push(item);
+      }
+    }
+
+    return Array.from(tagMap.entries())
+      .sort(([a], [b]) => a.localeCompare(b))
+      .map(([name, items]) => ({
+        name,
+        items: items.sort(
+          (a, b) =>
+            parseDdMmYyyy(b.data.publishdate || b.data.startdate) -
+            parseDdMmYyyy(a.data.publishdate || a.data.startdate)
+        ),
+      }));
   });
 
   eleventyConfig.addFilter("postDate", (date) => {
-    return DateTime.fromFormat(date, 'dd-MM-yyyy').toLocaleString(DateTime.DATE_MED);
+    if (!date) return "";
+    const dt = DateTime.fromFormat(String(date).trim(), "dd-MM-yyyy");
+    return dt.isValid ? dt.toLocaleString(DateTime.DATE_MED) : String(date);
   });
 
   eleventyConfig.addFilter("postMonth", (date) => {
-    if (date === 'Present') return date;
-    return DateTime.fromFormat(date, 'dd-MM-yyyy').toFormat('LLL, yyyy');
+    if (!date) return "";
+    if (String(date).trim() === "Present") return "Present";
+    const dt = DateTime.fromFormat(String(date).trim(), "dd-MM-yyyy");
+    return dt.isValid ? dt.toFormat("LLL yyyy") : String(date);
   });
 
   eleventyConfig.addShortcode("svgpath", async function (iconName) {
@@ -95,22 +178,23 @@ module.exports = function (eleventyConfig) {
   });
 
   eleventyConfig.addShortcode("image", async function (src, alt, widths, classname = "") {
-    let metadata = await Image(src, {
+    const metadata = await Image(src, {
       widths: [...widths],
       formats: ["webp"],
       urlPath: "/assets/images/gallery",
       outputDir: "./_site/assets/images/gallery/",
-      filenameFormat: function (id, src, width, format, options) {
-        const extension = path.extname(src);
-        const name = path.basename(src, extension);
+      filenameFormat: function (id, imgSrc, width, format) {
+        const extension = path.extname(imgSrc);
+        const name = path.basename(imgSrc, extension);
         return `${name}-${width}w.${format}`;
-      }
+      },
     });
 
     const imgAttributes = stringifyAttributes({
       src: metadata.webp[0].url,
-      loading: 'lazy',
-      decoding: 'async',
+      alt: alt || "",
+      loading: "lazy",
+      decoding: "async",
       class: classname,
     });
 
@@ -121,8 +205,8 @@ module.exports = function (eleventyConfig) {
     passthroughFileCopy: true,
     markdownTemplateEngine: "njk",
     dir: {
-      input: 'src',
-      output: '_site'  // This is the default value anyhow
-    }
+      input: "src",
+      output: "_site",
+    },
   };
 };

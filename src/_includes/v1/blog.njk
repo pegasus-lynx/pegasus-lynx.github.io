@@ -1,0 +1,52 @@
+---
+layout: page
+---
+<main class="main-style pt-0">
+    <div id="post-banner-image" class="w-full mx-auto"> 
+        <img src="/assets/images/{{ post_image }}" 
+                alt="{{ title }}" 
+                class="h-64 md:h-96 object-cover w-full shadow-xl">
+    </div>
+    <div id="post-body" class="bg-white dark:bg-neutral-900 md:text-center 
+                                md:px-16 md:py-24
+                                px-4 py-8">
+        <div id="post-header" class="mb-8 w-10/12 md:w-full mx-auto">
+            <h1 class="text-2xl md:text-4xl font-bold my-4 text-gray-900 dark:text-white md:w-10/12 mx-auto">{{ title }}</h1>
+            <h3 class="page-description-font-styletext-gray-700">{{ description }}</h3>
+        </div>
+        <hr class="w-10/12 md:w-8/12 mx-auto">
+        <div id="post-details" 
+            class="flex flex-row justify-between w-10/12 md:w-8/12 mx-auto my-3
+                    text-gray-500 dark:text-neutral-200 font-semibold">
+                <span class="text-sm">{{ readingtime }} | {{ publishdate | postDate }}</span>
+            
+            <div class="flex flex-row items-center gap-x-6 mx-4 text-sm">
+                <button onclick="window.App.copyPageUrl()" 
+                    class="hover:text-gray-600">
+                    <i class="fa-solid fa-copy"></i>
+                </button>
+            </div>
+        </div>
+        <hr class="w-10/12 md:w-8/12 mx-auto">
+        <div id="post-content" class="w-10/12 mx-auto mt-8 md:mt-16 mb-8 text-justify">
+            <article class="prose lg:prose-lg mx-auto dark:prose-invert">
+                {{ content | safe }}
+            </article>
+        </div>
+        <hr class="w-10/12 md:w-8/12 mx-auto">
+        <div id="post-tags" 
+            class="w-10/12 md:w-8/12 mx-auto my-2 text-sm font-semibold text-gray-900">
+            <ul class="tags-flex mb-2">
+                <li class="dark:text-white">Tags :</li>
+                {% for tag in tags %}
+                    <li>
+                        <a href="/tags/{{ tag | slugify }}/">
+                            <span class="text-xs bg-gray-200 rounded-md px-2 py-1 my-1">{{ tag }}</span>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <hr class="w-10/12 md:w-8/12 mx-auto">
+    </div>
+</main>

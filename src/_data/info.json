@@ -1,113 +1,102 @@
 {
-    "name": "Dipesh Kumar",
-    "sitename": "Dipesh's Personal Website",
-    "bio": "",
-    "about": "",
-    "socials": [
-        {
-            "name": "GitHub",
-            "icon": "fa-brands fa-github",
-            "url": "https://github.com/pegasus-lynx"
-        },
-        {
-            "name": "LinkedIn",
-            "icon": "fa-brands fa-linkedin",
-            "url": "https://www.linkedin.com/in/dipeshkr/"
-        },
-        {
-            "name": "Instagram",
-            "icon": "fa-brands fa-instagram",
-            "url": "https://www.instagram.com/_chai_there_/"
-        },
-        {
-            "name": "Medium",
-            "icon": "fa-brands fa-medium",
-            "url": "https://medium.com/@dipeshkrj14"
-        },
-        {
-            "name": "dipeshkrj14@gmail.com",
-            "icon": "fa-solid fa-envelope",
-            "url": "mailto:dipeshkrj14@gmail.com"
-        }
-    ],
-    "skills": [
-        {
-            "name": "C",
-            "iconname": "c"
-        },
-        {
-            "name": "C++",
-            "iconname": "cplusplus"
-        },
-        {
-            "name": "Python",
-            "iconname": "python"
-        },
-        {
-            "name": "Javascript",
-            "iconname": "javascript"
-        },
-        {
-            "name": "C#",
-            "iconname": "csharp"
-        },
-        {
-            "name": "MySQL",
-            "iconname": "mysql"
-        },
-        {
-            "name": "Git",
-            "iconname": "git"
-        },
-        {
-            "name": "Fast API",
-            "iconname": "fastapi"
-        },
-        {
-            "name": "OpenGL",
-            "iconname": "opengl"
-        },
-        {
-            "name": "HTML",
-            "iconname": "html5"
-        },
-        {
-            "name": "CSS",
-            "iconname": "css3"
-        },
-        {
-            "name": "Bootstrap",
-            "iconname": "bootstrap"
-        },
-        {
-            "name": "Angular JS",
-            "iconname": "angularjs"
-        },
-        {
-            "name": "NodeJS",
-            "iconname": "nodejs"
-        },
-        {
-            "name": ".NET",
-            "iconname": "dotnetcore"
-        },
-        {
-            "name": "Django",
-            "iconname": "django"
-        },
-        {
-            "name": "11ty",
-            "iconname": "eleventy"
-        },
-        {
-            "name": "PyTorch",
-            "iconname": "pytorch"
-        }
-    ],
-    "selectedprojects": [
-        "contour-rendering",
-        "personal-webapp",
-        "mwe-bpe",
-        "hindi-data-crf-viterbi-analysis"
-    ]
+  "name": "Dipesh Kumar",
+  "sitename": "Dipesh Kumar — Software Engineer",
+  "role": "Software Engineer II · Microsoft",
+  "punch": "Building resilient UI frameworks and thoughtful software systems.",
+  "intro": "I craft modern desktop frameworks in the Windows ecosystem (WPF & WinUI) that ship with the .NET SDK, while exploring distributed systems, language models, and visual design.",
+  "email": "dipeshkrj14@gmail.com",
+  "resumeUrl": "https://drive.google.com/file/d/1AFSSzhv9SuvjyP-Am3ukRk6_0hB40fKG/view?usp=sharing",
+  "about": [
+    "I'm Dipesh Kumar, a Software Engineer II at Microsoft on the Windows Presentation Foundation (WPF) and Windows desktop UI ecosystem team. Working in an open-source .NET framework means balancing decades-long compatibility with modern API design, contributor collaboration, and engineering rigor.",
+    "Across my career and research at IIT (BHU) Varanasi, I've enjoyed moving across layers — from C++ and OpenGL terrain rendering to backend REST services in Django, frontend web architecture, and Natural Language Processing research on subword tokenization and sequence labeling.",
+    "Outside of engineering, you'll usually find me reading fiction or essays over a cup of chai, experimenting with typography and visual design, or out on road trips and mountain trails with a camera — moments I collect in the Gallery."
+  ],
+  "socials": [
+    {
+      "name": "GitHub",
+      "icon": "fa-brands fa-github",
+      "url": "https://github.com/pegasus-lynx"
+    },
+    {
+      "name": "LinkedIn",
+      "icon": "fa-brands fa-linkedin",
+      "url": "https://www.linkedin.com/in/dipeshkr/"
+    },
+    {
+      "name": "Medium",
+      "icon": "fa-brands fa-medium",
+      "url": "https://medium.com/@dipeshkrj14"
+    },
+    {
+      "name": "Instagram",
+      "icon": "fa-brands fa-instagram",
+      "url": "https://www.instagram.com/_chai_there_/"
+    },
+    {
+      "name": "Email",
+      "icon": "fa-solid fa-envelope",
+      "url": "mailto:dipeshkrj14@gmail.com"
+    }
+  ],
+  "experiences": [
+    {
+      "role": "Software Engineer II",
+      "company": "Microsoft",
+      "time": "Sep 2023 — Present",
+      "details": [
+        "Core maintainer of Windows Presentation Foundation (WPF) in the open-source .NET SDK — reviewing community PRs, triaging issues, and shipping framework reliability and modernization improvements.",
+        "Co-designed and delivered the OpenFolderDialog API for WPF through API review, specification, implementation, sample apps, developer documentation, and automated test coverage.",
+        "Built automation pipelines to accelerate open-sourcing WPF's test suite and enabled CI unit-test execution on pull requests for external contributors."
+      ]
+    },
+    {
+      "role": "Software Engineer",
+      "company": "Microsoft",
+      "time": "Jun 2021 — Sep 2023",
+      "details": [
+        "Engineered bug fixes, accessibility improvements, and servicing updates across core WPF controls, layout, and input subsystems.",
+        "Partnered with .NET SDK partners and open-source contributors to keep framework releases stable across Windows versions."
+      ]
+    },
+    {
+      "role": "Software Engineering Intern",
+      "company": "Microsoft",
+      "time": "May 2020 — Jul 2020",
+      "details": [
+        "Extended an internal WPF diagnostics desktop application that aggregates multi-source telemetry with configurable command polling, response parsers, and shell-style command autocompletion."
+      ]
+    },
+    {
+      "role": "Backend Engineering Intern",
+      "company": "CheckIn (Reservefree Pvt. Ltd.)",
+      "time": "Dec 2018 — Jan 2019",
+      "details": [
+        "Built REST API endpoints for Android clients and redesigned PostgreSQL review schemas using Django REST Framework."
+      ]
+    }
+  ],
+  "skillGroups": [
+    {
+      "name": "Languages",
+      "skills": ["C#", "C++", "C", "Python", "JavaScript", "SQL", "XAML"]
+    },
+    {
+      "name": "Desktop & Systems",
+      "skills": ["WPF", "WinUI 3", ".NET SDK", "Win32 Interop", "CI Pipelines"]
+    },
+    {
+      "name": "Web & Backend",
+      "skills": ["11ty (Eleventy)", "Tailwind CSS", "Node.js", "Django", "FastAPI", "PostgreSQL", "MySQL"]
+    },
+    {
+      "name": "ML, NLP & Graphics",
+      "skills": ["PyTorch", "Transformers", "NLTK", "OpenGL"]
+    }
+  ],
+  "selectedprojects": [
+    "mwe-bpe",
+    "personal-webapp",
+    "contour-rendering",
+    "hindi-data-crf-viterbi-analysis"
+  ]
 }

@@ -1,0 +1,117 @@
+---
+layout: page
+---
+<div class="fixed top-0 left-0 w-full h-[3px] z-50 pointer-events-none">
+  <div id="reading-progress"
+       class="h-full w-0 transition-[width] duration-75"
+       style="background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));"></div>
+</div>
+
+<main class="max-w-5xl mx-auto px-6 md:px-10 py-12 md:py-16">
+  <!-- Editorial Header -->
+  <header class="max-w-[68ch] xl:max-w-4xl mx-auto mb-10">
+    {% if articleType == 'project' %}
+      <a href="/projects/" class="inline-flex items-center font-mono text-xs uppercase tracking-wider text-[var(--accent-primary)] hover:underline underline-offset-4 mb-5">
+        ← All Projects
+      </a>
+      <div class="ec-kicker mb-3">
+        Project Case Study · {{ startdate | postMonth }} — {{ enddate | postMonth }}
+      </div>
+    {% else %}
+      <a href="/blogs/" class="inline-flex items-center font-mono text-xs uppercase tracking-wider text-[var(--accent-primary)] hover:underline underline-offset-4 mb-5">
+        ← All Essays
+      </a>
+      <div class="ec-kicker mb-3">
+        Essay · {{ readingtime }} read · {{ publishdate | postDate }}
+      </div>
+    {% endif %}
+
+    <h1 class="font-display text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight leading-[1.16] text-[var(--text-primary)] mb-4">
+      {{ title }}
+    </h1>
+
+    {% if description %}
+      <p class="text-lg md:text-xl text-[var(--text-secondary)] leading-relaxed mb-6">
+        {{ description }}
+      </p>
+    {% endif %}
+
+    <div class="flex flex-wrap items-center justify-between gap-4 py-4 border-y border-[var(--border-subtle)]">
+      <div class="flex flex-wrap items-center gap-2">
+        {% for tag in tags %}
+          {% if tag != 'Blog' and tag != 'Project' %}
+            <a href="/tags/{{ tag | slugify }}/" class="ec-chip">{{ tag }}</a>
+          {% endif %}
+        {% endfor %}
+      </div>
+
+      <div class="flex items-center gap-2.5">
+        {% if sourcecode and sourcecode != '#' %}
+          <a href="{{ sourcecode }}" target="_blank" rel="noopener noreferrer"
+             class="ec-btn-secondary !py-1.5 !px-3 !text-xs font-mono">
+            <i class="fa-brands fa-github"></i>
+            <span>Source Code ↗</span>
+          </a>
+        {% endif %}
+        <button type="button" onclick="window.App.copyPageUrl(this)"
+                class="ec-btn-secondary !py-1.5 !px-3 !text-xs font-mono cursor-pointer">
+          <i class="fa-regular fa-copy"></i>
+          <span data-copy-label>Copy Link</span>
+        </button>
+      </div>
+    </div>
+
+    {% if post_image and show != false %}
+      <figure class="mt-8 rounded-2xl overflow-hidden border border-[var(--border-subtle)] bg-[var(--bg-surface)]">
+        <img src="/assets/images/{{ post_image }}" alt="{{ title }}"
+             class="w-full max-h-[420px] object-cover">
+      </figure>
+    {% endif %}
+  </header>
+
+  <!-- Reader Body + Optional Sticky Desktop TOC -->
+  <div class="xl:grid xl:grid-cols-[minmax(0,68ch)_220px] xl:gap-14 justify-center">
+    <article id="article-prose" class="ec-prose mx-auto xl:mx-0 w-full">
+      {{ content | safe }}
+    </article>
+
+    <aside id="toc-rail" class="hidden xl:hidden sticky top-28 self-start">
+      <div class="font-mono text-xs uppercase tracking-wider text-[var(--text-muted)] mb-3 pl-3.5">
+        On This Page
+      </div>
+      <nav id="toc-list" aria-label="Table of contents" class="space-y-0.5"></nav>
+    </aside>
+  </div>
+
+  <!-- Previous / Next Navigation -->
+  {% set collectionList = collections.projectsSorted if articleType == 'project' else collections.blogsSorted %}
+  {% set currentIndex = -1 %}
+  {% for item in collectionList %}
+    {% if item.url == page.url %}
+      {% set currentIndex = loop.index0 %}
+    {% endif %}
+  {% endfor %}
+
+  {% if currentIndex != -1 and collectionList.length > 1 %}
+    {% set newerItem = collectionList[currentIndex - 1] if currentIndex > 0 else null %}
+    {% set olderItem = collectionList[currentIndex + 1] if currentIndex + 1 < collectionList.length else null %}
+    {% if newerItem or olderItem %}
+      <nav aria-label="Adjacent posts" class="max-w-[68ch] xl:max-w-4xl mx-auto mt-16 pt-8 border-t border-[var(--border-subtle)] grid sm:grid-cols-2 gap-4">
+        {% if newerItem %}
+          <a href="{{ newerItem.url }}" class="ec-card ec-card-interactive p-5 block">
+            <div class="font-mono text-xs text-[var(--text-muted)] mb-1">← Newer</div>
+            <div class="font-display font-semibold text-base text-[var(--text-primary)]">{{ newerItem.data.title }}</div>
+          </a>
+        {% else %}
+          <div></div>
+        {% endif %}
+        {% if olderItem %}
+          <a href="{{ olderItem.url }}" class="ec-card ec-card-interactive p-5 block sm:text-right">
+            <div class="font-mono text-xs text-[var(--text-muted)] mb-1">Older →</div>
+            <div class="font-display font-semibold text-base text-[var(--text-primary)]">{{ olderItem.data.title }}</div>
+          </a>
+        {% endif %}
+      </nav>
+    {% endif %}
+  {% endif %}
+</main>

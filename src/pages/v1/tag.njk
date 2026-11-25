@@ -1,0 +1,17 @@
+---
+pagination:
+  data: collections
+  size: 1
+  alias: tag
+layout: list
+permalink: /tags/{{ tag | slugify }}/
+eleventyComputed:
+  selectedtag: "{{ tag }}"
+---
+
+<div>
+    <h1 class="page-title-font-style mb-2 md:mb-8">
+        Tagged - "{{ tag }}"
+    </h1>
+    <hr class="w-10/12 mx-auto">
+</div>

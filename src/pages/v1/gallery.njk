@@ -1,0 +1,22 @@
+---
+title: Gallery
+permalink: /gallery/
+---
+<main class="main-style">
+    <div id="gallery-body" class="body-style">
+        <div id="gallery-header">
+            <h1 class="page-title-font-style mb-2 md:mb-8">Gallery</h1>
+            <h3 class="page-description-font-style mb-8 md:mb-16">
+                Travel. Click. Design. Repeat. <br>
+                Some of my favorite designs and clicks from my travel.
+            </h3>
+        </div>
+        <div id="gallery-container" class="gallery-content px-6">
+            {% for img in collections.gallery %}
+                <div class="gallery-item">
+                    {% image img.src, img.alt, [350], "rounded-lg" %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</main>
