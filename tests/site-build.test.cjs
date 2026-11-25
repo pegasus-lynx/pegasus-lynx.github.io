@@ -56,14 +56,22 @@ test("compiled CSS defines Editorial Craft light and dark semantic color tokens"
   assert.match(css, /--accent-primary:\s*#6ee7b7/i);
 });
 
-test("compiled CSS registers Fraunces, Plus Jakarta Sans, and JetBrains Mono font families", () => {
+test("compiled CSS and HTML head register Outfit, Source Sans 3, and Fira Code font families", () => {
   const css = fs.readFileSync(
     path.join(SITE, "assets", "css", "tailwind.css"),
     "utf8"
   );
-  assert.match(css, /Fraunces/);
-  assert.match(css, /Plus Jakarta Sans/);
-  assert.match(css, /JetBrains Mono/);
+  assert.ok(css.includes("Outfit"), "Missing Outfit in compiled CSS");
+  assert.ok(css.includes("Source Sans 3"), "Missing Source Sans 3 in compiled CSS");
+  assert.ok(css.includes("Fira Code"), "Missing Fira Code in compiled CSS");
+  assert.ok(!css.includes("Fraunces"), "Old font Fraunces still in compiled CSS");
+  assert.ok(!css.includes("Plus Jakarta Sans"), "Old font Plus Jakarta Sans still in compiled CSS");
+  assert.ok(!css.includes("JetBrains Mono"), "Old font JetBrains Mono still in compiled CSS");
+
+  const indexHtml = fs.readFileSync(path.join(SITE, "index.html"), "utf8");
+  assert.ok(indexHtml.includes("family=Outfit:"), "Missing Outfit Google Font link");
+  assert.ok(indexHtml.includes("family=Source+Sans+3:"), "Missing Source Sans 3 Google Font link");
+  assert.ok(indexHtml.includes("family=Fira+Code:"), "Missing Fira Code Google Font link");
 });
 
 test("base page shell embeds flash-free theme initializer and accessible theme toggle", () => {

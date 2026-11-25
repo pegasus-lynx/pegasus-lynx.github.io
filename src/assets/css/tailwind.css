@@ -6,9 +6,9 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --font-display: "Fraunces", Georgia, serif;
-  --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-display: "Outfit", system-ui, -apple-system, sans-serif;
+  --font-sans: "Source Sans 3", system-ui, -apple-system, sans-serif;
+  --font-mono: "Fira Code", ui-monospace, SFMono-Regular, monospace;
 }
 
 :root {
@@ -195,8 +195,8 @@ a.ec-chip:hover {
 .ec-prose {
   max-width: 68ch;
   color: var(--text-primary);
-  font-size: 1.0625rem;
-  line-height: 1.82;
+  font-size: 1.09375rem;
+  line-height: 1.8;
   text-align: left;
 }
 
