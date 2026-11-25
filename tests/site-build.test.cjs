@@ -209,6 +209,18 @@ test("every internal href and img src in visible _site pages resolves on disk", 
   }
 });
 
-
-
-
+test("GitHub Actions workflow pins Node 26 LTS, uses v4 actions, and runs tests", () => {
+  const workflow = fs.readFileSync(
+    path.join(ROOT, ".github", "workflows", "build.yml"),
+    "utf8"
+  );
+  assert.ok(
+    !/node-version:\s*['"]?current['"]?/.test(workflow),
+    "Workflow must not use unstable node-version: current"
+  );
+  assert.match(workflow, /node-version:\s*['"]?26['"]?/);
+  assert.match(workflow, /actions\/checkout@v4/);
+  assert.match(workflow, /actions\/setup-node@v4/);
+  assert.match(workflow, /peaceiris\/actions-gh-pages@v4/);
+  assert.match(workflow, /npm test/);
+});
