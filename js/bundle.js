@@ -2,9 +2,8 @@
   // src/assets/js/index.js
   function syncThemeIcons() {
     const isDark = document.documentElement.classList.contains("dark");
-    document.querySelectorAll("[data-theme-icon]").forEach((icon) => {
-      icon.classList.toggle("fa-sun", isDark);
-      icon.classList.toggle("fa-moon", !isDark);
+    document.querySelectorAll("[data-theme-toggle]").forEach((btn) => {
+      btn.setAttribute("aria-pressed", String(isDark));
     });
   }
   function toggleTheme() {
@@ -43,11 +42,21 @@
         document.body.removeChild(ta);
       }
       const label = buttonEl && buttonEl.querySelector("[data-copy-label]");
+      const copyIcon = buttonEl && buttonEl.querySelector("[data-copy-icon]");
+      const copiedIcon = buttonEl && buttonEl.querySelector("[data-copied-icon]");
       if (label) {
         const original = label.textContent;
         label.textContent = "Copied!";
+        if (copyIcon && copiedIcon) {
+          copyIcon.classList.add("hidden");
+          copiedIcon.classList.remove("hidden");
+        }
         setTimeout(() => {
           label.textContent = original;
+          if (copyIcon && copiedIcon) {
+            copyIcon.classList.remove("hidden");
+            copiedIcon.classList.add("hidden");
+          }
         }, 2e3);
       }
     } catch (e) {
