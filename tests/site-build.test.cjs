@@ -557,7 +557,7 @@ test("all project and essay cards render data-tag-list with hidden +N chip while
   const tagHtml = fs.readFileSync(path.join(SITE, "tags", "python", "index.html"), "utf8");
   const css = fs.readFileSync(path.join(SITE, "assets", "css", "tailwind.css"), "utf8");
 
-  const skillsSection = indexHtml.slice(indexHtml.indexOf('id="skills"'), indexHtml.indexOf('id="projects"'));
+  const skillsSection = indexHtml.slice(indexHtml.indexOf('id="skills"'), indexHtml.indexOf('id="writing"'));
   assert.ok(!skillsSection.includes("data-tag-list"), "Skills section must not truncate skill chips");
 
   const homeProjects = indexHtml.slice(indexHtml.indexOf('id="projects"'), indexHtml.indexOf('id="writing"'));

@@ -28,8 +28,8 @@ permalink: /
       <nav class="hidden lg:flex flex-col gap-1 mb-10" aria-label="Page sections">
         <a href="#about" data-spy-target="about" class="ec-spy-link is-active">01 · About</a>
         <a href="#experience" data-spy-target="experience" class="ec-spy-link">02 · Experience</a>
-        <a href="#skills" data-spy-target="skills" class="ec-spy-link">03 · Skills</a>
-        <a href="#projects" data-spy-target="projects" class="ec-spy-link">04 · Projects</a>
+        <a href="#projects" data-spy-target="projects" class="ec-spy-link">03 · Projects</a>
+        <a href="#skills" data-spy-target="skills" class="ec-spy-link">04 · Skills</a>
         <a href="#writing" data-spy-target="writing" class="ec-spy-link">05 · Writing</a>
       </nav>
 
@@ -92,31 +92,11 @@ permalink: /
         </div>
       </section>
 
-      <!-- 03 Skills -->
-      <section id="skills" class="scroll-mt-24">
-        <div class="ec-kicker mb-2">03 · Toolkit</div>
-        <h2 class="font-display text-2xl sm:text-3xl font-bold mb-6">Skills &amp; Technologies</h2>
-        <div class="grid sm:grid-cols-2 gap-4">
-          {% for group in info.skillGroups %}
-            <div class="ec-card p-5">
-              <h3 class="font-mono text-xs uppercase tracking-wider text-[var(--text-muted)] mb-3">
-                {{ group.name }}
-              </h3>
-              <div class="flex flex-wrap gap-2">
-                {% for skill in group.skills %}
-                  <span class="ec-chip">{{ skill }}</span>
-                {% endfor %}
-              </div>
-            </div>
-          {% endfor %}
-        </div>
-      </section>
-
-      <!-- 04 Selected Projects -->
+      <!-- 03 Selected Projects -->
       <section id="projects" class="scroll-mt-24">
         <div class="flex items-end justify-between gap-4 mb-6">
           <div>
-            <div class="ec-kicker mb-2">04 · Selected Work</div>
+            <div class="ec-kicker mb-2">03 · Selected Work</div>
             <h2 class="font-display text-2xl sm:text-3xl font-bold">Featured Projects</h2>
           </div>
           <a href="/projects/" class="inline-flex items-center gap-1 font-mono text-xs uppercase tracking-wider text-[var(--accent-primary)] hover:underline underline-offset-4">
@@ -176,6 +156,26 @@ permalink: /
           </div>
           {% set carouselTotal = featuredProjects.length %}
           {% include "_carousel_controls.njk" %}
+        </div>
+      </section>
+
+      <!-- 04 Skills -->
+      <section id="skills" class="scroll-mt-24">
+        <div class="ec-kicker mb-2">04 · Toolkit</div>
+        <h2 class="font-display text-2xl sm:text-3xl font-bold mb-6">Skills &amp; Technologies</h2>
+        <div class="ec-card divide-y divide-[var(--border-subtle)]">
+          {% for group in info.skillGroups %}
+            <div class="px-5 py-4 sm:grid sm:grid-cols-[9.5rem_1fr] sm:gap-4 sm:items-baseline">
+              <h3 class="font-mono text-xs uppercase tracking-wider text-[var(--text-muted)] mb-2 sm:mb-0">
+                {{ group.name }}
+              </h3>
+              <div class="flex flex-wrap gap-1.5">
+                {% for skill in group.skills %}
+                  <span class="ec-chip">{{ skill }}</span>
+                {% endfor %}
+              </div>
+            </div>
+          {% endfor %}
         </div>
       </section>
 
