@@ -11,15 +11,17 @@ layout: page
   <!-- Editorial Header -->
   <header class="max-w-[68ch] xl:max-w-4xl mx-auto mb-10">
     {% if articleType == 'project' %}
-      <a href="/projects/" class="inline-flex items-center font-mono text-xs uppercase tracking-wider text-[var(--accent-primary)] hover:underline underline-offset-4 mb-5">
-        ← All Projects
+      <a href="/projects/" class="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-wider text-[var(--accent-primary)] hover:underline underline-offset-4 mb-5">
+        {% icon "arrow-left", "w-3.5 h-3.5" %}
+        <span>All Projects</span>
       </a>
       <div class="ec-kicker mb-3">
         Project Case Study · {{ startdate | postMonth }} — {{ enddate | postMonth }}
       </div>
     {% else %}
-      <a href="/blogs/" class="inline-flex items-center font-mono text-xs uppercase tracking-wider text-[var(--accent-primary)] hover:underline underline-offset-4 mb-5">
-        ← All Essays
+      <a href="/blogs/" class="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-wider text-[var(--accent-primary)] hover:underline underline-offset-4 mb-5">
+        {% icon "arrow-left", "w-3.5 h-3.5" %}
+        <span>All Essays</span>
       </a>
       <div class="ec-kicker mb-3">
         Essay · {{ readingtime }} read · {{ publishdate | postDate }}
@@ -49,13 +51,15 @@ layout: page
         {% if sourcecode and sourcecode != '#' %}
           <a href="{{ sourcecode }}" target="_blank" rel="noopener noreferrer"
              class="ec-btn-secondary !py-1.5 !px-3 !text-xs font-mono">
-            <i class="fa-brands fa-github"></i>
-            <span>Source Code ↗</span>
+            {% icon "github", "w-3.5 h-3.5" %}
+            <span>Source Code</span>
+            {% icon "arrow-up-right", "w-3.5 h-3.5" %}
           </a>
         {% endif %}
         <button type="button" onclick="window.App.copyPageUrl(this)"
                 class="ec-btn-secondary !py-1.5 !px-3 !text-xs font-mono cursor-pointer">
-          <i class="fa-regular fa-copy"></i>
+          <span data-copy-icon class="inline-flex">{% icon "copy", "w-3.5 h-3.5" %}</span>
+          <span data-copied-icon class="hidden">{% icon "check", "w-3.5 h-3.5" %}</span>
           <span data-copy-label>Copy Link</span>
         </button>
       </div>
@@ -99,7 +103,10 @@ layout: page
       <nav aria-label="Adjacent posts" class="max-w-[68ch] xl:max-w-4xl mx-auto mt-16 pt-8 border-t border-[var(--border-subtle)] grid sm:grid-cols-2 gap-4">
         {% if newerItem %}
           <a href="{{ newerItem.url }}" class="ec-card ec-card-interactive p-5 block">
-            <div class="font-mono text-xs text-[var(--text-muted)] mb-1">← Newer</div>
+            <div class="font-mono text-xs text-[var(--text-muted)] mb-1 inline-flex items-center gap-1">
+              {% icon "arrow-left", "w-3.5 h-3.5" %}
+              <span>Newer</span>
+            </div>
             <div class="font-display font-semibold text-base text-[var(--text-primary)]">{{ newerItem.data.title }}</div>
           </a>
         {% else %}
@@ -107,7 +114,10 @@ layout: page
         {% endif %}
         {% if olderItem %}
           <a href="{{ olderItem.url }}" class="ec-card ec-card-interactive p-5 block sm:text-right">
-            <div class="font-mono text-xs text-[var(--text-muted)] mb-1">Older →</div>
+            <div class="font-mono text-xs text-[var(--text-muted)] mb-1 inline-flex items-center sm:justify-end gap-1">
+              <span>Older</span>
+              {% icon "arrow-right", "w-3.5 h-3.5" %}
+            </div>
             <div class="font-display font-semibold text-base text-[var(--text-primary)]">{{ olderItem.data.title }}</div>
           </a>
         {% endif %}

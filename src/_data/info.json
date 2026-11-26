@@ -14,28 +14,23 @@
   "socials": [
     {
       "name": "GitHub",
-      "icon": "fa-brands fa-github",
+      "icon": "github",
       "url": "https://github.com/pegasus-lynx"
     },
     {
       "name": "LinkedIn",
-      "icon": "fa-brands fa-linkedin",
+      "icon": "linkedin",
       "url": "https://www.linkedin.com/in/dipeshkr/"
     },
     {
       "name": "Medium",
-      "icon": "fa-brands fa-medium",
+      "icon": "medium",
       "url": "https://medium.com/@dipeshkrj14"
     },
     {
       "name": "Instagram",
-      "icon": "fa-brands fa-instagram",
+      "icon": "instagram",
       "url": "https://www.instagram.com/_chai_there_/"
-    },
-    {
-      "name": "Email",
-      "icon": "fa-solid fa-envelope",
-      "url": "mailto:dipeshkrj14@gmail.com"
     }
   ],
   "experiences": [

@@ -4,7 +4,7 @@
       {% for social in info.socials %}
         <a href="{{ social.url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ social.name }}"
            class="hover:text-[var(--accent-primary)] transition-colors">
-          <i class="{{ social.icon }} fa-lg"></i>
+          {% icon social.icon, "w-5 h-5" %}
         </a>
       {% endfor %}
     </div>
