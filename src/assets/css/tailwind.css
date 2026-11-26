@@ -92,6 +92,19 @@
   box-shadow: 0 12px 28px -12px rgba(0, 0, 0, 0.18);
 }
 
+[hidden] {
+  display: none !important;
+}
+
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  -webkit-appearance: none;
+  appearance: none;
+  display: none;
+}
+
 .ec-chip {
   display: inline-flex;
   align-items: center;
@@ -115,6 +128,123 @@
   color: var(--text-muted);
   box-shadow: inset 0 0 0 1px var(--border-subtle);
   cursor: default;
+}
+
+.ec-chip-filter {
+  gap: 0.35rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+}
+
+.ec-chip-filter:hover {
+  border-color: var(--accent-primary);
+  transform: translateY(-1px);
+}
+
+.ec-chip-filter.is-active,
+.ec-chip-filter[aria-pressed="true"] {
+  background-color: var(--accent-primary);
+  color: var(--accent-primary-fg);
+  border-color: var(--accent-primary);
+}
+
+.ec-chip-count {
+  font-size: 0.68rem;
+  opacity: 0.72;
+}
+
+.ec-search-type-btn {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.35rem 0.8rem;
+  border-radius: 0.5rem;
+  background-color: var(--bg-surface);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-subtle);
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.ec-search-type-btn:hover {
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+}
+
+.ec-search-type-btn[aria-pressed="true"] {
+  background-color: var(--accent-primary);
+  color: var(--accent-primary-fg);
+  border-color: var(--accent-primary);
+}
+
+.ec-topic-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.25rem;
+  height: 1.25rem;
+  padding: 0 0.35rem;
+  border-radius: 9999px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  background-color: var(--accent-primary);
+  color: var(--accent-primary-fg);
+}
+
+.ec-topic-option {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.45rem 0.55rem;
+  border-radius: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  transition: background-color 0.12s ease;
+}
+
+.ec-topic-option:hover {
+  background-color: var(--bg-surface);
+}
+
+.ec-topic-checkbox {
+  flex: 0 0 1rem;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 0.25rem;
+  border: 1.5px solid var(--border-subtle);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: transparent;
+  transition: background-color 0.12s ease, border-color 0.12s ease, color 0.12s ease;
+}
+
+.ec-topic-option[aria-selected="true"] .ec-topic-checkbox {
+  background-color: var(--accent-primary);
+  border-color: var(--accent-primary);
+  color: var(--accent-primary-fg);
+}
+
+.ec-chip-removable {
+  gap: 0.35rem;
+  background-color: var(--accent-primary);
+  color: var(--accent-primary-fg);
+  border: 0;
+  cursor: pointer;
+}
+
+.ec-chip-removable:hover {
+  opacity: 0.9;
 }
 
 a.ec-chip:hover {

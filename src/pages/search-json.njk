@@ -1,0 +1,6 @@
+---
+permalink: /search.json
+layout: false
+eleventyExcludeFromCollections: true
+---
+{{ collections | buildSearchIndexJson | safe }}

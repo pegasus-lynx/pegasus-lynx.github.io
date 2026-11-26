@@ -32,6 +32,8 @@ test("icon registry renders accessible SVGs, rejects unknown names, and matches 
     "arrow-up-right",
     "arrow-left",
     "arrow-right",
+    "search",
+    "chevron-down",
     "github",
     "linkedin",
     "medium",
@@ -184,8 +186,8 @@ function walkHtmlFiles(dir) {
   return results;
 }
 
-test("blogs, projects, gallery, and tag pages render cleanly and exclude show:false drafts", () => {
-  for (const route of ["blogs", "projects", "gallery"]) {
+test("blogs, projects, gallery, and search pages render cleanly and omit static tag pages", () => {
+  for (const route of ["blogs", "projects", "gallery", "search"]) {
     assert.equal(
       fs.existsSync(path.join(SITE, route, "index.html")),
       true,
@@ -202,14 +204,14 @@ test("blogs, projects, gallery, and tag pages render cleanly and exclude show:fa
   assert.ok(galleryHtml.includes("/assets/images/gallery/"), "Missing gallery images");
 
   assert.equal(
-    fs.existsSync(path.join(SITE, "tags", "11ty", "index.html")),
-    true,
-    "Expected /tags/11ty/ page"
+    fs.existsSync(path.join(SITE, "tags")),
+    false,
+    "Static /tags/*/ directory must not be generated"
   );
   assert.equal(
-    fs.existsSync(path.join(SITE, "tags", "rdf-extraction", "index.html")),
-    false,
-    "Hidden draft tag rdf-extraction must not generate a tag page"
+    fs.existsSync(path.join(SITE, "search.json")),
+    true,
+    "Expected /search.json build-time index"
   );
 });
 
@@ -217,11 +219,18 @@ test("every internal href and img src in visible _site pages resolves on disk", 
   const htmlFiles = walkHtmlFiles(SITE).filter(
     (f) => !f.includes(`${path.sep}cross-lingual-rdf-extraction${path.sep}`)
   );
-  assert.ok(htmlFiles.length >= 25, `Expected >=25 HTML pages, found ${htmlFiles.length}`);
+  assert.ok(
+    htmlFiles.length >= 12 && htmlFiles.length <= 20,
+    `Expected 12..20 HTML pages after dropping tag pages, found ${htmlFiles.length}`
+  );
 
   const attrRegex = /\b(?:href|src)="(\/[^"#?]*)"/g;
   for (const file of htmlFiles) {
     const html = fs.readFileSync(file, "utf8");
+    assert.ok(
+      !/href="\/tags\//.test(html),
+      `Legacy /tags/ link found in ${path.relative(SITE, file)}`
+    );
     let match;
     while ((match = attrRegex.exec(html)) !== null) {
       const ref = match[1];
@@ -554,13 +563,12 @@ test("all project and essay cards render data-tag-list with hidden +N chip while
   const indexHtml = fs.readFileSync(path.join(SITE, "index.html"), "utf8");
   const projectsHtml = fs.readFileSync(path.join(SITE, "projects", "index.html"), "utf8");
   const blogsHtml = fs.readFileSync(path.join(SITE, "blogs", "index.html"), "utf8");
-  const tagHtml = fs.readFileSync(path.join(SITE, "tags", "python", "index.html"), "utf8");
   const css = fs.readFileSync(path.join(SITE, "assets", "css", "tailwind.css"), "utf8");
 
   const skillsSection = indexHtml.slice(indexHtml.indexOf('id="skills"'), indexHtml.indexOf('id="writing"'));
   assert.ok(!skillsSection.includes("data-tag-list"), "Skills section must not truncate skill chips");
 
-  const homeProjects = indexHtml.slice(indexHtml.indexOf('id="projects"'), indexHtml.indexOf('id="writing"'));
+  const homeProjects = indexHtml.slice(indexHtml.indexOf('id="projects"'), indexHtml.indexOf('id="skills"'));
   const homeWriting = indexHtml.slice(indexHtml.indexOf('id="writing"'));
   assert.equal((homeProjects.match(/data-tag-list/g) || []).length, 4, "Expected 4 data-tag-list in Home Featured Projects");
   assert.equal((homeProjects.match(/data-tag-more/g) || []).length, 4, "Expected 4 data-tag-more in Home Featured Projects");
@@ -576,10 +584,195 @@ test("all project and essay cards render data-tag-list with hidden +N chip while
   const blogsHeader = blogsHtml.slice(0, blogsHtml.indexOf("</header>"));
   assert.ok(!blogsHeader.includes("data-tag-list"), "Blogs page header topic filter must not truncate");
   assert.ok((blogsHtml.match(/data-tag-list/g) || []).length >= 2, "Expected data-tag-list on /blogs/ essay cards");
-  assert.ok((tagHtml.match(/data-tag-list/g) || []).length >= 1, "Expected data-tag-list on /tags/*/ cards");
 
   assert.ok(css.includes(".ec-chip[hidden]"), "CSS must hide [hidden] .ec-chip elements");
   assert.ok(css.includes(".ec-chip-more"), "CSS must style .ec-chip-more token");
+});
+
+test("search.json indexes visible projects and essays with stripped plain text and tag counts", () => {
+  const payload = JSON.parse(fs.readFileSync(path.join(SITE, "search.json"), "utf8"));
+  assert.ok(Array.isArray(payload.items), "search.json must expose items array");
+  assert.ok(Array.isArray(payload.tags), "search.json must expose tags array");
+  assert.equal(payload.items.length, 9, "Expected 9 visible entries (7 projects + 2 essays)");
+
+  for (const item of payload.items) {
+    assert.ok(item.title && item.url.startsWith("/"), "Invalid title or url in search.json");
+    assert.ok(item.type === "project" || item.type === "blog", `Unexpected item.type ${item.type}`);
+    assert.ok(typeof item.dateLabel === "string" && item.dateLabel.length > 0, "Missing dateLabel");
+    assert.ok(typeof item.sortTimestamp === "number" && item.sortTimestamp > 0, "Missing sortTimestamp");
+    assert.ok(typeof item.description === "string" && item.description.length > 0, "Missing description");
+    assert.ok(typeof item.content === "string" && item.content.length > 20, "Missing plain-text content");
+    assert.ok(!/<[a-z][\s\S]*>/i.test(item.content), `Unstripped HTML found in ${item.url} content`);
+    assert.ok(!item.url.includes("cross-lingual-rdf-extraction"), "Hidden draft leaked into search.json");
+    assert.ok(Array.isArray(item.tags) && item.tags.length > 0, "Missing item tags");
+    for (const t of item.tags) {
+      assert.ok(t.name && t.slug, "Each item tag must include name and slug");
+      assert.notEqual(t.name, "Project");
+      assert.notEqual(t.name, "Blog");
+    }
+  }
+
+  assert.ok(!payload.tags.some((t) => t.slug === "rdf-extraction"), "Draft-only tag leaked into search.json");
+  const pythonTag = payload.tags.find((t) => t.slug === "python");
+  assert.ok(pythonTag && pythonTag.count >= 4, "Expected python tag count >= 4");
+});
+
+test("search helpers handle switch vs Ctrl+Click AND tag selection and ranked keyword filtering", () => {
+  delete require.cache[require.resolve(path.join(SITE, "js", "bundle.js"))];
+  require(path.join(SITE, "js", "bundle.js"));
+  assert.equal(typeof globalThis.App?.nextSelectedTags, "function");
+  assert.equal(typeof globalThis.App?.filterSearchEntries, "function");
+
+  const { nextSelectedTags, filterSearchEntries } = globalThis.App;
+
+  // Normal click switches single tag; clicking sole active tag clears it
+  assert.deepEqual(nextSelectedTags([], "python", false), ["python"]);
+  assert.deepEqual(nextSelectedTags(["python"], "nlp", false), ["nlp"]);
+  assert.deepEqual(nextSelectedTags(["python"], "python", false), []);
+  // Ctrl/Cmd+Click adds AND clause or removes one tag from multi-selection
+  assert.deepEqual(nextSelectedTags(["python"], "nlp", true), ["python", "nlp"]);
+  assert.deepEqual(nextSelectedTags(["python", "nlp"], "python", true), ["nlp"]);
+  // Normal click when multiple tags are selected switches to just the clicked tag
+  assert.deepEqual(nextSelectedTags(["python", "nlp"], "python", false), ["python"]);
+
+  const sample = [
+    {
+      title: "BPE beyond Word Boundary",
+      url: "/project/mwe-bpe/",
+      type: "project",
+      sortTimestamp: 200,
+      description: "Subword tokenization with Byte Pair Encoding.",
+      tags: [{ name: "Python", slug: "python" }, { name: "NLP", slug: "nlp" }],
+      content: "Transformers and multi-word expressions in neural machine translation.",
+    },
+    {
+      title: "Hindi CRF Analysis",
+      url: "/project/hindi-crf/",
+      type: "project",
+      sortTimestamp: 150,
+      description: "Chunking Hindi sentences.",
+      tags: [{ name: "Python", slug: "python" }, { name: "NLP", slug: "nlp" }, { name: "CRF", slug: "crf" }],
+      content: "Shallow parsing with Viterbi decoding and BPE comparison.",
+    },
+    {
+      title: "Journey with 11ty and Tailwind",
+      url: "/blog/11ty/",
+      type: "blog",
+      sortTimestamp: 300,
+      description: "Building this portfolio site.",
+      tags: [{ name: "11ty", slug: "11ty" }, { name: "Tailwind", slug: "tailwind" }],
+      content: "Static site generation with Nunjucks templates.",
+    },
+  ];
+
+  // Empty query sorts newest first
+  assert.deepEqual(
+    filterSearchEntries(sample, { query: "", tags: [], type: "all" }).map((x) => x.url),
+    ["/blog/11ty/", "/project/mwe-bpe/", "/project/hindi-crf/"]
+  );
+
+  // Type filter
+  assert.deepEqual(
+    filterSearchEntries(sample, { query: "", tags: [], type: "blog" }).map((x) => x.url),
+    ["/blog/11ty/"]
+  );
+
+  // Multi-tag AND filter (python + crf -> only Hindi CRF)
+  assert.deepEqual(
+    filterSearchEntries(sample, { query: "", tags: ["python", "crf"], type: "all" }).map((x) => x.url),
+    ["/project/hindi-crf/"]
+  );
+
+  // Keyword ranking: "BPE" in title ranks above "BPE" in body even if timestamps tie/differ
+  assert.deepEqual(
+    filterSearchEntries(sample, { query: "bpe", tags: [], type: "all" }).map((x) => x.url),
+    ["/project/mwe-bpe/", "/project/hindi-crf/"]
+  );
+
+  // Multi-token body + description query
+  assert.deepEqual(
+    filterSearchEntries(sample, { query: "hindi viterbi", tags: [], type: "all" }).map((x) => x.url),
+    ["/project/hindi-crf/"]
+  );
+
+  // Unmatched query
+  assert.deepEqual(filterSearchEntries(sample, { query: "kubernetes", tags: [], type: "all" }), []);
+});
+
+test("search page and /search/?tag= chip links render cleanly while navbar hides search button", () => {
+  const searchHtml = fs.readFileSync(path.join(SITE, "search", "index.html"), "utf8");
+  const indexHtml = fs.readFileSync(path.join(SITE, "index.html"), "utf8");
+  const projectPageHtml = fs.readFileSync(path.join(SITE, "project", "mwe-bpe", "index.html"), "utf8");
+
+  assert.ok(!indexHtml.includes('href="/search/"'), "Navbar must hide /search/ button");
+  assert.ok(indexHtml.includes('href="/search/?tag=python"'), "Home project card tag must link to /search/?tag=python");
+  assert.ok(projectPageHtml.includes('href="/search/?tag=python"'), "Article header tag chip must link to /search/?tag=python");
+
+  assert.ok(searchHtml.includes("data-search-root"), "Missing data-search-root on /search/");
+  assert.ok(searchHtml.includes("data-search-input"), "Missing data-search-input on /search/");
+  assert.equal((searchHtml.match(/data-search-type="/g) || []).length, 3, "Expected 3 type filter buttons on /search/");
+  assert.ok((searchHtml.match(/data-search-tag="/g) || []).length >= 20, "Expected topic filter buttons on /search/");
+  assert.ok(searchHtml.includes("data-search-results"), "Missing data-search-results container");
+  assert.ok(searchHtml.includes("data-search-empty"), "Missing data-search-empty state");
+});
+
+test("projects and blogs pages render two-part inline search with multi-select topic dropdown and single clear icon", () => {
+  const projectsHtml = fs.readFileSync(path.join(SITE, "projects", "index.html"), "utf8");
+  const blogsHtml = fs.readFileSync(path.join(SITE, "blogs", "index.html"), "utf8");
+  const searchHtml = fs.readFileSync(path.join(SITE, "search", "index.html"), "utf8");
+  const css = fs.readFileSync(path.join(SITE, "assets", "css", "tailwind.css"), "utf8");
+
+  // Native search cancel icon must be hidden in CSS so duplicate X never renders
+  assert.ok(
+    css.includes("::-webkit-search-cancel-button"),
+    "CSS must strip native ::-webkit-search-cancel-button to prevent duplicate X"
+  );
+
+  // /search/ keeps full pill grid (not dropdown)
+  assert.ok(!searchHtml.includes("data-topic-dropdown"), "/search/ must keep topic pill grid");
+
+  // /projects/ inline two-part search + multi-select dropdown + scoped project tags
+  assert.ok(projectsHtml.includes("data-inline-search-root"), "Missing data-inline-search-root on /projects/");
+  assert.ok(projectsHtml.includes('data-inline-search-type="project"'), "Missing project search type on /projects/");
+  assert.ok(projectsHtml.includes("data-search-input"), "Missing inline search input on /projects/");
+  assert.ok(projectsHtml.includes("data-topic-dropdown"), "Missing multi-select topic dropdown on /projects/");
+  assert.ok(projectsHtml.includes('aria-multiselectable="true"'), "Missing aria-multiselectable listbox on /projects/");
+  assert.ok(projectsHtml.includes("data-topic-filter-input"), "Expected topic quick-filter input inside /projects/ dropdown");
+  assert.ok(projectsHtml.includes("data-active-tags-row"), "Missing active selected tags row on /projects/");
+  assert.ok(projectsHtml.includes('data-search-tag="python"'), "Expected python topic option on /projects/");
+  assert.ok(!projectsHtml.includes('data-search-tag="book-summary"'), "Essay-only tag leaked into /projects/ topic options");
+  assert.equal((projectsHtml.match(/data-inline-card="/g) || []).length, 7, "Expected 7 data-inline-card items on /projects/");
+  assert.ok(projectsHtml.includes('href="/projects/?tag=python"'), "Expected /projects/ card tags to link inline to /projects/?tag=python");
+  assert.ok(projectsHtml.includes("data-search-empty"), "Missing inline empty state on /projects/");
+
+  // /blogs/ inline two-part search + multi-select dropdown + scoped blog tags
+  assert.ok(blogsHtml.includes("data-inline-search-root"), "Missing data-inline-search-root on /blogs/");
+  assert.ok(blogsHtml.includes('data-inline-search-type="blog"'), "Missing blog search type on /blogs/");
+  assert.ok(blogsHtml.includes("data-search-input"), "Missing inline search input on /blogs/");
+  assert.ok(blogsHtml.includes("data-topic-dropdown"), "Missing multi-select topic dropdown on /blogs/");
+  assert.ok(blogsHtml.includes('aria-multiselectable="true"'), "Missing aria-multiselectable listbox on /blogs/");
+  assert.ok(!blogsHtml.includes("data-topic-filter-input"), "Small 5-tag /blogs/ dropdown should omit quick-filter input");
+  assert.ok(blogsHtml.includes("data-active-tags-row"), "Missing active selected tags row on /blogs/");
+  assert.ok(blogsHtml.includes('data-search-tag="11ty"'), "Expected 11ty topic option on /blogs/");
+  assert.ok(blogsHtml.includes('data-search-tag="book-summary"'), "Expected book-summary topic option on /blogs/");
+  assert.ok(!blogsHtml.includes('data-search-tag="pytorch"'), "Project-only tag leaked into /blogs/ topic options");
+  assert.equal((blogsHtml.match(/data-inline-card="/g) || []).length, 2, "Expected 2 data-inline-card items on /blogs/");
+  assert.ok(blogsHtml.includes('href="/blogs/?tag=11ty"'), "Expected /blogs/ card tags to link inline to /blogs/?tag=11ty");
+  assert.ok(blogsHtml.includes("data-search-empty"), "Missing inline empty state on /blogs/");
+
+  // Pure helper orders inline cards by relevance when query is present and restores initial order when cleared
+  delete require.cache[require.resolve(path.join(SITE, "js", "bundle.js"))];
+  require(path.join(SITE, "js", "bundle.js"));
+  assert.equal(typeof globalThis.App?.orderInlineCardUrls, "function");
+  const initialUrls = ["/project/a/", "/project/b/", "/project/c/"];
+  assert.deepEqual(
+    globalThis.App.orderInlineCardUrls(initialUrls, ["/project/c/", "/project/a/"], false),
+    ["/project/a/", "/project/c/"]
+  );
+  assert.deepEqual(
+    globalThis.App.orderInlineCardUrls(initialUrls, ["/project/c/", "/project/a/"], true),
+    ["/project/c/", "/project/a/"]
+  );
 });
 
 
