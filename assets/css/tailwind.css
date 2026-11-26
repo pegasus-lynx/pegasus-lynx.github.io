@@ -2418,6 +2418,18 @@ a.ec-chip:hover {
 .ec-nav-link:hover, .ec-nav-link[aria-current="page"] {
   color: var(--accent-primary);
 }
+.ec-navbar {
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+.ec-navbar.ec-navbar-hidden {
+  transform: translateY(-100%);
+}
+@media (prefers-reduced-motion: reduce) {
+  .ec-navbar {
+    transition: none;
+  }
+}
 .ec-theme-icon-light {
   display: inline-flex;
 }
