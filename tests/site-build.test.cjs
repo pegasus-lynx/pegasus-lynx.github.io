@@ -137,8 +137,12 @@ test("home page populates experience, skill groups, featured projects, and lates
   assert.ok(html.includes("Software Engineer II"));
   assert.ok(html.includes("OpenFolderDialog"));
   assert.ok(html.includes("Desktop &amp; Systems"));
+  assert.ok(html.includes("/project/rec-calls/"));
   assert.ok(html.includes("/project/mwe-bpe/"));
   assert.ok(html.includes("/blog/journey-with-11ty-and-tailwind/"));
+  assert.ok(
+    html.includes("https://devblogs.microsoft.com/dotnet/wpf-file-dialog-improvements-in-dotnet-8/")
+  );
   assert.ok(!html.includes("text-justify"));
 });
 
@@ -593,10 +597,13 @@ test("search.json indexes visible projects and essays with stripped plain text a
   const payload = JSON.parse(fs.readFileSync(path.join(SITE, "search.json"), "utf8"));
   assert.ok(Array.isArray(payload.items), "search.json must expose items array");
   assert.ok(Array.isArray(payload.tags), "search.json must expose tags array");
-  assert.equal(payload.items.length, 9, "Expected 9 visible entries (7 projects + 2 essays)");
+  assert.equal(payload.items.length, 11, "Expected 11 visible entries (8 projects + 3 essays)");
 
   for (const item of payload.items) {
-    assert.ok(item.title && item.url.startsWith("/"), "Invalid title or url in search.json");
+    assert.ok(
+      item.title && (item.url.startsWith("/") || item.url.startsWith("https://")),
+      "Invalid title or url in search.json"
+    );
     assert.ok(item.type === "project" || item.type === "blog", `Unexpected item.type ${item.type}`);
     assert.ok(typeof item.dateLabel === "string" && item.dateLabel.length > 0, "Missing dateLabel");
     assert.ok(typeof item.sortTimestamp === "number" && item.sortTimestamp > 0, "Missing sortTimestamp");
@@ -741,7 +748,7 @@ test("projects and blogs pages render two-part inline search with multi-select t
   assert.ok(projectsHtml.includes("data-active-tags-row"), "Missing active selected tags row on /projects/");
   assert.ok(projectsHtml.includes('data-search-tag="python"'), "Expected python topic option on /projects/");
   assert.ok(!projectsHtml.includes('data-search-tag="book-summary"'), "Essay-only tag leaked into /projects/ topic options");
-  assert.equal((projectsHtml.match(/data-inline-card="/g) || []).length, 7, "Expected 7 data-inline-card items on /projects/");
+  assert.equal((projectsHtml.match(/data-inline-card="/g) || []).length, 8, "Expected 8 data-inline-card items on /projects/");
   assert.ok(projectsHtml.includes('href="/projects/?tag=python"'), "Expected /projects/ card tags to link inline to /projects/?tag=python");
   assert.ok(projectsHtml.includes("data-search-empty"), "Missing inline empty state on /projects/");
 
@@ -749,14 +756,14 @@ test("projects and blogs pages render two-part inline search with multi-select t
   assert.ok(blogsHtml.includes("data-inline-search-root"), "Missing data-inline-search-root on /blogs/");
   assert.ok(blogsHtml.includes('data-inline-search-type="blog"'), "Missing blog search type on /blogs/");
   assert.ok(blogsHtml.includes("data-search-input"), "Missing inline search input on /blogs/");
-  assert.ok(blogsHtml.includes("data-topic-dropdown"), "Missing multi-select topic dropdown on /blogs/");
+  assert.ok(blogsHtml.includes("data-topic-dropdown"), "Missing multi-select topic dropdown on /projects/");
   assert.ok(blogsHtml.includes('aria-multiselectable="true"'), "Missing aria-multiselectable listbox on /blogs/");
-  assert.ok(!blogsHtml.includes("data-topic-filter-input"), "Small 5-tag /blogs/ dropdown should omit quick-filter input");
+  assert.ok(!blogsHtml.includes("data-topic-filter-input"), "Small 8-tag /blogs/ dropdown should omit quick-filter input");
   assert.ok(blogsHtml.includes("data-active-tags-row"), "Missing active selected tags row on /blogs/");
   assert.ok(blogsHtml.includes('data-search-tag="11ty"'), "Expected 11ty topic option on /blogs/");
   assert.ok(blogsHtml.includes('data-search-tag="book-summary"'), "Expected book-summary topic option on /blogs/");
   assert.ok(!blogsHtml.includes('data-search-tag="pytorch"'), "Project-only tag leaked into /blogs/ topic options");
-  assert.equal((blogsHtml.match(/data-inline-card="/g) || []).length, 2, "Expected 2 data-inline-card items on /blogs/");
+  assert.equal((blogsHtml.match(/data-inline-card="/g) || []).length, 3, "Expected 3 data-inline-card items on /blogs/");
   assert.ok(blogsHtml.includes('href="/blogs/?tag=11ty"'), "Expected /blogs/ card tags to link inline to /blogs/?tag=11ty");
   assert.ok(blogsHtml.includes("data-search-empty"), "Missing inline empty state on /blogs/");
 
@@ -774,6 +781,42 @@ test("projects and blogs pages render two-part inline search with multi-select t
     ["/project/c/", "/project/a/"]
   );
 });
+
+test("home page surfaces updated resume link, @dipeshmsft, experience OSS links, Recalls, and DevBlog", () => {
+  const indexHtml = fs.readFileSync(path.join(SITE, "index.html"), "utf8");
+  const blogsHtml = fs.readFileSync(path.join(SITE, "blogs", "index.html"), "utf8");
+
+  assert.ok(
+    indexHtml.includes("https://drive.google.com/file/d/1AJhn4yNdzz4UBtNhB1-xsQtmPqqfMtRN/view?usp=sharing"),
+    "Missing updated Google Drive resume URL"
+  );
+  assert.ok(indexHtml.includes("https://github.com/dipeshmsft"), "Missing @dipeshmsft GitHub link");
+  assert.ok(indexHtml.includes("https://github.com/dotnet/wpf"), "Missing dotnet/wpf link");
+  assert.ok(indexHtml.includes("https://learn.microsoft.com/en-us/windows/apps/winui/"), "Missing WinUI 3 link");
+  assert.ok(indexHtml.includes("https://github.com/dotnet/wpf/issues/7689"), "Missing OpenFolderDialog proposal link");
+  assert.ok(indexHtml.includes("https://github.com/dotnet/wpf/issues/8932"), "Missing Fluent ThemeMode proposal link");
+  assert.ok(indexHtml.includes("https://github.com/dotnet/wpf/issues/9295"), "Missing AccentColor proposal link");
+  assert.ok(
+    indexHtml.includes("https://www.microsoft.com/store/productId/9NDLX60WX4KQ"),
+    "Missing Microsoft Store WPF Gallery link"
+  );
+  assert.ok(indexHtml.includes("https://github.com/pegasus-lynx/rec-calls"), "Missing Recalls source link");
+  assert.equal(
+    fs.existsSync(path.join(SITE, "project", "rec-calls", "index.html")),
+    true,
+    "Expected /project/rec-calls/ case study page"
+  );
+  assert.equal(
+    fs.existsSync(path.join(SITE, "blog", "wpf-file-dialog-dotnet-8", "index.html")),
+    false,
+    "External .NET Blog entry must not emit a stub local HTML page"
+  );
+  assert.ok(blogsHtml.includes("Read on Microsoft .NET Blog"), "Missing external CTA on /blogs/");
+  assert.ok(blogsHtml.includes("60-Second Organizer"), "Book summary must remain on /blogs/");
+  assert.ok(!indexHtml.includes("60-Second Organizer"), "Book summary must be excluded from Home Latest Writing");
+  assert.ok(!indexHtml.includes('id="education"'), "Education section must not be rendered");
+});
+
 
 
 

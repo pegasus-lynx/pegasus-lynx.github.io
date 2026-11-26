@@ -252,6 +252,19 @@ a.ec-chip:hover {
   transform: translateY(-1px);
 }
 
+.ec-inline-link {
+  color: var(--accent-primary);
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color 0.15s ease;
+}
+
+.ec-inline-link:hover {
+  color: var(--accent-primary-hover);
+}
+
 .ec-btn-primary {
   display: inline-flex;
   align-items: center;
