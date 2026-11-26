@@ -36,13 +36,9 @@ permalink: /blogs/
           {{ post.data.description }}
         </p>
         <div class="flex flex-wrap items-center justify-between gap-3">
-          <div class="flex flex-wrap gap-2">
-            {% for tag in post.data.tags %}
-              {% if tag != 'Blog' %}
-                <a href="/tags/{{ tag | slugify }}/" class="ec-chip">{{ tag }}</a>
-              {% endif %}
-            {% endfor %}
-          </div>
+          {% set tagItems = post.data.tags %}
+          {% set tagListClass = "flex flex-wrap gap-2" %}
+          {% include "_card_tags.njk" %}
           <a href="{{ post.url }}" class="inline-flex items-center gap-1 font-mono text-xs uppercase tracking-wider text-[var(--accent-primary)] hover:underline underline-offset-4">
             <span>Read essay</span>
             {% icon "arrow-right", "w-3.5 h-3.5" %}

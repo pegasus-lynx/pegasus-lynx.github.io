@@ -51,13 +51,8 @@ eleventyComputed:
           {{ post.data.description }}
         </p>
 
-        <div class="flex flex-wrap gap-1.5">
-          {% for tag in post.data.tags %}
-            {% if tag != 'Blog' and tag != 'Project' %}
-              <a href="/tags/{{ tag | slugify }}/" class="ec-chip">{{ tag }}</a>
-            {% endif %}
-          {% endfor %}
-        </div>
+        {% set tagItems = post.data.tags %}
+        {% include "_card_tags.njk" %}
       </article>
     {% endfor %}
   </div>

@@ -1,0 +1,8 @@
+<div data-tag-list class="{{ tagListClass or 'flex flex-wrap gap-1.5' }}">
+  {% for tag in tagItems %}
+    {% if tag != 'Blog' and tag != 'Project' %}
+      <a href="/tags/{{ tag | slugify }}/" data-tag-item class="ec-chip">{{ tag }}</a>
+    {% endif %}
+  {% endfor %}
+  <span data-tag-more class="ec-chip ec-chip-more" hidden></span>
+</div>
