@@ -768,6 +768,9 @@
       margin-bottom: 0;
     }
   }
+  .mt-0\.5 {
+    margin-top: calc(var(--spacing) * 0.5);
+  }
   .mt-1 {
     margin-top: calc(var(--spacing) * 1);
   }
@@ -993,6 +996,9 @@
   .w-full {
     width: 100%;
   }
+  .w-px {
+    width: 1px;
+  }
   .max-w-\(--breakpoint-xl\) {
     max-width: var(--breakpoint-xl);
   }
@@ -1028,6 +1034,10 @@
   }
   .border-collapse {
     border-collapse: collapse;
+  }
+  .translate-y-0\.5 {
+    --tw-translate-y: calc(var(--spacing) * 0.5);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
   }
   .transform {
     transform: var(--tw-rotate-x,) var(--tw-rotate-y,) var(--tw-rotate-z,) var(--tw-skew-x,) var(--tw-skew-y,);
@@ -1252,6 +1262,9 @@
     @supports (color: color-mix(in lab, red, red)) {
       background-color: color-mix(in oklab, var(--bg-surface) 50%, transparent);
     }
+  }
+  .bg-\[var\(--border-subtle\)\] {
+    background-color: var(--border-subtle);
   }
   .bg-black\/50 {
     background-color: color-mix(in srgb, #000 50%, transparent);
@@ -2699,6 +2712,17 @@ a.ec-chip:hover {
   opacity: 0.85;
   transform: translateY(-1px);
 }
+.ec-inline-link {
+  color: var(--accent-primary);
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color 0.15s ease;
+}
+.ec-inline-link:hover {
+  color: var(--accent-primary-hover);
+}
 .ec-btn-primary {
   display: inline-flex;
   align-items: center;
@@ -3071,6 +3095,21 @@ a.ec-chip:hover {
     transition: none;
   }
 }
+@property --tw-translate-x {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
+}
+@property --tw-translate-y {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
+}
+@property --tw-translate-z {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
+}
 @property --tw-rotate-x {
   syntax: "*";
   inherits: false;
@@ -3284,6 +3323,9 @@ a.ec-chip:hover {
 @layer properties {
   @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
     *, ::before, ::after, ::backdrop {
+      --tw-translate-x: 0;
+      --tw-translate-y: 0;
+      --tw-translate-z: 0;
       --tw-rotate-x: initial;
       --tw-rotate-y: initial;
       --tw-rotate-z: initial;

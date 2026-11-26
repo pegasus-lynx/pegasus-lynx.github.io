@@ -508,6 +508,10 @@
       heading.className = "font-display text-xl md:text-2xl font-bold leading-snug mb-2";
       const titleLink = document.createElement("a");
       titleLink.href = item.url;
+      if (item.external || /^https?:\/\//i.test(item.url)) {
+        titleLink.target = "_blank";
+        titleLink.rel = "noopener noreferrer";
+      }
       titleLink.className = "hover:text-[var(--accent-primary)] transition-colors";
       titleLink.textContent = item.title;
       heading.appendChild(titleLink);

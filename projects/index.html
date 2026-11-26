@@ -50,7 +50,7 @@
       <a href="/projects/" class="ec-nav-link" aria-current="page">Projects</a>
       <a href="/blogs/" class="ec-nav-link" >Blogs</a>
       <a href="/gallery/" class="ec-nav-link" >Gallery</a>
-      <a href="https://drive.google.com/file/d/1AFSSzhv9SuvjyP-Am3ukRk6_0hB40fKG/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="ec-nav-link inline-flex items-center gap-1">
+      <a href="https://drive.google.com/file/d/1AJhn4yNdzz4UBtNhB1-xsQtmPqqfMtRN/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="ec-nav-link inline-flex items-center gap-1">
         <span>Resume</span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true" focusable="false"><path d="M7 17 17 7M7 7h10v10"/></svg>
       </a>
@@ -91,7 +91,7 @@
         <a href="/projects/" class="py-2 hover:text-[var(--accent-primary)] text-[var(--accent-primary)]" aria-current="page">Projects</a>
         <a href="/blogs/" class="py-2 hover:text-[var(--accent-primary)] " >Blogs</a>
         <a href="/gallery/" class="py-2 hover:text-[var(--accent-primary)] " >Gallery</a>
-        <a href="https://drive.google.com/file/d/1AFSSzhv9SuvjyP-Am3ukRk6_0hB40fKG/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="py-2 hover:text-[var(--accent-primary)] inline-flex items-center gap-1.5">
+        <a href="https://drive.google.com/file/d/1AJhn4yNdzz4UBtNhB1-xsQtmPqqfMtRN/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="py-2 hover:text-[var(--accent-primary)] inline-flex items-center gap-1.5">
           <span>Resume</span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4" aria-hidden="true" focusable="false"><path d="M7 17 17 7M7 7h10v10"/></svg>
         </a>
@@ -311,6 +311,19 @@
             <button
               type="button"
               role="option"
+              data-search-tag="developer-tools"
+              data-search-tag-label="Developer Tools"
+              aria-selected="false"
+              class="ec-topic-option"
+            >
+              <span class="ec-topic-checkbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg></span>
+              <span class="flex-1 text-left truncate">Developer Tools</span>
+              <span class="ec-chip-count font-mono">1</span>
+            </button>
+          
+            <button
+              type="button"
+              role="option"
               data-search-tag="django"
               data-search-tag-label="Django"
               aria-selected="false"
@@ -519,6 +532,19 @@
             <button
               type="button"
               role="option"
+              data-search-tag="static-analysis"
+              data-search-tag-label="Static Analysis"
+              aria-selected="false"
+              class="ec-topic-option"
+            >
+              <span class="ec-topic-checkbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg></span>
+              <span class="flex-1 text-left truncate">Static Analysis</span>
+              <span class="ec-chip-count font-mono">1</span>
+            </button>
+          
+            <button
+              type="button"
+              role="option"
               data-search-tag="tailwind"
               data-search-tag-label="Tailwind"
               aria-selected="false"
@@ -539,6 +565,32 @@
             >
               <span class="ec-topic-checkbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg></span>
               <span class="flex-1 text-left truncate">Transformers</span>
+              <span class="ec-chip-count font-mono">1</span>
+            </button>
+          
+            <button
+              type="button"
+              role="option"
+              data-search-tag="typescript"
+              data-search-tag-label="TypeScript"
+              aria-selected="false"
+              class="ec-topic-option"
+            >
+              <span class="ec-topic-checkbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg></span>
+              <span class="flex-1 text-left truncate">TypeScript</span>
+              <span class="ec-chip-count font-mono">1</span>
+            </button>
+          
+            <button
+              type="button"
+              role="option"
+              data-search-tag="vs-code-extension"
+              data-search-tag-label="VS Code Extension"
+              aria-selected="false"
+              class="ec-topic-option"
+            >
+              <span class="ec-topic-checkbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg></span>
+              <span class="flex-1 text-left truncate">VS Code Extension</span>
               <span class="ec-chip-count font-mono">1</span>
             </button>
           
@@ -582,6 +634,71 @@
 
 
   <div data-search-results class="grid md:grid-cols-2 gap-8">
+    
+      <article data-inline-card="/project/rec-calls/" class="ec-card ec-card-interactive overflow-hidden flex flex-col">
+        
+          <a href="/project/rec-calls/" class="block bg-[var(--bg-surface)] border-b border-[var(--border-subtle)]">
+            <img src="/assets/images/rec-calls-cover.webp" alt="Recalls: Recursive Method Call Analysis for VS Code"
+                 loading="lazy" class="w-full h-52 object-cover">
+          </a>
+        
+
+        <div class="p-6 md:p-7 flex flex-col justify-between flex-1">
+          <div>
+            <div class="flex items-center justify-between gap-3 mb-2">
+              <span class="font-mono text-xs uppercase tracking-wider text-[var(--accent-secondary)]">
+                Sep 2025 — Sep 2025
+              </span>
+              
+                <a href="https://github.com/pegasus-lynx/rec-calls" target="_blank" rel="noopener noreferrer"
+                   aria-label="Source code for Recalls: Recursive Method Call Analysis for VS Code"
+                   class="inline-flex items-center gap-1 font-mono text-xs text-[var(--text-muted)] hover:text-[var(--accent-primary)]">
+                  <span>Source</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true" focusable="false"><path d="M7 17 17 7M7 7h10v10"/></svg>
+                </a>
+              
+            </div>
+
+            <h2 class="font-display text-2xl font-bold leading-snug mb-2.5">
+              <a href="/project/rec-calls/" class="hover:text-[var(--accent-primary)] transition-colors">
+                Recalls: Recursive Method Call Analysis for VS Code
+              </a>
+            </h2>
+
+            <p class="text-[var(--text-secondary)] text-sm md:text-base leading-relaxed mb-5">
+              A VS Code extension for recursive method-call tracking and symbol navigation across a workspace, backed by a background-indexed reference cache.
+            </p>
+          </div>
+
+          
+          
+          
+          
+<div data-tag-list class="flex flex-wrap gap-1.5 pt-4 border-t border-[var(--border-subtle)]">
+  
+    
+  
+    
+      <a href="/projects/?tag=typescript" data-tag-item data-tag-slug="typescript" class="ec-chip">TypeScript</a>
+    
+  
+    
+      <a href="/projects/?tag=vs-code-extension" data-tag-item data-tag-slug="vs-code-extension" class="ec-chip">VS Code Extension</a>
+    
+  
+    
+      <a href="/projects/?tag=static-analysis" data-tag-item data-tag-slug="static-analysis" class="ec-chip">Static Analysis</a>
+    
+  
+    
+      <a href="/projects/?tag=developer-tools" data-tag-item data-tag-slug="developer-tools" class="ec-chip">Developer Tools</a>
+    
+  
+  <span data-tag-more class="ec-chip ec-chip-more" hidden></span>
+</div>
+
+        </div>
+      </article>
     
       <article data-inline-card="/project/personal-webapp/" class="ec-card ec-card-interactive overflow-hidden flex flex-col">
         
