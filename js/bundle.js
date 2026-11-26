@@ -195,10 +195,104 @@
     );
     sections.forEach((sec) => observer.observe(sec));
   }
+  function computeCarouselIndex(trackCenter, slideCenters) {
+    if (!Array.isArray(slideCenters) || slideCenters.length === 0) return 0;
+    let bestIndex = 0;
+    let bestDistance = Infinity;
+    for (let i = 0; i < slideCenters.length; i += 1) {
+      const distance = Math.abs(slideCenters[i] - trackCenter);
+      if (distance < bestDistance) {
+        bestDistance = distance;
+        bestIndex = i;
+      }
+    }
+    return bestIndex;
+  }
+  function computeCarouselDotWindow(activeIndex, total, maxVisible = 7) {
+    if (total <= 0) return { start: 0, end: -1 };
+    if (total <= maxVisible) return { start: 0, end: total - 1 };
+    const half = Math.floor(maxVisible / 2);
+    const start = Math.max(0, Math.min(total - maxVisible, activeIndex - half));
+    return { start, end: start + maxVisible - 1 };
+  }
+  function initMobileCarousels() {
+    const carousels = Array.from(document.querySelectorAll("[data-carousel]"));
+    if (!carousels.length) return;
+    const prefersReducedMotion = () => Boolean(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+    carousels.forEach((root) => {
+      const track = root.querySelector("[data-carousel-track]");
+      const slides = track ? Array.from(track.querySelectorAll("[data-carousel-slide]")) : [];
+      if (!track || !slides.length) return;
+      const dotsTrack = root.querySelector("[data-carousel-dots]");
+      const dots = Array.from(root.querySelectorAll("[data-carousel-dot]"));
+      let activeIndex = 0;
+      let ticking = false;
+      const syncState = () => {
+        const trackCenter = track.scrollLeft + track.clientWidth / 2;
+        const slideCenters = slides.map((s) => s.offsetLeft + s.offsetWidth / 2);
+        activeIndex = computeCarouselIndex(trackCenter, slideCenters);
+        if (dots.length) {
+          const maxVisible = 7;
+          const dotPitch = 14;
+          const { start, end } = computeCarouselDotWindow(activeIndex, dots.length, maxVisible);
+          if (dotsTrack && dots.length > maxVisible) {
+            dotsTrack.style.transform = `translateX(-${start * dotPitch}px)`;
+          }
+          dots.forEach((dot, idx) => {
+            const isActive = idx === activeIndex;
+            const isEdge = !isActive && dots.length > maxVisible && (idx === start && start > 0 || idx === end && end < dots.length - 1);
+            dot.classList.toggle("is-active", isActive);
+            dot.classList.toggle("is-edge", isEdge);
+            dot.setAttribute("aria-current", isActive ? "true" : "false");
+          });
+        }
+      };
+      const scrollToSlide = (index) => {
+        const clamped = Math.max(0, Math.min(slides.length - 1, index));
+        const target = slides[clamped];
+        if (!target) return;
+        const left = Math.max(
+          0,
+          target.offsetLeft - (track.clientWidth - target.offsetWidth) / 2
+        );
+        track.scrollTo({
+          left,
+          behavior: prefersReducedMotion() ? "auto" : "smooth"
+        });
+      };
+      dots.forEach((dot, idx) => {
+        dot.addEventListener("click", () => scrollToSlide(idx));
+      });
+      root.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowLeft") {
+          e.preventDefault();
+          scrollToSlide(activeIndex - 1);
+        } else if (e.key === "ArrowRight") {
+          e.preventDefault();
+          scrollToSlide(activeIndex + 1);
+        }
+      });
+      track.addEventListener(
+        "scroll",
+        () => {
+          if (ticking) return;
+          ticking = true;
+          window.requestAnimationFrame(() => {
+            syncState();
+            ticking = false;
+          });
+        },
+        { passive: true }
+      );
+      window.addEventListener("resize", syncState, { passive: true });
+      syncState();
+    });
+  }
   if (typeof document !== "undefined") {
     document.addEventListener("DOMContentLoaded", () => {
       syncThemeIcons();
       initSmartNavbar();
+      initMobileCarousels();
       initArticleReader();
       initHomeScrollSpy();
       document.addEventListener("keydown", (e) => {
@@ -212,6 +306,9 @@
     copyPageUrl,
     updateNavbarScrollState,
     initSmartNavbar,
+    computeCarouselIndex,
+    computeCarouselDotWindow,
+    initMobileCarousels,
     initArticleReader,
     initHomeScrollSpy
   };
