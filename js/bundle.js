@@ -288,10 +288,118 @@
       syncState();
     });
   }
+  function countChipLines(tops, tolerance = 2) {
+    if (!Array.isArray(tops) || tops.length === 0) return 0;
+    let lines = 1;
+    let currentTop = tops[0];
+    for (let i = 1; i < tops.length; i++) {
+      if (Math.abs(tops[i] - currentTop) > tolerance) {
+        lines += 1;
+        currentTop = tops[i];
+      }
+    }
+    return lines;
+  }
+  function fitTagList(container, maxLines = 2) {
+    if (!container) return { visibleCount: 0, hiddenCount: 0 };
+    const items = Array.from(container.querySelectorAll("[data-tag-item]"));
+    const moreChip = container.querySelector("[data-tag-more]");
+    if (!items.length || !moreChip) {
+      return { visibleCount: items.length, hiddenCount: 0 };
+    }
+    items.forEach((item) => {
+      item.hidden = false;
+    });
+    moreChip.hidden = true;
+    moreChip.textContent = "";
+    moreChip.removeAttribute("title");
+    moreChip.removeAttribute("aria-label");
+    if (container.clientWidth === 0) {
+      return { visibleCount: items.length, hiddenCount: 0 };
+    }
+    const allTops = items.map((item) => item.offsetTop);
+    if (countChipLines(allTops) <= maxLines) {
+      return { visibleCount: items.length, hiddenCount: 0 };
+    }
+    let lines = 1;
+    let currentTop = allTops[0];
+    let visibleCount = items.length;
+    for (let i = 1; i < allTops.length; i++) {
+      if (Math.abs(allTops[i] - currentTop) > 2) {
+        lines += 1;
+        currentTop = allTops[i];
+        if (lines > maxLines) {
+          visibleCount = i;
+          break;
+        }
+      }
+    }
+    for (let i = visibleCount; i < items.length; i++) {
+      items[i].hidden = true;
+    }
+    moreChip.hidden = false;
+    while (visibleCount > 1) {
+      const hiddenCount2 = items.length - visibleCount;
+      moreChip.textContent = `+${hiddenCount2}`;
+      const currentTops = [];
+      for (let i = 0; i < visibleCount; i++) {
+        currentTops.push(items[i].offsetTop);
+      }
+      currentTops.push(moreChip.offsetTop);
+      if (countChipLines(currentTops) <= maxLines) {
+        break;
+      }
+      visibleCount -= 1;
+      items[visibleCount].hidden = true;
+    }
+    const hiddenItems = items.slice(visibleCount);
+    const hiddenNames = hiddenItems.map((el) => el.textContent.trim()).filter(Boolean);
+    const hiddenCount = hiddenItems.length;
+    moreChip.textContent = `+${hiddenCount}`;
+    if (hiddenNames.length) {
+      const summary = hiddenNames.join(", ");
+      moreChip.title = summary;
+      moreChip.setAttribute(
+        "aria-label",
+        `${hiddenCount} more ${hiddenCount === 1 ? "tag" : "tags"}: ${summary}`
+      );
+    }
+    return { visibleCount, hiddenCount };
+  }
+  function initCardTagOverflow() {
+    const lists = Array.from(document.querySelectorAll("[data-tag-list]"));
+    if (!lists.length) return;
+    const lastWidths = /* @__PURE__ */ new WeakMap();
+    const updateList = (list, force = false) => {
+      const width = list.clientWidth;
+      if (!force && lastWidths.get(list) === width) return;
+      lastWidths.set(list, width);
+      fitTagList(list, 2);
+    };
+    lists.forEach((list) => updateList(list, true));
+    if (typeof ResizeObserver !== "undefined") {
+      const observer = new ResizeObserver((entries) => {
+        entries.forEach((entry) => updateList(entry.target, false));
+      });
+      lists.forEach((list) => observer.observe(list));
+    } else {
+      window.addEventListener(
+        "resize",
+        () => lists.forEach((list) => updateList(list, false)),
+        { passive: true }
+      );
+    }
+    if (document.fonts && typeof document.fonts.ready?.then === "function") {
+      document.fonts.ready.then(() => {
+        lists.forEach((list) => updateList(list, true));
+      });
+    }
+  }
   if (typeof document !== "undefined") {
     document.addEventListener("DOMContentLoaded", () => {
       syncThemeIcons();
       initSmartNavbar();
+      initCardTagOverflow();
       initMobileCarousels();
       initArticleReader();
       initHomeScrollSpy();
@@ -309,6 +417,9 @@
     computeCarouselIndex,
     computeCarouselDotWindow,
     initMobileCarousels,
+    countChipLines,
+    fitTagList,
+    initCardTagOverflow,
     initArticleReader,
     initHomeScrollSpy
   };

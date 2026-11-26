@@ -146,8 +146,8 @@
       <nav class="hidden lg:flex flex-col gap-1 mb-10" aria-label="Page sections">
         <a href="#about" data-spy-target="about" class="ec-spy-link is-active">01 · About</a>
         <a href="#experience" data-spy-target="experience" class="ec-spy-link">02 · Experience</a>
-        <a href="#skills" data-spy-target="skills" class="ec-spy-link">03 · Skills</a>
-        <a href="#projects" data-spy-target="projects" class="ec-spy-link">04 · Projects</a>
+        <a href="#projects" data-spy-target="projects" class="ec-spy-link">03 · Projects</a>
+        <a href="#skills" data-spy-target="skills" class="ec-spy-link">04 · Skills</a>
         <a href="#writing" data-spy-target="writing" class="ec-spy-link">05 · Writing</a>
       </nav>
 
@@ -187,7 +187,7 @@
     </aside>
 
     <!-- Right Scrolling Content Feed -->
-    <div class="lg:col-span-7 space-y-20">
+    <div class="lg:col-span-7 min-w-0 space-y-20">
 
       <!-- 01 About -->
       <section id="about" class="scroll-mt-24">
@@ -283,17 +283,391 @@
         </div>
       </section>
 
-      <!-- 03 Skills -->
-      <section id="skills" class="scroll-mt-24">
-        <div class="ec-kicker mb-2">03 · Toolkit</div>
-        <h2 class="font-display text-2xl sm:text-3xl font-bold mb-6">Skills &amp; Technologies</h2>
-        <div class="grid sm:grid-cols-2 gap-4">
+      <!-- 03 Selected Projects -->
+      <section id="projects" class="scroll-mt-24">
+        <div class="flex items-end justify-between gap-4 mb-6">
+          <div>
+            <div class="ec-kicker mb-2">03 · Selected Work</div>
+            <h2 class="font-display text-2xl sm:text-3xl font-bold">Featured Projects</h2>
+          </div>
+          <a href="/projects/" class="inline-flex items-center gap-1 font-mono text-xs uppercase tracking-wider text-[var(--accent-primary)] hover:underline underline-offset-4">
+            <span>All projects</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true" focusable="false"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+          </a>
+        </div>
+
+        
+        
           
-            <div class="ec-card p-5">
-              <h3 class="font-mono text-xs uppercase tracking-wider text-[var(--text-muted)] mb-3">
+            
+          
+            
+              
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+        
+          
+            
+              
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+        
+          
+            
+          
+            
+          
+            
+          
+            
+              
+            
+          
+            
+          
+            
+          
+            
+          
+        
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+              
+            
+          
+            
+          
+        
+
+        <div data-carousel aria-roledescription="carousel" aria-label="Featured projects">
+          <div data-carousel-track class="ec-mobile-carousel-track sm:space-y-5">
+            
+              <article data-carousel-slide class="ec-mobile-carousel-slide ec-card ec-card-interactive overflow-hidden flex flex-col sm:flex-row">
+                
+                  <a href="/project/mwe-bpe/" class="block sm:w-48 shrink-0 bg-[var(--bg-surface)]">
+                    <img src="/assets/images/mwe-bpe-tokenization-examples.webp" alt="BPE beyond Word Boundary: How NOT to use MWEs in NMT"
+                         loading="lazy" class="w-full h-44 sm:h-full object-cover">
+                  </a>
+                
+                <div class="p-6 flex flex-col justify-between flex-1">
+                  <div>
+                    <div class="flex items-center justify-between gap-2 mb-1.5">
+                      <span class="font-mono text-xs text-[var(--accent-secondary)]">
+                        Aug 2021 — May 2022
+                      </span>
+                      
+                        <a href="https://github.com/pegasus-lynx/mwe-bpe" target="_blank" rel="noopener noreferrer"
+                           aria-label="Source code for BPE beyond Word Boundary: How NOT to use MWEs in NMT"
+                           class="inline-flex items-center gap-1 text-xs font-mono text-[var(--text-muted)] hover:text-[var(--accent-primary)]">
+                          <span>GitHub</span>
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true" focusable="false"><path d="M7 17 17 7M7 7h10v10"/></svg>
+                        </a>
+                      
+                    </div>
+                    <h3 class="font-display text-xl font-bold leading-snug mb-2">
+                      <a href="/project/mwe-bpe/" class="hover:text-[var(--accent-primary)] transition-colors">
+                        BPE beyond Word Boundary: How NOT to use MWEs in NMT
+                      </a>
+                    </h3>
+                    <p class="text-sm text-[var(--text-secondary)] leading-relaxed mb-4">
+                      A research project to identify Multi-Word Expressions using Byte Pair Encoding.
+                    </p>
+                  </div>
+                  
+                  <div data-tag-list class="flex flex-wrap gap-1.5">
+  
+    
+  
+    
+      <a href="/tags/python/" data-tag-item class="ec-chip">Python</a>
+    
+  
+    
+      <a href="/tags/nlp/" data-tag-item class="ec-chip">NLP</a>
+    
+  
+    
+      <a href="/tags/multi-word-expressions/" data-tag-item class="ec-chip">Multi-Word Expressions</a>
+    
+  
+    
+      <a href="/tags/byte-pair-encoding/" data-tag-item class="ec-chip">Byte-Pair Encoding</a>
+    
+  
+    
+      <a href="/tags/pytorch/" data-tag-item class="ec-chip">PyTorch</a>
+    
+  
+    
+      <a href="/tags/transformers/" data-tag-item class="ec-chip">Transformers</a>
+    
+  
+  <span data-tag-more class="ec-chip ec-chip-more" hidden></span>
+</div>
+
+                </div>
+              </article>
+            
+              <article data-carousel-slide class="ec-mobile-carousel-slide ec-card ec-card-interactive overflow-hidden flex flex-col sm:flex-row">
+                
+                  <a href="/project/personal-webapp/" class="block sm:w-48 shrink-0 bg-[var(--bg-surface)]">
+                    <img src="/assets/images/personal-webapp.webp" alt="Dipesh Kumar&#39;s Webapp"
+                         loading="lazy" class="w-full h-44 sm:h-full object-cover">
+                  </a>
+                
+                <div class="p-6 flex flex-col justify-between flex-1">
+                  <div>
+                    <div class="flex items-center justify-between gap-2 mb-1.5">
+                      <span class="font-mono text-xs text-[var(--accent-secondary)]">
+                        Dec 2023 — Present
+                      </span>
+                      
+                        <a href="https://github.com/pegasus-lynx/pegasus-lynx.github.io" target="_blank" rel="noopener noreferrer"
+                           aria-label="Source code for Dipesh Kumar&#39;s Webapp"
+                           class="inline-flex items-center gap-1 text-xs font-mono text-[var(--text-muted)] hover:text-[var(--accent-primary)]">
+                          <span>GitHub</span>
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true" focusable="false"><path d="M7 17 17 7M7 7h10v10"/></svg>
+                        </a>
+                      
+                    </div>
+                    <h3 class="font-display text-xl font-bold leading-snug mb-2">
+                      <a href="/project/personal-webapp/" class="hover:text-[var(--accent-primary)] transition-colors">
+                        Dipesh Kumar&#39;s Webapp
+                      </a>
+                    </h3>
+                    <p class="text-sm text-[var(--text-secondary)] leading-relaxed mb-4">
+                      A personal blogging webapp for managing and sharing ideas and showcase my past projects.
+                    </p>
+                  </div>
+                  
+                  <div data-tag-list class="flex flex-wrap gap-1.5">
+  
+    
+  
+    
+      <a href="/tags/11ty/" data-tag-item class="ec-chip">11ty</a>
+    
+  
+    
+      <a href="/tags/tailwind/" data-tag-item class="ec-chip">Tailwind</a>
+    
+  
+    
+      <a href="/tags/nunjucks/" data-tag-item class="ec-chip">Nunjucks</a>
+    
+  
+    
+      <a href="/tags/markdown/" data-tag-item class="ec-chip">Markdown</a>
+    
+  
+  <span data-tag-more class="ec-chip ec-chip-more" hidden></span>
+</div>
+
+                </div>
+              </article>
+            
+              <article data-carousel-slide class="ec-mobile-carousel-slide ec-card ec-card-interactive overflow-hidden flex flex-col sm:flex-row">
+                
+                  <a href="/project/contour-rendering/" class="block sm:w-48 shrink-0 bg-[var(--bg-surface)]">
+                    <img src="/assets/images/contour-rendering.webp" alt="Contour Renderer"
+                         loading="lazy" class="w-full h-44 sm:h-full object-cover">
+                  </a>
+                
+                <div class="p-6 flex flex-col justify-between flex-1">
+                  <div>
+                    <div class="flex items-center justify-between gap-2 mb-1.5">
+                      <span class="font-mono text-xs text-[var(--accent-secondary)]">
+                        Mar 2019 — Apr 2019
+                      </span>
+                      
+                        <a href="https://github.com/pegasus-lynx/ContourRendering" target="_blank" rel="noopener noreferrer"
+                           aria-label="Source code for Contour Renderer"
+                           class="inline-flex items-center gap-1 text-xs font-mono text-[var(--text-muted)] hover:text-[var(--accent-primary)]">
+                          <span>GitHub</span>
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true" focusable="false"><path d="M7 17 17 7M7 7h10v10"/></svg>
+                        </a>
+                      
+                    </div>
+                    <h3 class="font-display text-xl font-bold leading-snug mb-2">
+                      <a href="/project/contour-rendering/" class="hover:text-[var(--accent-primary)] transition-colors">
+                        Contour Renderer
+                      </a>
+                    </h3>
+                    <p class="text-sm text-[var(--text-secondary)] leading-relaxed mb-4">
+                      A C++ application for visualing 2D contour maps as 3D models.
+                    </p>
+                  </div>
+                  
+                  <div data-tag-list class="flex flex-wrap gap-1.5">
+  
+    
+  
+    
+      <a href="/tags/c/" data-tag-item class="ec-chip">C++</a>
+    
+  
+    
+      <a href="/tags/opengl/" data-tag-item class="ec-chip">OpenGL</a>
+    
+  
+    
+      <a href="/tags/computer-graphics/" data-tag-item class="ec-chip">Computer Graphics</a>
+    
+  
+    
+      <a href="/tags/dynamic-programming/" data-tag-item class="ec-chip">Dynamic Programming</a>
+    
+  
+  <span data-tag-more class="ec-chip ec-chip-more" hidden></span>
+</div>
+
+                </div>
+              </article>
+            
+              <article data-carousel-slide class="ec-mobile-carousel-slide ec-card ec-card-interactive overflow-hidden flex flex-col sm:flex-row">
+                
+                  <a href="/project/hindi-data-crf-viterbi-analysis/" class="block sm:w-48 shrink-0 bg-[var(--bg-surface)]">
+                    <img src="/assets/images/crf-project-cover.webp" alt="Analysis of Hindi tagged data using CRF with Viterbi Decoding"
+                         loading="lazy" class="w-full h-44 sm:h-full object-cover">
+                  </a>
+                
+                <div class="p-6 flex flex-col justify-between flex-1">
+                  <div>
+                    <div class="flex items-center justify-between gap-2 mb-1.5">
+                      <span class="font-mono text-xs text-[var(--accent-secondary)]">
+                        Jan 2019 — Apr 2019
+                      </span>
+                      
+                        <a href="https://github.com/pegasus-lynx/Junk/tree/master/NLP" target="_blank" rel="noopener noreferrer"
+                           aria-label="Source code for Analysis of Hindi tagged data using CRF with Viterbi Decoding"
+                           class="inline-flex items-center gap-1 text-xs font-mono text-[var(--text-muted)] hover:text-[var(--accent-primary)]">
+                          <span>GitHub</span>
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true" focusable="false"><path d="M7 17 17 7M7 7h10v10"/></svg>
+                        </a>
+                      
+                    </div>
+                    <h3 class="font-display text-xl font-bold leading-snug mb-2">
+                      <a href="/project/hindi-data-crf-viterbi-analysis/" class="hover:text-[var(--accent-primary)] transition-colors">
+                        Analysis of Hindi tagged data using CRF with Viterbi Decoding
+                      </a>
+                    </h3>
+                    <p class="text-sm text-[var(--text-secondary)] leading-relaxed mb-4">
+                      A research project to analyze the results of using CRF with Viterbi decoding on Hindi tagged data.
+                    </p>
+                  </div>
+                  
+                  <div data-tag-list class="flex flex-wrap gap-1.5">
+  
+    
+  
+    
+      <a href="/tags/python/" data-tag-item class="ec-chip">Python</a>
+    
+  
+    
+      <a href="/tags/nlp/" data-tag-item class="ec-chip">NLP</a>
+    
+  
+    
+      <a href="/tags/crf/" data-tag-item class="ec-chip">CRF</a>
+    
+  
+    
+      <a href="/tags/nltk/" data-tag-item class="ec-chip">NLTK</a>
+    
+  
+    
+      <a href="/tags/ner/" data-tag-item class="ec-chip">NER</a>
+    
+  
+  <span data-tag-more class="ec-chip ec-chip-more" hidden></span>
+</div>
+
+                </div>
+              </article>
+            
+          </div>
+          
+          
+<div class="flex sm:hidden items-center justify-center mt-4">
+  <div data-carousel-dots-viewport
+       class="ec-carousel-dots-viewport">
+    <div data-carousel-dots class="ec-carousel-dots">
+      
+        <button type="button"
+                data-carousel-dot="0"
+                aria-label="Go to slide 1"
+                aria-current="true"
+                class="ec-carousel-dot is-active"></button>
+      
+        <button type="button"
+                data-carousel-dot="1"
+                aria-label="Go to slide 2"
+                aria-current="false"
+                class="ec-carousel-dot"></button>
+      
+        <button type="button"
+                data-carousel-dot="2"
+                aria-label="Go to slide 3"
+                aria-current="false"
+                class="ec-carousel-dot"></button>
+      
+        <button type="button"
+                data-carousel-dot="3"
+                aria-label="Go to slide 4"
+                aria-current="false"
+                class="ec-carousel-dot"></button>
+      
+    </div>
+  </div>
+</div>
+
+        </div>
+      </section>
+
+      <!-- 04 Skills -->
+      <section id="skills" class="scroll-mt-24">
+        <div class="ec-kicker mb-2">04 · Toolkit</div>
+        <h2 class="font-display text-2xl sm:text-3xl font-bold mb-6">Skills &amp; Technologies</h2>
+        <div class="ec-card divide-y divide-[var(--border-subtle)]">
+          
+            <div class="px-5 py-4 sm:grid sm:grid-cols-[9.5rem_1fr] sm:gap-4 sm:items-baseline">
+              <h3 class="font-mono text-xs uppercase tracking-wider text-[var(--text-muted)] mb-2 sm:mb-0">
                 Languages
               </h3>
-              <div class="flex flex-wrap gap-2">
+              <div class="flex flex-wrap gap-1.5">
                 
                   <span class="ec-chip">C#</span>
                 
@@ -312,11 +686,11 @@
               </div>
             </div>
           
-            <div class="ec-card p-5">
-              <h3 class="font-mono text-xs uppercase tracking-wider text-[var(--text-muted)] mb-3">
+            <div class="px-5 py-4 sm:grid sm:grid-cols-[9.5rem_1fr] sm:gap-4 sm:items-baseline">
+              <h3 class="font-mono text-xs uppercase tracking-wider text-[var(--text-muted)] mb-2 sm:mb-0">
                 Desktop &amp; Systems
               </h3>
-              <div class="flex flex-wrap gap-2">
+              <div class="flex flex-wrap gap-1.5">
                 
                   <span class="ec-chip">WPF</span>
                 
@@ -331,11 +705,11 @@
               </div>
             </div>
           
-            <div class="ec-card p-5">
-              <h3 class="font-mono text-xs uppercase tracking-wider text-[var(--text-muted)] mb-3">
+            <div class="px-5 py-4 sm:grid sm:grid-cols-[9.5rem_1fr] sm:gap-4 sm:items-baseline">
+              <h3 class="font-mono text-xs uppercase tracking-wider text-[var(--text-muted)] mb-2 sm:mb-0">
                 Web &amp; Backend
               </h3>
-              <div class="flex flex-wrap gap-2">
+              <div class="flex flex-wrap gap-1.5">
                 
                   <span class="ec-chip">11ty (Eleventy)</span>
                 
@@ -354,11 +728,11 @@
               </div>
             </div>
           
-            <div class="ec-card p-5">
-              <h3 class="font-mono text-xs uppercase tracking-wider text-[var(--text-muted)] mb-3">
+            <div class="px-5 py-4 sm:grid sm:grid-cols-[9.5rem_1fr] sm:gap-4 sm:items-baseline">
+              <h3 class="font-mono text-xs uppercase tracking-wider text-[var(--text-muted)] mb-2 sm:mb-0">
                 ML, NLP &amp; Graphics
               </h3>
-              <div class="flex flex-wrap gap-2">
+              <div class="flex flex-wrap gap-1.5">
                 
                   <span class="ec-chip">PyTorch</span>
                 
@@ -370,320 +744,6 @@
                 
               </div>
             </div>
-          
-        </div>
-      </section>
-
-      <!-- 04 Selected Projects -->
-      <section id="projects" class="scroll-mt-24">
-        <div class="flex items-end justify-between gap-4 mb-6">
-          <div>
-            <div class="ec-kicker mb-2">04 · Selected Work</div>
-            <h2 class="font-display text-2xl sm:text-3xl font-bold">Featured Projects</h2>
-          </div>
-          <a href="/projects/" class="inline-flex items-center gap-1 font-mono text-xs uppercase tracking-wider text-[var(--accent-primary)] hover:underline underline-offset-4">
-            <span>All projects</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true" focusable="false"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
-          </a>
-        </div>
-
-        <div class="space-y-5">
-          
-            
-              
-            
-              
-                <article class="ec-card ec-card-interactive overflow-hidden sm:flex">
-                  
-                    <a href="/project/mwe-bpe/" class="block sm:w-48 shrink-0 bg-[var(--bg-surface)]">
-                      <img src="/assets/images/mwe-bpe-tokenization-examples.webp" alt="BPE beyond Word Boundary: How NOT to use MWEs in NMT"
-                           loading="lazy" class="w-full h-44 sm:h-full object-cover">
-                    </a>
-                  
-                  <div class="p-6 flex flex-col justify-between flex-1">
-                    <div>
-                      <div class="flex items-center justify-between gap-2 mb-1.5">
-                        <span class="font-mono text-xs text-[var(--accent-secondary)]">
-                          Aug 2021 — May 2022
-                        </span>
-                        
-                          <a href="https://github.com/pegasus-lynx/mwe-bpe" target="_blank" rel="noopener noreferrer"
-                             aria-label="Source code for BPE beyond Word Boundary: How NOT to use MWEs in NMT"
-                             class="inline-flex items-center gap-1 text-xs font-mono text-[var(--text-muted)] hover:text-[var(--accent-primary)]">
-                            <span>GitHub</span>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true" focusable="false"><path d="M7 17 17 7M7 7h10v10"/></svg>
-                          </a>
-                        
-                      </div>
-                      <h3 class="font-display text-xl font-bold leading-snug mb-2">
-                        <a href="/project/mwe-bpe/" class="hover:text-[var(--accent-primary)] transition-colors">
-                          BPE beyond Word Boundary: How NOT to use MWEs in NMT
-                        </a>
-                      </h3>
-                      <p class="text-sm text-[var(--text-secondary)] leading-relaxed mb-4">
-                        A research project to identify Multi-Word Expressions using Byte Pair Encoding.
-                      </p>
-                    </div>
-                    <div class="flex flex-wrap gap-1.5">
-                      
-                        
-                      
-                        
-                          <a href="/tags/python/" class="ec-chip">Python</a>
-                        
-                      
-                        
-                          <a href="/tags/nlp/" class="ec-chip">NLP</a>
-                        
-                      
-                        
-                          <a href="/tags/multi-word-expressions/" class="ec-chip">Multi-Word Expressions</a>
-                        
-                      
-                        
-                          <a href="/tags/byte-pair-encoding/" class="ec-chip">Byte-Pair Encoding</a>
-                        
-                      
-                        
-                          <a href="/tags/pytorch/" class="ec-chip">PyTorch</a>
-                        
-                      
-                        
-                          <a href="/tags/transformers/" class="ec-chip">Transformers</a>
-                        
-                      
-                    </div>
-                  </div>
-                </article>
-              
-            
-              
-            
-              
-            
-              
-            
-              
-            
-              
-            
-          
-            
-              
-                <article class="ec-card ec-card-interactive overflow-hidden sm:flex">
-                  
-                    <a href="/project/personal-webapp/" class="block sm:w-48 shrink-0 bg-[var(--bg-surface)]">
-                      <img src="/assets/images/personal-webapp.webp" alt="Dipesh Kumar&#39;s Webapp"
-                           loading="lazy" class="w-full h-44 sm:h-full object-cover">
-                    </a>
-                  
-                  <div class="p-6 flex flex-col justify-between flex-1">
-                    <div>
-                      <div class="flex items-center justify-between gap-2 mb-1.5">
-                        <span class="font-mono text-xs text-[var(--accent-secondary)]">
-                          Dec 2023 — Present
-                        </span>
-                        
-                          <a href="https://github.com/pegasus-lynx/pegasus-lynx.github.io" target="_blank" rel="noopener noreferrer"
-                             aria-label="Source code for Dipesh Kumar&#39;s Webapp"
-                             class="inline-flex items-center gap-1 text-xs font-mono text-[var(--text-muted)] hover:text-[var(--accent-primary)]">
-                            <span>GitHub</span>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true" focusable="false"><path d="M7 17 17 7M7 7h10v10"/></svg>
-                          </a>
-                        
-                      </div>
-                      <h3 class="font-display text-xl font-bold leading-snug mb-2">
-                        <a href="/project/personal-webapp/" class="hover:text-[var(--accent-primary)] transition-colors">
-                          Dipesh Kumar&#39;s Webapp
-                        </a>
-                      </h3>
-                      <p class="text-sm text-[var(--text-secondary)] leading-relaxed mb-4">
-                        A personal blogging webapp for managing and sharing ideas and showcase my past projects.
-                      </p>
-                    </div>
-                    <div class="flex flex-wrap gap-1.5">
-                      
-                        
-                      
-                        
-                          <a href="/tags/11ty/" class="ec-chip">11ty</a>
-                        
-                      
-                        
-                          <a href="/tags/tailwind/" class="ec-chip">Tailwind</a>
-                        
-                      
-                        
-                          <a href="/tags/nunjucks/" class="ec-chip">Nunjucks</a>
-                        
-                      
-                        
-                          <a href="/tags/markdown/" class="ec-chip">Markdown</a>
-                        
-                      
-                    </div>
-                  </div>
-                </article>
-              
-            
-              
-            
-              
-            
-              
-            
-              
-            
-              
-            
-              
-            
-          
-            
-              
-            
-              
-            
-              
-            
-              
-                <article class="ec-card ec-card-interactive overflow-hidden sm:flex">
-                  
-                    <a href="/project/contour-rendering/" class="block sm:w-48 shrink-0 bg-[var(--bg-surface)]">
-                      <img src="/assets/images/contour-rendering.webp" alt="Contour Renderer"
-                           loading="lazy" class="w-full h-44 sm:h-full object-cover">
-                    </a>
-                  
-                  <div class="p-6 flex flex-col justify-between flex-1">
-                    <div>
-                      <div class="flex items-center justify-between gap-2 mb-1.5">
-                        <span class="font-mono text-xs text-[var(--accent-secondary)]">
-                          Mar 2019 — Apr 2019
-                        </span>
-                        
-                          <a href="https://github.com/pegasus-lynx/ContourRendering" target="_blank" rel="noopener noreferrer"
-                             aria-label="Source code for Contour Renderer"
-                             class="inline-flex items-center gap-1 text-xs font-mono text-[var(--text-muted)] hover:text-[var(--accent-primary)]">
-                            <span>GitHub</span>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true" focusable="false"><path d="M7 17 17 7M7 7h10v10"/></svg>
-                          </a>
-                        
-                      </div>
-                      <h3 class="font-display text-xl font-bold leading-snug mb-2">
-                        <a href="/project/contour-rendering/" class="hover:text-[var(--accent-primary)] transition-colors">
-                          Contour Renderer
-                        </a>
-                      </h3>
-                      <p class="text-sm text-[var(--text-secondary)] leading-relaxed mb-4">
-                        A C++ application for visualing 2D contour maps as 3D models.
-                      </p>
-                    </div>
-                    <div class="flex flex-wrap gap-1.5">
-                      
-                        
-                      
-                        
-                          <a href="/tags/c/" class="ec-chip">C++</a>
-                        
-                      
-                        
-                          <a href="/tags/opengl/" class="ec-chip">OpenGL</a>
-                        
-                      
-                        
-                          <a href="/tags/computer-graphics/" class="ec-chip">Computer Graphics</a>
-                        
-                      
-                        
-                          <a href="/tags/dynamic-programming/" class="ec-chip">Dynamic Programming</a>
-                        
-                      
-                    </div>
-                  </div>
-                </article>
-              
-            
-              
-            
-              
-            
-              
-            
-          
-            
-              
-            
-              
-            
-              
-            
-              
-            
-              
-            
-              
-                <article class="ec-card ec-card-interactive overflow-hidden sm:flex">
-                  
-                    <a href="/project/hindi-data-crf-viterbi-analysis/" class="block sm:w-48 shrink-0 bg-[var(--bg-surface)]">
-                      <img src="/assets/images/crf-project-cover.webp" alt="Analysis of Hindi tagged data using CRF with Viterbi Decoding"
-                           loading="lazy" class="w-full h-44 sm:h-full object-cover">
-                    </a>
-                  
-                  <div class="p-6 flex flex-col justify-between flex-1">
-                    <div>
-                      <div class="flex items-center justify-between gap-2 mb-1.5">
-                        <span class="font-mono text-xs text-[var(--accent-secondary)]">
-                          Jan 2019 — Apr 2019
-                        </span>
-                        
-                          <a href="https://github.com/pegasus-lynx/Junk/tree/master/NLP" target="_blank" rel="noopener noreferrer"
-                             aria-label="Source code for Analysis of Hindi tagged data using CRF with Viterbi Decoding"
-                             class="inline-flex items-center gap-1 text-xs font-mono text-[var(--text-muted)] hover:text-[var(--accent-primary)]">
-                            <span>GitHub</span>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true" focusable="false"><path d="M7 17 17 7M7 7h10v10"/></svg>
-                          </a>
-                        
-                      </div>
-                      <h3 class="font-display text-xl font-bold leading-snug mb-2">
-                        <a href="/project/hindi-data-crf-viterbi-analysis/" class="hover:text-[var(--accent-primary)] transition-colors">
-                          Analysis of Hindi tagged data using CRF with Viterbi Decoding
-                        </a>
-                      </h3>
-                      <p class="text-sm text-[var(--text-secondary)] leading-relaxed mb-4">
-                        A research project to analyze the results of using CRF with Viterbi decoding on Hindi tagged data.
-                      </p>
-                    </div>
-                    <div class="flex flex-wrap gap-1.5">
-                      
-                        
-                      
-                        
-                          <a href="/tags/python/" class="ec-chip">Python</a>
-                        
-                      
-                        
-                          <a href="/tags/nlp/" class="ec-chip">NLP</a>
-                        
-                      
-                        
-                          <a href="/tags/crf/" class="ec-chip">CRF</a>
-                        
-                      
-                        
-                          <a href="/tags/nltk/" class="ec-chip">NLTK</a>
-                        
-                      
-                        
-                          <a href="/tags/ner/" class="ec-chip">NER</a>
-                        
-                      
-                    </div>
-                  </div>
-                </article>
-              
-            
-              
-            
           
         </div>
       </section>
@@ -716,19 +776,22 @@
                 <p class="text-sm text-[var(--text-secondary)] leading-relaxed mb-4">
                   How is it working with 11ty alongside Tailwind ?
                 </p>
-                <div class="flex flex-wrap gap-1.5">
-                  
-                    
-                  
-                    
-                      <a href="/tags/11ty/" class="ec-chip">11ty</a>
-                    
-                  
-                    
-                      <a href="/tags/tailwind/" class="ec-chip">Tailwind</a>
-                    
-                  
-                </div>
+                
+                <div data-tag-list class="flex flex-wrap gap-1.5">
+  
+    
+  
+    
+      <a href="/tags/11ty/" data-tag-item class="ec-chip">11ty</a>
+    
+  
+    
+      <a href="/tags/tailwind/" data-tag-item class="ec-chip">Tailwind</a>
+    
+  
+  <span data-tag-more class="ec-chip ec-chip-more" hidden></span>
+</div>
+
               </article>
             
           
@@ -745,19 +808,22 @@
                 <p class="text-sm text-[var(--text-secondary)] leading-relaxed mb-4">
                   How would you like to know the small steps that can get you organized for life?
                 </p>
-                <div class="flex flex-wrap gap-1.5">
-                  
-                    
-                  
-                    
-                      <a href="/tags/organization/" class="ec-chip">Organization</a>
-                    
-                  
-                    
-                      <a href="/tags/book-summary/" class="ec-chip">Book Summary</a>
-                    
-                  
-                </div>
+                
+                <div data-tag-list class="flex flex-wrap gap-1.5">
+  
+    
+  
+    
+      <a href="/tags/organization/" data-tag-item class="ec-chip">Organization</a>
+    
+  
+    
+      <a href="/tags/book-summary/" data-tag-item class="ec-chip">Book Summary</a>
+    
+  
+  <span data-tag-more class="ec-chip ec-chip-more" hidden></span>
+</div>
+
               </article>
             
           
