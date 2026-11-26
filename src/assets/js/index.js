@@ -24,6 +24,71 @@ function toggleMobileMenu(forceClose = false) {
   } else {
     menu.classList.toggle("hidden");
   }
+  if (!menu.classList.contains("hidden")) {
+    const header = document.querySelector("#site-header");
+    if (header) header.classList.remove("ec-navbar-hidden");
+  }
+}
+
+function updateNavbarScrollState({
+  header,
+  mobileMenu,
+  currentY,
+  lastY,
+  activeElement = null,
+  threshold = 8,
+  topOffset = 64,
+}) {
+  if (!header) return currentY;
+  const clampedY = Math.max(0, currentY);
+  const menuOpen = Boolean(mobileMenu && !mobileMenu.classList.contains("hidden"));
+  const focusInside = Boolean(activeElement && header.contains(activeElement));
+
+  if (clampedY <= topOffset || menuOpen || focusInside) {
+    header.classList.remove("ec-navbar-hidden");
+    return clampedY;
+  }
+
+  const delta = clampedY - lastY;
+  if (Math.abs(delta) < threshold) {
+    return lastY;
+  }
+
+  if (delta >= threshold) {
+    header.classList.add("ec-navbar-hidden");
+  } else if (delta <= -threshold) {
+    header.classList.remove("ec-navbar-hidden");
+  }
+
+  return clampedY;
+}
+
+function initSmartNavbar() {
+  const header = document.querySelector("#site-header");
+  if (!header) return;
+  const mobileMenu = document.querySelector("#mobile-nav-menu");
+  let lastY = Math.max(0, window.scrollY || 0);
+  let ticking = false;
+
+  const onScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(() => {
+      lastY = updateNavbarScrollState({
+        header,
+        mobileMenu,
+        currentY: window.scrollY || 0,
+        lastY,
+        activeElement: document.activeElement,
+      });
+      ticking = false;
+    });
+  };
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+  header.addEventListener("focusin", () => {
+    header.classList.remove("ec-navbar-hidden");
+  });
 }
 
 async function copyPageUrl(buttonEl) {
@@ -155,19 +220,24 @@ function initHomeScrollSpy() {
   sections.forEach((sec) => observer.observe(sec));
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  syncThemeIcons();
-  initArticleReader();
-  initHomeScrollSpy();
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") toggleMobileMenu(true);
+if (typeof document !== "undefined") {
+  document.addEventListener("DOMContentLoaded", () => {
+    syncThemeIcons();
+    initSmartNavbar();
+    initArticleReader();
+    initHomeScrollSpy();
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") toggleMobileMenu(true);
+    });
   });
-});
+}
 
 globalThis.App = {
   toggleTheme,
   toggleMobileMenu,
   copyPageUrl,
+  updateNavbarScrollState,
+  initSmartNavbar,
   initArticleReader,
   initHomeScrollSpy,
 };
