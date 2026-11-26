@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> | Dipesh Kumar — Software Engineer</title>
-    <meta name="description" content="I craft modern desktop frameworks in the Windows ecosystem (WPF &amp; WinUI) that ship with the .NET SDK, while exploring distributed systems, language models, and visual design.">
+    <title>Search | Dipesh Kumar — Software Engineer</title>
+    <meta name="description" content="Search projects, case studies, and essays by keyword or topic.">
 
     <script>
       (function () {
@@ -120,82 +120,372 @@
   </div>
 </div>
     <div id="main-content" class="flex-1">
-        <main class="max-w-4xl mx-auto px-6 md:px-10 py-12 md:py-16">
-  <header class="mb-10">
-    <div class="flex items-center gap-4 mb-4 font-mono text-xs uppercase tracking-wider">
-      <a href="/projects/" class="inline-flex items-center gap-1 text-[var(--accent-primary)] hover:underline underline-offset-4">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5" aria-hidden="true" focusable="false"><path d="m12 19-7-7 7-7M19 12H5"/></svg>
-        <span>Projects</span>
-      </a>
-      <span class="text-[var(--text-muted)]">·</span>
-      <a href="/blogs/" class="text-[var(--accent-primary)] hover:underline underline-offset-4">Essays</a>
-    </div>
-    <div class="ec-kicker mb-2">1 Entry</div>
-    <h1 class="font-display text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight">
-      Tagged “Multi-Word Expressions”
+        <main class="max-w-4xl mx-auto px-6 md:px-10 py-12 md:py-16" data-search-root>
+  <header class="mb-8">
+    <div class="ec-kicker mb-2">Search &amp; Topics</div>
+    <h1 class="font-display text-4xl md:text-5xl font-bold tracking-tight mb-3">
+      Search
     </h1>
+    <p class="text-lg text-[var(--text-secondary)] max-w-2xl leading-relaxed">
+      Find projects, case studies, and essays by keyword or topic.
+    </p>
   </header>
 
-  <div class="space-y-5">
-    
-      
-      <article class="ec-card ec-card-interactive p-6">
-        <div class="flex items-center gap-2 font-mono text-xs uppercase tracking-wider mb-2">
-          <span class="text-[var(--accent-primary)] font-semibold">
-            Project
-          </span>
-          <span class="text-[var(--text-muted)]">·</span>
-          <span class="text-[var(--accent-secondary)]">
-            
-              Aug 2021 — May 2022
-            
-          </span>
-        </div>
+  <section class="ec-card p-5 md:p-6 mb-8" aria-label="Search filters">
+    <div class="relative">
+      <label for="search-input" class="sr-only">Search titles, topics, or content</label>
+      <span class="pointer-events-none absolute inset-y-0 left-3.5 flex items-center text-[var(--text-muted)]">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      </span>
+      <input
+        id="search-input"
+        data-search-input
+        type="search"
+        placeholder="Search titles, topics, or content…"
+        autocomplete="off"
+        spellcheck="false"
+        class="w-full rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-canvas)] py-3 pl-10 pr-10 text-base text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:border-[var(--accent-primary)] focus:outline-none transition-colors"
+      >
+      <button
+        type="button"
+        data-search-clear-query
+        hidden
+        aria-label="Clear search text"
+        class="absolute inset-y-0 right-2.5 my-auto w-7 h-7 rounded-md flex items-center justify-center text-[var(--text-muted)] hover:text-[var(--text-primary)] cursor-pointer"
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4" aria-hidden="true" focusable="false"><path d="M6 18 18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
 
-        <h2 class="font-display text-xl sm:text-2xl font-bold leading-snug mb-2">
-          <a href="/project/mwe-bpe/" class="hover:text-[var(--accent-primary)] transition-colors">
-            BPE beyond Word Boundary: How NOT to use MWEs in NMT
-          </a>
-        </h2>
+    <div class="mt-4 flex flex-wrap items-center justify-between gap-3">
+      <div class="flex flex-wrap items-center gap-2" role="group" aria-label="Content type">
+        <button type="button" data-search-type="all" aria-pressed="true" class="ec-search-type-btn">All</button>
+        <button type="button" data-search-type="project" aria-pressed="false" class="ec-search-type-btn">Projects</button>
+        <button type="button" data-search-type="blog" aria-pressed="false" class="ec-search-type-btn">Essays</button>
+      </div>
 
-        <p class="text-[var(--text-secondary)] text-sm md:text-base leading-relaxed mb-4">
-          A research project to identify Multi-Word Expressions using Byte Pair Encoding.
-        </p>
+      <button type="button" data-search-reset hidden class="font-mono text-xs uppercase tracking-wider text-[var(--accent-primary)] hover:underline underline-offset-4 cursor-pointer">
+        Clear all filters
+      </button>
+    </div>
 
+    <div class="mt-5 pt-4 border-t border-[var(--border-subtle)]">
+      <div class="flex items-baseline justify-between gap-2 mb-2.5">
+        <span class="font-mono text-xs uppercase tracking-wider text-[var(--text-muted)]">Topics</span>
+        <span class="hidden sm:inline font-mono text-[11px] text-[var(--text-muted)]">Click switches · Ctrl+Click combines (AND)</span>
+      </div>
+      <div class="flex flex-wrap gap-1.5" role="group" aria-label="Filter by topic">
         
-        <div data-tag-list class="flex flex-wrap gap-1.5">
-  
-    
-  
-    
-      <a href="/tags/python/" data-tag-item class="ec-chip">Python</a>
-    
-  
-    
-      <a href="/tags/nlp/" data-tag-item class="ec-chip">NLP</a>
-    
-  
-    
-      <a href="/tags/multi-word-expressions/" data-tag-item class="ec-chip">Multi-Word Expressions</a>
-    
-  
-    
-      <a href="/tags/byte-pair-encoding/" data-tag-item class="ec-chip">Byte-Pair Encoding</a>
-    
-  
-    
-      <a href="/tags/pytorch/" data-tag-item class="ec-chip">PyTorch</a>
-    
-  
-    
-      <a href="/tags/transformers/" data-tag-item class="ec-chip">Transformers</a>
-    
-  
-  <span data-tag-more class="ec-chip ec-chip-more" hidden></span>
-</div>
+          <button
+            type="button"
+            data-search-tag="11ty"
+            aria-pressed="false"
+            class="ec-chip ec-chip-filter"
+          >
+            <span>11ty</span>
+            <span class="ec-chip-count">2</span>
+          </button>
+        
+          <button
+            type="button"
+            data-search-tag="backend-development"
+            aria-pressed="false"
+            class="ec-chip ec-chip-filter"
+          >
+            <span>Backend Development</span>
+            <span class="ec-chip-count">1</span>
+          </button>
+        
+          <button
+            type="button"
+            data-search-tag="book-summary"
+            aria-pressed="false"
+            class="ec-chip ec-chip-filter"
+          >
+            <span>Book Summary</span>
+            <span class="ec-chip-count">1</span>
+          </button>
+        
+          <button
+            type="button"
+            data-search-tag="byte-pair-encoding"
+            aria-pressed="false"
+            class="ec-chip ec-chip-filter"
+          >
+            <span>Byte-Pair Encoding</span>
+            <span class="ec-chip-count">1</span>
+          </button>
+        
+          <button
+            type="button"
+            data-search-tag="c"
+            aria-pressed="false"
+            class="ec-chip ec-chip-filter"
+          >
+            <span>C++</span>
+            <span class="ec-chip-count">1</span>
+          </button>
+        
+          <button
+            type="button"
+            data-search-tag="computer-graphics"
+            aria-pressed="false"
+            class="ec-chip ec-chip-filter"
+          >
+            <span>Computer Graphics</span>
+            <span class="ec-chip-count">1</span>
+          </button>
+        
+          <button
+            type="button"
+            data-search-tag="crf"
+            aria-pressed="false"
+            class="ec-chip ec-chip-filter"
+          >
+            <span>CRF</span>
+            <span class="ec-chip-count">1</span>
+          </button>
+        
+          <button
+            type="button"
+            data-search-tag="css3"
+            aria-pressed="false"
+            class="ec-chip ec-chip-filter"
+          >
+            <span>CSS3</span>
+            <span class="ec-chip-count">2</span>
+          </button>
+        
+          <button
+            type="button"
+            data-search-tag="deep-learning"
+            aria-pressed="false"
+            class="ec-chip ec-chip-filter"
+          >
+            <span>Deep Learning</span>
+            <span class="ec-chip-count">1</span>
+          </button>
+        
+          <button
+            type="button"
+            data-search-tag="django"
+            aria-pressed="false"
+            class="ec-chip ec-chip-filter"
+          >
+            <span>Django</span>
+            <span class="ec-chip-count">1</span>
+          </button>
+        
+          <button
+            type="button"
+            data-search-tag="dynamic-programming"
+            aria-pressed="false"
+            class="ec-chip ec-chip-filter"
+          >
+            <span>Dynamic Programming</span>
+            <span class="ec-chip-count">1</span>
+          </button>
+        
+          <button
+            type="button"
+            data-search-tag="frontend-development"
+            aria-pressed="false"
+            class="ec-chip ec-chip-filter"
+          >
+            <span>Frontend Development</span>
+            <span class="ec-chip-count">1</span>
+          </button>
+        
+          <button
+            type="button"
+            data-search-tag="html5"
+            aria-pressed="false"
+            class="ec-chip ec-chip-filter"
+          >
+            <span>HTML5</span>
+            <span class="ec-chip-count">1</span>
+          </button>
+        
+          <button
+            type="button"
+            data-search-tag="image-processing"
+            aria-pressed="false"
+            class="ec-chip ec-chip-filter"
+          >
+            <span>Image Processing</span>
+            <span class="ec-chip-count">1</span>
+          </button>
+        
+          <button
+            type="button"
+            data-search-tag="markdown"
+            aria-pressed="false"
+            class="ec-chip ec-chip-filter"
+          >
+            <span>Markdown</span>
+            <span class="ec-chip-count">1</span>
+          </button>
+        
+          <button
+            type="button"
+            data-search-tag="multi-word-expressions"
+            aria-pressed="false"
+            class="ec-chip ec-chip-filter"
+          >
+            <span>Multi-Word Expressions</span>
+            <span class="ec-chip-count">1</span>
+          </button>
+        
+          <button
+            type="button"
+            data-search-tag="mysql"
+            aria-pressed="false"
+            class="ec-chip ec-chip-filter"
+          >
+            <span>MySQL</span>
+            <span class="ec-chip-count">1</span>
+          </button>
+        
+          <button
+            type="button"
+            data-search-tag="ner"
+            aria-pressed="false"
+            class="ec-chip ec-chip-filter"
+          >
+            <span>NER</span>
+            <span class="ec-chip-count">1</span>
+          </button>
+        
+          <button
+            type="button"
+            data-search-tag="nlp"
+            aria-pressed="false"
+            class="ec-chip ec-chip-filter"
+          >
+            <span>NLP</span>
+            <span class="ec-chip-count">2</span>
+          </button>
+        
+          <button
+            type="button"
+            data-search-tag="nltk"
+            aria-pressed="false"
+            class="ec-chip ec-chip-filter"
+          >
+            <span>NLTK</span>
+            <span class="ec-chip-count">1</span>
+          </button>
+        
+          <button
+            type="button"
+            data-search-tag="nunjucks"
+            aria-pressed="false"
+            class="ec-chip ec-chip-filter"
+          >
+            <span>Nunjucks</span>
+            <span class="ec-chip-count">1</span>
+          </button>
+        
+          <button
+            type="button"
+            data-search-tag="opengl"
+            aria-pressed="false"
+            class="ec-chip ec-chip-filter"
+          >
+            <span>OpenGL</span>
+            <span class="ec-chip-count">1</span>
+          </button>
+        
+          <button
+            type="button"
+            data-search-tag="organization"
+            aria-pressed="false"
+            class="ec-chip ec-chip-filter"
+          >
+            <span>Organization</span>
+            <span class="ec-chip-count">1</span>
+          </button>
+        
+          <button
+            type="button"
+            data-search-tag="pwa"
+            aria-pressed="false"
+            class="ec-chip ec-chip-filter"
+          >
+            <span>PWA</span>
+            <span class="ec-chip-count">1</span>
+          </button>
+        
+          <button
+            type="button"
+            data-search-tag="python"
+            aria-pressed="false"
+            class="ec-chip ec-chip-filter"
+          >
+            <span>Python</span>
+            <span class="ec-chip-count">4</span>
+          </button>
+        
+          <button
+            type="button"
+            data-search-tag="pytorch"
+            aria-pressed="false"
+            class="ec-chip ec-chip-filter"
+          >
+            <span>PyTorch</span>
+            <span class="ec-chip-count">1</span>
+          </button>
+        
+          <button
+            type="button"
+            data-search-tag="tailwind"
+            aria-pressed="false"
+            class="ec-chip ec-chip-filter"
+          >
+            <span>Tailwind</span>
+            <span class="ec-chip-count">2</span>
+          </button>
+        
+          <button
+            type="button"
+            data-search-tag="transformers"
+            aria-pressed="false"
+            class="ec-chip ec-chip-filter"
+          >
+            <span>Transformers</span>
+            <span class="ec-chip-count">1</span>
+          </button>
+        
+          <button
+            type="button"
+            data-search-tag="vuejs"
+            aria-pressed="false"
+            class="ec-chip ec-chip-filter"
+          >
+            <span>VueJS</span>
+            <span class="ec-chip-count">1</span>
+          </button>
+        
+      </div>
+    </div>
+  </section>
 
-      </article>
-    
+  <div data-search-status aria-live="polite" class="font-mono text-xs uppercase tracking-wider text-[var(--text-muted)] mb-5">
+    Loading index…
+  </div>
+
+  <div id="search-results" data-search-results class="space-y-5"></div>
+
+  <div data-search-empty hidden class="ec-card p-8 text-center">
+    <p class="font-display text-lg font-semibold text-[var(--text-primary)] mb-1">
+      No matching projects or essays
+    </p>
+    <p class="text-sm text-[var(--text-secondary)] mb-4">
+      Try removing a topic filter or using fewer keywords.
+    </p>
+    <button type="button" data-search-empty-reset class="ec-btn-secondary cursor-pointer">
+      Reset filters
+    </button>
   </div>
 </main>
 

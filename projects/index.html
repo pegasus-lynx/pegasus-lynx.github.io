@@ -120,8 +120,8 @@
   </div>
 </div>
     <div id="main-content" class="flex-1">
-        <main class="max-w-6xl mx-auto px-6 md:px-10 py-12 md:py-16">
-  <header class="mb-12 max-w-2xl">
+        <main class="max-w-6xl mx-auto px-6 md:px-10 py-12 md:py-16" data-inline-search-root data-inline-search-type="project">
+  <header class="mb-8 max-w-2xl">
     <div class="ec-kicker mb-2">Archive &amp; Case Studies</div>
     <h1 class="font-display text-4xl md:text-5xl font-bold tracking-tight mb-4">
       Projects
@@ -131,9 +131,459 @@
     </p>
   </header>
 
-  <div class="grid md:grid-cols-2 gap-8">
+  
+  
+  <section class="mb-8" aria-label="Filter entries">
+  <div class="flex flex-col sm:flex-row items-stretch gap-2.5">
+    <div class="relative flex-1">
+      <label for="search-input" class="sr-only">Search projects by title, topic, or content…</label>
+      <span class="pointer-events-none absolute inset-y-0 left-3.5 flex items-center text-[var(--text-muted)]">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      </span>
+      <input
+        id="search-input"
+        data-search-input
+        type="search"
+        placeholder="Search projects by title, topic, or content…"
+        autocomplete="off"
+        spellcheck="false"
+        class="w-full h-11 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-card)] pl-10 pr-10 text-base text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:border-[var(--accent-primary)] focus:outline-none transition-colors"
+      >
+      <button
+        type="button"
+        data-search-clear-query
+        hidden
+        aria-label="Clear search text"
+        class="absolute inset-y-0 right-2.5 my-auto w-7 h-7 rounded-md flex items-center justify-center text-[var(--text-muted)] hover:text-[var(--text-primary)] cursor-pointer"
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4" aria-hidden="true" focusable="false"><path d="M6 18 18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+
+    <div class="relative sm:w-52 shrink-0" data-topic-dropdown>
+      <button
+        type="button"
+        data-topic-dropdown-btn
+        aria-expanded="false"
+        aria-haspopup="listbox"
+        class="w-full h-11 px-3.5 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-card)] flex items-center justify-between gap-2 font-mono text-xs uppercase tracking-wider text-[var(--text-secondary)] hover:border-[var(--accent-primary)] hover:text-[var(--text-primary)] transition-colors cursor-pointer"
+      >
+        <span class="inline-flex items-center gap-2">
+          <span>Topics</span>
+          <span data-topic-count hidden class="ec-topic-badge">0</span>
+        </span>
+        <span data-topic-chevron class="transition-transform duration-150">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg>
+        </span>
+      </button>
+
+      <div
+        data-topic-dropdown-panel
+        hidden
+        class="absolute right-0 z-30 mt-2 w-full sm:w-72 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-card)] shadow-xl p-2"
+      >
+        
+          <div class="mb-1.5">
+            <label for="topic-filter-input" class="sr-only">Filter topics</label>
+            <input
+              id="topic-filter-input"
+              data-topic-filter-input
+              type="search"
+              placeholder="Filter topics…"
+              autocomplete="off"
+              spellcheck="false"
+              class="w-full rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-canvas)] px-3 py-1.5 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:border-[var(--accent-primary)] focus:outline-none"
+            >
+          </div>
+        
+
+        <div
+          role="listbox"
+          aria-multiselectable="true"
+          aria-label="Filter by topic"
+          class="max-h-60 overflow-y-auto space-y-0.5"
+        >
+          
+            <button
+              type="button"
+              role="option"
+              data-search-tag="11ty"
+              data-search-tag-label="11ty"
+              aria-selected="false"
+              class="ec-topic-option"
+            >
+              <span class="ec-topic-checkbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg></span>
+              <span class="flex-1 text-left truncate">11ty</span>
+              <span class="ec-chip-count font-mono">1</span>
+            </button>
+          
+            <button
+              type="button"
+              role="option"
+              data-search-tag="backend-development"
+              data-search-tag-label="Backend Development"
+              aria-selected="false"
+              class="ec-topic-option"
+            >
+              <span class="ec-topic-checkbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg></span>
+              <span class="flex-1 text-left truncate">Backend Development</span>
+              <span class="ec-chip-count font-mono">1</span>
+            </button>
+          
+            <button
+              type="button"
+              role="option"
+              data-search-tag="byte-pair-encoding"
+              data-search-tag-label="Byte-Pair Encoding"
+              aria-selected="false"
+              class="ec-topic-option"
+            >
+              <span class="ec-topic-checkbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg></span>
+              <span class="flex-1 text-left truncate">Byte-Pair Encoding</span>
+              <span class="ec-chip-count font-mono">1</span>
+            </button>
+          
+            <button
+              type="button"
+              role="option"
+              data-search-tag="c"
+              data-search-tag-label="C++"
+              aria-selected="false"
+              class="ec-topic-option"
+            >
+              <span class="ec-topic-checkbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg></span>
+              <span class="flex-1 text-left truncate">C++</span>
+              <span class="ec-chip-count font-mono">1</span>
+            </button>
+          
+            <button
+              type="button"
+              role="option"
+              data-search-tag="computer-graphics"
+              data-search-tag-label="Computer Graphics"
+              aria-selected="false"
+              class="ec-topic-option"
+            >
+              <span class="ec-topic-checkbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg></span>
+              <span class="flex-1 text-left truncate">Computer Graphics</span>
+              <span class="ec-chip-count font-mono">1</span>
+            </button>
+          
+            <button
+              type="button"
+              role="option"
+              data-search-tag="crf"
+              data-search-tag-label="CRF"
+              aria-selected="false"
+              class="ec-topic-option"
+            >
+              <span class="ec-topic-checkbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg></span>
+              <span class="flex-1 text-left truncate">CRF</span>
+              <span class="ec-chip-count font-mono">1</span>
+            </button>
+          
+            <button
+              type="button"
+              role="option"
+              data-search-tag="css3"
+              data-search-tag-label="CSS3"
+              aria-selected="false"
+              class="ec-topic-option"
+            >
+              <span class="ec-topic-checkbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg></span>
+              <span class="flex-1 text-left truncate">CSS3</span>
+              <span class="ec-chip-count font-mono">2</span>
+            </button>
+          
+            <button
+              type="button"
+              role="option"
+              data-search-tag="deep-learning"
+              data-search-tag-label="Deep Learning"
+              aria-selected="false"
+              class="ec-topic-option"
+            >
+              <span class="ec-topic-checkbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg></span>
+              <span class="flex-1 text-left truncate">Deep Learning</span>
+              <span class="ec-chip-count font-mono">1</span>
+            </button>
+          
+            <button
+              type="button"
+              role="option"
+              data-search-tag="django"
+              data-search-tag-label="Django"
+              aria-selected="false"
+              class="ec-topic-option"
+            >
+              <span class="ec-topic-checkbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg></span>
+              <span class="flex-1 text-left truncate">Django</span>
+              <span class="ec-chip-count font-mono">1</span>
+            </button>
+          
+            <button
+              type="button"
+              role="option"
+              data-search-tag="dynamic-programming"
+              data-search-tag-label="Dynamic Programming"
+              aria-selected="false"
+              class="ec-topic-option"
+            >
+              <span class="ec-topic-checkbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg></span>
+              <span class="flex-1 text-left truncate">Dynamic Programming</span>
+              <span class="ec-chip-count font-mono">1</span>
+            </button>
+          
+            <button
+              type="button"
+              role="option"
+              data-search-tag="frontend-development"
+              data-search-tag-label="Frontend Development"
+              aria-selected="false"
+              class="ec-topic-option"
+            >
+              <span class="ec-topic-checkbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg></span>
+              <span class="flex-1 text-left truncate">Frontend Development</span>
+              <span class="ec-chip-count font-mono">1</span>
+            </button>
+          
+            <button
+              type="button"
+              role="option"
+              data-search-tag="html5"
+              data-search-tag-label="HTML5"
+              aria-selected="false"
+              class="ec-topic-option"
+            >
+              <span class="ec-topic-checkbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg></span>
+              <span class="flex-1 text-left truncate">HTML5</span>
+              <span class="ec-chip-count font-mono">1</span>
+            </button>
+          
+            <button
+              type="button"
+              role="option"
+              data-search-tag="image-processing"
+              data-search-tag-label="Image Processing"
+              aria-selected="false"
+              class="ec-topic-option"
+            >
+              <span class="ec-topic-checkbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg></span>
+              <span class="flex-1 text-left truncate">Image Processing</span>
+              <span class="ec-chip-count font-mono">1</span>
+            </button>
+          
+            <button
+              type="button"
+              role="option"
+              data-search-tag="markdown"
+              data-search-tag-label="Markdown"
+              aria-selected="false"
+              class="ec-topic-option"
+            >
+              <span class="ec-topic-checkbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg></span>
+              <span class="flex-1 text-left truncate">Markdown</span>
+              <span class="ec-chip-count font-mono">1</span>
+            </button>
+          
+            <button
+              type="button"
+              role="option"
+              data-search-tag="multi-word-expressions"
+              data-search-tag-label="Multi-Word Expressions"
+              aria-selected="false"
+              class="ec-topic-option"
+            >
+              <span class="ec-topic-checkbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg></span>
+              <span class="flex-1 text-left truncate">Multi-Word Expressions</span>
+              <span class="ec-chip-count font-mono">1</span>
+            </button>
+          
+            <button
+              type="button"
+              role="option"
+              data-search-tag="mysql"
+              data-search-tag-label="MySQL"
+              aria-selected="false"
+              class="ec-topic-option"
+            >
+              <span class="ec-topic-checkbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg></span>
+              <span class="flex-1 text-left truncate">MySQL</span>
+              <span class="ec-chip-count font-mono">1</span>
+            </button>
+          
+            <button
+              type="button"
+              role="option"
+              data-search-tag="ner"
+              data-search-tag-label="NER"
+              aria-selected="false"
+              class="ec-topic-option"
+            >
+              <span class="ec-topic-checkbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg></span>
+              <span class="flex-1 text-left truncate">NER</span>
+              <span class="ec-chip-count font-mono">1</span>
+            </button>
+          
+            <button
+              type="button"
+              role="option"
+              data-search-tag="nlp"
+              data-search-tag-label="NLP"
+              aria-selected="false"
+              class="ec-topic-option"
+            >
+              <span class="ec-topic-checkbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg></span>
+              <span class="flex-1 text-left truncate">NLP</span>
+              <span class="ec-chip-count font-mono">2</span>
+            </button>
+          
+            <button
+              type="button"
+              role="option"
+              data-search-tag="nltk"
+              data-search-tag-label="NLTK"
+              aria-selected="false"
+              class="ec-topic-option"
+            >
+              <span class="ec-topic-checkbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg></span>
+              <span class="flex-1 text-left truncate">NLTK</span>
+              <span class="ec-chip-count font-mono">1</span>
+            </button>
+          
+            <button
+              type="button"
+              role="option"
+              data-search-tag="nunjucks"
+              data-search-tag-label="Nunjucks"
+              aria-selected="false"
+              class="ec-topic-option"
+            >
+              <span class="ec-topic-checkbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg></span>
+              <span class="flex-1 text-left truncate">Nunjucks</span>
+              <span class="ec-chip-count font-mono">1</span>
+            </button>
+          
+            <button
+              type="button"
+              role="option"
+              data-search-tag="opengl"
+              data-search-tag-label="OpenGL"
+              aria-selected="false"
+              class="ec-topic-option"
+            >
+              <span class="ec-topic-checkbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg></span>
+              <span class="flex-1 text-left truncate">OpenGL</span>
+              <span class="ec-chip-count font-mono">1</span>
+            </button>
+          
+            <button
+              type="button"
+              role="option"
+              data-search-tag="pwa"
+              data-search-tag-label="PWA"
+              aria-selected="false"
+              class="ec-topic-option"
+            >
+              <span class="ec-topic-checkbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg></span>
+              <span class="flex-1 text-left truncate">PWA</span>
+              <span class="ec-chip-count font-mono">1</span>
+            </button>
+          
+            <button
+              type="button"
+              role="option"
+              data-search-tag="python"
+              data-search-tag-label="Python"
+              aria-selected="false"
+              class="ec-topic-option"
+            >
+              <span class="ec-topic-checkbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg></span>
+              <span class="flex-1 text-left truncate">Python</span>
+              <span class="ec-chip-count font-mono">4</span>
+            </button>
+          
+            <button
+              type="button"
+              role="option"
+              data-search-tag="pytorch"
+              data-search-tag-label="PyTorch"
+              aria-selected="false"
+              class="ec-topic-option"
+            >
+              <span class="ec-topic-checkbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg></span>
+              <span class="flex-1 text-left truncate">PyTorch</span>
+              <span class="ec-chip-count font-mono">1</span>
+            </button>
+          
+            <button
+              type="button"
+              role="option"
+              data-search-tag="tailwind"
+              data-search-tag-label="Tailwind"
+              aria-selected="false"
+              class="ec-topic-option"
+            >
+              <span class="ec-topic-checkbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg></span>
+              <span class="flex-1 text-left truncate">Tailwind</span>
+              <span class="ec-chip-count font-mono">1</span>
+            </button>
+          
+            <button
+              type="button"
+              role="option"
+              data-search-tag="transformers"
+              data-search-tag-label="Transformers"
+              aria-selected="false"
+              class="ec-topic-option"
+            >
+              <span class="ec-topic-checkbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg></span>
+              <span class="flex-1 text-left truncate">Transformers</span>
+              <span class="ec-chip-count font-mono">1</span>
+            </button>
+          
+            <button
+              type="button"
+              role="option"
+              data-search-tag="vuejs"
+              data-search-tag-label="VueJS"
+              aria-selected="false"
+              class="ec-topic-option"
+            >
+              <span class="ec-topic-checkbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg></span>
+              <span class="flex-1 text-left truncate">VueJS</span>
+              <span class="ec-chip-count font-mono">1</span>
+            </button>
+          
+        </div>
+
+        <p data-topic-filter-empty hidden class="py-3 text-center font-mono text-xs text-[var(--text-muted)]">
+          No matching topics
+        </p>
+
+        <div data-topic-dropdown-footer hidden class="mt-1.5 pt-1.5 border-t border-[var(--border-subtle)] flex justify-end px-1">
+          <button type="button" data-topic-clear class="font-mono text-[11px] uppercase tracking-wider text-[var(--accent-primary)] hover:underline cursor-pointer">
+            Clear topics
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div data-active-tags-row hidden class="mt-3 flex flex-wrap items-center gap-1.5">
+    <div data-active-tags-list class="contents"></div>
+    <button type="button" data-search-reset class="ml-1 font-mono text-xs uppercase tracking-wider text-[var(--accent-primary)] hover:underline underline-offset-4 cursor-pointer">
+      Clear all
+    </button>
+  </div>
+
+  <div data-search-status aria-live="polite" hidden class="mt-3 font-mono text-xs uppercase tracking-wider text-[var(--text-muted)]"></div>
+</section>
+
+
+  <div data-search-results class="grid md:grid-cols-2 gap-8">
     
-      <article class="ec-card ec-card-interactive overflow-hidden flex flex-col">
+      <article data-inline-card="/project/personal-webapp/" class="ec-card ec-card-interactive overflow-hidden flex flex-col">
         
           <a href="/project/personal-webapp/" class="block bg-[var(--bg-surface)] border-b border-[var(--border-subtle)]">
             <img src="/assets/images/personal-webapp.webp" alt="Dipesh Kumar&#39;s Webapp"
@@ -170,24 +620,26 @@
 
           
           
-          <div data-tag-list class="flex flex-wrap gap-1.5 pt-4 border-t border-[var(--border-subtle)]">
+          
+          
+<div data-tag-list class="flex flex-wrap gap-1.5 pt-4 border-t border-[var(--border-subtle)]">
   
     
   
     
-      <a href="/tags/11ty/" data-tag-item class="ec-chip">11ty</a>
+      <a href="/projects/?tag=11ty" data-tag-item data-tag-slug="11ty" class="ec-chip">11ty</a>
     
   
     
-      <a href="/tags/tailwind/" data-tag-item class="ec-chip">Tailwind</a>
+      <a href="/projects/?tag=tailwind" data-tag-item data-tag-slug="tailwind" class="ec-chip">Tailwind</a>
     
   
     
-      <a href="/tags/nunjucks/" data-tag-item class="ec-chip">Nunjucks</a>
+      <a href="/projects/?tag=nunjucks" data-tag-item data-tag-slug="nunjucks" class="ec-chip">Nunjucks</a>
     
   
     
-      <a href="/tags/markdown/" data-tag-item class="ec-chip">Markdown</a>
+      <a href="/projects/?tag=markdown" data-tag-item data-tag-slug="markdown" class="ec-chip">Markdown</a>
     
   
   <span data-tag-more class="ec-chip ec-chip-more" hidden></span>
@@ -196,7 +648,7 @@
         </div>
       </article>
     
-      <article class="ec-card ec-card-interactive overflow-hidden flex flex-col">
+      <article data-inline-card="/project/mwe-bpe/" class="ec-card ec-card-interactive overflow-hidden flex flex-col">
         
           <a href="/project/mwe-bpe/" class="block bg-[var(--bg-surface)] border-b border-[var(--border-subtle)]">
             <img src="/assets/images/mwe-bpe-tokenization-examples.webp" alt="BPE beyond Word Boundary: How NOT to use MWEs in NMT"
@@ -233,32 +685,34 @@
 
           
           
-          <div data-tag-list class="flex flex-wrap gap-1.5 pt-4 border-t border-[var(--border-subtle)]">
+          
+          
+<div data-tag-list class="flex flex-wrap gap-1.5 pt-4 border-t border-[var(--border-subtle)]">
   
     
   
     
-      <a href="/tags/python/" data-tag-item class="ec-chip">Python</a>
+      <a href="/projects/?tag=python" data-tag-item data-tag-slug="python" class="ec-chip">Python</a>
     
   
     
-      <a href="/tags/nlp/" data-tag-item class="ec-chip">NLP</a>
+      <a href="/projects/?tag=nlp" data-tag-item data-tag-slug="nlp" class="ec-chip">NLP</a>
     
   
     
-      <a href="/tags/multi-word-expressions/" data-tag-item class="ec-chip">Multi-Word Expressions</a>
+      <a href="/projects/?tag=multi-word-expressions" data-tag-item data-tag-slug="multi-word-expressions" class="ec-chip">Multi-Word Expressions</a>
     
   
     
-      <a href="/tags/byte-pair-encoding/" data-tag-item class="ec-chip">Byte-Pair Encoding</a>
+      <a href="/projects/?tag=byte-pair-encoding" data-tag-item data-tag-slug="byte-pair-encoding" class="ec-chip">Byte-Pair Encoding</a>
     
   
     
-      <a href="/tags/pytorch/" data-tag-item class="ec-chip">PyTorch</a>
+      <a href="/projects/?tag=pytorch" data-tag-item data-tag-slug="pytorch" class="ec-chip">PyTorch</a>
     
   
     
-      <a href="/tags/transformers/" data-tag-item class="ec-chip">Transformers</a>
+      <a href="/projects/?tag=transformers" data-tag-item data-tag-slug="transformers" class="ec-chip">Transformers</a>
     
   
   <span data-tag-more class="ec-chip ec-chip-more" hidden></span>
@@ -267,7 +721,7 @@
         </div>
       </article>
     
-      <article class="ec-card ec-card-interactive overflow-hidden flex flex-col">
+      <article data-inline-card="/project/image-enc-dl/" class="ec-card ec-card-interactive overflow-hidden flex flex-col">
         
           <a href="/project/image-enc-dl/" class="block bg-[var(--bg-surface)] border-b border-[var(--border-subtle)]">
             <img src="/assets/images/imgencdl-cover.webp" alt="Image Encryption Algorithms for privacy in Deep Learning"
@@ -304,20 +758,22 @@
 
           
           
-          <div data-tag-list class="flex flex-wrap gap-1.5 pt-4 border-t border-[var(--border-subtle)]">
+          
+          
+<div data-tag-list class="flex flex-wrap gap-1.5 pt-4 border-t border-[var(--border-subtle)]">
   
     
   
     
-      <a href="/tags/python/" data-tag-item class="ec-chip">Python</a>
+      <a href="/projects/?tag=python" data-tag-item data-tag-slug="python" class="ec-chip">Python</a>
     
   
     
-      <a href="/tags/deep-learning/" data-tag-item class="ec-chip">Deep Learning</a>
+      <a href="/projects/?tag=deep-learning" data-tag-item data-tag-slug="deep-learning" class="ec-chip">Deep Learning</a>
     
   
     
-      <a href="/tags/image-processing/" data-tag-item class="ec-chip">Image Processing</a>
+      <a href="/projects/?tag=image-processing" data-tag-item data-tag-slug="image-processing" class="ec-chip">Image Processing</a>
     
   
   <span data-tag-more class="ec-chip ec-chip-more" hidden></span>
@@ -326,7 +782,7 @@
         </div>
       </article>
     
-      <article class="ec-card ec-card-interactive overflow-hidden flex flex-col">
+      <article data-inline-card="/project/contour-rendering/" class="ec-card ec-card-interactive overflow-hidden flex flex-col">
         
           <a href="/project/contour-rendering/" class="block bg-[var(--bg-surface)] border-b border-[var(--border-subtle)]">
             <img src="/assets/images/contour-rendering.webp" alt="Contour Renderer"
@@ -363,24 +819,26 @@
 
           
           
-          <div data-tag-list class="flex flex-wrap gap-1.5 pt-4 border-t border-[var(--border-subtle)]">
+          
+          
+<div data-tag-list class="flex flex-wrap gap-1.5 pt-4 border-t border-[var(--border-subtle)]">
   
     
   
     
-      <a href="/tags/c/" data-tag-item class="ec-chip">C++</a>
+      <a href="/projects/?tag=c" data-tag-item data-tag-slug="c" class="ec-chip">C++</a>
     
   
     
-      <a href="/tags/opengl/" data-tag-item class="ec-chip">OpenGL</a>
+      <a href="/projects/?tag=opengl" data-tag-item data-tag-slug="opengl" class="ec-chip">OpenGL</a>
     
   
     
-      <a href="/tags/computer-graphics/" data-tag-item class="ec-chip">Computer Graphics</a>
+      <a href="/projects/?tag=computer-graphics" data-tag-item data-tag-slug="computer-graphics" class="ec-chip">Computer Graphics</a>
     
   
     
-      <a href="/tags/dynamic-programming/" data-tag-item class="ec-chip">Dynamic Programming</a>
+      <a href="/projects/?tag=dynamic-programming" data-tag-item data-tag-slug="dynamic-programming" class="ec-chip">Dynamic Programming</a>
     
   
   <span data-tag-more class="ec-chip ec-chip-more" hidden></span>
@@ -389,7 +847,7 @@
         </div>
       </article>
     
-      <article class="ec-card ec-card-interactive overflow-hidden flex flex-col">
+      <article data-inline-card="/project/codefest-pwa-frontend/" class="ec-card ec-card-interactive overflow-hidden flex flex-col">
         
           <a href="/project/codefest-pwa-frontend/" class="block bg-[var(--bg-surface)] border-b border-[var(--border-subtle)]">
             <img src="/assets/images/codefest-frontend-pwa.webp" alt="Codefest PWA Frontend"
@@ -426,24 +884,26 @@
 
           
           
-          <div data-tag-list class="flex flex-wrap gap-1.5 pt-4 border-t border-[var(--border-subtle)]">
+          
+          
+<div data-tag-list class="flex flex-wrap gap-1.5 pt-4 border-t border-[var(--border-subtle)]">
   
     
   
     
-      <a href="/tags/vuejs/" data-tag-item class="ec-chip">VueJS</a>
+      <a href="/projects/?tag=vuejs" data-tag-item data-tag-slug="vuejs" class="ec-chip">VueJS</a>
     
   
     
-      <a href="/tags/css3/" data-tag-item class="ec-chip">CSS3</a>
+      <a href="/projects/?tag=css3" data-tag-item data-tag-slug="css3" class="ec-chip">CSS3</a>
     
   
     
-      <a href="/tags/pwa/" data-tag-item class="ec-chip">PWA</a>
+      <a href="/projects/?tag=pwa" data-tag-item data-tag-slug="pwa" class="ec-chip">PWA</a>
     
   
     
-      <a href="/tags/frontend-development/" data-tag-item class="ec-chip">Frontend Development</a>
+      <a href="/projects/?tag=frontend-development" data-tag-item data-tag-slug="frontend-development" class="ec-chip">Frontend Development</a>
     
   
   <span data-tag-more class="ec-chip ec-chip-more" hidden></span>
@@ -452,7 +912,7 @@
         </div>
       </article>
     
-      <article class="ec-card ec-card-interactive overflow-hidden flex flex-col">
+      <article data-inline-card="/project/hindi-data-crf-viterbi-analysis/" class="ec-card ec-card-interactive overflow-hidden flex flex-col">
         
           <a href="/project/hindi-data-crf-viterbi-analysis/" class="block bg-[var(--bg-surface)] border-b border-[var(--border-subtle)]">
             <img src="/assets/images/crf-project-cover.webp" alt="Analysis of Hindi tagged data using CRF with Viterbi Decoding"
@@ -489,28 +949,30 @@
 
           
           
-          <div data-tag-list class="flex flex-wrap gap-1.5 pt-4 border-t border-[var(--border-subtle)]">
+          
+          
+<div data-tag-list class="flex flex-wrap gap-1.5 pt-4 border-t border-[var(--border-subtle)]">
   
     
   
     
-      <a href="/tags/python/" data-tag-item class="ec-chip">Python</a>
+      <a href="/projects/?tag=python" data-tag-item data-tag-slug="python" class="ec-chip">Python</a>
     
   
     
-      <a href="/tags/nlp/" data-tag-item class="ec-chip">NLP</a>
+      <a href="/projects/?tag=nlp" data-tag-item data-tag-slug="nlp" class="ec-chip">NLP</a>
     
   
     
-      <a href="/tags/crf/" data-tag-item class="ec-chip">CRF</a>
+      <a href="/projects/?tag=crf" data-tag-item data-tag-slug="crf" class="ec-chip">CRF</a>
     
   
     
-      <a href="/tags/nltk/" data-tag-item class="ec-chip">NLTK</a>
+      <a href="/projects/?tag=nltk" data-tag-item data-tag-slug="nltk" class="ec-chip">NLTK</a>
     
   
     
-      <a href="/tags/ner/" data-tag-item class="ec-chip">NER</a>
+      <a href="/projects/?tag=ner" data-tag-item data-tag-slug="ner" class="ec-chip">NER</a>
     
   
   <span data-tag-more class="ec-chip ec-chip-more" hidden></span>
@@ -519,7 +981,7 @@
         </div>
       </article>
     
-      <article class="ec-card ec-card-interactive overflow-hidden flex flex-col">
+      <article data-inline-card="/project/genmed-store-locator/" class="ec-card ec-card-interactive overflow-hidden flex flex-col">
         
           <a href="/project/genmed-store-locator/" class="block bg-[var(--bg-surface)] border-b border-[var(--border-subtle)]">
             <img src="/assets/images/genmed-cover.webp" alt="GenMed: Medical Store Locator Webapp"
@@ -556,32 +1018,34 @@
 
           
           
-          <div data-tag-list class="flex flex-wrap gap-1.5 pt-4 border-t border-[var(--border-subtle)]">
+          
+          
+<div data-tag-list class="flex flex-wrap gap-1.5 pt-4 border-t border-[var(--border-subtle)]">
   
     
   
     
-      <a href="/tags/django/" data-tag-item class="ec-chip">Django</a>
+      <a href="/projects/?tag=django" data-tag-item data-tag-slug="django" class="ec-chip">Django</a>
     
   
     
-      <a href="/tags/python/" data-tag-item class="ec-chip">Python</a>
+      <a href="/projects/?tag=python" data-tag-item data-tag-slug="python" class="ec-chip">Python</a>
     
   
     
-      <a href="/tags/css3/" data-tag-item class="ec-chip">CSS3</a>
+      <a href="/projects/?tag=css3" data-tag-item data-tag-slug="css3" class="ec-chip">CSS3</a>
     
   
     
-      <a href="/tags/html5/" data-tag-item class="ec-chip">HTML5</a>
+      <a href="/projects/?tag=html5" data-tag-item data-tag-slug="html5" class="ec-chip">HTML5</a>
     
   
     
-      <a href="/tags/mysql/" data-tag-item class="ec-chip">MySQL</a>
+      <a href="/projects/?tag=mysql" data-tag-item data-tag-slug="mysql" class="ec-chip">MySQL</a>
     
   
     
-      <a href="/tags/backend-development/" data-tag-item class="ec-chip">Backend Development</a>
+      <a href="/projects/?tag=backend-development" data-tag-item data-tag-slug="backend-development" class="ec-chip">Backend Development</a>
     
   
   <span data-tag-more class="ec-chip ec-chip-more" hidden></span>
@@ -590,6 +1054,18 @@
         </div>
       </article>
     
+  </div>
+
+  <div data-search-empty hidden class="ec-card p-8 text-center">
+    <p class="font-display text-lg font-semibold text-[var(--text-primary)] mb-1">
+      No matching projects
+    </p>
+    <p class="text-sm text-[var(--text-secondary)] mb-4">
+      Try removing a topic filter or using fewer keywords.
+    </p>
+    <button type="button" data-search-empty-reset class="ec-btn-secondary cursor-pointer">
+      Reset filters
+    </button>
   </div>
 </main>
 
