@@ -42,7 +42,7 @@ layout: page
       <div class="flex flex-wrap items-center gap-2">
         {% for tag in tags %}
           {% if tag != 'Blog' and tag != 'Project' %}
-            <a href="/tags/{{ tag | slugify }}/" class="ec-chip">{{ tag }}</a>
+            <a href="/search/?tag={{ tag | slugify }}" class="ec-chip">{{ tag }}</a>
           {% endif %}
         {% endfor %}
       </div>

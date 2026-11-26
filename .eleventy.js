@@ -30,6 +30,36 @@ function parseDdMmYyyy(value) {
   return dt.isValid ? dt.toMillis() : 0;
 }
 
+function formatPostDate(date) {
+  if (!date) return "";
+  const dt = DateTime.fromFormat(String(date).trim(), "dd-MM-yyyy");
+  return dt.isValid ? dt.toLocaleString(DateTime.DATE_MED) : String(date);
+}
+
+function formatPostMonth(date) {
+  if (!date) return "";
+  if (String(date).trim() === "Present") return "Present";
+  const dt = DateTime.fromFormat(String(date).trim(), "dd-MM-yyyy");
+  return dt.isValid ? dt.toFormat("LLL yyyy") : String(date);
+}
+
+function stripHtmlToText(html) {
+  if (!html) return "";
+  return String(html)
+    .replace(/<script[\s\S]*?<\/script>/gi, " ")
+    .replace(/<style[\s\S]*?<\/style>/gi, " ")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/&nbsp;/gi, " ")
+    .replace(/&amp;/gi, "&")
+    .replace(/&quot;/gi, '"')
+    .replace(/&#39;|&apos;/gi, "'")
+    .replace(/&mdash;/gi, "—")
+    .replace(/&ndash;/gi, "–")
+    .replace(/&lt;|&gt;|[<>]/gi, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
 const META_TAGS = new Set(["all", "Blog", "Project", "gallery"]);
 
 module.exports = function (eleventyConfig) {
@@ -120,18 +150,10 @@ module.exports = function (eleventyConfig) {
       .sort((a, b) => parseDdMmYyyy(b.data.startdate) - parseDdMmYyyy(a.data.startdate))
   );
 
-  eleventyConfig.addCollection("visibleTags", (collectionApi) => {
+  const collectVisibleTags = (items) => {
     const tagMap = new Map();
-    const visibleItems = collectionApi
-      .getAll()
-      .filter(
-        (item) =>
-          item.data.show !== false &&
-          Array.isArray(item.data.tags) &&
-          (item.data.tags.includes("Blog") || item.data.tags.includes("Project"))
-      );
-
-    for (const item of visibleItems) {
+    for (const item of items) {
+      if (!Array.isArray(item.data.tags)) continue;
       for (const tag of item.data.tags) {
         if (META_TAGS.has(tag)) continue;
         if (!tagMap.has(tag)) tagMap.set(tag, []);
@@ -141,27 +163,102 @@ module.exports = function (eleventyConfig) {
 
     return Array.from(tagMap.entries())
       .sort(([a], [b]) => a.localeCompare(b))
-      .map(([name, items]) => ({
+      .map(([name, tagItems]) => ({
         name,
-        items: items.sort(
+        items: tagItems.sort(
           (a, b) =>
             parseDdMmYyyy(b.data.publishdate || b.data.startdate) -
             parseDdMmYyyy(a.data.publishdate || a.data.startdate)
         ),
       }));
-  });
+  };
 
-  eleventyConfig.addFilter("postDate", (date) => {
-    if (!date) return "";
-    const dt = DateTime.fromFormat(String(date).trim(), "dd-MM-yyyy");
-    return dt.isValid ? dt.toLocaleString(DateTime.DATE_MED) : String(date);
-  });
+  eleventyConfig.addCollection("visibleTags", (collectionApi) =>
+    collectVisibleTags(
+      collectionApi
+        .getAll()
+        .filter(
+          (item) =>
+            item.data.show !== false &&
+            Array.isArray(item.data.tags) &&
+            (item.data.tags.includes("Blog") || item.data.tags.includes("Project"))
+        )
+    )
+  );
 
-  eleventyConfig.addFilter("postMonth", (date) => {
-    if (!date) return "";
-    if (String(date).trim() === "Present") return "Present";
-    const dt = DateTime.fromFormat(String(date).trim(), "dd-MM-yyyy");
-    return dt.isValid ? dt.toFormat("LLL yyyy") : String(date);
+  eleventyConfig.addCollection("projectTags", (collectionApi) =>
+    collectVisibleTags(
+      collectionApi
+        .getFilteredByTag("Project")
+        .filter((item) => item.data.show !== false)
+    )
+  );
+
+  eleventyConfig.addCollection("blogTags", (collectionApi) =>
+    collectVisibleTags(
+      collectionApi
+        .getFilteredByTag("Blog")
+        .filter((item) => item.data.show !== false)
+    )
+  );
+
+  eleventyConfig.addFilter("postDate", formatPostDate);
+
+  eleventyConfig.addFilter("postMonth", formatPostMonth);
+
+  eleventyConfig.addFilter("buildSearchIndexJson", (collections) => {
+    const slugify = eleventyConfig.getFilter("slugify");
+    const extractPlainText = (item) => {
+      const rawSource = fs.readFileSync(item.inputPath, "utf8");
+      const bodySource = rawSource
+        .replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n?/, "")
+        .replace(/\{#[\s\S]*?#\}/g, " ")
+        .replace(/\{%[\s\S]*?%\}/g, " ")
+        .replace(/\{\{[\s\S]*?\}\}/g, " ");
+      return stripHtmlToText(md.render(bodySource, {}));
+    };
+
+    const mapVisibleTags = (rawTags) =>
+      (Array.isArray(rawTags) ? rawTags : [])
+        .filter((t) => !META_TAGS.has(t))
+        .map((name) => ({ name, slug: slugify(name) }));
+
+    const projectItems = (collections.projectsSorted || []).map((item) => ({
+      title: item.data.title || "",
+      url: item.url,
+      type: "project",
+      dateLabel: `${formatPostMonth(item.data.startdate)} — ${formatPostMonth(item.data.enddate)}`,
+      sortTimestamp: parseDdMmYyyy(item.data.startdate),
+      description: item.data.description || "",
+      tags: mapVisibleTags(item.data.tags),
+      content: extractPlainText(item),
+    }));
+
+    const blogItems = (collections.blogsSorted || []).map((item) => {
+      const pubLabel = formatPostDate(item.data.publishdate);
+      return {
+        title: item.data.title || "",
+        url: item.url,
+        type: "blog",
+        dateLabel: item.data.readingtime ? `${pubLabel} · ${item.data.readingtime} read` : pubLabel,
+        sortTimestamp: parseDdMmYyyy(item.data.publishdate),
+        description: item.data.description || "",
+        tags: mapVisibleTags(item.data.tags),
+        content: extractPlainText(item),
+      };
+    });
+
+    const items = [...projectItems, ...blogItems].sort(
+      (a, b) => b.sortTimestamp - a.sortTimestamp
+    );
+
+    const tags = (collections.visibleTags || []).map((tagObj) => ({
+      name: tagObj.name,
+      slug: slugify(tagObj.name),
+      count: tagObj.items.length,
+    }));
+
+    return JSON.stringify({ items, tags });
   });
 
   eleventyConfig.addShortcode("icon", (name, className = "w-4 h-4") =>

@@ -1,0 +1,93 @@
+---
+title: Search
+description: Search projects, case studies, and essays by keyword or topic.
+permalink: /search/
+---
+<main class="max-w-4xl mx-auto px-6 md:px-10 py-12 md:py-16" data-search-root>
+  <header class="mb-8">
+    <div class="ec-kicker mb-2">Search &amp; Topics</div>
+    <h1 class="font-display text-4xl md:text-5xl font-bold tracking-tight mb-3">
+      Search
+    </h1>
+    <p class="text-lg text-[var(--text-secondary)] max-w-2xl leading-relaxed">
+      Find projects, case studies, and essays by keyword or topic.
+    </p>
+  </header>
+
+  <section class="ec-card p-5 md:p-6 mb-8" aria-label="Search filters">
+    <div class="relative">
+      <label for="search-input" class="sr-only">Search titles, topics, or content</label>
+      <span class="pointer-events-none absolute inset-y-0 left-3.5 flex items-center text-[var(--text-muted)]">
+        {% icon "search", "w-4 h-4" %}
+      </span>
+      <input
+        id="search-input"
+        data-search-input
+        type="search"
+        placeholder="Search titles, topics, or content…"
+        autocomplete="off"
+        spellcheck="false"
+        class="w-full rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-canvas)] py-3 pl-10 pr-10 text-base text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:border-[var(--accent-primary)] focus:outline-none transition-colors"
+      >
+      <button
+        type="button"
+        data-search-clear-query
+        hidden
+        aria-label="Clear search text"
+        class="absolute inset-y-0 right-2.5 my-auto w-7 h-7 rounded-md flex items-center justify-center text-[var(--text-muted)] hover:text-[var(--text-primary)] cursor-pointer"
+      >
+        {% icon "close", "w-4 h-4" %}
+      </button>
+    </div>
+
+    <div class="mt-4 flex flex-wrap items-center justify-between gap-3">
+      <div class="flex flex-wrap items-center gap-2" role="group" aria-label="Content type">
+        <button type="button" data-search-type="all" aria-pressed="true" class="ec-search-type-btn">All</button>
+        <button type="button" data-search-type="project" aria-pressed="false" class="ec-search-type-btn">Projects</button>
+        <button type="button" data-search-type="blog" aria-pressed="false" class="ec-search-type-btn">Essays</button>
+      </div>
+
+      <button type="button" data-search-reset hidden class="font-mono text-xs uppercase tracking-wider text-[var(--accent-primary)] hover:underline underline-offset-4 cursor-pointer">
+        Clear all filters
+      </button>
+    </div>
+
+    <div class="mt-5 pt-4 border-t border-[var(--border-subtle)]">
+      <div class="flex items-baseline justify-between gap-2 mb-2.5">
+        <span class="font-mono text-xs uppercase tracking-wider text-[var(--text-muted)]">Topics</span>
+        <span class="hidden sm:inline font-mono text-[11px] text-[var(--text-muted)]">Click switches · Ctrl+Click combines (AND)</span>
+      </div>
+      <div class="flex flex-wrap gap-1.5" role="group" aria-label="Filter by topic">
+        {% for tagObj in collections.visibleTags %}
+          <button
+            type="button"
+            data-search-tag="{{ tagObj.name | slugify }}"
+            aria-pressed="false"
+            class="ec-chip ec-chip-filter"
+          >
+            <span>{{ tagObj.name }}</span>
+            <span class="ec-chip-count">{{ tagObj.items.length }}</span>
+          </button>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <div data-search-status aria-live="polite" class="font-mono text-xs uppercase tracking-wider text-[var(--text-muted)] mb-5">
+    Loading index…
+  </div>
+
+  <div id="search-results" data-search-results class="space-y-5"></div>
+
+  <div data-search-empty hidden class="ec-card p-8 text-center">
+    <p class="font-display text-lg font-semibold text-[var(--text-primary)] mb-1">
+      No matching projects or essays
+    </p>
+    <p class="text-sm text-[var(--text-secondary)] mb-4">
+      Try removing a topic filter or using fewer keywords.
+    </p>
+    <button type="button" data-search-empty-reset class="ec-btn-secondary cursor-pointer">
+      Reset filters
+    </button>
+  </div>
+</main>
