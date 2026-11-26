@@ -408,5 +408,179 @@ test("gallery page renders frameless rounded mobile carousel with centered dots 
   assert.ok(bundleJs.includes("initMobileCarousels"), "Missing initMobileCarousels in bundle.js");
 });
 
+test("home featured projects renders reusable mobile carousel with 4 slides and non-windowed dots while preserving desktop stack", () => {
+  const indexHtml = fs.readFileSync(path.join(SITE, "index.html"), "utf8");
+  const projectsStart = indexHtml.indexOf('id="projects"');
+  const writingStart = indexHtml.indexOf('id="writing"');
+  assert.ok(projectsStart > 0 && writingStart > projectsStart, "Missing #projects or #writing section on home page");
+
+  const projectsSection = indexHtml.slice(projectsStart, writingStart);
+  assert.ok(projectsSection.includes("data-carousel"), "Featured projects missing data-carousel wrapper");
+  assert.ok(projectsSection.includes("data-carousel-track"), "Featured projects missing data-carousel-track");
+  assert.ok(projectsSection.includes("ec-mobile-carousel-track"), "Featured projects missing ec-mobile-carousel-track");
+  assert.ok(projectsSection.includes("sm:space-y-5"), "Desktop sm:space-y-5 stack spacing must be preserved");
+  assert.ok(!/\bclass="[^"]*(?<!sm:)space-y-5\b/.test(projectsSection), "Unprefixed space-y-5 must not apply on mobile carousel track");
+  assert.ok(projectsSection.includes("sm:flex-row"), "Desktop sm:flex-row horizontal card layout must be preserved");
+
+  const slideCount = (projectsSection.match(/data-carousel-slide/g) || []).length;
+  assert.equal(slideCount, 4, "Expected 4 featured project carousel slides");
+
+  const dotCount = (projectsSection.match(/data-carousel-dot="/g) || []).length;
+  assert.equal(dotCount, 4, "Expected 4 pagination dots for featured projects");
+  assert.ok(!projectsSection.includes("is-windowed"), "4-dot pagination must not use 7-dot windowed clipping");
+});
+
+test("card tag overflow helper caps wrapped tags at 2 lines and fits +N token on line 2", () => {
+  delete require.cache[require.resolve(path.join(SITE, "js", "bundle.js"))];
+  require(path.join(SITE, "js", "bundle.js"));
+  assert.equal(typeof globalThis.App?.countChipLines, "function");
+  assert.equal(typeof globalThis.App?.fitTagList, "function");
+
+  const { countChipLines, fitTagList } = globalThis.App;
+  assert.equal(countChipLines([]), 0);
+  assert.equal(countChipLines([0, 0, 28, 28]), 2);
+  assert.equal(countChipLines([0, 28, 56]), 3);
+
+  function createFlexMock(containerWidth, specs, gap = 6, rowHeight = 28) {
+    let width = containerWidth;
+    const makeNode = (label, baseWidth) => {
+      const attrs = {};
+      return {
+        textContent: label,
+        hidden: false,
+        title: "",
+        _width: baseWidth,
+        setAttribute(k, v) {
+          attrs[k] = v;
+        },
+        getAttribute(k) {
+          return attrs[k];
+        },
+        removeAttribute(k) {
+          delete attrs[k];
+        },
+        get offsetTop() {
+          layout();
+          return this._top || 0;
+        },
+      };
+    };
+
+    const items = specs.map(([label, w]) => makeNode(label, w));
+    const moreChip = makeNode("", 38);
+    moreChip.hidden = true;
+
+    function layout() {
+      let x = 0;
+      let y = 0;
+      const visible = [
+        ...items.filter((el) => !el.hidden),
+        ...(moreChip.hidden ? [] : [{ el: moreChip, w: 24 + moreChip.textContent.length * 7 }]),
+      ];
+      for (const entry of visible) {
+        const node = entry.el || entry;
+        const w = entry.w ?? node._width;
+        if (x > 0 && x + gap + w > width) {
+          x = 0;
+          y += rowHeight;
+        }
+        node._top = y;
+        x = x === 0 ? w : x + gap + w;
+      }
+    }
+
+    return {
+      items,
+      moreChip,
+      setWidth(nextWidth) {
+        width = nextWidth;
+      },
+      container: {
+        get clientWidth() {
+          return width;
+        },
+        querySelectorAll(sel) {
+          return sel === "[data-tag-item]" ? items : [];
+        },
+        querySelector(sel) {
+          return sel === "[data-tag-more]" ? moreChip : null;
+        },
+      },
+    };
+  }
+
+  // Case 1: mwe-bpe tags on 294px mobile card -> 3 tags fit on lines 1-2 + "+3" fits on line 2
+  const mwe = createFlexMock(294, [
+    ["Python", 62],
+    ["NLP", 42],
+    ["Multi-Word Expressions", 195],
+    ["Byte-Pair Encoding", 165],
+    ["PyTorch", 72],
+    ["Transformers", 104],
+  ]);
+  const resMobile = fitTagList(mwe.container, 2);
+  assert.deepEqual(resMobile, { visibleCount: 3, hiddenCount: 3 });
+  assert.equal(mwe.moreChip.hidden, false);
+  assert.equal(mwe.moreChip.textContent, "+3");
+  assert.equal(mwe.moreChip.title, "Byte-Pair Encoding, PyTorch, Transformers");
+  assert.equal(mwe.items[2].hidden, false);
+  assert.equal(mwe.items[3].hidden, true);
+
+  // Case 2: Widening container to 640px desktop restores all 6 tags and hides +N
+  mwe.setWidth(640);
+  const resDesktop = fitTagList(mwe.container, 2);
+  assert.deepEqual(resDesktop, { visibleCount: 6, hiddenCount: 0 });
+  assert.equal(mwe.moreChip.hidden, true);
+  assert.ok(mwe.items.every((el) => el.hidden === false));
+
+  // Case 3: Line 2 is nearly full (180px of 200px), so "+1" (38px) cannot fit alongside item[1];
+  // fitTagList must hide item[1] too and render "+2" on line 2 instead of spilling "+1" onto line 3.
+  const tight = createFlexMock(200, [
+    ["Python", 150],
+    ["Computer Graphics", 180],
+    ["OpenGL", 75],
+  ]);
+  const resTight = fitTagList(tight.container, 2);
+  assert.deepEqual(resTight, { visibleCount: 1, hiddenCount: 2 });
+  assert.equal(tight.moreChip.hidden, false);
+  assert.equal(tight.moreChip.textContent, "+2");
+  assert.equal(tight.items[0].hidden, false);
+  assert.equal(tight.items[1].hidden, true);
+  assert.equal(tight.items[2].hidden, true);
+  assert.ok(countChipLines([tight.items[0].offsetTop, tight.moreChip.offsetTop]) <= 2);
+});
+
+test("all project and essay cards render data-tag-list with hidden +N chip while skills and topic filters do not", () => {
+  const indexHtml = fs.readFileSync(path.join(SITE, "index.html"), "utf8");
+  const projectsHtml = fs.readFileSync(path.join(SITE, "projects", "index.html"), "utf8");
+  const blogsHtml = fs.readFileSync(path.join(SITE, "blogs", "index.html"), "utf8");
+  const tagHtml = fs.readFileSync(path.join(SITE, "tags", "python", "index.html"), "utf8");
+  const css = fs.readFileSync(path.join(SITE, "assets", "css", "tailwind.css"), "utf8");
+
+  const skillsSection = indexHtml.slice(indexHtml.indexOf('id="skills"'), indexHtml.indexOf('id="writing"'));
+  assert.ok(!skillsSection.includes("data-tag-list"), "Skills section must not truncate skill chips");
+
+  const homeProjects = indexHtml.slice(indexHtml.indexOf('id="projects"'), indexHtml.indexOf('id="writing"'));
+  const homeWriting = indexHtml.slice(indexHtml.indexOf('id="writing"'));
+  assert.equal((homeProjects.match(/data-tag-list/g) || []).length, 4, "Expected 4 data-tag-list in Home Featured Projects");
+  assert.equal((homeProjects.match(/data-tag-more/g) || []).length, 4, "Expected 4 data-tag-more in Home Featured Projects");
+  assert.ok((homeWriting.match(/data-tag-list/g) || []).length >= 2, "Expected data-tag-list on Home Latest Writing cards");
+
+  const projectArticleCount = (projectsHtml.match(/<article\b/g) || []).length;
+  assert.ok(projectArticleCount >= 7, "Expected visible project cards on /projects/");
+  assert.equal(
+    (projectsHtml.match(/data-tag-list/g) || []).length,
+    projectArticleCount,
+    "Expected data-tag-list on every /projects/ card"
+  );
+  const blogsHeader = blogsHtml.slice(0, blogsHtml.indexOf("</header>"));
+  assert.ok(!blogsHeader.includes("data-tag-list"), "Blogs page header topic filter must not truncate");
+  assert.ok((blogsHtml.match(/data-tag-list/g) || []).length >= 2, "Expected data-tag-list on /blogs/ essay cards");
+  assert.ok((tagHtml.match(/data-tag-list/g) || []).length >= 1, "Expected data-tag-list on /tags/*/ cards");
+
+  assert.ok(css.includes(".ec-chip[hidden]"), "CSS must hide [hidden] .ec-chip elements");
+  assert.ok(css.includes(".ec-chip-more"), "CSS must style .ec-chip-more token");
+});
+
 
 
