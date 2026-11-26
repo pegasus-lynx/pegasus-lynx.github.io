@@ -33,8 +33,9 @@ permalink: /projects/
               {% if project.data.sourcecode and project.data.sourcecode != '#' %}
                 <a href="{{ project.data.sourcecode }}" target="_blank" rel="noopener noreferrer"
                    aria-label="Source code for {{ project.data.title }}"
-                   class="font-mono text-xs text-[var(--text-muted)] hover:text-[var(--accent-primary)]">
-                  Source ↗
+                   class="inline-flex items-center gap-1 font-mono text-xs text-[var(--text-muted)] hover:text-[var(--accent-primary)]">
+                  <span>Source</span>
+                  {% icon "arrow-up-right", "w-3.5 h-3.5" %}
                 </a>
               {% endif %}
             </div>

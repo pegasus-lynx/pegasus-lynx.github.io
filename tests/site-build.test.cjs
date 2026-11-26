@@ -20,12 +20,40 @@ test("info.json exposes unified v2 schema fields", () => {
   assert.ok(Array.isArray(info.selectedprojects) && info.selectedprojects.length >= 3);
 });
 
-test("info.json social icons contain valid space-separated CSS classes", () => {
+test("icon registry renders accessible SVGs, rejects unknown names, and matches info.json socials", () => {
+  const { ICONS, renderIcon } = require("../src/_data/icons.js");
+  const requiredKeys = [
+    "sun",
+    "moon",
+    "menu",
+    "close",
+    "copy",
+    "check",
+    "arrow-up-right",
+    "arrow-left",
+    "arrow-right",
+    "github",
+    "linkedin",
+    "medium",
+    "instagram",
+  ];
+  for (const key of requiredKeys) {
+    assert.ok(ICONS[key], `Missing icon key "${key}" in icons.js`);
+    const svg = renderIcon(key, "w-5 h-5");
+    assert.match(svg, /^<svg\b[^>]*aria-hidden="true"[^>]*focusable="false"/);
+    assert.ok(svg.includes('class="w-5 h-5"'), `Missing custom class on ${key}`);
+    assert.ok(svg.endsWith("</svg>"));
+  }
+
+  assert.throws(() => renderIcon("non-existent-icon"), /Unknown icon/);
+
   const info = JSON.parse(
     fs.readFileSync(path.join(ROOT, "src", "_data", "info.json"), "utf8")
   );
+  assert.equal(info.socials.length, 4, "Expected 4 socials after removing Email");
   for (const social of info.socials) {
-    assert.ok(!social.icon.includes(","), `Invalid comma in icon class: ${social.icon}`);
+    assert.notEqual(social.name, "Email", "Redundant Email social entry must be removed");
+    assert.ok(ICONS[social.icon], `Social icon "${social.icon}" missing from icons.js`);
   }
 });
 
@@ -120,7 +148,7 @@ test("blog reader renders 68ch prose container, progress bar, and sticky TOC rai
   assert.ok(blogHtml.includes('id="reading-progress"'), "Missing #reading-progress");
   assert.ok(blogHtml.includes('id="article-prose"'), "Missing #article-prose");
   assert.ok(blogHtml.includes('id="toc-rail"'), "Missing #toc-rail");
-  assert.ok(blogHtml.includes("← All Essays"), "Missing back link");
+  assert.ok(blogHtml.includes("All Essays"), "Missing back link");
   assert.ok(!blogHtml.includes("text-justify"), "Blog prose must not use text-justify");
 });
 
@@ -130,7 +158,7 @@ test("project reader renders case study metadata, blockquotes, figures, and guar
     "utf8"
   );
   assert.ok(projectHtml.includes('id="article-prose"'), "Missing #article-prose");
-  assert.ok(projectHtml.includes("← All Projects"), "Missing back link");
+  assert.ok(projectHtml.includes("All Projects"), "Missing back link");
   assert.ok(projectHtml.includes("https://github.com/pegasus-lynx/mwe-bpe"), "Missing source code link");
   assert.ok(projectHtml.includes("<blockquote>"), "Missing rendered blockquote");
   assert.ok(projectHtml.includes("/assets/images/mwe-bpe-score-table.webp"), "Missing figure image");
@@ -140,7 +168,7 @@ test("project reader renders case study metadata, blockquotes, figures, and guar
     path.join(SITE, "project", "cross-lingual-rdf-extraction", "index.html"),
     "utf8"
   );
-  assert.ok(!draftHtml.includes("Source Code ↗"), "Draft with sourcecode:# must omit Source Code button");
+  assert.ok(!draftHtml.includes("Source Code"), "Draft with sourcecode:# must omit Source Code button");
 });
 
 function walkHtmlFiles(dir) {
@@ -224,3 +252,23 @@ test("GitHub Actions workflow pins Node 26 LTS, uses v4 actions, and runs tests"
   assert.match(workflow, /peaceiris\/actions-gh-pages@v4/);
   assert.match(workflow, /npm test/);
 });
+
+test("built pages eliminate Font Awesome, text arrow glyphs, and render inline SVG icons", () => {
+  const htmlFiles = walkHtmlFiles(SITE);
+  for (const file of htmlFiles) {
+    const html = fs.readFileSync(file, "utf8");
+    const rel = path.relative(SITE, file);
+    assert.ok(!html.includes("fontawesome.com"), `Font Awesome script still present in ${rel}`);
+    assert.doesNotMatch(html, /\bfa-(?:brands|solid|regular|moon|sun)\b/, `Legacy fa-* class in ${rel}`);
+    assert.doesNotMatch(html, /[↗←→]/, `Raw directional Unicode glyph remaining in ${rel}`);
+  }
+
+  const indexHtml = fs.readFileSync(path.join(SITE, "index.html"), "utf8");
+  assert.ok(indexHtml.includes("ec-theme-icon-light"), "Missing light-mode moon icon wrapper");
+  assert.ok(indexHtml.includes("ec-theme-icon-dark"), "Missing dark-mode sun icon wrapper");
+  assert.ok(!indexHtml.includes('aria-label="Email"'), "Removed Email social link still rendered");
+
+  const css = fs.readFileSync(path.join(SITE, "assets", "css", "tailwind.css"), "utf8");
+  assert.ok(css.includes(".ec-theme-icon-dark"), "Missing CSS rule for .ec-theme-icon-dark");
+});
+

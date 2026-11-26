@@ -159,6 +159,22 @@ a.ec-chip:hover {
   color: var(--accent-primary);
 }
 
+.ec-theme-icon-light {
+  display: inline-flex;
+}
+
+.ec-theme-icon-dark {
+  display: none;
+}
+
+.dark .ec-theme-icon-light {
+  display: none;
+}
+
+.dark .ec-theme-icon-dark {
+  display: inline-flex;
+}
+
 .ec-spy-link {
   display: flex;
   align-items: center;

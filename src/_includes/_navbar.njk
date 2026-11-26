@@ -13,24 +13,24 @@
       <a href="/gallery/" class="ec-nav-link" {% if page.url == '/gallery/' %}aria-current="page"{% endif %}>Gallery</a>
       <a href="{{ info.resumeUrl }}" target="_blank" rel="noopener noreferrer" class="ec-nav-link inline-flex items-center gap-1">
         <span>Resume</span>
-        <span class="font-mono text-xs" aria-hidden="true">↗</span>
+        {% icon "arrow-up-right", "w-3.5 h-3.5" %}
       </a>
-      <button type="button" onclick="window.App.toggleTheme()" aria-label="Toggle color theme"
+      <button type="button" data-theme-toggle onclick="window.App.toggleTheme()" aria-label="Toggle color theme"
               class="w-9 h-9 rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-card)] flex items-center justify-center text-[var(--text-secondary)] hover:text-[var(--accent-primary)] hover:border-[var(--accent-primary)] transition-colors cursor-pointer">
-        <i data-theme-icon class="fa-solid fa-moon text-sm"></i>
+        <span class="ec-theme-icon-light">{% icon "moon", "w-4 h-4" %}</span>
+        <span class="ec-theme-icon-dark">{% icon "sun", "w-4 h-4" %}</span>
       </button>
     </div>
 
     <div class="flex items-center gap-2 md:hidden">
-      <button type="button" onclick="window.App.toggleTheme()" aria-label="Toggle color theme"
+      <button type="button" data-theme-toggle onclick="window.App.toggleTheme()" aria-label="Toggle color theme"
               class="w-9 h-9 rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-card)] flex items-center justify-center text-[var(--text-secondary)] cursor-pointer">
-        <i data-theme-icon class="fa-solid fa-moon text-sm"></i>
+        <span class="ec-theme-icon-light">{% icon "moon", "w-4 h-4" %}</span>
+        <span class="ec-theme-icon-dark">{% icon "sun", "w-4 h-4" %}</span>
       </button>
       <button type="button" id="mobile-nav-button" onclick="window.App.toggleMobileMenu()" aria-label="Open navigation menu"
               class="w-9 h-9 rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-card)] flex items-center justify-center text-[var(--text-primary)] cursor-pointer">
-        <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="currentColor" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-        </svg>
+        {% icon "menu", "w-5 h-5" %}
       </button>
     </div>
   </nav>
@@ -43,9 +43,7 @@
           <span class="font-display font-bold text-lg">{{ info.name }}</span>
           <button type="button" onclick="window.App.toggleMobileMenu(true)" aria-label="Close navigation menu"
                   class="w-9 h-9 rounded-lg border border-[var(--border-subtle)] flex items-center justify-center">
-            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-            </svg>
+            {% icon "close", "w-5 h-5" %}
           </button>
         </div>
         <div class="mt-6 flex flex-col gap-4 font-display text-xl font-semibold">
@@ -53,14 +51,17 @@
           <a href="/projects/" class="py-2 hover:text-[var(--accent-primary)]">Projects</a>
           <a href="/blogs/" class="py-2 hover:text-[var(--accent-primary)]">Blogs</a>
           <a href="/gallery/" class="py-2 hover:text-[var(--accent-primary)]">Gallery</a>
-          <a href="{{ info.resumeUrl }}" target="_blank" rel="noopener noreferrer" class="py-2 hover:text-[var(--accent-primary)]">Resume ↗</a>
+          <a href="{{ info.resumeUrl }}" target="_blank" rel="noopener noreferrer" class="py-2 hover:text-[var(--accent-primary)] inline-flex items-center gap-1.5">
+            <span>Resume</span>
+            {% icon "arrow-up-right", "w-4 h-4" %}
+          </a>
         </div>
       </div>
 
       <div class="pt-6 border-t border-[var(--border-subtle)] flex items-center gap-5 text-[var(--text-secondary)]">
         {% for social in info.socials %}
           <a href="{{ social.url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ social.name }}" class="hover:text-[var(--accent-primary)]">
-            <i class="{{ social.icon }} fa-lg"></i>
+            {% icon social.icon, "w-5 h-5" %}
           </a>
         {% endfor %}
       </div>

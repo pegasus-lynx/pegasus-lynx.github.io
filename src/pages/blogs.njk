@@ -43,8 +43,9 @@ permalink: /blogs/
               {% endif %}
             {% endfor %}
           </div>
-          <a href="{{ post.url }}" class="font-mono text-xs uppercase tracking-wider text-[var(--accent-primary)] hover:underline underline-offset-4">
-            Read essay →
+          <a href="{{ post.url }}" class="inline-flex items-center gap-1 font-mono text-xs uppercase tracking-wider text-[var(--accent-primary)] hover:underline underline-offset-4">
+            <span>Read essay</span>
+            {% icon "arrow-right", "w-3.5 h-3.5" %}
           </a>
         </div>
       </article>

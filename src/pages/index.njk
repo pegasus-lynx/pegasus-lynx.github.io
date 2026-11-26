@@ -36,7 +36,7 @@ permalink: /
       <div class="flex flex-wrap items-center gap-3 mb-8">
         <a href="{{ info.resumeUrl }}" target="_blank" rel="noopener noreferrer" class="ec-btn-primary">
           <span>Resume</span>
-          <span class="font-mono text-xs" aria-hidden="true">↗</span>
+          {% icon "arrow-up-right", "w-4 h-4" %}
         </a>
         <a href="mailto:{{ info.email }}" class="ec-btn-secondary">
           <span>Say Hello</span>
@@ -47,7 +47,7 @@ permalink: /
         {% for social in info.socials %}
           <a href="{{ social.url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ social.name }}"
              class="hover:text-[var(--accent-primary)] transition-colors">
-            <i class="{{ social.icon }} fa-lg"></i>
+            {% icon social.icon, "w-5 h-5" %}
           </a>
         {% endfor %}
       </div>
@@ -119,8 +119,9 @@ permalink: /
             <div class="ec-kicker mb-2">04 · Selected Work</div>
             <h2 class="font-display text-2xl sm:text-3xl font-bold">Featured Projects</h2>
           </div>
-          <a href="/projects/" class="font-mono text-xs uppercase tracking-wider text-[var(--accent-primary)] hover:underline underline-offset-4">
-            All projects →
+          <a href="/projects/" class="inline-flex items-center gap-1 font-mono text-xs uppercase tracking-wider text-[var(--accent-primary)] hover:underline underline-offset-4">
+            <span>All projects</span>
+            {% icon "arrow-right", "w-3.5 h-3.5" %}
           </a>
         </div>
 
@@ -144,8 +145,9 @@ permalink: /
                         {% if project.data.sourcecode and project.data.sourcecode != '#' %}
                           <a href="{{ project.data.sourcecode }}" target="_blank" rel="noopener noreferrer"
                              aria-label="Source code for {{ project.data.title }}"
-                             class="text-xs font-mono text-[var(--text-muted)] hover:text-[var(--accent-primary)]">
-                            GitHub ↗
+                             class="inline-flex items-center gap-1 text-xs font-mono text-[var(--text-muted)] hover:text-[var(--accent-primary)]">
+                            <span>GitHub</span>
+                            {% icon "arrow-up-right", "w-3.5 h-3.5" %}
                           </a>
                         {% endif %}
                       </div>
@@ -180,8 +182,9 @@ permalink: /
             <div class="ec-kicker mb-2">05 · Essays &amp; Notes</div>
             <h2 class="font-display text-2xl sm:text-3xl font-bold">Latest Writing</h2>
           </div>
-          <a href="/blogs/" class="font-mono text-xs uppercase tracking-wider text-[var(--accent-primary)] hover:underline underline-offset-4">
-            All essays →
+          <a href="/blogs/" class="inline-flex items-center gap-1 font-mono text-xs uppercase tracking-wider text-[var(--accent-primary)] hover:underline underline-offset-4">
+            <span>All essays</span>
+            {% icon "arrow-right", "w-3.5 h-3.5" %}
           </a>
         </div>
 
