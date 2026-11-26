@@ -347,4 +347,66 @@ test("navbar renders About link, places mobile drawer outside header, and compil
   assert.match(bundleJs, /initSmartNavbar/);
 });
 
+test("mobile carousel helpers resolve nearest slide center and sliding dot window", () => {
+  delete require.cache[require.resolve(path.join(SITE, "js", "bundle.js"))];
+  require(path.join(SITE, "js", "bundle.js"));
+  assert.equal(typeof globalThis.App?.computeCarouselIndex, "function");
+  assert.equal(typeof globalThis.App?.computeCarouselDotWindow, "function");
+
+  const { computeCarouselIndex, computeCarouselDotWindow } = globalThis.App;
+  assert.equal(computeCarouselIndex(160, []), 0);
+
+  const centers = [160, 480, 800, 1120];
+  assert.equal(computeCarouselIndex(0, centers), 0);
+  assert.equal(computeCarouselIndex(310, centers), 0);
+  assert.equal(computeCarouselIndex(330, centers), 1);
+  assert.equal(computeCarouselIndex(790, centers), 2);
+  assert.equal(computeCarouselIndex(1500, centers), 3);
+
+  assert.deepEqual(computeCarouselDotWindow(0, 3, 7), { start: 0, end: 2 });
+  assert.deepEqual(computeCarouselDotWindow(0, 20, 7), { start: 0, end: 6 });
+  assert.deepEqual(computeCarouselDotWindow(5, 20, 7), { start: 2, end: 8 });
+  assert.deepEqual(computeCarouselDotWindow(19, 20, 7), { start: 13, end: 19 });
+});
+
+test("gallery page renders frameless rounded mobile carousel with centered dots only", () => {
+  const galleryHtml = fs.readFileSync(path.join(SITE, "gallery", "index.html"), "utf8");
+  const css = fs.readFileSync(path.join(SITE, "assets", "css", "tailwind.css"), "utf8");
+  const bundleJs = fs.readFileSync(path.join(SITE, "js", "bundle.js"), "utf8");
+
+  assert.ok(galleryHtml.includes("data-carousel"), "Missing data-carousel wrapper");
+  assert.ok(galleryHtml.includes("data-carousel-track"), "Missing data-carousel-track");
+  assert.ok(galleryHtml.includes("ec-mobile-carousel-track"), "Missing ec-mobile-carousel-track class");
+  assert.ok(galleryHtml.includes("ec-gallery-masonry"), "Desktop ec-gallery-masonry class must be preserved");
+  assert.ok(!galleryHtml.includes("ec-gallery-stage"), "Frameless gallery must not render ec-gallery-stage");
+  assert.ok(!/<figure[^>]*\bec-card\b/.test(galleryHtml), "Gallery figure must not have ec-card border");
+  assert.ok(!/<figure[^>]*\bp-2\b/.test(galleryHtml), "Gallery figure must not have p-2 inner gap");
+  assert.ok(/<img[^>]*width="720"[^>]*height="\d+"[^>]*class="[^"]*\brounded-2xl\b/.test(galleryHtml), "Gallery img must have intrinsic dimensions and rounded-2xl corners");
+
+  const slideCount = (galleryHtml.match(/data-carousel-slide/g) || []).length;
+  assert.equal(slideCount, 20, "Expected 20 gallery carousel slides");
+
+  const portraitCount = (galleryHtml.match(/data-orientation="portrait"/g) || []).length;
+  const landscapeCount = (galleryHtml.match(/data-orientation="landscape"/g) || []).length;
+  assert.equal(portraitCount, 14, "Expected 14 portrait gallery slides");
+  assert.equal(landscapeCount, 6, "Expected 6 landscape gallery slides");
+  assert.ok(/data-orientation="landscape"\s+style="--slide-bg:\s*url\('\/assets\/images\/gallery\/[^']+\.webp'\)"/.test(galleryHtml), "Landscape slides must set --slide-bg CSS variable");
+
+  assert.ok(!galleryHtml.includes("1 / 20"), "Numeric 1 / 20 counter must not appear on page");
+  assert.ok(!galleryHtml.includes("data-carousel-status"), "data-carousel-status counter must be removed");
+  assert.ok(!galleryHtml.includes("data-carousel-prev"), "Prev arrow button must be removed");
+  assert.ok(!galleryHtml.includes("data-carousel-next"), "Next arrow button must be removed");
+
+  const dotCount = (galleryHtml.match(/data-carousel-dot="/g) || []).length;
+  assert.equal(dotCount, 20, "Expected 20 pagination dot buttons");
+
+  assert.ok(css.includes(".ec-mobile-carousel-track"), "Missing .ec-mobile-carousel-track in CSS");
+  assert.ok(css.includes(".ec-carousel-dot"), "Missing .ec-carousel-dot styles in CSS");
+  assert.ok(css.includes('[data-orientation="landscape"]::before'), "Missing landscape blurred backdrop pseudo-element in CSS");
+  assert.ok(css.includes("blur("), "Missing blur filter on landscape backdrop in CSS");
+  assert.ok(!css.includes(".ec-gallery-stage"), "Unused .ec-gallery-stage frame rule should be removed");
+  assert.ok(bundleJs.includes("initMobileCarousels"), "Missing initMobileCarousels in bundle.js");
+});
+
+
 

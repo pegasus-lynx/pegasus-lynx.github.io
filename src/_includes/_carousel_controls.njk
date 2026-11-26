@@ -1,0 +1,15 @@
+{% set dotTotal = carouselTotal or 1 %}
+<div class="flex sm:hidden items-center justify-center mt-4">
+  <div data-carousel-dots-viewport
+       class="ec-carousel-dots-viewport{% if dotTotal > 7 %} is-windowed{% endif %}">
+    <div data-carousel-dots class="ec-carousel-dots">
+      {% for i in range(0, dotTotal) %}
+        <button type="button"
+                data-carousel-dot="{{ i }}"
+                aria-label="Go to slide {{ i + 1 }}"
+                aria-current="{{ 'true' if i == 0 else 'false' }}"
+                class="ec-carousel-dot{% if i == 0 %} is-active{% endif %}{% if dotTotal > 7 and i == 6 %} is-edge{% endif %}"></button>
+      {% endfor %}
+    </div>
+  </div>
+</div>

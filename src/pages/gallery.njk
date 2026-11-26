@@ -14,11 +14,24 @@ permalink: /gallery/
     </p>
   </header>
 
-  <div class="ec-gallery-masonry">
-    {% for img in collections.gallery %}
-      <figure class="ec-gallery-item ec-card overflow-hidden p-2">
-        {% image img.src, img.alt, [720], "w-full h-auto rounded-lg block" %}
-      </figure>
-    {% endfor %}
-  </div>
+  <section data-carousel aria-roledescription="carousel" aria-label="Photo gallery">
+    <div data-carousel-track class="ec-mobile-carousel-track ec-gallery-masonry">
+      {% for img in collections.gallery %}
+        <figure data-carousel-slide
+                data-orientation="{{ img.orientation }}"
+                {% if img.orientation == "landscape" %}style="--slide-bg: url('{{ img.url }}')"{% endif %}
+                class="ec-mobile-carousel-slide ec-gallery-item">
+          <img src="{{ img.url }}"
+               width="{{ img.width }}"
+               height="{{ img.height }}"
+               alt="{{ img.alt }}"
+               loading="lazy"
+               decoding="async"
+               class="w-full h-auto rounded-2xl block">
+        </figure>
+      {% endfor %}
+    </div>
+    {% set carouselTotal = collections.gallery.length %}
+    {% include "_carousel_controls.njk" %}
+  </section>
 </main>
