@@ -75,12 +75,35 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/assets/images/favicons/");
   eleventyConfig.addPassthroughCopy("CNAME");
 
-  eleventyConfig.addCollection("gallery", () => {
+  eleventyConfig.addCollection("gallery", async () => {
     const galleryPath = path.resolve(__dirname, "./src/assets/images/gallery");
-    return fs.readdirSync(galleryPath).map((file) => ({
-      src: `./src/assets/images/gallery/${file}`,
-      alt: file.replace(/\.[^.]+$/, "").replace(/[-_]+/g, " "),
-    }));
+    const files = fs.readdirSync(galleryPath).sort();
+    return Promise.all(
+      files.map(async (file) => {
+        const src = `./src/assets/images/gallery/${file}`;
+        const alt = file.replace(/\.[^.]+$/, "").replace(/[-_]+/g, " ");
+        const metadata = await Image(src, {
+          widths: [720],
+          formats: ["webp"],
+          urlPath: "/assets/images/gallery",
+          outputDir: "./_site/assets/images/gallery/",
+          filenameFormat: function (id, imgSrc, width, format) {
+            const extension = path.extname(imgSrc);
+            const name = path.basename(imgSrc, extension);
+            return `${name}-${width}w.${format}`;
+          },
+        });
+        const output = metadata.webp[0];
+        return {
+          src,
+          url: output.url,
+          width: output.width,
+          height: output.height,
+          orientation: output.width > output.height ? "landscape" : "portrait",
+          alt,
+        };
+      })
+    );
   });
 
   eleventyConfig.addCollection("blogsSorted", (collectionApi) =>
@@ -158,8 +181,11 @@ module.exports = function (eleventyConfig) {
       },
     });
 
+    const output = metadata.webp[0];
     const imgAttributes = stringifyAttributes({
-      src: metadata.webp[0].url,
+      src: output.url,
+      width: output.width,
+      height: output.height,
       alt: alt || "",
       loading: "lazy",
       decoding: "async",
