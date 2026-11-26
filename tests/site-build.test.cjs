@@ -272,3 +272,79 @@ test("built pages eliminate Font Awesome, text arrow glyphs, and render inline S
   assert.ok(css.includes(".ec-theme-icon-dark"), "Missing CSS rule for .ec-theme-icon-dark");
 });
 
+test("smart navbar state machine hides on scroll down, shows on scroll up, and guards top/menu/focus", () => {
+  delete require.cache[require.resolve(path.join(SITE, "js", "bundle.js"))];
+  require(path.join(SITE, "js", "bundle.js"));
+  assert.equal(typeof globalThis.App?.updateNavbarScrollState, "function");
+
+  const makeEl = (initialClasses = []) => {
+    const set = new Set(initialClasses);
+    return {
+      classList: {
+        add: (c) => set.add(c),
+        remove: (c) => set.delete(c),
+        contains: (c) => set.has(c),
+      },
+      contains: (node) => Boolean(node && node === focusedInside),
+    };
+  };
+
+  let focusedInside = null;
+  const header = makeEl();
+  const mobileMenu = makeEl(["hidden"]);
+  const { updateNavbarScrollState } = globalThis.App;
+
+  // Scrolling down past 64px hides header
+  let lastY = updateNavbarScrollState({ header, mobileMenu, currentY: 120, lastY: 20, activeElement: null });
+  assert.equal(lastY, 120);
+  assert.equal(header.classList.contains("ec-navbar-hidden"), true);
+
+  // Small jitter (< 8px) keeps state and preserves lastY so gradual scroll accumulates
+  lastY = updateNavbarScrollState({ header, mobileMenu, currentY: 115, lastY, activeElement: null });
+  assert.equal(lastY, 120);
+  assert.equal(header.classList.contains("ec-navbar-hidden"), true);
+
+  // Scrolling up >= 8px reveals header immediately
+  lastY = updateNavbarScrollState({ header, mobileMenu, currentY: 108, lastY, activeElement: null });
+  assert.equal(lastY, 108);
+  assert.equal(header.classList.contains("ec-navbar-hidden"), false);
+
+  // Open mobile menu prevents hiding on downward scroll
+  mobileMenu.classList.remove("hidden");
+  lastY = updateNavbarScrollState({ header, mobileMenu, currentY: 220, lastY, activeElement: null });
+  assert.equal(header.classList.contains("ec-navbar-hidden"), false);
+  mobileMenu.classList.add("hidden");
+
+  // Active keyboard focus inside header prevents hiding
+  focusedInside = {};
+  lastY = updateNavbarScrollState({ header, mobileMenu, currentY: 320, lastY, activeElement: focusedInside });
+  assert.equal(header.classList.contains("ec-navbar-hidden"), false);
+  focusedInside = null;
+
+  // Returning near top (<= 64px) always reveals header
+  header.classList.add("ec-navbar-hidden");
+  lastY = updateNavbarScrollState({ header, mobileMenu, currentY: 40, lastY: 200, activeElement: null });
+  assert.equal(lastY, 40);
+  assert.equal(header.classList.contains("ec-navbar-hidden"), false);
+});
+
+test("navbar renders About link, places mobile drawer outside header, and compiles hide-on-scroll styles", () => {
+  const indexHtml = fs.readFileSync(path.join(SITE, "index.html"), "utf8");
+  const blogsHtml = fs.readFileSync(path.join(SITE, "blogs", "index.html"), "utf8");
+  const css = fs.readFileSync(path.join(SITE, "assets", "css", "tailwind.css"), "utf8");
+  const bundleJs = fs.readFileSync(path.join(SITE, "js", "bundle.js"), "utf8");
+
+  assert.match(indexHtml, /<header[^>]*id="site-header"[^>]*class="[^"]*\bec-navbar\b/);
+  assert.match(indexHtml, /<a href="\/" class="ec-nav-link"\s+aria-current="page">About<\/a>/);
+  assert.match(blogsHtml, /<a href="\/" class="ec-nav-link"\s*>About<\/a>/);
+  assert.ok(!indexHtml.includes(">Home</a>"), "Mobile drawer should show About instead of Home");
+
+  const headerEnd = indexHtml.indexOf("</header>");
+  const mobileDrawerPos = indexHtml.indexOf('id="mobile-nav-menu"');
+  assert.ok(headerEnd > 0 && mobileDrawerPos > headerEnd, "#mobile-nav-menu must be outside <header>");
+
+  assert.ok(css.includes(".ec-navbar-hidden"), "Missing .ec-navbar-hidden in compiled CSS");
+  assert.match(bundleJs, /initSmartNavbar/);
+});
+
+
