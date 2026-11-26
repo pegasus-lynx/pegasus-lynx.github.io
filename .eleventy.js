@@ -206,6 +206,16 @@ module.exports = function (eleventyConfig) {
 
   eleventyConfig.addFilter("postMonth", formatPostMonth);
 
+  eleventyConfig.addFilter("mdInline", (value) => {
+    if (!value) return "";
+    const html = md.renderInline(String(value));
+    return html.replace(/<a\s+href="([^"]+)"([^>]*)>/g, (match, href, rest) => {
+      const isExternal = /^https?:\/\//i.test(href);
+      const extAttrs = isExternal ? ' target="_blank" rel="noopener noreferrer"' : "";
+      return `<a href="${href}"${rest}${extAttrs} class="ec-inline-link">`;
+    });
+  });
+
   eleventyConfig.addFilter("buildSearchIndexJson", (collections) => {
     const slugify = eleventyConfig.getFilter("slugify");
     const extractPlainText = (item) => {
@@ -236,11 +246,18 @@ module.exports = function (eleventyConfig) {
 
     const blogItems = (collections.blogsSorted || []).map((item) => {
       const pubLabel = formatPostDate(item.data.publishdate);
+      const externalUrl = item.data.external_url ? String(item.data.external_url) : "";
+      const externalSite = item.data.external_site ? String(item.data.external_site) : "";
+      const metaParts = [pubLabel];
+      if (item.data.readingtime) metaParts.push(`${item.data.readingtime} read`);
+      if (externalSite) metaParts.push(externalSite);
       return {
         title: item.data.title || "",
-        url: item.url,
+        url: externalUrl || item.url,
         type: "blog",
-        dateLabel: item.data.readingtime ? `${pubLabel} · ${item.data.readingtime} read` : pubLabel,
+        external: Boolean(externalUrl),
+        externalSite,
+        dateLabel: metaParts.filter(Boolean).join(" · "),
         sortTimestamp: parseDdMmYyyy(item.data.publishdate),
         description: item.data.description || "",
         tags: mapVisibleTags(item.data.tags),

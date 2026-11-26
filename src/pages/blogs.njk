@@ -20,12 +20,15 @@ permalink: /blogs/
 
   <div data-search-results class="space-y-6">
     {% for post in collections.blogsSorted %}
-      <article data-inline-card="{{ post.url }}" class="ec-card ec-card-interactive p-6 md:p-8">
+      {% set postHref = post.data.external_url or post.url %}
+      {% set isExternalPost = true if post.data.external_url else false %}
+      <article data-inline-card="{{ postHref }}" class="ec-card ec-card-interactive p-6 md:p-8">
         <div class="font-mono text-xs uppercase tracking-wider text-[var(--accent-secondary)] mb-2">
-          {{ post.data.publishdate | postDate }} · {{ post.data.readingtime }} read
+          {{ post.data.publishdate | postDate }} · {{ post.data.readingtime }} read{% if post.data.external_site %} · {{ post.data.external_site }}{% endif %}
         </div>
         <h2 class="font-display text-2xl font-bold leading-snug mb-2.5">
-          <a href="{{ post.url }}" class="hover:text-[var(--accent-primary)] transition-colors">
+          <a href="{{ postHref }}"{% if isExternalPost %} target="_blank" rel="noopener noreferrer"{% endif %}
+             class="hover:text-[var(--accent-primary)] transition-colors">
             {{ post.data.title }}
           </a>
         </h2>
@@ -37,9 +40,14 @@ permalink: /blogs/
           {% set tagBaseUrl = "/blogs/" %}
           {% set tagListClass = "flex flex-wrap gap-2" %}
           {% include "_card_tags.njk" %}
-          <a href="{{ post.url }}" class="inline-flex items-center gap-1 font-mono text-xs uppercase tracking-wider text-[var(--accent-primary)] hover:underline underline-offset-4">
-            <span>Read essay</span>
-            {% icon "arrow-right", "w-3.5 h-3.5" %}
+          <a href="{{ postHref }}"{% if isExternalPost %} target="_blank" rel="noopener noreferrer"{% endif %}
+             class="inline-flex items-center gap-1 font-mono text-xs uppercase tracking-wider text-[var(--accent-primary)] hover:underline underline-offset-4">
+            <span>{% if post.data.external_site %}Read on {{ post.data.external_site }}{% else %}Read essay{% endif %}</span>
+            {% if isExternalPost %}
+              {% icon "arrow-up-right", "w-3.5 h-3.5" %}
+            {% else %}
+              {% icon "arrow-right", "w-3.5 h-3.5" %}
+            {% endif %}
           </a>
         </div>
       </article>

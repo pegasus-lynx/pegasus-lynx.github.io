@@ -22,7 +22,7 @@ permalink: /
         {{ info.punch }}
       </p>
       <p class="text-[var(--text-secondary)] text-base leading-relaxed mb-8">
-        {{ info.intro }}
+        {{ info.intro | mdInline | safe }}
       </p>
 
       <nav class="hidden lg:flex flex-col gap-1 mb-10" aria-label="Page sections">
@@ -43,13 +43,23 @@ permalink: /
         </a>
       </div>
 
-      <div class="flex items-center gap-5 text-[var(--text-secondary)]">
+      <div class="flex flex-wrap items-center gap-5 text-[var(--text-secondary)]">
         {% for social in info.socials %}
           <a href="{{ social.url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ social.name }}"
              class="hover:text-[var(--accent-primary)] transition-colors">
             {% icon social.icon, "w-5 h-5" %}
           </a>
         {% endfor %}
+        {% if info.workGithub %}
+          <span class="h-4 w-px bg-[var(--border-subtle)]" aria-hidden="true"></span>
+          <a href="{{ info.workGithub.url }}" target="_blank" rel="noopener noreferrer"
+             aria-label="Microsoft open-source GitHub ({{ info.workGithub.label }})"
+             class="inline-flex items-center gap-1.5 font-mono text-xs text-[var(--text-secondary)] hover:text-[var(--accent-primary)] transition-colors">
+            {% icon "github", "w-4 h-4" %}
+            <span>{{ info.workGithub.label }}</span>
+            {% icon "arrow-up-right", "w-3.5 h-3.5" %}
+          </a>
+        {% endif %}
       </div>
     </aside>
 
@@ -62,7 +72,7 @@ permalink: /
         <h2 class="font-display text-2xl sm:text-3xl font-bold mb-6">About Me</h2>
         <div class="space-y-4 text-[var(--text-secondary)] text-base md:text-[1.05rem] leading-[1.8] text-left">
           {% for paragraph in info.about %}
-            <p>{{ paragraph }}</p>
+            <p>{{ paragraph | mdInline | safe }}</p>
           {% endfor %}
         </div>
       </section>
@@ -75,16 +85,21 @@ permalink: /
           {% for exp in info.experiences %}
             <div class="ec-card p-6">
               <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-3">
-                <h3 class="font-display text-lg font-semibold text-[var(--text-primary)]">
-                  {{ exp.role }} <span class="text-[var(--accent-primary)]">· {{ exp.company }}</span>
-                </h3>
+                <div>
+                  <h3 class="font-display text-lg font-semibold text-[var(--text-primary)]">
+                    {{ exp.role }} <span class="text-[var(--accent-primary)]">· {{ exp.company }}</span>
+                  </h3>
+                  {% if exp.location %}
+                    <p class="font-mono text-xs text-[var(--text-muted)] mt-0.5">{{ exp.location }}</p>
+                  {% endif %}
+                </div>
                 <span class="font-mono text-xs uppercase tracking-wider text-[var(--accent-secondary)] shrink-0">
                   {{ exp.time }}
                 </span>
               </div>
               <ul class="space-y-2.5 text-sm md:text-[0.95rem] leading-relaxed text-[var(--text-secondary)] list-disc pl-5">
                 {% for item in exp.details %}
-                  <li>{{ item }}</li>
+                  <li>{{ item | mdInline | safe }}</li>
                 {% endfor %}
               </ul>
             </div>
@@ -192,25 +207,36 @@ permalink: /
           </a>
         </div>
 
+        {% set homePosts = [] %}
+        {% for post in collections.blogsSorted %}
+          {% if "Book Summary" not in post.data.tags and homePosts.length < 3 %}
+            {% set _ = homePosts.push(post) %}
+          {% endif %}
+        {% endfor %}
+
         <div class="space-y-4">
-          {% for post in collections.blogsSorted %}
-            {% if loop.index <= 3 %}
-              <article class="ec-card ec-card-interactive p-6">
-                <div class="font-mono text-xs text-[var(--accent-secondary)] mb-2">
-                  {{ post.data.publishdate | postDate }} · {{ post.data.readingtime }} read
-                </div>
-                <h3 class="font-display text-xl font-bold leading-snug mb-2">
-                  <a href="{{ post.url }}" class="hover:text-[var(--accent-primary)] transition-colors">
-                    {{ post.data.title }}
-                  </a>
-                </h3>
-                <p class="text-sm text-[var(--text-secondary)] leading-relaxed mb-4">
-                  {{ post.data.description }}
-                </p>
-                {% set tagItems = post.data.tags %}
-                {% include "_card_tags.njk" %}
-              </article>
-            {% endif %}
+          {% for post in homePosts %}
+            {% set postHref = post.data.external_url or post.url %}
+            {% set isExternalPost = true if post.data.external_url else false %}
+            <article class="ec-card ec-card-interactive p-6">
+              <div class="font-mono text-xs text-[var(--accent-secondary)] mb-2">
+                {{ post.data.publishdate | postDate }} · {{ post.data.readingtime }} read{% if post.data.external_site %} · {{ post.data.external_site }}{% endif %}
+              </div>
+              <h3 class="font-display text-xl font-bold leading-snug mb-2">
+                <a href="{{ postHref }}"{% if isExternalPost %} target="_blank" rel="noopener noreferrer"{% endif %}
+                   class="inline-flex items-baseline gap-1.5 hover:text-[var(--accent-primary)] transition-colors">
+                  <span>{{ post.data.title }}</span>
+                  {% if isExternalPost %}
+                    {% icon "arrow-up-right", "w-4 h-4 shrink-0 translate-y-0.5 text-[var(--accent-primary)]" %}
+                  {% endif %}
+                </a>
+              </h3>
+              <p class="text-sm text-[var(--text-secondary)] leading-relaxed mb-4">
+                {{ post.data.description }}
+              </p>
+              {% set tagItems = post.data.tags %}
+              {% include "_card_tags.njk" %}
+            </article>
           {% endfor %}
         </div>
       </section>

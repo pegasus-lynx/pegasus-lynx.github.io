@@ -3,13 +3,17 @@
   "sitename": "Dipesh Kumar — Software Engineer",
   "role": "Software Engineer II · Microsoft",
   "punch": "Building resilient UI frameworks and thoughtful software systems.",
-  "intro": "I craft modern desktop frameworks in the Windows ecosystem (WPF & WinUI) that ship with the .NET SDK, while exploring distributed systems, language models, and visual design.",
+  "intro": "I build core desktop UI frameworks at Microsoft — [WPF](https://github.com/dotnet/wpf) and [WinUI 3](https://learn.microsoft.com/en-us/windows/apps/winui/), used by 700K+ developers behind apps like Visual Studio, AutoCAD, and Microsoft Store — while exploring developer tooling, language models, and visual design.",
   "email": "dipeshkrj14@gmail.com",
-  "resumeUrl": "https://drive.google.com/file/d/1AFSSzhv9SuvjyP-Am3ukRk6_0hB40fKG/view?usp=sharing",
+  "resumeUrl": "https://drive.google.com/file/d/1AJhn4yNdzz4UBtNhB1-xsQtmPqqfMtRN/view?usp=sharing",
+  "workGithub": {
+    "label": "@dipeshmsft",
+    "url": "https://github.com/dipeshmsft"
+  },
   "about": [
-    "I'm Dipesh Kumar, a Software Engineer II at Microsoft on the Windows Presentation Foundation (WPF) and Windows desktop UI ecosystem team. Working in an open-source .NET framework means balancing decades-long compatibility with modern API design, contributor collaboration, and engineering rigor.",
-    "Across my career and research at IIT (BHU) Varanasi, I've enjoyed moving across layers — from C++ and OpenGL terrain rendering to backend REST services in Django, frontend web architecture, and Natural Language Processing research on subword tokenization and sequence labeling.",
-    "Outside of engineering, you'll usually find me reading fiction or essays over a cup of chai, experimenting with typography and visual design, or out on road trips and mountain trails with a camera — moments I collect in the Gallery."
+    "I'm Dipesh Kumar, a Software Engineer II at Microsoft in Hyderabad with 5+ years on the core team of [Windows Presentation Foundation (WPF)](https://github.com/dotnet/wpf) and [WinUI 3](https://learn.microsoft.com/en-us/windows/apps/winui/). Maintaining foundational .NET and Windows UI frameworks in the open ([@dipeshmsft](https://github.com/dipeshmsft)) means balancing decades-long compatibility with modern API design, community PR reviews, and open-source leadership.",
+    "Across my work at Microsoft and research at IIT (BHU) Varanasi, I enjoy moving across layers — from reactive UI controls, ETL/Kusto performance pipelines, and AI-assisted servicing agents to VS Code developer extensions, C++ OpenGL rendering, and published NLP research on subword tokenization.",
+    "Outside of engineering, you'll usually find me reading fiction or essays over a cup of chai, experimenting with typography and visual design, or out on road trips and mountain trails with a camera — moments I collect in the [Gallery](/gallery/)."
   ],
   "socials": [
     {
@@ -37,20 +41,24 @@
     {
       "role": "Software Engineer II",
       "company": "Microsoft",
-      "time": "Sep 2023 — Present",
+      "location": "Hyderabad, India",
+      "time": "Oct 2023 — Present",
       "details": [
-        "Core maintainer of Windows Presentation Foundation (WPF) in the open-source .NET SDK — reviewing community PRs, triaging issues, and shipping framework reliability and modernization improvements.",
-        "Co-designed and delivered the OpenFolderDialog API for WPF through API review, specification, implementation, sample apps, developer documentation, and automated test coverage.",
-        "Built automation pipelines to accelerate open-sourcing WPF's test suite and enabled CI unit-test execution on pull requests for external contributors."
+        "Spearheaded the Windows 11 native Fluent theme and runtime theme-switching infrastructure for [WPF](https://github.com/dotnet/wpf) — introducing [Fluent ThemeMode](https://github.com/dotnet/wpf/issues/8932) and [AccentColor](https://github.com/dotnet/wpf/issues/9295) APIs, and shipping [WPF Gallery on Microsoft Store](https://www.microsoft.com/store/productId/9NDLX60WX4KQ?ocid=pdpshare) (>20K downloads) to showcase the new controls and themes.",
+        "Engineered a performant reactive data pipeline for the [WinUI 3](https://learn.microsoft.com/en-us/windows/apps/winui/) TableView control (filtering, grouping, sorting, and live change tracking across flat and hierarchical data) and owned end-to-end delivery of SplitMenuFlyoutItem.",
+        "Authored a WinUI performance measurement dashboard (latency, memory, and scroll metrics extracted from ETL traces into Azure Data Explorer / Kusto) and rejuvenated WinUI Snoop for real-time visual-tree and property inspection without debugger setup.",
+        "Built an internal AI agent for the WPF servicing workflow to adapt fixes across framework versions, build constraints, and version-control systems (TFVC, Source Depot) — reducing manual effort by 75%."
       ]
     },
     {
-      "role": "Software Engineer",
+      "role": "Software Engineer I",
       "company": "Microsoft",
-      "time": "Jun 2021 — Sep 2023",
+      "location": "Hyderabad, India",
+      "time": "Jun 2021 — Oct 2023",
       "details": [
-        "Engineered bug fixes, accessibility improvements, and servicing updates across core WPF controls, layout, and input subsystems.",
-        "Partnered with .NET SDK partners and open-source contributors to keep framework releases stable across Windows versions."
+        "Designed the [OpenFolderDialog API](https://github.com/dotnet/wpf/issues/7689) in WPF (.NET 8) — a top-voted community request (>170 upvotes) — delivering integration tests, developer documentation, and an official [.NET Blog article](https://devblogs.microsoft.com/dotnet/wpf-file-dialog-improvements-in-dotnet-8/).",
+        "Investigated and resolved critical production issues for enterprise clients (Visual Studio, Affinity, Siemens Healthcare, Schneider Electric), improving reliability for 1M+ professionals across healthcare and design.",
+        "Led open-sourcing of the [dotnet/wpf](https://github.com/dotnet/wpf) test suite and infrastructure, building automated sanitization workflows and enabling CI-based unit testing for faster PR ingestion."
       ]
     },
     {
@@ -58,7 +66,7 @@
       "company": "Microsoft",
       "time": "May 2020 — Jul 2020",
       "details": [
-        "Extended an internal WPF diagnostics desktop application that aggregates multi-source telemetry with configurable command polling, response parsers, and shell-style command autocompletion."
+        "Extended an internal hardware debug tool aggregating on-board power and thermal data with command polling, telemetry parsers, and a live visualization dashboard."
       ]
     },
     {
@@ -73,24 +81,24 @@
   "skillGroups": [
     {
       "name": "Languages",
-      "skills": ["C#", "C++", "C", "Python", "JavaScript", "SQL", "XAML"]
+      "skills": ["C#", "C++", "Python", "TypeScript", "JavaScript", "PowerShell", "SQL", "XAML"]
     },
     {
       "name": "Desktop & Systems",
-      "skills": ["WPF", "WinUI 3", ".NET SDK", "Win32 Interop", "CI Pipelines"]
+      "skills": ["WPF", "WinUI 3", ".NET SDK", "Win32 Interop", "ETL Traces & WPA", "CI Pipelines"]
     },
     {
-      "name": "Web & Backend",
-      "skills": ["11ty (Eleventy)", "Tailwind CSS", "Node.js", "Django", "FastAPI", "PostgreSQL", "MySQL"]
+      "name": "Data, Cloud & Web",
+      "skills": ["Azure Data Explorer (Kusto)", "Azure App Service", "Power BI", "Next.js", "11ty (Eleventy)", "Tailwind CSS", "Node.js", "Django", "PostgreSQL"]
     },
     {
-      "name": "ML, NLP & Graphics",
-      "skills": ["PyTorch", "Transformers", "NLTK", "OpenGL"]
+      "name": "AI, NLP & Graphics",
+      "skills": ["OpenAI API & Embeddings", "PyTorch", "Transformers", "NLTK", "OpenGL"]
     }
   ],
   "selectedprojects": [
+    "rec-calls",
     "mwe-bpe",
-    "personal-webapp",
     "contour-rendering",
     "hindi-data-crf-viterbi-analysis"
   ]
