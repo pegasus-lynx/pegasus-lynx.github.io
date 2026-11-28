@@ -182,6 +182,22 @@ input[type="search"]::-webkit-search-results-decoration {
   border-color: var(--accent-primary);
 }
 
+.ec-topic-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--text-muted) transparent;
+}
+
+@supports not (scrollbar-color: red blue) {
+  .ec-topic-scroll::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .ec-topic-scroll::-webkit-scrollbar-thumb {
+    background-color: var(--text-muted);
+    border-radius: 9999px;
+  }
+}
+
 .ec-topic-badge {
   display: inline-flex;
   align-items: center;

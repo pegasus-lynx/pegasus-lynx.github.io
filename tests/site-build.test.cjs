@@ -729,6 +729,27 @@ test("projects and blogs pages render two-part inline search with multi-select t
   const searchHtml = fs.readFileSync(path.join(SITE, "search", "index.html"), "utf8");
   const css = fs.readFileSync(path.join(SITE, "assets", "css", "tailwind.css"), "utf8");
 
+  for (const html of [projectsHtml, blogsHtml]) {
+    const section = html.match(/<section class="mb-8" aria-label="Filter entries">([\s\S]*?)<\/section>/)[1];
+    const bar = section.match(/<div class="([^"]*)">/)[1];
+    const dropdown = section.match(/<div class="([^"]*)" data-topic-dropdown>/)[1];
+    const input = section.match(/<input\s+id="search-input"[\s\S]*?class="([^"]*)"/)[1];
+    assert.match(bar, /\brounded-xl\b/);
+    assert.match(bar, /\bborder\b/);
+    assert.match(bar, /\bsm:flex-row\b/);
+    assert.doesNotMatch(bar, /\bgap-/);
+    assert.match(dropdown, /\bborder-t\b/);
+    assert.match(dropdown, /\bsm:border-t-0\b/);
+    assert.match(dropdown, /\bsm:border-l\b/);
+    assert.doesNotMatch(input, /\bborder\b/);
+    const topicButton = section.match(/<button\s+type="button"\s+data-topic-dropdown-btn[\s\S]*?class="([^"]*)"/)[1];
+    const topicList = section.match(/<div\s+role="listbox"[\s\S]*?class="([^"]*)"/)[1];
+    assert.ok(topicButton.includes("bg-[var(--bg-surface)]"), "Topics button must use the theme surface color");
+    assert.match(topicList, /\bec-topic-scroll\b/);
+  }
+  assert.match(css, /\.ec-topic-scroll\s*\{[^}]*scrollbar-color:\s*var\(--text-muted\)\s+transparent/s);
+  assert.match(css, /\.ec-topic-scroll\s*\{[^}]*scrollbar-width:\s*thin/s);
+
   // Native search cancel icon must be hidden in CSS so duplicate X never renders
   assert.ok(
     css.includes("::-webkit-search-cancel-button"),

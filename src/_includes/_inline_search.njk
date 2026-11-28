@@ -1,5 +1,5 @@
 <section class="mb-8" aria-label="Filter entries">
-  <div class="flex flex-col sm:flex-row items-stretch gap-2.5">
+  <div class="flex flex-col sm:flex-row items-stretch rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-card)] focus-within:border-[var(--accent-primary)] transition-colors">
     <div class="relative flex-1">
       <label for="search-input" class="sr-only">{{ searchPlaceholder }}</label>
       <span class="pointer-events-none absolute inset-y-0 left-3.5 flex items-center text-[var(--text-muted)]">
@@ -12,7 +12,7 @@
         placeholder="{{ searchPlaceholder }}"
         autocomplete="off"
         spellcheck="false"
-        class="w-full h-11 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-card)] pl-10 pr-10 text-base text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:border-[var(--accent-primary)] focus:outline-none transition-colors"
+        class="w-full h-11 rounded-t-xl sm:rounded-l-xl sm:rounded-tr-none bg-transparent pl-10 pr-10 text-base text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--accent-primary)] transition-colors"
       >
       <button
         type="button"
@@ -25,13 +25,13 @@
       </button>
     </div>
 
-    <div class="relative sm:w-52 shrink-0" data-topic-dropdown>
+    <div class="relative sm:w-52 shrink-0 border-t sm:border-t-0 sm:border-l border-[var(--border-subtle)]" data-topic-dropdown>
       <button
         type="button"
         data-topic-dropdown-btn
         aria-expanded="false"
         aria-haspopup="listbox"
-        class="w-full h-11 px-3.5 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-card)] flex items-center justify-between gap-2 font-mono text-xs uppercase tracking-wider text-[var(--text-secondary)] hover:border-[var(--accent-primary)] hover:text-[var(--text-primary)] transition-colors cursor-pointer"
+        class="w-full h-11 px-3.5 rounded-b-xl sm:rounded-r-xl sm:rounded-bl-none bg-[var(--bg-surface)] flex items-center justify-between gap-2 font-mono text-xs uppercase tracking-wider text-[var(--text-secondary)] hover:text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--accent-primary)] transition-colors cursor-pointer"
       >
         <span class="inline-flex items-center gap-2">
           <span>Topics</span>
@@ -66,7 +66,7 @@
           role="listbox"
           aria-multiselectable="true"
           aria-label="Filter by topic"
-          class="max-h-60 overflow-y-auto space-y-0.5"
+          class="ec-topic-scroll max-h-60 overflow-y-auto space-y-0.5"
         >
           {% for tagObj in filterTags %}
             <button
