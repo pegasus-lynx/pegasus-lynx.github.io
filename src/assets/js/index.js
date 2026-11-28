@@ -128,6 +128,33 @@ async function copyPageUrl(buttonEl) {
   } catch (e) {}
 }
 
+function initScrollSpyBottom(targets, setActive, activationOffset) {
+  let wasAtBottom = false;
+  const isAtBottom = () => {
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    return maxScroll > 0 && window.scrollY >= maxScroll - 1;
+  };
+  const update = () => {
+    if (isAtBottom()) {
+      setActive(targets[targets.length - 1].id);
+      wasAtBottom = true;
+      return true;
+    }
+    if (wasAtBottom) {
+      const current = targets.filter((target) =>
+        target.getBoundingClientRect().top <= window.innerHeight * activationOffset
+      ).pop() || targets[0];
+      setActive(current.id);
+      wasAtBottom = false;
+    }
+    return false;
+  };
+  window.addEventListener("scroll", update, { passive: true });
+  window.addEventListener("resize", update);
+  update();
+  return update;
+}
+
 function initArticleReader() {
   const prose = document.querySelector("#article-prose");
   const progressBar = document.querySelector("#reading-progress");
@@ -173,9 +200,11 @@ function initArticleReader() {
       linksById.forEach((el, key) => el.classList.toggle("is-active", key === id));
     };
     setActive(headings[0].id);
+    const updateBottom = initScrollSpyBottom(headings, setActive, 0.15);
 
     const observer = new IntersectionObserver(
       (entries) => {
+        if (updateBottom()) return;
         for (const entry of entries) {
           if (entry.isIntersecting) {
             setActive(entry.target.id);
@@ -204,9 +233,12 @@ function initHomeScrollSpy() {
   };
 
   if (sections[0]) setActive(sections[0].id);
+  if (!sections.length) return;
+  const updateBottom = initScrollSpyBottom(sections, setActive, 0.2);
 
   const observer = new IntersectionObserver(
     (entries) => {
+      if (updateBottom()) return;
       for (const entry of entries) {
         if (entry.isIntersecting) {
           setActive(entry.target.id);
